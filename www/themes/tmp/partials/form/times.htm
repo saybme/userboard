@@ -1,0 +1,27 @@
+[viewBag]
+==
+<?php
+
+use Saybme\Ub\Classes\App\AppClass;
+
+function onStart(){
+    $q = new AppClass;
+    $this['times'] = $q->getTimes();
+}
+?>
+==
+
+<div class="">
+
+    <label for="" class="block w-full text-sm mb-1">Выбрать время</label>
+
+    <div class="flex gap-2 flex-wrap">        
+        {% for key, item in times %}
+            <div class="flex-none">
+                <input type="radio" name="time" id="time_{{ key }}" class="hidden peer">
+                <label for="time_{{ key }}" class="kbd hover:bg-blue-2 hover:text-white hover:cursor-pointer peer-checked:bg-blue-2 peer-checked:text-white">{{ item }}</label>               
+            </div>
+        {% endfor %}
+    </div>
+
+</div>

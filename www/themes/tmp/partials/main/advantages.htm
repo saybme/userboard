@@ -1,0 +1,19 @@
+<div class="table:container pt-[2.813rem] table_sm:pt-[4.063rem] pb-[4.125rem] px-2">
+    
+    <h3 class="text-xl mob_l:text-2xl font-gilroy-bold table_l:text-txt-30 laptop:text-txt-40 text-center">Преимущества работы с нами</h3>
+    
+    <div class="mt-[2.2rem] table_l:mt-[3.5rem] flex overflow-x-auto scrollbar-hide">
+        {% for item in global.advantages %}
+            <div class="max-w-[200px] table_l:max-w-none table_l:w-1/3 flex-none table_l:flex font-gilroy-medium table_sm:items-center flex-col table_sm:flex-row">
+                <div class="w-[40px] table_sm:w-[70px] laptop:w-[100px]">
+                    {{ item.icon | raw }}
+                </div>
+                <div class="w-full table_sm:w-[calc(100%-70px)] laptop:w-[calc(100%-100px)] table_sm:pl-5 mt-3 table_sm:mt-0">
+                    <h4 class="text-base table_l:text-lg laptop:text-txt-22 max-w-[90%]">{{ item.title }}</h4>
+                    <p class="text-[0.563rem] table_l:text-xs laptop:text-sm max-w-[90%]">{{ item.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>

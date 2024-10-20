@@ -1,0 +1,30 @@
+name: Селект
+description: Поле селект
+icon: icon-bars
+fields:
+  is_required:
+    label: Обязательное поле
+    span: full
+    type: checkbox
+    default: 1
+    tab: Поле
+  title:
+    label: Заголовок
+    span: auto
+    type: text   
+    tab: Поле 
+  id_values:
+    label: ID ресурса
+    span: auto
+    type: text   
+    tab: Поле 
+  kgroup:
+    label: Группа
+    span: auto
+    type: text
+    tab: Настройки
+  ubtype:
+    label: Тип вывода
+    span: auto
+    type: dropdown
+    tab: Настройки

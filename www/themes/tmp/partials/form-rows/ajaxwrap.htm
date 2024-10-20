@@ -1,0 +1,7 @@
+<div class="space-y-5 form-body mt-2">
+    {% for row in box.rows %}
+        <div class="">
+            {% partial 'form-rows/' ~ row._group row=row %}
+        </div>
+    {% endfor %}
+</div>

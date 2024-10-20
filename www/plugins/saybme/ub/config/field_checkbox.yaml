@@ -1,0 +1,48 @@
+name: Чекбоксы
+description: Список чекбоксов
+icon: icon-check-square
+fields:
+  is_required:
+    label: Обязательное поле
+    span: full
+    type: checkbox
+    default: 1
+    tab: Поле
+  rows:
+    label: Значения
+    span: full
+    type: repeater
+    tab: Поле
+    form:
+      fields:   
+        title:
+          label: Заголовок
+          span: auto
+          type: text
+        hash:
+          label: HASH
+          disabled: 1
+          span: auto
+  title:
+    label: Заголовок
+    span: full
+    type: text
+  ptitle:
+    label: Заголовок в заявке
+    span: full
+    type: text
+  clses:
+    label: Классы
+    span: full
+    type: taglist
+    separator: space
+    optionsMethod: getClasses   
+  ubtype:
+    label: Тип вывода
+    span: full
+    type: dropdown
+  kgroup:
+    label: Группа
+    span: full
+    type: text
+  

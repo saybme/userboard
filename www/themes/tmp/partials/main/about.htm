@@ -1,0 +1,23 @@
+<div class="bg-ub-container bg-no-repeat bg-center bg-cover rounded-[5.5rem] table_sm:rounded-[6.25rem] max-w-[1800px] mx-auto relative overflow-hidden">
+    <div class="table:container py-[3.438rem] table:py-[5.938rem] px-[3.125rem] flex relative z-10 justify-between flex-col table:flex-row">        
+        <div class="w-full table:w-[calc(100%-390px)] laptop:w-[calc(100%-420px)]">
+            <h2 class="text-blue-1 text-txt-40 table_sm:text-txt-60 table:text-txt-80 laptop:text-txt-100"><span class="text-red-3">USER</span>BOARD</h2>
+            <h3 class="text-lg table:text-txt-26 mt-4 table:mt-[2.188rem]">Для чего нужен UserBoard?</h3>
+            <div class="mt-[2rem] about-text w-full table:max-w-[680px]">
+                {{ global.about | content }}
+            </div>
+        </div>
+        <div class="w-full table:w-[360px] laptop:w-[420px]">
+            <h4 class="text-base laptop:text-lg font-gilroy-medium text-grey-3">Немного статистики</h4>
+            <div class="mt-2 flex flex-row table:flex-col justify-between flex-wrap table_l:flex-nowrap gap-5 table_l:gap-0">
+                {% for item in global.statistics %}
+                    <div class="max-w-[250px] table_l:max-w-none">
+                        <h4 class="text-3xl table_sm:text-4xl table:text-5xl font-gilroy-bold laptop:text-txt-60 text-blue-2">{{ item.title }}</h4>
+                        <p class="text-sm table_sm:text-base table:text-lg font-gilroy-medium mt-2 max-w-[80%] table_sm:max-w-none">{{ item.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="absolute top-0 right-0 w-full h-full bg-logo-container bg-no-repeat bg-right"></div>
+</div>

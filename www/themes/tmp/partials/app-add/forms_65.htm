@@ -1,0 +1,78 @@
+<div class="font-gilroy-medium" id="form_result"> 
+
+    <h4 class="font-gilroy-bold">{{ page.description }}</h4>
+
+    <form action="" class="block w-full mt-4" data-request="onOrderForm" data-request-validate>
+
+        <input type="hidden" name="form" value="{{ page.id }}">        
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg">
+            <h3 class="font-gilroy-bold text-xl">2. Информация о транспортном средстве</h3>
+            <div class="mt-4">
+                {% partial 'boxes/vehicle-information' type=2 %}
+            </div>   
+        </fieldset>   
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">3. Ваши данные</h3>   
+            <div class="mt-4">
+                {% partial 'boxes/your-data' type=2 %}
+            </div>  
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">4. Документ, удостоверяющий личность</h3>    
+            <div class="mt-4">
+                {% partial 'boxes/passport' type=1 %}
+            </div>   
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">5. Адрес проживания (регистрации)</h3>   
+            <div class="mt-4">
+                {% partial 'boxes/address' type=1 name='residential_address' %}  
+            </div>
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">6. Сведения о доверенности</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/information-proxy' type=2 %}
+            </div>   
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">7. Данные собственника (юридического лица)</h3>  
+            <div class="mt-4">
+                {% partial 'boxes/owner-details-legal-entity' type=2 %}
+            </div>  
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">8. Юридический адрес</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/address' title='Введите адрес' name='legal_address' type=1 %}  
+            </div>
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">9. Где вы будете ставить на регистрационный учет автотранспортное средство?</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/address' type=2 name='car_registration_address' items=['По адресу проживания доверенного лица','По адресу проживания собственника','По иному адресу'] %} 
+            </div> 
+        </fieldset>                               
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">10. Укажите дату и время постановки на регистрационный учет</h3> 
+            <div class="mt-4 grid grid-cols-2 gap-4">
+                {% partial 'boxes/date-time' %}                
+            </div>   
+        </fieldset>   
+
+        <div class="mt-4">    
+            {% partial 'boxes/form-bottom' %}   
+        </div>  
+
+    </form>
+
+</div>

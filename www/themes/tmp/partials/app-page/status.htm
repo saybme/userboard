@@ -1,0 +1,21 @@
+{% if page.status == 2 %}
+
+    <div class="text-2xl font-gilroy-bold text-red-1 underline">
+        Заявка выполнена.
+    </div>
+
+{% else %}
+
+    <form action="" data-request="onStatusApp">
+        <input type="hidden" name="id" value="{{ page.id }}">
+        <h4 class="text-xl font-gilroy-bold">Изменить статус заявки:</h4>
+        <div class="mt-1 flex gap-x-2">
+            <select name="status" id="" class="select select-bordered w-full max-w-[360px]">
+                <option value="">Выбрать действие</option>
+                <option value="2">Заявки выполнена</option>
+            </select>
+            <button class="btn btn-red">Выполнить</button>
+        </div>
+    </form>
+
+{% endif %}

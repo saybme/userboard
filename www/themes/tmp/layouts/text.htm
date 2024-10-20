@@ -1,0 +1,43 @@
+description = "Текстовый шаблон"
+
+[staticPage]
+useContent = 1
+default = 0
+
+[global]
+handle = "UdSettings"
+
+[app]
+
+[staticBreadcrumbs]
+==
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% partial "site/head" %}
+</head>
+
+<body class="min-h-screen flex flex-col font-gilroy">
+
+    <header class="sticky top-0 relative z-50 transition-shadow">
+        {% partial "site/header" %}
+    </header>
+    
+    <div class="main bg-grey-2 flex-1">  
+        <div class="container pb-6">
+            {% partial "breadcrumbs/items" items=breadcrumbs %}   
+            <div class="text mt-2">
+                {% page %} 
+            </div>
+        </div>                
+    </div>
+
+    <footer class="mt-auto bg-blue-1 text-white">
+        {% partial "site/footer" %}    
+    </footer>
+
+    {% partial "site/scripts" %}  
+    
+</body>
+
+</html>

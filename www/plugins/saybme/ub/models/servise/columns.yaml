@@ -1,0 +1,22 @@
+columns:
+    name:
+        label: Услуга
+        type: text
+        searchable: true
+    srvcategory:
+        label: Тип
+        type: text
+        select: name
+        relation: srvcategory
+    is_active:
+        label: Опубликован
+        type: switch
+    is_popular:
+        label: Популярная
+        type: switch
+    created_at:
+        label: Создан
+        type: datetime       
+    id:
+        label: ID
+        type: text

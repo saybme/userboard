@@ -1,0 +1,62 @@
+{% if type == 1 %}
+
+<div class="grid grid-cols-2 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Тип доверенности</label>
+        <select class="select select-bordered w-full">
+            {% for item in glform.proxy_types %}
+                <option value="{{ item.name }}">{{ item.name }}</option>
+            {% endfor %}
+        </select>
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+</div>    
+
+<div class="grid grid-cols-3 gap-4 mt-2">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Дата выдачи</label>
+        <input type="date" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Кем выдано</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Срок действия до</label>
+        <input type="date" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+</div>
+
+{% endif %}
+
+
+
+{% if type == 2 %} 
+
+<div class="grid grid-cols-3 gap-4 mt-2">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер</label>
+        <input type="text" value="" name="proxy[number]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="proxy.number" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Дата выдачи</label>
+        <input type="date" value="" name="proxy[date_issue]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="proxy.date_issue" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Кем выдано</label>
+        <input type="text" value="" name="proxy[issued_by]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="proxy.issued_by" class="text-error mt-2 text-xs"></span>
+    </div>     
+</div>
+
+{% endif %}

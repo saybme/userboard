@@ -1,0 +1,32 @@
+{% for item in items %}
+    <div class="bg-white py-3 px-4 rounded-md hover:bg-gray-100 border border-gray-200">
+        <a href="{{ item.link }}" class="flex space-x-3 items-center">
+            <div class="flex-1">
+                <div class="text-gray-500 text-sm">Размещен:</div>
+                <div class="text-lg">{{ item.created_at | date('d.m.Y') }}</div>    
+            </div>
+            <div class="flex-1">
+                <div class="font-gilroy-bold text-lg flex ">
+                    <div class="border-2 border-black rounded-md text-center flex divide-x-2 divide-black bg-gradient-to-t from-gray-200">
+                        <div class="py-1 flex-1 w-[120px]">{{ item.carnumber.0 }}</div>
+                        <div class="py-1 w-[42px] flex flex-col">
+                            <span class="leading-none">{{ item.carnumber.1 }}</span>
+                            <span class="font-gilroy-regular leading-none text-[.5rem]">RUS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="flex-1">
+                <div class="text-gray-500 text-sm">Цена:</div>
+                <div class="font-gilroy-bold text-lg"><span class="text-red-1">{{ item.price }}</span> руб.</div>    
+            </div>
+            <div class="flex-1">
+                <div class="text-gray-500 text-sm">Продавец:</div>
+                <div class="font-gilroy-bold text-lg">{{ item.username }}</div>    
+            </div>
+            <div class="flex items-center">
+                <span class="btn btn-red btn-sm">Подробнее</span>
+            </div>
+        </a>
+    </div>
+{% endfor %}

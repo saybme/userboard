@@ -1,0 +1,15 @@
+<div class="py-8">
+
+    <h1 class="table:text-txt-40 text-blue-2">Заявки пользователя:</h1>
+
+    <div class="mt-6 space-y-2" id="apps">
+        {% for item in applications %}
+            <a href="{{ item.link }}" class="flex p-3 bg-white rounded-md border text hover:bg-black/10 app_status_{{ item.status }}">
+                <div class="font-bold text-red-1 flex-1">№{{ item.num }}</div>
+                <div class="flex-1 text-gray-500">Статус: {{ item.status_name }}</div>
+                <div class="">{{ item.created_at | date('d.m.Y') }}</div>
+            </a>
+        {% endfor %}
+    </div>
+
+</div>

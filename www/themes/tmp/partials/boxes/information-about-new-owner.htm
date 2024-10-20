@@ -1,0 +1,80 @@
+<div class="">
+    {% for item in ['Физическое лицо','Юридическое лицо'] %}
+        <div class="form-control">
+            <label class="label cursor-pointer justify-start">            
+                <input type="radio" name="owner_type" value="{{ item }}" class="radio checked:bg-red-500" {{ loop.first == true ? 'checked' : '' }} />
+                <span class="label-text ml-2">{{ item }}</span> 
+            </label>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="grid grid-cols-4 gap-4 mt-2">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Фамилия</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Имя</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Отчество</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Дата рождения</label>
+        <input type="date" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+</div>
+
+<div class="mt-2">
+    <label for="" class="block w-full text-sm mb-1">Адресная строка</label>
+    <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+</div> 
+
+<div class="mt-2">
+    <label for="" class="block w-full text-sm mb-1">Тип документа</label>
+    <select class="select select-bordered w-full">
+        {% for item in glform.document_types %}
+            <option value="{{ item.name }}">{{ item.name }}</option>
+        {% endfor %}
+    </select>
+    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+</div> 
+
+<div class="grid grid-cols-3 gap-4 mt-2">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Серия</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div>    
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Дата выдачи</label>
+        <input type="date" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+</div>
+
+<div class="flex gap-4 mt-2">
+    <div class="flex-1">
+        <label for="" class="block w-full text-sm mb-1">Кем выдан</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Код подразделения</label>
+        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+    </div>     
+</div>

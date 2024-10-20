@@ -1,0 +1,13 @@
+name: Users
+form: $/saybme/ub/models/user/fields.yaml
+modelClass: Saybme\Ub\Models\User
+defaultRedirect: saybme/ub/users
+design:
+    displayMode: popup
+    size: 450
+create:
+    redirect: 'saybme/ub/users/update/:id'
+    redirectClose: saybme/ub/users
+update:
+    redirect: saybme/ub/users
+    redirectClose: saybme/ub/users

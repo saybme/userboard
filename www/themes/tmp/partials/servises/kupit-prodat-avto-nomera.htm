@@ -1,0 +1,24 @@
+[ubapps]
+slug = "{{ :slug }}"
+type = "getNumbers"
+
+[ubapps topnumbers]
+slug = "{{ :slug }}"
+type = "getTopNumbers"
+==
+
+<div class="">
+    {% partial "breadcrumbs/items" items=breadcrumbs %}   
+</div>
+
+{% component 'topnumbers' %}
+
+<div class="pt-2 pb-9">    
+
+    <h1 class="title-h1 leading-none">{{ page.name }}</h1>    
+
+    <div class="mt-4">
+        {% component 'ubapps' %}
+    </div>
+
+</div>

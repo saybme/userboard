@@ -1,0 +1,646 @@
+<div class="font-gilroy-medium" id="form_result"> 
+
+    <h4 class="font-gilroy-bold">{{ page.description }}</h4>
+
+    <form action="" class="block w-full mt-4" data-request="onOrderForm" data-request-validate>
+
+        <input type="hidden" name="form" value="{{ page.id }}">        
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg">
+
+            <h3 class="font-gilroy-bold text-xl">2. Информация о транспортном средстве</h3>
+
+            <div class="form-control mt-2">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="info_cart" class="radio checked:bg-red-500" value="Автомобиль или автобус" checked />
+                  <span class="label-text ml-2">Автомобиль или автобус</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="info_cart" class="radio checked:bg-red-500" value="Прицеп" />
+                  <span class="label-text ml-2">Прицеп</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="info_cart" class="radio checked:bg-red-500" value="Мотоцикл" />
+                  <span class="label-text ml-2">Мотоцикл</span> 
+                </label>
+            </div>
+
+            <div class="mt-2 grid grid-cols-3 gap-4">
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Марка</label>
+                    <input type="text" value="" name="mark" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="mark" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Модель</label>
+                    <input type="text" value="" name="model" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="mark" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Год выпуска</label>
+                    <input type="text" value="" name="year" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="year" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Идентификационный номер транспортного средства (VIN)</label>
+                <input type="text" value="" name="vin" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="vin" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2 grid grid-cols-2 gap-4">
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Номер кузова</label>
+                    <input type="text" value="" name="num_body" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="num_body" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Номер шасси (рамы)</label>
+                    <input type="text" value="" name="num_shasi" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="num_shasi" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Государственный регистрационный знак</label>
+                <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+            </div>
+
+        </fieldset>       
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">3. Требуется ли Вам получение (замена) государственного регистрационного знака?</h3>            
+
+            <div class="alert alert-warning mt-4">
+                <span>Примечание присвоение государственного регистрационного знака осуществляется в соответствии с цифровым кодом региона места регистрации (прописки) владельца транспортного средства. Пример, если Вы купили транспортное средство, которое стоит на учете в г. Москва автомобильный код региона 799, а сами прописаны в Санкт – Петербурге, то при переоформлении транспортного средства Вам присвоят виртуальный номер с автомобильным кодом 198 код г. Санкт-Петербург, который Вам нужно будет изготовить самостоятельно. Изготовителем государственных регистрационных знаков транспортных средств может быть юридическое лицо или индивидуальный предприниматель, зарегистрированные в РФ</span>
+            </div>
+
+            <div class="form-control mt-2">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="reg_znak" class="radio checked:bg-red-500" value="Автомобиль или автобус" checked />
+                  <span class="label-text ml-2">требуется</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="reg_znak" class="radio checked:bg-red-500" value="Прицеп" />
+                  <span class="label-text ml-2">требуется виртуальный</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="reg_znak" class="radio checked:bg-red-500" value="Мотоцикл" />
+                  <span class="label-text ml-2">не требуется</span> 
+                </label>
+            </div>            
+
+        </fieldset>   
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">4. Паспорт транспортного средства (ПТС)</h3>                 
+
+            <div class="form-control mt-4">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="pts" class="radio checked:bg-red-500" value="Автомобиль или автобус" checked />
+                  <span class="label-text ml-2">внести изменения в действующий</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="pts" class="radio checked:bg-red-500" value="Прицеп" />
+                  <span class="label-text ml-2">получить новый или дубликат</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="pts" class="radio checked:bg-red-500" value="Мотоцикл" />
+                  <span class="label-text ml-2">у меня электронный ПТС</span> 
+                </label>
+            </div>            
+
+        </fieldset>  
+        
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">6. Ваши данные</h3>                 
+
+            <div class="form-control mt-4">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="gender" class="radio checked:bg-red-500" value="Автомобиль или автобус" checked />
+                  <span class="label-text ml-2">Мужской</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="gender" class="radio checked:bg-red-500" value="Прицеп" />
+                  <span class="label-text ml-2">Женский</span> 
+                </label>
+            </div>       
+            
+            <div class="mt-4 grid grid-cols-4 gap-4">
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Фамилия</label>
+                    <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Имя</label>
+                    <input type="text" value="" name="username" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="username" class="text-error mt-2 text-xs"></span>
+                </div>
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Отчество</label>
+                    <input type="text" value="" name="patronymic" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="patronymic" class="text-error mt-2 text-xs"></span>
+                </div>
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Дата рождения</label>
+                    <input type="date" value="" name="dob" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="dob" class="text-error mt-2 text-xs"></span>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-2">
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Контактный телефон</label>
+                    <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Адрес электронной почты</label>
+                    <input type="email" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Страна рождения</label>
+                <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                <p class="text-xs text-grey-3">Укажите страну рождения (как в документе, удостоверяющем личность)</p>
+                <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mt-2">
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Регион рождения</label>
+                    <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Место рождения</label>
+                    <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Гражданство</label>
+                    <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">7. Документ, удостоверяющий личность</h3>     
+            
+            <div class="mt-4">
+                <label for="" class="block w-full text-sm mb-1">Тип документа</label>                
+                <select class="select select-bordered w-full">
+                    <option disabled selected>Не выбрано</option>
+                    {% for item in glform.document_types %}
+                        <option>{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+                <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+            </div>
+            
+            <div class="mt-4 grid grid-cols-3 gap-4">
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Серия</label>
+                    <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Номер</label>
+                    <input type="text" value="" name="username" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="username" class="text-error mt-2 text-xs"></span>
+                </div>
+
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Дата выдачи</label>
+                    <input type="date" value="" name="patronymic" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="patronymic" class="text-error mt-2 text-xs"></span>
+                </div>             
+
+            </div>
+
+            <div class="flex gap-4 mt-2">
+                <div class="flex-1">
+                    <label for="" class="block w-full text-sm mb-1">Кем выдан</label>
+                    <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Код подразделения</label>
+                    <input type="email" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+           
+
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">8. Адрес проживания (регистрации)</h3>     
+            
+            <div class="mt-4">
+                <label for="" class="block w-full text-sm mb-1">По адресу проживания</label>
+                <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+            </div>
+            
+            <div class="mt-2 hidden">
+
+                <div class=" flex gap-4">
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Индекс</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Регион</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Населенный пункт</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>  
+                </div>  
+    
+                <div class="mt-2 flex gap-4">
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Улица</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>  
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Дом</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>    
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Строение</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>    
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Квартира / офис</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div> 
+    
+                </div>
+    
+                <div class="form-control mt-2">
+                    <label class="label cursor-pointer justify-start">                  
+                      <input type="checkbox" checked="checked" class="checkbox" />
+                      <span class="label-text ml-2">Без квартиры / офиса</span> 
+                    </label>
+                </div> 
+
+            </div>     
+
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">9. Сведения о доверенности</h3>             
+            
+            <div class="mt-4 grid grid-cols-2 gap-4">
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Тип доверенности</label>
+                    <select class="select select-bordered w-full">
+                        {% for item in glform.proxy_types %}
+                            <option>{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Номер</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>    
+            
+            <div class="grid grid-cols-3 gap-4 mt-2">
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Дата выдачи</label>
+                    <input type="date" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Кем выдано</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Срок действия до</label>
+                    <input type="date" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">10. Данные собственника (юридического лица)</h3>   
+
+            <div class="alert alert-warning mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <span>Сведения о государственной регистрации юридических лиц, индивидуальных предпринимателей, крестьянских (фермерских) хозяйств (Наименование, ИНН, КПП, ОГРН, юридический адрес) доступны на официальном ресурсе ФНС России по адресу <a href="http://egrul.nalog.ru/" target="_blank" rel="noopener noreferrer">http://egrul.nalog.ru/</a></span>
+            </div> 
+            
+            <div class="mt-4 grid grid-cols-3 gap-4">                
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">ОПФ</label>
+                    <select class="select select-bordered w-full">
+                        {% for item in glform.opf_types %}
+                            <option>{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Наименование</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Дата регистрации</label>
+                    <input type="date" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>            
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Филиал</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="flex-1">
+                    <label for="" class="block w-full text-sm mb-1">ОГРН</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="flex-1">
+                    <label for="" class="block w-full text-sm mb-1">ИНН</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>
+
+            <div class="mt-2 flex gap-4"> 
+                <div class="flex-1">
+                    <label for="" class="block w-full text-sm mb-1">КПП</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+                <div class="">
+                    <label for="" class="block w-full text-sm mb-1">Контактный телефон</label>
+                    <input type="text" placeholder="" class="input input-bordered w-full" />
+                    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                </div>
+            </div>             
+
+        </fieldset>        
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">11. Юридический адрес</h3>     
+            
+            <div class="mt-4">
+                <label for="" class="block w-full text-sm mb-1">По адресу проживания</label>
+                <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+            </div>
+            
+            <div class="mt-2 hidden">
+
+                <div class=" flex gap-4">
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Индекс</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Регион</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Населенный пункт</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>  
+                </div>  
+    
+                <div class="mt-2 flex gap-4">
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Улица</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>  
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Дом</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>    
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Строение</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>    
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Квартира / офис</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div> 
+    
+                </div>
+    
+                <div class="form-control mt-2">
+                    <label class="label cursor-pointer justify-start">                  
+                      <input type="checkbox" checked="checked" class="checkbox" />
+                      <span class="label-text ml-2">Без квартиры / офиса</span> 
+                    </label>
+                </div> 
+
+            </div>     
+
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">12. Где вы будете ставить на регистрационный учет автотранспортное средство?</h3>     
+
+            <div class="form-control mt-4">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="is_residence" class="radio checked:bg-red-500" value="1" checked />
+                  <span class="label-text ml-2">По адресу проживания доверенного лица</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="is_residence" class="radio checked:bg-red-500" value="2" />
+                  <span class="label-text ml-2">По адресу проживания собственника</span> 
+                </label>
+            </div> 
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                      
+                  <input type="radio" name="is_residence" class="radio checked:bg-red-500" value="3" />
+                  <span class="label-text ml-2">По иному адресу</span> 
+                </label>
+            </div> 
+            
+            <div class="mt-4">
+                <label for="" class="block w-full text-sm mb-1">Введите адрес</label>
+                <input type="text" value="" name="surname" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="surname" class="text-error mt-2 text-xs"></span>
+            </div>
+            
+            <div class="hidden mt-2">
+                <div class=" flex gap-4">
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Индекс</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Регион</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Населенный пункт</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>  
+                </div>  
+                
+                <div class="mt-2 flex gap-4">
+                    <div class="flex-1">
+                        <label for="" class="block w-full text-sm mb-1">Улица</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>  
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Дом</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>    
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Строение</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div>    
+                    <div class="">
+                        <label for="" class="block w-full text-sm mb-1">Квартира / офис</label>
+                        <input type="text" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                        <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+                    </div> 
+    
+                </div>
+    
+                <div class="form-control mt-2">
+                    <label class="label cursor-pointer justify-start">                  
+                      <input type="checkbox" checked="checked" class="checkbox" />
+                      <span class="label-text ml-2">Без квартиры / офиса</span> 
+                    </label>
+                </div>   
+            </div>         
+           
+
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+
+            <h3 class="font-gilroy-bold text-xl">13. Укажите дату и время постановки на регистрационный учет</h3>                
+            
+            <div class="mt-4">
+                <label for="" class="block w-full text-sm mb-1">Выбрать дату</label>
+                <input type="datetime-local" value="" name="" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+            </div>   
+
+        </fieldset>         
+
+        <div class="alert alert-warning mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span>Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)</span>
+        </div>
+
+        <div class="mt-4">            
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                    <input type="checkbox" class="checkbox" />
+                    <span class="label-text ml-2">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                    <input type="checkbox" class="checkbox" />
+                    <span class="label-text ml-2">Госпошлина была оплачена</span> 
+                </label>
+            </div>
+
+        </div>
+
+        <div class="alert alert-info mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки</span>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <button class="btn btn-red btn-lg" data-attach-loading>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+                </svg>                  
+                Отправить
+            </button>
+        </div>   
+        
+
+    </form>
+
+</div>

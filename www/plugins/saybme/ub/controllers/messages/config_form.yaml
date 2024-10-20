@@ -1,0 +1,10 @@
+name: Messages
+form: $/saybme/ub/models/message/fields.yaml
+modelClass: Saybme\Ub\Models\Message
+defaultRedirect: saybme/ub/messages
+create:
+    redirect: 'saybme/ub/messages/update/:id'
+    redirectClose: saybme/ub/messages
+update:
+    redirect: saybme/ub/messages
+    redirectClose: saybme/ub/messages

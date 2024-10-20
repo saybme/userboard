@@ -1,0 +1,37 @@
+tabs:
+    fields:
+        servises:
+            label: Услуги
+            span: full
+            type: partial
+            tab: Услуги
+        description:
+            label: Описание
+            size: small
+            span: full
+            type: textarea
+            tab: Описание
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    name:
+        label: Категория
+        span: auto
+        type: text

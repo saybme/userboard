@@ -1,0 +1,27 @@
+<form action="" data-request="onSaveProfile" data-request-validate>
+
+    <div class="grid grid-cols-3 gap-2">
+        <div class="">
+            <label for="name" class="block w-full text-sm mb-1">Ваше имя:</label>
+            <input type="text" name="profile[name]" id="name" placeholder="" value="{{ user.profile.name }}" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="email" class="block w-full text-sm mb-1">E-mail:</label>
+            <input type="email" name="email" id="email" value="{{ user.email }}" placeholder="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="phone" class="block w-full text-sm mb-1">Телефон:</label>
+            <input type="text" value="{{ user.phone }}" name="phone" id="phone" placeholder="" class="input input-bordered w-full" disabled>
+        </div>                    
+    </div>
+
+    <div class="mt-2">
+        <label for="comment" class="block w-full text-sm mb-1">Немного и себе:</label>
+        <textarea name="comment" id="comment" rows="5" class="textarea textarea-bordered w-full"></textarea>
+    </div>
+
+    <div class="mt-2">
+        <button class="btn btn-red" data-attach-loading>Сохранить</button>
+    </div>
+
+</form>

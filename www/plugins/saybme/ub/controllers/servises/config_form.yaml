@@ -1,0 +1,10 @@
+name: Servises
+form: $/saybme/ub/models/servise/fields.yaml
+modelClass: Saybme\Ub\Models\Servise
+defaultRedirect: saybme/ub/servises
+create:
+    redirect: 'saybme/ub/servises/update/:id'
+    redirectClose: saybme/ub/servises
+update:
+    redirect: saybme/ub/servises
+    redirectClose: saybme/ub/servises

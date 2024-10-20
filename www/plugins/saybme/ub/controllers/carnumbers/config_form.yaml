@@ -1,0 +1,10 @@
+name: Carnumbers
+form: $/saybme/ub/models/carnumber/fields.yaml
+modelClass: Saybme\Ub\Models\Carnumber
+defaultRedirect: saybme/ub/carnumbers
+create:
+    redirect: 'saybme/ub/carnumbers/update/:id'
+    redirectClose: saybme/ub/carnumbers
+update:
+    redirect: saybme/ub/carnumbers
+    redirectClose: saybme/ub/carnumbers

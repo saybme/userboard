@@ -1,0 +1,10 @@
+name: Prpages
+form: $/saybme/ub/models/prpage/fields.yaml
+modelClass: Saybme\Ub\Models\Prpage
+defaultRedirect: saybme/ub/prpages
+create:
+    redirect: 'saybme/ub/prpages/update/:id'
+    redirectClose: saybme/ub/prpages
+update:
+    redirect: saybme/ub/prpages
+    redirectClose: saybme/ub/prpages

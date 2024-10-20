@@ -1,0 +1,34 @@
+<div class="bg-white p-4 border border-gray-200 mt-3 rounded-md">
+    <h3 class="text-xl font-bold">Найти гос-номер</h3>
+    <hr class="mt-2">
+    <div class="mt-2">
+        <form action="" class="flex gap-x-3">
+            <div class="">
+                <input type="text" name="region" placeholder="Регион" class="input input-bordered w-full">
+            </div>
+            <div class="">
+                <input type="text" name="number" placeholder="Номер" class="input input-bordered w-full">
+            </div>
+            <div class="">
+                <button class="btn btn-red">Найти</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h4 class="text-2xl font-bold mt-4">Галерея продажи номеров:</h4>
+
+<div class="mt-3 space-y-3">
+    {% partial 'announcements/items' items=items %}
+</div>
+
+<div class="mt-4">
+    <div class="alert alert-warning">
+        <div class="flex">
+            <i class="underline me-6">
+                Если вы не нашли подходящий вариант в галереи номеров, оставьте заказ по ниже указанной форме, ваш заказ попадает в ленту и при просмотре объявлений в ленте обязательно найдется тот, кто  захочет вам продать желаемый номер, подобрать за вознаграждение или купить ваш номер.
+            </i>
+            <a href="/cabinet/zakazat-gosnomer" class="btn btn-red border-none">Номер под заказ</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+name: Уведомление
+description: Блок уведомление
+icon: icon-commenting-o
+fields:
+  type:
+    label: Цвет
+    span: full
+    type: dropdown
+    options:
+      yellow: Желтый
+      red: Красный
+  title:
+    label: Текст
+    span: full
+    type: richeditor
+    size: small  
+    useLineBreaks: true
+    toolbarButtons: bold|italic

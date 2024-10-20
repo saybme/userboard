@@ -1,0 +1,48 @@
+url = "/"
+layout = "default"
+title = "Главная"
+
+[ubreview main_ubreview]
+type = "getScroll"
+==
+
+<div class="">
+    {% partial 'banners/main' %}
+</div>
+
+<div class="bg-blue-1 text-white">
+    {% partial 'main/advantages' %}
+</div>
+
+<div class="bg-grey-2">
+    {% partial 'main/questions' %}
+</div>
+
+<div class="bg-grey-2">
+    {% partial 'main/about' %}
+</div>
+
+<div class="bg-grey-2">
+    {% partial 'main/servises' %}    
+</div>
+
+<div class="table:container table:pt-[4.063rem] pb-[4.125rem] px-2">
+    {% partial 'main/headache' %}
+</div>
+
+<div class="bg-gradient-to-t from-blue-2 to-blue-3 text-white">
+    {% partial 'main/order-form' %}
+</div>
+
+<div class="pt-[4.063rem] pb-[4.125rem] overflow-hidden">
+
+    <div class="table:container px-2">
+        <h3 class="text-txt-30 laptop:text-section-h1 text-blue-1">Мнения клиентов о нашей работе</h3>
+        <p class="text-base laptop:text-lg mt-7">Мы можем связать вас любым нашим клиентом и он поделится впечатлением от работы с нами</p>
+    </div>
+
+    <div class="table:container mt-6 px-2">
+        {% component 'main_ubreview' %}
+    </div>
+    
+</div>

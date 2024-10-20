@@ -1,0 +1,114 @@
+{% if type == 1 %}
+
+<div class="flex gap-4">
+    {% partial 'boxes/gender' name=your_gender %}   
+</div>            
+
+<div class="mt-2 grid grid-cols-4 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Фамилия</label>
+        <input type="text" value="" name="your_surname" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_surname" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Имя</label>
+        <input type="text" value="" name="your_name" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_name" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Отчество</label>
+        <input type="text" value="" name="your_patronymic" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_patronymic" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Дата рождения</label>
+        <input type="date" value="" name="your_dob" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_dob" class="text-error mt-2 text-xs"></span>
+    </div>  
+</div>            
+
+<div class="mt-2 grid grid-cols-2 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Контактный телефон</label>
+        <input type="text" value="" name="your_phone" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_phone" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Адрес электронной почты</label>
+        <input type="email" value="" name="your_email" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_email" class="text-error mt-2 text-xs"></span>
+    </div>
+</div>   
+
+<div class="mt-2">
+    <label for="" class="block w-full text-sm mb-1">Страна рождения</label>
+    <input type="text" value="" name="your_country" class="input input-bordered w-full" placeholder="" id="">
+    <p class="text-xs text-grey-3">Укажите страну рождения (как в документе, удостоверяющем личность)</p>
+    <span data-validate-for="your_country" class="text-error mt-2 text-xs"></span>
+</div> 
+
+<div class="mt-2 grid grid-cols-3 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Регион рождения</label>
+        <input type="text" value="" name="your_region" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_region" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Место рождения</label>
+        <input type="text" value="" name="your_birthplace" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_birthplace" class="text-error mt-2 text-xs"></span>
+    </div> 
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Гражданство</label>
+        <input type="text" value="" name="your_citizenship" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your_citizenship" class="text-error mt-2 text-xs"></span>
+    </div> 
+</div>
+
+{% endif %}
+
+
+{% if type == 2 %}
+
+<div class="flex gap-4">
+    {% partial 'boxes/gender' name='your' %}   
+</div>            
+
+<div class="mt-2 grid grid-cols-4 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Фамилия</label>
+        <input type="text" value="" name="your[surname]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your.surname" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Имя</label>
+        <input type="text" value="" name="your[name]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your.name" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Отчество</label>
+        <input type="text" value="" name="your[patronymic]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your.patronymic" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Дата рождения</label>
+        <input type="date" value="" name="your[dob]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your.dob" class="text-error mt-2 text-xs"></span>
+    </div>  
+</div>            
+
+<div class="mt-2 grid grid-cols-2 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Контактный телефон</label>
+        <input type="text" value="" name="your[phone]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your.phone" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Адрес электронной почты</label>
+        <input type="email" value="" name="your[email]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="your.email" class="text-error mt-2 text-xs"></span>
+    </div>
+</div>   
+
+
+{% endif %}

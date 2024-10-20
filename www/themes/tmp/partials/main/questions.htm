@@ -1,0 +1,22 @@
+<div class="table:container pt-[4.063rem] pb-[4.125rem] flex px-2 justify-between flex-col table_l:flex-row">
+        
+    <div class="w-full table_sm:w-[calc(100%-540px)] laptop:w-[calc(100%-620px)] pr-8">
+
+        <h2 class="max-w-[560px] text-blue-2 text-2xl font-gilroy-bold table_sm:text-txt-30 laptop:text-txt-40">У вас возникли вопросы Вы можете написать нам</h2>
+        
+        <p class="mt-[1.875rem] text-lg font-gilroy-medium max-w-[420px]">
+            Заполните форму и наш менеджер свяжется 
+            с вами в кратчайшие сроки и предложит лучшие варианты в соотношении цена/качество
+        </p>
+
+        <div class="max-w-[420px] table_sm:max-w-none overflow-auto">
+            <img src="{{ 'assets/images/car-form.png' | theme }}" alt="" class="block -translate-x-[150px] table_l:translate-x-0"> 
+        </div>
+
+    </div>
+
+    <div class="w-full table_sm:w-[500px] laptop:w-[580px]">
+        {% partial 'forms/form-order' %}
+    </div>
+
+</div>

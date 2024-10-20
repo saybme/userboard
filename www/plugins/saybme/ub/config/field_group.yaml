@@ -1,0 +1,42 @@
+name: Группа
+description: Группа полей
+icon: icon-sitemap
+fields:
+  id:
+    label: ID группы
+    span: full
+    type: text
+    disabled: 1
+  title:
+    label: Заголовок формы
+    span: row
+    type: text
+    spanClass: col-4
+  ptitle:
+    label: Заголовок на странице
+    span: row
+    type: text
+    spanClass: col-4
+  cols:
+    label: Колонок
+    span: row
+    type: number
+    default: 1
+    spanClass: col-4
+  childrens:
+    label: Данные
+    span: full
+    type: repeater
+    prompt: Добавить поле
+    useTabs: true
+    groups: 
+      text: $/saybme/ub/config/field_text.yaml
+      radio: $/saybme/ub/config/field_radio.yaml
+      checkboxs: $/saybme/ub/config/field_checkbox.yaml
+      select: $/saybme/ub/config/field_select.yaml
+      dropzone: $/saybme/ub/config/field_dropzone.yaml
+      alert: $/saybme/ub/config/field_alert.yaml
+      inputs: $/saybme/ub/config/field_inputs.yaml
+      multy: $/saybme/ub/config/field_multy.yaml
+      ajaxwrap: $/saybme/ub/config/field_ajaxwrap.yaml
+      partial: $/saybme/ub/config/field_partial.yaml

@@ -1,0 +1,9 @@
+url = "/gossnumbers/:slug"
+layout = "default"
+title = "Гос номер"
+
+[ubapps]
+slug = "{{ :slug }}"
+type = "getNumber"
+==
+{% component 'ubapps' %}

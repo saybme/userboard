@@ -1,0 +1,16 @@
+uuid: d9eeebf9-9335-4913-9e42-a73316d57e03
+handle: UdUserTypes
+type: entry
+name: Типы пользователей
+drafts: false
+
+navigation:
+    parent: UdSettings
+    icon: icon-users
+    order: 40
+
+fields:
+    description:
+        label: Описание пользователя
+        type: textarea
+        size: small

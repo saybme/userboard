@@ -1,0 +1,74 @@
+plugin:
+    name: 'saybme.ub::lang.plugin.name'
+    description: 'saybme.ub::lang.plugin.description'
+    author: SaybMe
+    icon: oc-icon-barcode
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: UserBoard
+        url: /
+        icon: icon-barcode
+        sideMenu:
+            side-menu-item3:
+                label: Баннеры
+                url: saybme/ub/banners
+                icon: icon-image
+            side-menu-item7:
+                label: 'Категории услуг'
+                url: saybme/ub/srvcategories
+                icon: icon-share-alt
+            side-menu-item2:
+                label: Услуги
+                url: saybme/ub/servises
+                icon: icon-sitemap
+            side-menu-item:
+                label: Отзывы
+                url: saybme/ub/reviews
+                icon: icon-comments
+            side-menu-item4:
+                label: Пользователи
+                url: saybme/ub/users
+                icon: icon-users
+            side-menu-item5:
+                label: 'Страница профиля'
+                url: saybme/ub/prpages
+                icon: icon-sitemap
+            side-menu-item6:
+                label: Обращения
+                url: saybme/ub/supthemes
+                icon: icon-comment
+            side-menu-item8:
+                label: Формы
+                url: saybme/ub/forms
+                icon: icon-server
+            side-menu-item9:
+                label: Заявки
+                url: saybme/ub/applications
+                icon: icon-stack-overflow
+            side-menu-item10:
+                label: Документы
+                url: saybme/ub/documents
+                icon: icon-file
+    main-menu-item2:
+        label: 'UB настройки'
+        url: /
+        icon: icon-code-fork
+        sideMenu:
+            side-menu-item:
+                label: Формы
+                url: saybme/ub/ubforms
+                icon: icon-slack
+            side-menu-item2:
+                label: 'Данные форм'
+                url: saybme/ub/ubformvalues
+                icon: icon-share-alt
+    main-menu-item3:
+        label: 'UB Объявления'
+        url: /
+        icon: icon-life-ring
+        sideMenu:
+            side-menu-item:
+                label: 'Гос номера'
+                url: saybme/ub/carnumbers
+                icon: icon-sort-numeric-asc

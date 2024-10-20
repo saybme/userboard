@@ -1,0 +1,13 @@
+list: $/saybme/ub/models/user/columns.yaml
+modelClass: Saybme\Ub\Models\User
+title: Users
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+recordOnClick: popup
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'saybme/ub/users/update/:id'

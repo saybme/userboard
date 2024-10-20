@@ -1,0 +1,25 @@
+url = "/testy"
+layout = "default"
+title = "Тесты"
+==
+<?php
+use Saybme\Ub\Models\Formrow;
+use Saybme\Ub\Models\Application;
+
+function onStart(){
+
+    // 38
+    $data = Application::find(38);
+    return $data->data;
+
+    return Session::get('ubform');
+
+    $items = Formrow::where('id', 2588)->first();
+   
+  return $items;
+
+    return $items->value['hash'];
+
+}
+?>
+==

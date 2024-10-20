@@ -1,0 +1,11 @@
+<div class="relative">  
+
+    <div class="f-carousel" id="swiper-review">        
+        {% for item in items %}
+            <div class="f-carousel__slide">
+                {% partial "reviews/item" item=item %}
+            </div>    
+        {% endfor %}             
+    </div>  
+
+</div>

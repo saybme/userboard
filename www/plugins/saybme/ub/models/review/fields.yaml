@@ -1,0 +1,42 @@
+tabs:
+    fields:
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    name:
+        label: Отзыв
+        span: auto
+        type: text
+    photo:
+        label: Изображение
+        mode: image
+        imageWidth: '90'
+        imageHeight: '90'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    description:
+        label: Описание
+        size: large
+        span: auto
+        type: textarea

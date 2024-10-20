@@ -1,0 +1,16 @@
+uuid: e26ccf6c-4dbc-4957-b52c-faefe81b758d
+handle: InCompanies
+type: entry
+name: Страховые компании
+drafts: false
+
+navigation:
+    parent: UdSettings
+    icon: icon-magic
+    order: 10
+
+fields:
+    description:
+        label: Entry description
+        type: textarea
+        size: small

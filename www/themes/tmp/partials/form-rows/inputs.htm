@@ -1,0 +1,9 @@
+<div class="{{ row.title }}">
+    
+    {% for item in row.childrens %}
+        <div class="{{ item.clss }}">              
+            {% partial 'form-rows/' ~ item._group row=item %}
+        </div>
+    {% endfor %}
+
+</div>

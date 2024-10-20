@@ -1,0 +1,14 @@
+{% if type == 1 %}
+
+<div class="">
+    {% for item in ['внести изменения в действующий','получить новый или дубликат','у меня электронный ПТС'] %}
+        <div class="form-control ">
+            <label class="label cursor-pointer justify-start">                      
+                <input type="radio" name="pts" class="radio checked:bg-red-500" value="{{ item }}" {{ loop.first == true ? 'checked' : '' }} />
+                <span class="label-text ml-2">{{ item }}</span> 
+            </label>
+        </div>    
+    {% endfor %}
+</div>
+
+{% endif %}

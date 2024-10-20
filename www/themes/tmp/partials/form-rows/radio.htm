@@ -1,0 +1,28 @@
+<div class="">   
+
+    {% if row.title %}
+        <div class="mb-1">{{ row.title }}</div>
+    {% endif %}    
+
+    <div class="{{ row.clses }}">
+        {% for key, item in row.rows %}
+            <div class="form-control">
+                <label class="label cursor-pointer py-1">   
+                    {% if item.hash_parent %}   
+                        <input type="radio" data-wrap="ajax_{{ row.hash }}" data-id="{{ item.hash_parent }}" name="{{ row.hash }}" class="radio checked:bg-red-500" value="{{ item.id }}" onchange="getWrapForm(this)">      
+                    {% else %}      
+                        <input type="radio" name="{{ row.hash }}" class="radio checked:bg-red-500" value="{{ item.id }}">
+                    {% endif %}
+                    <span class="label-text ml-2 flex-1">{{ item.title }}</span> 
+                </label>
+            </div>
+        {% endfor %} 
+    </div>  
+
+    <span data-validate-for="{{ row.hash }}" class="text-error mt-2 text-xs"></span>
+
+</div>
+
+{% if row.is_ajax %}
+    <div id="ajax_{{ row.hash }}"></div>
+{% endif %}

@@ -1,0 +1,9 @@
+# config_relation.yaml
+comments:
+    label: Сообщения
+    view:
+        list: $/saybme/ub/models/message/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/ub/models/message/fields.yaml

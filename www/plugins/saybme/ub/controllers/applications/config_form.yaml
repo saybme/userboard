@@ -1,0 +1,10 @@
+name: Applications
+form: $/saybme/ub/models/application/fields.yaml
+modelClass: Saybme\Ub\Models\Application
+defaultRedirect: saybme/ub/applications
+create:
+    redirect: 'saybme/ub/applications/update/:id'
+    redirectClose: saybme/ub/applications
+update:
+    redirect: saybme/ub/applications
+    redirectClose: saybme/ub/applications

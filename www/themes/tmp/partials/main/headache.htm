@@ -1,0 +1,11 @@
+<h3 class="text-2xl table:text-3xl font-gilroy-bold laptop:text-section-h1 text-blue-1 text-center">Избавляем вас от головной боли</h3>
+    <div class="flex mt-[3rem] overflow-x-auto scrollbar-hide">        
+        {% for item in global.headache %}
+            <div class="w-[180px] table_l:w-1/4 flex-none table_l:flex flex-col items-center">
+                <div class="headache-icon">
+                    {{ item.icon | raw }}
+                </div>
+                <h4 class="mt-4 text-lg laptop:text-txt-26 text-center">{{ item.title }}</h4>
+            </div>
+        {% endfor %}
+    </div>

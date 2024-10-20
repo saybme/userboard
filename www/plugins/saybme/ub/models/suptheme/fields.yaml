@@ -1,0 +1,53 @@
+tabs:
+    fields:
+        comments:
+            label: Сообщения темы
+            span: full
+            tab: Сообщения
+            type: partial
+        url:
+            label: Полный путь
+            span: auto
+            tab: Информация
+            disabled: true
+        hash:
+            label: HASH
+            span: auto
+            tab: Информация
+            disabled: true
+        created_at:
+            label: Создан
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+        updated_at:
+            label: Обновлен
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Информация
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    num@update:
+        label: 'Тема обращения'
+        span: auto
+        type: text
+        disabled: true
+    user:
+        label: Пользователь
+        span: auto
+        type: relation
+        placeholder: -- Выбрать --
+        nameFrom: phone
+    description:
+        label: 'Описание темы'
+        size: small
+        span: full
+        type: textarea

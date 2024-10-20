@@ -1,0 +1,15 @@
+<div class="font-gilroy-medium">
+
+    <h4 class="font-gilroy-bold">{{ page.description }}</h4>
+
+    <h3 class="text-2xl font-gilroy-bold mt-4">Вы являетесь?</h3>
+
+    <ul class="mt-4 text-base flex flex-col gap-2 list-disc ml-5">    
+        {% for item in page.children %}
+            <li>
+                <a href="{{ item.link }}" class="text-blue-2 hover:underline">{{ item.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</div>

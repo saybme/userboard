@@ -1,0 +1,40 @@
+[viewBag]
+==
+<?php
+use Saybme\Ub\Classes\Banners\BannerClass;
+
+function onStart(){
+    $q = new BannerClass;
+    $this['mainbanners'] = $q->getAllBaners();
+}
+?>
+==
+
+<div class="bg-grey-2 relative">   
+
+    <div class="f-carousel" id="swiper-bnrs">
+        
+        {% for item in mainbanners %}
+            <div class="f-carousel__slide">
+                <div class="table:container py-[1.5rem] table_l:py-[3.125rem] table_sm:py-[6.25rem] relative px-2">
+                    <div class="relative z-10">
+                        <h4 class="text-red-2 uppercase font-gilroy-bold text-[0.5rem] laptop:text-[0.813rem]">user<span class="text-blue-2">board</span>.ru</h4>
+                        <div class="slide-text">
+                            {{ item.description | raw }}
+                        </div>
+                        {% if item.link %}
+                            <div class="mt-9">
+                                <a href="{{ item.link | link }}" class="btn btn-red">Заказать услугу</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="absolute -right-[70%] table_l:-right-[10%] table:-right-[15%] laptop:right-0 top-0 h-full opacity-30 table_sm:opacity-100">
+                        <img src="{{ item.photo.path }}" alt="" class="block w-full h-full object-contain">
+                    </div>
+                </div>                
+            </div>
+        {% endfor %}
+          
+    </div>    
+
+</div>

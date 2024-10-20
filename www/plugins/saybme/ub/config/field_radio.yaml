@@ -1,0 +1,80 @@
+name: Радиокнопки
+description: Список радиокнопок
+icon: icon-check-circle
+fields:
+  is_required:
+    label: Обязательное поле
+    span: full
+    type: checkbox
+    default: 1
+    tab: Поле
+  is_ajax:
+    label: AJAX связка
+    span: full
+    type: checkbox
+    tab: Настройка
+  title:
+    label: Заголовок
+    span: row
+    type: text
+    spanClass: col-4
+    tab: Поле
+  ptitle:
+    label: Заголовок в заявке
+    span: row
+    type: text
+    spanClass: col-3
+    tab: Поле
+  clses:
+    label: Классы
+    span: row
+    type: taglist
+    separator: space
+    optionsMethod: getClasses
+    spanClass: col-3
+    tab: Поле
+  kgroup:
+    label: Группа
+    span: row
+    type: text
+    spanClass: col-2
+    tab: Поле
+  ubtype:
+    label: Тип вывода
+    span: auto
+    type: dropdown
+    tab: Настройка
+  hash:
+    label: HASH
+    span: auto
+    type: text
+    disabled: 1
+    tab: Настройка
+  id:
+    label: ID
+    span: auto
+    type: text
+    disabled: 1
+    tab: Настройка
+  rows:
+    label: Значения
+    span: full
+    type: repeater
+    tab: Значения
+    form:
+      fields:
+        title:
+          label: Заголовок
+          span: row
+          type: text
+          spanClass: col-4
+        hash:
+          label: HASH
+          disabled: 1
+          span: row
+          spanClass: col-4
+        hash_parent:
+          label: Связный блок
+          span: row
+          type: text
+          spanClass: col-4

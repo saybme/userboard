@@ -1,0 +1,24 @@
+fields:
+    name:
+        label: Заголовок
+        span: full
+        type: text
+tabs:
+    fields:
+        values:
+            label: Значения
+            span: full
+            tab: Значения
+            type: repeater
+            form:
+                fields:
+                    title:
+                        label: Значение
+                        span: full
+                        type: text
+        description:
+            label: Описание
+            span: full
+            type: textarea
+            tab: Описание
+            size: small

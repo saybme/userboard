@@ -1,0 +1,12 @@
+name: PARTIAL
+description: PARTIAL блок вывода заголовок
+icon: icon-cubes
+fields:
+  title:
+    label: Текст
+    span: auto
+    type: text
+  partial_api:
+    label: API partial
+    span: auto
+    type: text

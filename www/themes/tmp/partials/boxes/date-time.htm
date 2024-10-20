@@ -1,0 +1,28 @@
+[viewBag]
+==
+<?php
+
+use Saybme\Ub\Classes\App\AppClass;
+
+function onStart(){
+    $q = new AppClass;
+    $this['times'] = $q->getTimes();
+}
+?>
+==
+
+<div class="">
+    <label for="" class="block w-full text-sm mb-1">Выбрать дату</label>
+    <input type="date" value="" name="app_date[date]" class="input input-bordered w-full" placeholder="" id="">
+    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+</div>
+
+<div class="">
+    <label for="" class="block w-full text-sm mb-1">Выбрать время</label>
+    <select class="select select-bordered w-full" name="app_date[time]">
+        {% for item in times %}
+            <option class="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <span data-validate-for="" class="text-error mt-2 text-xs"></span>
+</div>

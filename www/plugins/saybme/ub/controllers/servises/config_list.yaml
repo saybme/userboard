@@ -1,0 +1,14 @@
+title: Servises
+modelClass: Saybme\Ub\Models\Servise
+list: $/saybme/ub/models/servise/columns.yaml
+recordUrl: 'saybme/ub/servises/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 10
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

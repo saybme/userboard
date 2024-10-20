@@ -1,0 +1,14 @@
+url = "/cabinet/:slug*"
+layout = "default"
+title = "Страница кабинета"
+
+[cabinet]
+slug = "{{ :slug }}"
+type = "getPage"
+
+[global glform]
+handle = "UdForm"
+==
+<div class="container">
+    {% component 'cabinet' %}
+</div>

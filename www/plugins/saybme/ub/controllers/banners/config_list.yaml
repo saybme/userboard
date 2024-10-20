@@ -1,0 +1,15 @@
+title: Banners
+modelClass: Saybme\Ub\Models\Banner
+list: $/saybme/ub/models/banner/columns.yaml
+recordUrl: 'saybme/ub/banners/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 1
+    showTree: false
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

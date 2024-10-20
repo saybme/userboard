@@ -1,0 +1,188 @@
+v1.0.1:
+    - 'Initialize plugin'
+v1.0.2:
+    - 'Created table saybme_ub_reviews'
+    - builder_table_create_saybme_ub_reviews.php
+v1.0.3:
+    - 'Updated table saybme_ub_reviews'
+    - builder_table_update_saybme_ub_reviews.php
+v1.0.4:
+    - 'Created table saybme_ub_servises'
+    - builder_table_create_saybme_ub_servises.php
+v1.0.5:
+    - 'Updated table saybme_ub_servises'
+    - builder_table_update_saybme_ub_servises.php
+v1.0.6:
+    - 'Updated table saybme_ub_servises'
+    - builder_table_update_saybme_ub_servises_2.php
+v1.0.7:
+    - 'Created table saybme_ub_banners'
+    - builder_table_create_saybme_ub_banners.php
+v1.0.8:
+    - 'Created table saybme_ub_users'
+    - builder_table_create_saybme_ub_users.php
+v1.0.9:
+    - 'Created table saybme_ub_profile_pages'
+    - builder_table_create_saybme_ub_profile_pages.php
+v1.0.10:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages.php
+v1.0.11:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_2.php
+v1.0.12:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_3.php
+v1.0.13:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_4.php
+v1.0.14:
+    - 'Updated table saybme_ub_users'
+    - builder_table_update_saybme_ub_users.php
+v1.0.15:
+    - 'Created table saybme_ub_sup_themes'
+    - builder_table_create_saybme_ub_sup_themes.php
+v1.0.16:
+    - 'Updated table saybme_ub_sup_themes'
+    - builder_table_update_saybme_ub_sup_themes.php
+v1.0.17:
+    - 'Updated table saybme_ub_sup_themes'
+    - builder_table_update_saybme_ub_sup_themes_2.php
+v1.0.18:
+    - 'Updated table saybme_ub_sup_themes'
+    - builder_table_update_saybme_ub_sup_themes_3.php
+v1.0.19:
+    - 'Created table saybme_ub_messages'
+    - builder_table_create_saybme_ub_messages.php
+v1.0.20:
+    - 'Updated table saybme_ub_messages'
+    - builder_table_update_saybme_ub_messages.php
+v1.0.21:
+    - 'Created table saybme_ub_srv_categories'
+    - builder_table_create_saybme_ub_srv_categories.php
+v1.0.22:
+    - 'Updated table saybme_ub_servises'
+    - builder_table_update_saybme_ub_servises_3.php
+v1.0.23:
+    - 'Created table saybme_ub_forms'
+    - builder_table_create_saybme_ub_forms.php
+v1.0.24:
+    - 'Updated table saybme_ub_servises'
+    - builder_table_update_saybme_ub_servises_4.php
+v1.0.25:
+    - 'Updated table saybme_ub_servises'
+    - builder_table_update_saybme_ub_servises_5.php
+v1.0.26:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms.php
+v1.0.27:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_2.php
+v1.0.28:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_3.php
+v1.0.29:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_4.php
+v1.0.30:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_5.php
+v1.0.31:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_6.php
+v1.0.32:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_7.php
+v1.0.33:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_8.php
+v1.0.34:
+    - 'Updated table saybme_ub_forms'
+    - builder_table_update_saybme_ub_forms_9.php
+v1.0.35:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_5.php
+v1.0.36:
+    - 'Created table saybme_ub_applications'
+    - builder_table_create_saybme_ub_applications.php
+v1.0.37:
+    - 'Updated table saybme_ub_applications'
+    - builder_table_update_saybme_ub_applications.php
+v1.0.38:
+    - 'Updated table saybme_ub_applications'
+    - builder_table_update_saybme_ub_applications_2.php
+v1.0.39:
+    - 'Created table saybme_ub_documents'
+    - builder_table_create_saybme_ub_documents.php
+v1.0.40:
+    - 'Updated table saybme_ub_documents'
+    - builder_table_update_saybme_ub_documents.php
+v1.0.41:
+    - 'Updated table saybme_ub_servises'
+    - builder_table_update_saybme_ub_servises_6.php
+v1.0.42:
+    - 'Created table saybme_ub_ubforms'
+    - builder_table_create_saybme_ub_ubforms.php
+v1.0.43:
+    - 'Created table saybme_ub_formrows'
+    - builder_table_create_saybme_ub_formrows.php
+v1.0.44:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms.php
+v1.0.45:
+    - 'Updated table saybme_ub_formrows'
+    - builder_table_update_saybme_ub_formrows.php
+v1.0.46:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_2.php
+v1.0.47:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_3.php
+v1.0.48:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_4.php
+v1.0.49:
+    - 'Updated table saybme_ub_formrows'
+    - builder_table_update_saybme_ub_formrows_2.php
+v1.0.50:
+    - 'Created table saybme_ub_ubformvalues'
+    - builder_table_create_saybme_ub_ubformvalues.php
+v1.0.51:
+    - 'Created table saybme_ub_form_values'
+    - builder_table_create_saybme_ub_form_values.php
+v1.0.52:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_5.php
+v1.0.53:
+    - 'Created table saybme_ub_carnumbers'
+    - builder_table_create_saybme_ub_carnumbers.php
+v1.0.54:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers.php
+v1.0.55:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_2.php
+v1.0.56:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_3.php
+v1.0.57:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_4.php
+v1.0.58:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_5.php
+v1.0.59:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_6.php
+v1.0.60:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_7.php
+v1.0.61:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_8.php
+v1.0.62:
+    - 'Updated table saybme_ub_users'
+    - builder_table_update_saybme_ub_users_2.php
+v1.0.63:
+    - 'Updated table saybme_ub_applications'
+    - builder_table_update_saybme_ub_applications_3.php

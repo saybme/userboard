@@ -1,0 +1,13 @@
+name: Ubformvalues
+form: $/saybme/ub/models/ubformvalue/fields.yaml
+modelClass: Saybme\Ub\Models\Ubformvalue
+defaultRedirect: saybme/ub/ubformvalues
+design:
+    displayMode: popup
+    size: 450
+create:
+    redirect: 'saybme/ub/ubformvalues/update/:id'
+    redirectClose: saybme/ub/ubformvalues
+update:
+    redirect: saybme/ub/ubformvalues
+    redirectClose: saybme/ub/ubformvalues

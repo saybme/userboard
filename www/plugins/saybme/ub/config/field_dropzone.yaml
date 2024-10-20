@@ -1,0 +1,31 @@
+name: Dropzone
+description: Поле Dropzone для фото
+icon: icon-file-image-o
+fields:
+  is_required:
+    label: Обязательное поле
+    span: full
+    type: checkbox
+    default: 1
+    tab: Поле
+  title:
+    label: Заголовок
+    span: full
+    type: textarea
+    size: small
+    tab: Поле 
+  ptitle:
+    label: Заголовок в заявке
+    span: full
+    type: text
+    tab: Поле 
+  ubtype:
+    label: Тип вывода
+    span: auto
+    type: dropdown
+    tab: Поле 
+  kgroup:
+    label: Группа
+    span: auto
+    type: number
+    tab: Поле

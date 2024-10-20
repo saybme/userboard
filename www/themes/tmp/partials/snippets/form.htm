@@ -1,0 +1,23 @@
+[viewBag]
+snippetCode = "ubform"
+snippetName = "Форма"
+snippetDescription = "Блок вывода формы"
+snippetProperties[form_id][title] = "ID формы"
+snippetProperties[form_id][type] = "string"
+snippetProperties[form_id][default] = ""
+snippetProperties[form_id][options][] = ""
+==
+<?php
+use Saybme\Ub\Classes\Auth\AuthClass;
+
+function onStart(){
+    $formId = $this->form_id; 
+    $q = new AuthClass;      
+    $form = $q->getUbFormId($formId);
+    $this['ubform'] = $form;
+}
+?>
+==
+<div class="">
+    {% partial "forms/wrap-form" page=ubform %}
+</div>

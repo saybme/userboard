@@ -1,0 +1,147 @@
+<div class="" id="form_result">    
+
+    <p class="text-lg font-gilroy-medium">Заполните форму, мы рассчитаем стоимость оформления</p>
+
+    <form action="" class="block w-full mt-4" data-request="onOrderForm" data-request-validate>
+
+        <input type="hidden" name="form" value="{{ page.id }}">
+
+        <div class="">
+            <label for="" class="block w-full text-sm mb-1">Список вносимых изменений (дополнительное оборудование, узлы и агрегаты вносимых в конструкцию ТС)</label>
+            <input type="text" value="" name="list" class="input input-bordered w-full" placeholder="" id="">
+            <span data-validate-for="list" class="text-error mt-2 text-xs"></span>
+        </div>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>Фото автомобиля с 4 –х сторон, номер рамы, кузова, VIN, дублирующая маркировочная табличка (шильдик), показания спидометра</p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>Скан паспорта транспортного средства (ПТС)  с 2-х сторон</p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>Свидетельство о регистрации транспортного средства (СРТС) с 2-х сторон</p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>Паспорт гражданина РФ  лицевая  сторона и прописка (ИНН для Юридического лица)</p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>СНИЛС сторону с номером</p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>Документы,  удостоверяющие право собственности (договор купли продажи номерных агрегатов, таможенная декларация, сертификаты и т.д.) на устанавливаемое дополнительное оборудование, узлы и агрегаты вносимых в конструкцию ТС </p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <p>Доверенность если вы представитель собственника</p>
+            <div class="border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed">
+                Перетащите файл сюда или загрузите вручную
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <legend class="font-gilroy-medium text-lg px-3 m-0">Оборудование уже стоит?</legend>
+            <div class="flex gap-3">   
+                <div class="form-control">
+                    <label class="label cursor-pointer">                      
+                      <input type="radio" name="oborodovanie" class="radio checked:bg-red-500" value="0" checked />
+                      <span class="label-text ml-2">Нет</span> 
+                    </label>
+                </div>
+                <div class="form-control">
+                    <label class="label cursor-pointer">                      
+                      <input type="radio" name="oborodovanie" class="radio checked:bg-red-500" value="1" />
+                      <span class="label-text ml-2">Да</span> 
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <legend class="font-gilroy-medium text-lg px-3 m-0">Сертификаты, грузовая таможенная декларация (ГТД) на оборудование имеется?</legend>
+            <div class="flex gap-3">   
+                <div class="form-control">
+                    <label class="label cursor-pointer">                      
+                      <input type="radio" name="sertificate" class="radio checked:bg-red-500" value="0" checked />
+                      <span class="label-text ml-2">Нет</span> 
+                    </label>
+                </div>
+                <div class="form-control">
+                    <label class="label cursor-pointer">                      
+                      <input type="radio" name="sertificate" class="radio checked:bg-red-500" value="1" />
+                      <span class="label-text ml-2">Да</span> 
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <legend class="font-gilroy-medium text-lg px-3 m-0">Контактная информация</legend>
+
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Как к вам обращаться?</label>
+                <input type="text" name="username" value="" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="username" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Телефон для связи / Whats App</label>
+                <input type="text" name="phone"  value="{{ user.phone }}" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="phone" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Адрес электронной почты (при наличии)</label>
+                <input type="email" name="email" value="" class="input input-bordered w-full" placeholder="" id="">
+            </div>
+
+        </fieldset>
+
+        <div class="alert alert-warning mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span>
+                Внимание! Оплата производиться только после того как наш оператор свяжется с вами по телефону и подтвердит регистрацию заявки
+            </span>
+        </div>        
+
+        <div class="alert alert-info mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>Оставайтесь на связи, в  ближайшее время  наш оператор с вами свяжется!</span>
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-red btn-lg" data-attach-loading>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+                </svg>                  
+                Отправить</button>
+        </div>
+
+        
+        
+
+    </form>
+
+</div>

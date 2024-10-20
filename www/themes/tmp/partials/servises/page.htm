@@ -1,0 +1,27 @@
+<div class="">
+    {% partial "breadcrumbs/items" items=breadcrumbs %}   
+</div>
+
+<div class="flex items-start pt-2 pb-9">
+
+    <div class="w-[320px] bg-white flex-none mr-8 rounded-lg px-4 py-6">
+        <h4 class="text-blue-2 font-gilroy-bold text-3xl/none">Наши услуги:</h4>
+        <nav class="mt-4">
+            <ul class="list-disc ml-5 space-y-2 font-gilroy-medium">
+                {% for item in menu %}
+                <li class="">
+                    <a href="{{ item.link }}" class="hover:underline hover:text-red-1 block">{{ item.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="flex-1">
+        <h1 class="title-h1">{{ page.name }}</h1>
+        <div class="text space-y-4">
+            {{ page.content | content }}
+        </div>
+    </div>
+
+</div>

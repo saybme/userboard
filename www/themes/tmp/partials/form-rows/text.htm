@@ -1,0 +1,61 @@
+{% if row.type == 'address' %}
+
+    <div class="">
+        <label for="{{ row.hash }}_full" class="block w-full text-sm mb-1">{{ row.title }}</label>
+        <input type="text" value="" name="{{ row.hash }}[full]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_full">    
+    </div>
+
+    <div class="mt-2 flex gap-x-5 flex-wrap table_sm:flex-nowrap gap-y-2">
+        <div class="w-full table_sm:max-w-[150px]">
+            <label for="{{ row.hash }}_index" class="block w-full text-sm mb-1">Индекс</label>
+            <input type="text" value="" name="{{ row.hash }}[index]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_index">    
+        </div>
+        <div class="w-full table_l:min-w-[250px]">
+            <label for="{{ row.hash }}_region" class="block w-full text-sm mb-1">Регион</label>
+            <input type="text" value="" name="{{ row.hash }}[region]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_region">    
+        </div>
+        <div class="flex-1 table_l:min-w-[250px]">
+            <label for="{{ row.hash }}_city" class="block w-full text-sm mb-1">Населенный пункт</label>
+            <input type="text" value="" name="{{ row.hash }}[city]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_city">    
+        </div>
+    </div>
+
+    <div class="mt-2 flex gap-x-5 flex-wrap table_sm:flex-nowrap gap-y-2">
+        <div class="table_sm:flex-1 w-full table_sm:w-auto">
+            <label for="{{ row.hash }}_street" class="block w-full text-sm mb-1">Улица</label>
+            <input type="text" value="" name="{{ row.hash }}[street]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_street">    
+        </div>
+        <div class="w-full table_l:max-w-[130px]">
+            <label for="{{ row.hash }}_house" class="block w-full text-sm mb-1">Дом</label>
+            <input type="text" value="" name="{{ row.hash }}[house]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_house">    
+        </div>
+        <div class="w-full table_l:max-w-[130px]">
+            <label for="{{ row.hash }}_building" class="block w-full text-sm mb-1">Строение</label>
+            <input type="text" value="" name="{{ row.hash }}[building]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_building">    
+        </div>
+        <div class="w-full table_l:max-w-[130px]">
+            <label for="{{ row.hash }}_room" class="block w-full text-sm mb-1">Квартира / офис</label>
+            <input type="text" value="" name="{{ row.hash }}[room]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_room">    
+        </div>
+    </div>
+    <div class="form-control mt-2">
+        <label class="label cursor-pointer py-1">                      
+            <input type="checkbox" name="{{ row.hash }}[no_address]" class="checkbox" value="Без квартиры / офиса">
+            <span class="label-text ml-2 flex-1">Без квартиры / офиса</span> 
+        </label>
+    </div>   
+
+{% else %}
+
+    <label for="{{ row.hash }}" class="block w-full text-sm mb-1">{{ row.title }}</label>
+    <input type="{{ row.type ?: 'text' }}" value="" name="{{ row.hash }}" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}">
+    {% if row.comment %}
+        <div class="text-xs text-grey-3">
+            {{ row.comment }}
+        </div>
+    {% endif %}
+    <span data-validate-for="{{ row.hash }}" class="text-error mt-2 text-xs"></span>
+
+{% endif %}
+
+{{ page.formdata }}

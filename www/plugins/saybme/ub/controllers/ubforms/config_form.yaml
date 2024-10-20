@@ -1,0 +1,12 @@
+name: Ubforms
+form: $/saybme/ub/models/ubform/fields.yaml
+modelClass: Saybme\Ub\Models\Ubform
+defaultRedirect: saybme/ub/ubforms
+design:
+    displayMode: sidebar
+create:
+    redirect: 'saybme/ub/ubforms/update/:id'
+    redirectClose: saybme/ub/ubforms
+update:
+    redirect: saybme/ub/ubforms
+    redirectClose: saybme/ub/ubforms

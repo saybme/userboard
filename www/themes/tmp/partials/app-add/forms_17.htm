@@ -1,0 +1,193 @@
+<div class="" id="form_result">    
+
+    <p class="text-lg font-gilroy-medium">
+        {{ page.description }}
+    </p>
+
+    <form action="" class="block w-full mt-4" data-request="onOrderForm" data-request-validate>
+
+        <input type="hidden" name="form" value="{{ page.id }}">
+
+        <div class="">
+            <label for="" class="block w-full text-sm mb-1">В каком подразделении ГИБДД будите оформлять переоборудование транспортного средства  (наименование подразделения  Госавтоинспекции)</label>
+            <input type="text" value="" name="gibdd" class="input input-bordered w-full" placeholder="" id="">
+            <span data-validate-for="gibdd" class="text-error mt-2 text-xs"></span>
+        </div>
+
+        <div class="mt-2">
+            <label for="" class="block w-full text-sm mb-1">Фамилия Имя Отчество заявителя</label>
+            <input type="text" value="" name="fio" class="input input-bordered w-full" placeholder="" id="">
+            <span data-validate-for="fio" class="text-error mt-2 text-xs"></span>
+        </div>
+
+        <div class="mt-2">
+            <label for="" class="block w-full text-sm mb-1">Указываются изменения в конструкцию транспортного средства (указываются сведения из  «заключения предварительной технической экспертизы»)</label>
+            <input type="text" value="" name="design_changes" class="input input-bordered w-full" placeholder="" id="">
+            <span data-validate-for="design_changes" class="text-error mt-2 text-xs"></span>
+        </div>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+
+            <legend class="font-gilroy-medium text-lg px-3 m-0">СВЕДЕНИЯ О ТРАНСПОРТНОМ СРЕДСТВЕ</legend>
+
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Марка / Модель ТС</label>
+                <input type="text" value="" name="mark_model" class="input input-bordered w-full" placeholder="Пример TOYOTA LAND CRUISER" id="">
+                <span data-validate-for="mark_model" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Тип / категория ТС</label>
+                <input type="text" value="" name="type_category_ts" class="input input-bordered w-full" placeholder="Пример легковой универсал / «В»" id="">
+                <span data-validate-for="type_category_ts" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Цвет</label>
+                <input type="text" value="" name="bg" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="bg" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Государственный регистрационный знак</label>
+                <input type="text" value="" name="gosznak" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="gosznak" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Идентификационный номер VIN</label>
+                <input type="text" value="" name="vin" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="vin" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Кузов (кабина, прицеп) №</label>
+                <input type="text" value="" name="body" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="body" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Шасси (рама) №</label>
+                <input type="text" value="" name="chassis" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="chassis" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Модель двигателя</label>
+                <input type="text" value="" name="engine" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="engine" class="text-error mt-2 text-xs"></span>
+            </div>
+
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+
+            <legend class="font-gilroy-medium text-lg px-3 m-0">СВЕДЕНИЯ О СОБСТВЕННИКЕ ТРАНСПОРТНОГО СРЕДСТВА</legend>
+
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">(наименование юридического лица или фамилия, имя, отчество (при наличии) физического лица)</label>
+                <input type="text" value="" name="mark_model" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="mark_model" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Дата регистрации юридического лица или дата рождения физического лица</label>
+                <input type="text" value="" name="date_reg" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="date_reg" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Документ, удостоверяющий личность * ИНН (для физических лиц при наличии)</label>
+                <input type="text" value="" name="doc_inn" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="doc_inn" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Адрес регистрации юридического лица или физического лица (индекс, субъект Российской Федерации, район, населенный пункт, улица, дом, корпус, квартира)</label>
+                <input type="text" value="" name="address_reg" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="address_reg" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Телефон</label>
+                <input type="text" value="" name="phone" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="phone" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Адрес электронной почты (при наличии)</label>
+                <input type="email" value="" name="email" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="email" class="text-error mt-2 text-xs"></span>
+            </div>            
+
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+
+            <legend class="font-gilroy-medium text-lg px-3 m-0">ПРЕДСТАВИТЕЛЬ СОБСТВЕННИКА **</legend>
+
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Фамилия, имя, отчество (при наличии)</label>
+                <input type="text" value="" name="fio_pr" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="fio_pr" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Документ, удостоверяющий личность  (серия, номер, когда, кем выдан)</label>
+                <input type="text" value="" name="pr_document" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="pr_document" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Адрес  места регистрации (субъект Российской Федерации, район, населенный пункт, улица, дом, корпус, квартира)</label>
+                <input type="text" value="" name="pr_adr_reg" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="pr_adr_reg" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Телефон</label>
+                <input type="text" value="" name="pr_phone" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="pr_phone" class="text-error mt-2 text-xs"></span>
+            </div>
+
+            <div class="mt-2">
+                <label for="" class="block w-full text-sm mb-1">Адрес электронной почты (при наличии)</label>
+                <input type="email" value="" name="pr_email" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="pr_email" class="text-error mt-2 text-xs"></span>
+            </div>
+                      
+
+        </fieldset>
+
+        <p class="my-3">
+            * Данная графа заполняется только для физических лиц.<br>
+             ** Данный блок заполняется в случае, если заявитель не является собственником.
+        </p>
+
+        <div class="alert alert-warning mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span>
+                Внимание! Оплата производиться только после того как наш оператор свяжется с вами по телефону и подтвердит регистрацию заявки
+            </span>
+        </div>        
+
+        <div class="alert alert-info mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>Оставайтесь на связи, в  ближайшее время  наш оператор с вами свяжется!</span>
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-red btn-lg" data-attach-loading>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+                </svg>                  
+                Отправить
+            </button>
+        </div>
+
+        
+        
+
+    </form>
+
+</div>

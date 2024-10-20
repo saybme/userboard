@@ -1,0 +1,135 @@
+{% if type == 1 %}    
+
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">{{ title ?: 'По адресу проживания' }}</label>
+        <input type="text" value="" name="{{ name }}[address]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="{{ name }}.address" class="text-error mt-2 text-xs"></span>
+    </div>
+
+    <div class="mt-2 hidden">
+
+        <div class=" flex gap-4">
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Индекс</label>
+                <input type="text" value="" name="{{ name }}[index]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.index" class="text-error mt-2 text-xs"></span>
+            </div>
+            <div class="flex-1">
+                <label for="" class="block w-full text-sm mb-1">Регион</label>
+                <input type="text" value="" name="{{ name }}[region]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.region" class="text-error mt-2 text-xs"></span>
+            </div>
+            <div class="flex-1">
+                <label for="" class="block w-full text-sm mb-1">Населенный пункт</label>
+                <input type="text" value="" name="{{ name }}[point]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.point" class="text-error mt-2 text-xs"></span>
+            </div>  
+        </div>  
+
+        <div class="mt-2 flex gap-4">
+            <div class="flex-1">
+                <label for="" class="block w-full text-sm mb-1">Улица</label>
+                <input type="text" value="" name="{{ name }}[street]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.street" class="text-error mt-2 text-xs"></span>
+            </div>  
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Дом</label>
+                <input type="text" value="" name="{{ name }}[house]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.house" class="text-error mt-2 text-xs"></span>
+            </div>    
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Строение</label>
+                <input type="text" value="" name="{{ name }}[building]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.building" class="text-error mt-2 text-xs"></span>
+            </div>    
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Квартира / офис</label>
+                <input type="text" value="" name="{{ name }}[flat]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.flat" class="text-error mt-2 text-xs"></span>
+            </div> 
+        </div>
+
+        <div class="form-control mt-2">
+            <label class="label cursor-pointer justify-start">                  
+                <input type="checkbox" checked="checked" class="checkbox" name="{{ name }}[is_flat]" value="Без квартиры / офиса" />
+                <span class="label-text ml-2">Без квартиры / офиса</span> 
+            </label>
+        </div> 
+
+    </div> 
+
+{% endif %}
+
+
+{% if type == 2 %}
+
+    <div class="">
+        {% for item in items %}
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">                
+                    <input type="radio" name="{{ name }}[type]" value="{{ item }}" class="radio checked:bg-red-500" {{ loop.first == true ? ' checked' : '' }} />
+                    <span class="label-text ml-2">{{ item }}</span> 
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-2">
+        <label for="" class="block w-full text-sm mb-1">Введите адрес</label>
+        <input type="text" value="" name="{{ name }}[residential_address]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="{{ name }}.residential_address" class="text-error mt-2 text-xs"></span>
+    </div>
+
+    <div class="mt-2 hidden">
+
+        <div class=" flex gap-4">
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Индекс</label>
+                <input type="text" value="" name="{{ name }}[index]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.index" class="text-error mt-2 text-xs"></span>
+            </div>
+            <div class="flex-1">
+                <label for="" class="block w-full text-sm mb-1">Регион</label>
+                <input type="text" value="" name="{{ name }}[region]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.region" class="text-error mt-2 text-xs"></span>
+            </div>
+            <div class="flex-1">
+                <label for="" class="block w-full text-sm mb-1">Населенный пункт</label>
+                <input type="text" value="" name="{{ name }}[point]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.point" class="text-error mt-2 text-xs"></span>
+            </div>  
+        </div>  
+
+        <div class="mt-2 flex gap-4">
+            <div class="flex-1">
+                <label for="" class="block w-full text-sm mb-1">Улица</label>
+                <input type="text" value="" name="{{ name }}[street]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.street" class="text-error mt-2 text-xs"></span>
+            </div>  
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Дом</label>
+                <input type="text" value="" name="{{ name }}[house]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.house" class="text-error mt-2 text-xs"></span>
+            </div>    
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Строение</label>
+                <input type="text" value="" name="{{ name }}[building]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.building" class="text-error mt-2 text-xs"></span>
+            </div>    
+            <div class="">
+                <label for="" class="block w-full text-sm mb-1">Квартира / офис</label>
+                <input type="text" value="" name="{{ name }}[flat]" class="input input-bordered w-full" placeholder="" id="">
+                <span data-validate-for="{{ name }}.flat" class="text-error mt-2 text-xs"></span>
+            </div> 
+        </div>
+
+        <div class="form-control mt-2">
+            <label class="label cursor-pointer justify-start">                  
+                <input type="checkbox" checked="checked" class="checkbox" name="{{ name }}[is_flat]" value="Без квартиры / офиса" />
+                <span class="label-text ml-2">Без квартиры / офиса</span> 
+            </label>
+        </div> 
+
+    </div> 
+
+{% endif %}

@@ -1,0 +1,115 @@
+{% if type == 1 %}
+
+<div class="">
+    {% for item in ['Автомобиль или автобус','Прицеп','Мотоцикл'] %}
+        <div class="form-control ">
+            <label class="label cursor-pointer justify-start">                      
+                <input type="radio" name="type_transport" class="radio checked:bg-red-500" value="{{ item }}" {{ loop.first == true ? 'checked' : '' }} />
+                <span class="label-text ml-2">{{ item }}</span> 
+            </label>
+        </div>    
+    {% endfor %}
+</div>
+
+<div class="mt-2 grid grid-cols-3 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Марка</label>
+        <input type="text" value="" name="mark" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="mark" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Модель</label>
+        <input type="text" value="" name="model" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="model" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Год выпуска</label>
+        <input type="text" value="" name="caryear" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="caryear" class="text-error mt-2 text-xs"></span>
+    </div>
+</div>
+
+<div class="mt-2">
+    <label for="" class="block w-full text-sm mb-1">Идентификационный номер транспортного средства (VIN)</label>
+    <input type="text" value="" name="carvin" class="input input-bordered w-full" placeholder="" id="">
+    <span data-validate-for="carvin" class="text-error mt-2 text-xs"></span>
+</div>                       
+
+<div class="mt-2 grid grid-cols-2 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер кузова</label>
+        <input type="text" value="" name="car_num_body" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car_num_body" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер шасси (рамы)</label>
+        <input type="text" value="" name="car_num_shasi" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car_num_shasi" class="text-error mt-2 text-xs"></span>
+    </div>
+</div>
+
+<div class="mt-2">
+    <label for="" class="block w-full text-sm mb-1">Государственный регистрационный знак</label>
+    <input type="text" value="" name="gos_znak" class="input input-bordered w-full" placeholder="" id="">
+    <span data-validate-for="gos_znak" class="text-error mt-2 text-xs"></span>
+</div>  
+
+{% endif %}
+
+{% if type == 2 %}
+
+<div class="flex">    
+    <div class="w-[300px]">
+        {% for item in ['Автомобиль или автобус','Прицеп','Мотоцикл'] %}
+            <div class="form-control ">
+                <label class="label cursor-pointer justify-start">                      
+                    <input type="radio" name="car[type_transport]" class="radio checked:bg-red-500" value="{{ item }}" {{ loop.first == true ? 'checked' : '' }} />
+                    <span class="label-text ml-2">{{ item }}</span> 
+                </label>
+            </div>    
+        {% endfor %}
+    </div>
+    <div class="alert alert-warning flex-1">
+        <p>В случае отсутствия информации о транспортном средстве, вам следует обратиться в любое регистрационное подразделение ГИБДД и получить информацию о транспортном средстве (марка, модель, год выпуска, идентификационный номер VIN, номер кузова, шасси или рамы)</p>
+    </div>
+</div>
+
+<div class="mt-2 grid grid-cols-3 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Марка</label>
+        <input type="text" value="" name="car[mark]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car.mark" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Модель</label>
+        <input type="text" value="" name="car[model]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car.model" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Год выпуска</label>
+        <input type="number" value="" name="car[year]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car.year" class="text-error mt-2 text-xs"></span>
+    </div>
+</div>
+
+<div class="mt-2">
+    <label for="" class="block w-full text-sm mb-1">Идентификационный номер транспортного средства (VIN)</label>
+    <input type="text" value="" name="car[vin]" class="input input-bordered w-full" placeholder="" id="">
+    <span data-validate-for="car.vin" class="text-error mt-2 text-xs"></span>
+</div>                       
+
+<div class="mt-2 grid grid-cols-2 gap-4">
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер кузова</label>
+        <input type="text" value="" name="car[body_number]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car.body_number" class="text-error mt-2 text-xs"></span>
+    </div>
+    <div class="">
+        <label for="" class="block w-full text-sm mb-1">Номер шасси (рамы)</label>
+        <input type="text" value="" name="car[chassis_number]" class="input input-bordered w-full" placeholder="" id="">
+        <span data-validate-for="car.chassis_number" class="text-error mt-2 text-xs"></span>
+    </div>
+</div>
+
+{% endif %}
+

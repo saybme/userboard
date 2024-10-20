@@ -1,0 +1,10 @@
+name: Reviews
+form: $/saybme/ub/models/review/fields.yaml
+modelClass: Saybme\Ub\Models\Review
+defaultRedirect: saybme/ub/reviews
+create:
+    redirect: 'saybme/ub/reviews/update/:id'
+    redirectClose: saybme/ub/reviews
+update:
+    redirect: saybme/ub/reviews
+    redirectClose: saybme/ub/reviews

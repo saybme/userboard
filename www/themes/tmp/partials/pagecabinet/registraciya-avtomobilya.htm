@@ -1,0 +1,24 @@
+<div class="text">
+    {{ page.content | content }}
+</div>
+
+<div class="mt-5">
+    <nav class="">
+        <ul class="nav-registration">
+            {% for item in page.children %}
+                <li class="">
+                    <a href="{{ item.link }}">{{ item.name }}</a>
+                    {% if item.children | length > 0 %}
+                        <ul>
+                            {% for child in item.children %}                                
+                                <li>
+                                    <a href="{{ child.link }}">{{ child.name }}</a>
+                                </li>                                
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>

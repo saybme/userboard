@@ -1,0 +1,86 @@
+{% if row.multyTypes == 'id_document' %}
+
+    <div class="">
+        <label for="{{ row.hash }}_document" class="block w-full text-sm mb-1">{{ row.title }}</label>
+        <select name="{{ row.hash }}[document]" class="select select-bordered w-full" id="{{ row.hash }}_document">
+            <option disabled selected>Выбрать</option>
+            {% for item in 1 | formvalues %}
+                <option value="{{ item.title }}">{{ item.title }}</option>
+            {% endfor %}
+        </select>  
+    </div>
+    
+    <div class="mt-2 grid grid-cols-3 gap-5">
+        <div class="">
+            <label for="{{ row.hash }}_series" class="block w-full text-sm mb-1">Серия</label>
+            <input type="text" value="" name="{{ row.hash }}[series]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_series">    
+        </div>
+        <div class="">
+            <label for="{{ row.hash }}_num" class="block w-full text-sm mb-1">Номер</label>
+            <input type="text" value="" name="{{ row.hash }}[num]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_num">    
+        </div>
+        <div class="">
+            <label for="{{ row.hash }}_date" class="block w-full text-sm mb-1">Дата выдачи</label>
+            <input type="date" value="" name="{{ row.hash }}[date]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_date">    
+        </div>
+    </div>
+
+    <div class="mt-2 flex gap-x-5 gap-y-2">
+        <div class="flex-1">
+            <label for="{{ row.hash }}_issuedby" class="block w-full text-sm mb-1">Кем выдан</label>
+            <input type="text" value="" name="{{ row.hash }}[issuedby]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_issuedby">    
+        </div>
+        <div class="w-[180px]">
+            <label for="{{ row.hash }}_code" class="block w-full text-sm mb-1">Код подразделения</label>
+            <input type="text" value="" name="{{ row.hash }}[code]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_code">    
+        </div>
+    </div>
+
+{% endif %}
+
+<!-- power_attorney -->
+{% if row.multyTypes == 'power_attorney' %}
+    <div class="grid grid-cols-2 gap-5">
+        <div class="">
+            <label for="{{ row.hash }}_power_attorney" class="block w-full text-sm mb-1">Тип доверенности</label>
+            <select name="{{ row.hash }}[power_attorney]" class="select select-bordered w-full" id="{{ row.hash }}_power_attorney">
+                <option disabled selected>Выбрать</option>
+                {% for item in 2 | formvalues %}
+                    <option value="{{ item.title }}">{{ item.title }}</option>
+                {% endfor %}
+            </select>  
+        </div>
+        <div class="">
+            <label for="{{ row.hash }}_num" class="block w-full text-sm mb-1">Номер</label>
+            <input type="text" value="" name="{{ row.hash }}[num]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_num">    
+        </div>
+    </div>
+    <div class="mt-2 grid grid-cols-3 gap-5">
+        <div class="">
+            <label for="{{ row.hash }}_date" class="block w-full text-sm mb-1">Дата выдачи</label>
+            <input type="date" value="" name="{{ row.hash }}[date]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_date">    
+        </div>
+        <div class="">
+            <label for="{{ row.hash }}_issuedby" class="block w-full text-sm mb-1">Кем выдано</label>
+            <input type="text" value="" name="{{ row.hash }}[issuedby]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_issuedby">    
+        </div>
+        <div class="">
+            <label for="{{ row.hash }}_validuntil" class="block w-full text-sm mb-1">Срок действия до</label>
+            <input type="date" value="" name="{{ row.hash }}[validuntil]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_validuntil">    
+        </div>
+    </div>
+{% endif %}
+
+<!-- data_time -->
+{% if row.multyTypes == 'data_time' %}
+    <div class="grid grid-cols-1 table_l:grid-cols-2 gap-5">
+        <div class="">
+            <label for="{{ row.hash }}_date" class="block w-full text-sm mb-1">Дата</label>
+            <input type="date" value="" name="{{ row.hash }}[date]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_date">    
+        </div>
+        <div class="">
+            <label for="{{ row.hash }}_time" class="block w-full text-sm mb-1">Время</label>
+            <input type="time" value="" name="{{ row.hash }}[time]" class="input input-bordered w-full" placeholder="" id="{{ row.hash }}_time">    
+        </div>
+    </div>
+{% endif %}

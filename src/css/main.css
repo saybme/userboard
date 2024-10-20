@@ -1,0 +1,288 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    .about-text > p {
+        @apply pb-5 text-base font-gilroy-medium
+    }
+
+    .slide-text {
+        @apply max-w-[680px] mt-3
+    }
+
+    .slide-text > h2 {
+        @apply text-txt-30 table_sm:text-txt-40 laptop:text-txt-50 text-blue-2 mb-[1.875rem]
+    }
+
+    .slide-text > p {
+        @apply font-gilroy-medium text-sm laptop:text-base leading-[1.238rem] laptop:leading-[1.938rem]
+    }
+
+    .text > p, .text > ul, .text > ul, .text > table {
+        @apply text-base font-gilroy-medium mb-4
+    }
+
+    .text > ul {
+        @apply mb-4 list-disc ml-5 leading-normal
+    }
+
+    .text > p a, .text > ul a {
+        @apply text-blue-2 hover:underline
+    }
+
+    .text > h3 {
+        @apply text-2xl font-semibold text-blue-2 mb-4
+    }
+
+    .text h4.oc-mb-0 {
+        @apply mb-1
+    }
+
+    .text > h4 {
+        @apply text-xl font-semibold mb-4
+    }
+
+    .title-h1 {
+        @apply text-txt-40 text-blue-2 mb-6
+    }
+
+    .title-h2 {
+        @apply text-txt-30 text-blue-2 mb-6
+    }
+
+    .title {
+        @apply text-2xl table:text-3xl font-gilroy-bold laptop:text-section-h1 text-blue-1
+    }
+
+    .profile-content {
+        @apply w-full table:w-[calc(100%-420px)] 
+    }
+
+    .profile-sidebar {
+        @apply w-full table:w-[380px] bg-white rounded-md
+    }
+
+    .dropzones {
+        @apply flex flex-wrap gap-3 border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed h-auto min-h-0 hover:border-blue-2 hover:text-blue-2
+    }
+
+    .dropzone .dz-message {
+        @apply p-0 m-0 font-gilroy-medium w-full text-center
+    }
+
+    .dropzone .dz-preview .dz-image {
+        @apply rounded-md
+    }
+
+    .dropzone .dz-preview {
+        @apply m-0
+    }
+
+    
+
+}
+
+
+@layer components {
+
+    #apps .app_status_1 {
+        @apply bg-green-100 border-green-100
+    }
+
+    ul.nav-registration a {
+        @apply hover:text-blue-2 hover:underline
+    }
+
+    ul.nav-registration {
+        @apply text-xl space-y-4
+    }
+
+    ul.nav-registration ul {
+        @apply text-base list-disc ml-5 mt-1
+    }
+
+    .form-body .ub-flex {
+        @apply flex gap-x-5 gap-y-2 flex-col table_l:flex-row
+    }
+
+    .form-body .ub-grid {
+        @apply gap-y-2 gap-x-5 grid
+    }
+
+    .form-body .ub-grid-2 {
+        @apply grid-cols-1 mob_l:grid-cols-2
+    }
+
+    .form-body .ub-grid-3 {
+        @apply w-full table_sm:grid-cols-3
+    }     
+
+    .form-body .ub-grid-4 {
+        @apply grid-cols-1 table_l:grid-cols-2 table_sm:grid-cols-4
+    }   
+
+    .form-body .ub-wfull {
+        @apply w-full
+    }  
+    
+    .form-body .ub-250 {
+        @apply w-[250px]
+    }
+
+    .form-body .ub-280 {
+        @apply w-[280px]
+    }
+
+    .input_group .gr_3 {
+        @apply grid-cols-3 gap-5
+    }
+
+    .input_group .gr_2 {
+        @apply grid-cols-2 gap-5
+    }
+
+    #appForm .dropzone .dz-message {
+        @apply m-0
+    }
+
+    #appForm .dropzone {
+        @apply min-h-0 border-2 py-4 px-4 mt-2 bg-white text-center text-grey-1 border-grey-1 border-dashed
+    }
+
+    #enter-form {
+        @apply w-full max-w-[420px] p-0 rounded-lg
+    }
+
+    #swiper-review {
+        @apply [--f-carousel-slide-width:calc((100%/2)-15px)] table_l:[--f-carousel-slide-width:calc((100%/3)-15px)] table:[--f-carousel-slide-width:calc((100%/4)-15px)] [--f-carousel-spacing:20px] [--f-carousel-dot-color:#0B2F4F]
+    }
+
+    #carousel-numbers {
+        @apply [--f-carousel-slide-width:calc((100%/7)-15px)] [--f-carousel-spacing:20px]
+    }
+
+    #carousel-numbers .f-progress {
+        @apply top-full left-0
+    }
+
+    .btn {
+        @apply text-white
+    }
+
+    .btn-red {
+      @apply bg-gradient-to-t from-red-1 to-red-2 text-white
+    }
+
+    .header-fix {
+        @apply drop-shadow-xl transition-shadow
+    }
+
+    .header-menu {
+        @apply flex text-xl laptop:text-txt-22 gap-[2.188rem] 
+    }
+
+    .header-menu li a {
+        @apply hover:text-red-2 relative hover:after:w-full
+    }
+    
+    .header-menu li.active a {
+        @apply text-red-2 after:w-full
+    }
+
+    .header-menu li a::after {
+        @apply content-[''] block h-[2px] bg-red-2 absolute left-0 -bottom-[4px] transition ease-in-out
+    }
+
+    .footer-menu { 
+        @apply flex flex-wrap gap-4 text-base laptop:text-lg justify-center
+    }
+
+    .footer-menu li a {
+        @apply relative hover:after:content-[''] after:absolute after:left-0 after:-bottom-[3px] hover:after:w-full after:h-[2px] after:bg-white
+    }
+
+    .ub-modal-open {
+        @apply w-full w-[420px] max-w-[95%] rounded-md
+    }
+
+    .headache-icon svg {
+        @apply h-[60px] table:h-[75px] w-auto mx-auto
+    }
+
+}
+
+
+
+
+
+@font-face {
+	font-family: 'Bebas Neue';
+	src: url('../fonts/BebasNeueBold.eot');
+	src: local('Bebas Neue Bold'), local('BebasNeueBold'),
+		url('../fonts/BebasNeueBold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/BebasNeueBold.woff') format('woff'),
+		url('../fonts/BebasNeueBold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Gilroy Regular';
+    src: url('./fonts/Gilroy-Regular.eot');
+    src: local('Gilroy Regular'), local('Gilroy-Regular'),
+        url('./fonts/Gilroy-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Gilroy-Regular.woff2') format('woff2'),
+        url('./fonts/Gilroy-Regular.woff') format('woff'),
+        url('./fonts/Gilroy-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy Extra Bold';
+    src: url('../fonts/Gilroy-ExtraBold.eot');
+    src: url('../fonts/Gilroy-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Gilroy-ExtraBold.woff') format('woff'),
+    url('../fonts/Gilroy-ExtraBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Black.eot');
+    src: local('Gilroy Black'), local('Gilroy-Black'),
+        url('../fonts/Gilroy-Black.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Gilroy-Black.woff2') format('woff2'),
+        url('../fonts/Gilroy-Black.woff') format('woff'),
+        url('../fonts/Gilroy-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy Medium';
+    src: url('../fonts/Gilroy-Medium.eot');
+    src: local('Gilroy Medium'), local('Gilroy-Medium'),
+        url('../fonts/Gilroy-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Gilroy-Medium.woff2') format('woff2'),
+        url('../fonts/Gilroy-Medium.woff') format('woff'),
+        url('../fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/Gilroy-Semibold.eot');
+    src: local('Gilroy Semibold'), local('Gilroy-Semibold'),
+        url('../fonts/Gilroy-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Gilroy-Semibold.woff2') format('woff2'),
+        url('../fonts/Gilroy-Semibold.woff') format('woff'),
+        url('../fonts/Gilroy-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}

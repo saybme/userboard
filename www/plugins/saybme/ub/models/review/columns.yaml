@@ -1,0 +1,11 @@
+columns:
+    name:
+        label: Отзыв
+        type: text
+        searchable: true
+    created_at:
+        label: Создан
+        type: datetime
+    is_active:
+        label: Обновлен
+        type: switch

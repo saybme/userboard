@@ -1,0 +1,97 @@
+{% if step == 1 %}
+
+    <input type="hidden" name="step" value="2">
+
+    <div class="">
+        <label for="" class="mb-1 block w-full">Номер телефона</label>
+        <input type="text" name="phone" placeholder="+7 999 999-99-99" class="input input-bordered w-full" oninput="setPhone(this)">
+        <div data-validate-for="phone" class="text-xs text-red-2 mt-1 w-full"></div>
+    </div>
+
+    <div class="mt-4 relative pl-6">
+        <input type="checkbox" name="check" id="check" class="checkbox checkbox-xs rounded-sm absolute left-0 top-1">
+        <label for="check" class="text-sm">
+            Я соглашаюсь на обработку <a href="/polzovatelskoe-soglashenie" target="_blank" class="text-red-1 hover:underline">персональных данных</a>.
+        </label>
+        <div data-validate-for="check" class="text-xs text-red-2 mt-1 w-full"></div>
+    </div>
+
+    <div class="mt-4">
+        <button class="btn btn-red" data-attach-loading>Отправить</button>
+    </div>
+
+{% endif %}
+
+{% if step == 2 %}
+
+    <input type="hidden" name="step" value="3">
+
+    <div class="">
+        <label for="" class="mb-1 block w-full">Номер телефона</label>
+        <input type="text" name="phone" placeholder="+7 999 999-99-99" value="{{ auth.phone }}" class="input input-bordered w-full" disabled>
+        <div data-validate-for="phone" class="text-xs text-red-2 mt-1 w-full"></div>
+    </div>
+
+    {% if auth.utype == 2 %}
+
+        <input type="hidden" name="step" value="manager">
+
+        <div class="mt-2">
+            <label for="m-sms-code" class="mb-1 block w-full">Введите пароль</label>
+            <input type="text" name="sms" id="m-sms-code" value="" class="input input-bordered w-full">
+            <div data-validate-for="sms" class="text-xs text-red-2 mt-1 w-full"></div>
+        </div>
+
+        <div class="mt-2">
+            <button class="btn btn-red" data-attach-loading>Войти</button>
+        </div>
+
+    {% else %}
+
+        <div class="mt-2">
+            <label for="m-sms-code" class="mb-1 block w-full">Введите код из СМС</label>
+            <input type="text" name="sms" id="m-sms-code" value="" class="input input-bordered w-full">
+            <div data-validate-for="sms" class="text-xs text-red-2 mt-1 w-full"></div>
+        </div>
+        
+        <div class="mt-2 font-gilroy-medium">
+            <p>СМС с кодом для входа отправлено на Ваш номер телефона.</p>
+        </div>   
+
+        <div class="mt-2">
+            <button class="btn btn-red" data-attach-loading>Зарегистрироваться</button>
+        </div>
+
+    {% endif %}  
+
+    
+
+{% endif %}
+
+{% if step == 3 %}
+
+    <input type="hidden" name="step" value="4">
+
+    <div class="">
+        <label for="" class="mb-1 block w-full">Номер телефона</label>
+        <input type="text" name="phone" placeholder="+7 999 999-99-99" value="{{ auth.phone }}" class="input input-bordered w-full" disabled>
+        <div data-validate-for="phone" class="text-xs text-red-2 mt-1 w-full"></div>
+    </div>
+
+    <div class="mt-2">
+        <label for="m-sms-code" class="mb-1 block w-full">Введите код из СМС</label>
+        <input type="text" name="sms" id="m-sms-code" value="" class="input input-bordered w-full">
+        <div data-validate-for="sms" class="text-xs text-red-2 mt-1 w-full"></div>
+    </div>
+    
+    <div class="mt-2 font-gilroy-medium">
+        <p>СМС с кодом для входа отправлено на Ваш номер телефона.</p>
+    </div>   
+
+    
+
+    <div class="mt-2">
+        <button class="btn btn-red" data-attach-loading>Войти</button>
+    </div>
+
+{% endif %}

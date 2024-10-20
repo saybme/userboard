@@ -1,0 +1,104 @@
+uuid: 75c74aa4-8a26-49b0-b5e6-af25f3c531fe
+handle: UdSettings
+type: global
+name: Основные настройки сайта
+
+primaryNavigation:
+    label: Settings
+    icon: icon-cogs
+    order: 150
+
+navigation:
+    parent: UdSettings
+    icon: icon-cogs
+    order: 10
+
+fields:
+    about:
+        label: О компании
+        span: full
+        type: richeditor
+        size: huge
+        tab: О компании
+
+    statistics:
+        label: Статистика
+        span: full
+        tab: О компании
+        type: repeater
+        form:
+            fields:
+                title:
+                    label: Заголовок
+                    span: auto
+                description:
+                    label: Описание
+                    span: auto
+
+    _headache:
+        label: Головные боли
+        span: full
+        tab: О компании
+        type: section
+    headache:
+        label: Список
+        span: full
+        tab: О компании
+        useTabs: true
+        type: repeater
+        form:
+            fields:
+                title:
+                    label: Заголовок
+                    span: full
+                    tab: Заголовок
+                icon:
+                    label: Иконка SVG
+                    span: full
+                    type: codeeditor
+                    tab: Иконка
+
+    _advantages:
+        label: Преимущества
+        span: full
+        tab: О компании
+        type: section
+    advantages:
+        label: Список преимуществ
+        span: full
+        tab: О компании
+        type: repeater
+        useTabs: true
+        form:
+            fields:
+                title:
+                    label: Заголовок
+                    span: auto
+                    tab: Текст
+                description:
+                    label: Описание
+                    span: auto
+                    tab: Текст
+                icon:
+                    label: Иконка SVG
+                    span: full
+                    size: huge
+                    type: codeeditor
+                    tab: Иконка
+
+    logo:
+        label: Логотип
+        span: full
+        type: fileupload
+        mode: image
+        tab: Общие
+    phone_header:
+        label: Номер телефона в шапке
+        span: full
+        tab: Общие
+
+    footer_info:
+        label: Информация в подвале
+        type: textarea
+        tab: Подвал
+        size: small

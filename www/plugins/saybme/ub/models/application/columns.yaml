@@ -1,0 +1,14 @@
+columns:
+    num:
+        label: Заявка
+        type: text
+        searchable: true
+    status_name:
+        label: Статус
+        type: text
+    created_at:
+        label: Создан
+        type: datetime
+    id:
+        label: ID
+        type: text

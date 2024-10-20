@@ -1,0 +1,10 @@
+columns:
+    num:
+        label: Номер
+        type: text
+    is_active:
+        label: Опубликован
+        type: switch
+    created_at:
+        label: Создан
+        type: datetime

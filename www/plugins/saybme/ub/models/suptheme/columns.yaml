@@ -1,0 +1,14 @@
+columns:
+    num:
+        label: 'Тема обращения'
+        type: text
+        searchable: true
+    is_active:
+        label: Опубликован
+        type: switch
+    created_at:
+        label: Создан
+        type: datetime
+    id:
+        label: ID
+        type: text

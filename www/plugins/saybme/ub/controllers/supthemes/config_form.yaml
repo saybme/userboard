@@ -1,0 +1,10 @@
+name: Supthemes
+form: $/saybme/ub/models/suptheme/fields.yaml
+modelClass: Saybme\Ub\Models\Suptheme
+defaultRedirect: saybme/ub/supthemes
+create:
+    redirect: 'saybme/ub/supthemes/update/:id'
+    redirectClose: saybme/ub/supthemes
+update:
+    redirect: saybme/ub/supthemes
+    redirectClose: saybme/ub/supthemes

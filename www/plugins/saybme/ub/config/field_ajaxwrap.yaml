@@ -1,0 +1,18 @@
+name: AJAX wrap
+description: AJAX контейнер
+icon: icon-sitemap
+fields: 
+  id:
+    label: ID
+    disabled: 1
+    span: full
+  childrens:
+    label: Данные
+    span: full
+    type: repeater
+    prompt: Добавить поле
+    useTabs: true
+    groups: 
+      text: $/saybme/ub/config/field_text.yaml
+      inputs: $/saybme/ub/config/field_inputs.yaml
+      select: $/saybme/ub/config/field_select.yaml

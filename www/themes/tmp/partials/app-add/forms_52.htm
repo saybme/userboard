@@ -1,0 +1,136 @@
+<div class="font-gilroy-medium" id="form_result"> 
+
+    <h4 class="font-gilroy-bold">{{ page.description }}</h4>
+
+    <form action="" class="block w-full mt-4" data-request="onOrderForm" data-request-validate>
+
+        <input type="hidden" name="form" value="{{ page.id }}">        
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg">
+            <h3 class="font-gilroy-bold text-xl">2. Информация о транспортном средстве</h3>
+            <div class="mt-4">
+                {% partial 'boxes/vehicle-information' type=1 %}
+            </div>   
+        </fieldset>       
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">3. Требуется ли Вам получение (замена) государственного регистрационного знака?</h3>    
+            <div class="mt-4">
+                {% partial 'boxes/replacement-state-sign' type=1 %}
+            </div>   
+        </fieldset>   
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">4. Паспорт транспортного средства (ПТС)</h3>   
+            <div class="mt-4">
+                {% partial 'boxes/pts' type=1 %}
+            </div>     
+        </fieldset>  
+        
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">5. Ваши данные</h3>               
+            <div class="mt-4">
+                {% partial 'boxes/your-data' type=1 %}
+            </div>  
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">6. Документ, удостоверяющий личность</h3>  
+            <div class="mt-4">
+                {% partial 'boxes/passport' type=1 %}
+            </div>    
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">7. Адрес проживания (регистрации)</h3>   
+            <div class="mt-4">
+                {% partial 'boxes/address' type=1 %}  
+            </div>
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">8. Сведения о доверенности</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/information-proxy' %}
+            </div>   
+        </fieldset> 
+        
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">9. Сведения о физическом лице, собственнике транспортного средства</h3>   
+            <div class="mt-4">
+                {% partial 'boxes/individual-owner-transport' %}
+            </div>  
+        </fieldset> 
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">10. Документ, удостоверяющий личность собственника</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/passport' %}
+            </div>   
+        </fieldset>
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">11. Адрес проживания (регистрации) собственника</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/address' type=1 %}  
+            </div>
+        </fieldset>  
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">12. Где вы будете ставить на регистрационный учет автотранспортное средство?</h3> 
+            <div class="mt-4">
+                {% partial 'boxes/address' type=2 items=['По адресу проживания доверенного лица','По адресу проживания собственника','По иному адресу'] %}  
+            </div>
+        </fieldset>            
+
+        <fieldset class="border pt-5 pb-5 px-5 rounded-lg mt-4">
+            <h3 class="font-gilroy-bold text-xl">13. Укажите дату и время постановки на регистрационный учет</h3> 
+            <div class="mt-4 grid grid-cols-2 gap-4">
+                {% partial 'boxes/date-time' %}                
+            </div>   
+        </fieldset>         
+
+        <div class="alert alert-warning mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <div class="">
+                {{ glform.text_3 | raw }}
+            </div>
+        </div>
+
+        <div class="mt-4">            
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                    <input type="checkbox" class="checkbox" />
+                    <span class="label-text ml-2">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</span> 
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                    <input type="checkbox" class="checkbox" />
+                    <span class="label-text ml-2">Госпошлина была оплачена</span> 
+                </label>
+            </div>
+
+        </div>
+
+        <div class="alert alert-info mt-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки</span>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+            <button class="btn btn-red btn-lg" data-attach-loading>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
+                </svg>                  
+                Отправить
+            </button>
+        </div>   
+        
+
+    </form>
+
+</div>

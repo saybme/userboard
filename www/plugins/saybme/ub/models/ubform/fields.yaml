@@ -1,0 +1,73 @@
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    name:
+        label: Форма
+        span: full
+        type: text    
+tabs:
+    fields:
+        rows:
+            label: Поля формы
+            size: full
+            tab: Форма
+            type: repeater          
+            prompt: Добавить блок
+            displayMode: builder
+            titleFrom: title    
+            useTabs: true        
+            groups: 
+                text: $/saybme/ub/config/field_text.yaml    
+                radio: $/saybme/ub/config/field_radio.yaml  
+                dropzone: $/saybme/ub/config/field_dropzone.yaml 
+                alert: $/saybme/ub/config/field_alert.yaml
+                group: $/saybme/ub/config/field_group.yaml
+                multy: $/saybme/ub/config/field_multy.yaml
+                partial: $/saybme/ub/config/field_partial.yaml
+        description:
+            label: Описание формы
+            size: small
+            span: full
+            type: richeditor
+            tab: Описание
+        content:
+            label: Подпись формы
+            size: small
+            span: full
+            type: richeditor
+            tab: Описание   
+        menutitle:
+            label: Заголовок страницы
+            span: full
+            tab: Дополнительно
+            type: text     
+        url:
+            label: Ссылка
+            span: full
+            type: text
+            tab: Дополнительно
+            disabled: 1
+        photos:
+            label: Фото
+            span: full
+            tab: Файлы
+            type: fileupload
+secondaryTabs:
+    fields:
+        hash:
+            label: HASH
+            span: full
+            disabled: 1
+            type: text
+        parent:
+            label: Родительский ресурс
+            span: full          
+            placeholder: -- Выбрать --
+            type: relation
+        price: 
+            label: Цена
+            span: full
+            type: number

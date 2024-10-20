@@ -1,0 +1,8 @@
+<label for="{{ row.hash }}" class="block w-full text-sm mb-1">{{ row.title }}</label>
+
+<select name="{{ row.hash }}" class="select select-bordered w-full" id="{{ row.hash }}">
+    <option disabled selected>Выбрать</option>
+    {% for item in row.id_values | formvalues %}
+        <option value="{{ item.title }}">{{ item.title }}</option>
+    {% endfor %}
+</select> 

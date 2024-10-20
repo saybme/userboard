@@ -1,0 +1,77 @@
+uuid: 4364ae61-c1a4-4e20-8736-d1195e6e7684
+handle: UdForm
+type: global
+name: Данные форм
+
+navigation:
+    parent: UdSettings
+    icon: icon-tasks
+    order: 10
+
+fields:
+    document_types:
+        label: Типы документов
+        tab: Формы
+        type: datatable
+        columns:
+            name:
+                type: string
+                title: Документ
+
+    proxy_types:
+        label: Тип доверенности
+        tab: Формы
+        type: datatable
+        columns:
+            name:
+                type: string
+                title: Документ
+
+    opf_types:
+        label: ОПФ
+        tab: Формы
+        type: datatable
+        columns:
+            name:
+                type: string
+                title: Документ 
+
+    ownership:
+        label: Форма собственности
+        tab: Формы
+        type: datatable
+        columns:
+            name:
+                type: string
+                title: Документ    
+
+    title_documents:
+        label: Наименование документа
+        tab: Формы
+        type: datatable
+        columns:
+            name:
+                type: string
+                title: Документ  
+
+    text_1:
+        label: Текст формы №1
+        span: full
+        tab: Тексты
+        type: richeditor
+        size: huge     
+
+    text_2:
+        label: Текст формы №2
+        span: full
+        tab: Тексты
+        type: richeditor
+        size: huge    
+    
+    text_3:
+        label: Текст формы №3
+        span: full
+        tab: Тексты
+        type: richeditor
+        size: huge  
+            

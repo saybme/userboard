@@ -1,0 +1,18 @@
+{% if type == 1 %}
+
+<div class="alert alert-warning">
+    {{ glform.text_2 | raw }}   
+</div>
+
+<div class="mt-2">
+    {% for item in ['требуется','требуется виртуальный','не требуется'] %}
+        <div class="form-control ">
+            <label class="label cursor-pointer justify-start">                      
+                <input type="radio" name="replacement_sign" class="radio checked:bg-red-500" value="{{ item }}" {{ loop.first == true ? 'checked' : '' }} />
+                <span class="label-text ml-2">{{ item }}</span> 
+            </label>
+        </div>    
+    {% endfor %}
+</div>
+
+{% endif %}

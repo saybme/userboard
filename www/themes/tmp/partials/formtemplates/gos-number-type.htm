@@ -1,0 +1,45 @@
+{% if type == 'Авто' %}                     
+    <div class="flex">
+        <div class="flex border-2 border-black rounded-lg overflow-hidden bg-gradient-to-t from-gray-200">
+            <input type="text" value="" name="nums[]" maxlength="1" class="h-[45px] text-center w-[45px] bg-inherit focus:outline-none" placeholder="*">   
+            <input type="text" value="" name="nums[]" maxlength="3" class="h-[45px] text-center w-[80px] bg-inherit text-xl focus:outline-none" placeholder="***">  
+            <input type="text" value="" name="nums[]" maxlength="2" class="h-[45px] text-center w-[45px] bg-inherit focus:outline-none" placeholder="**">  
+            <div class="w-[55px] border-l-2 border-black">
+                <input type="text" value="" name="nums[]" maxlength="3" class="text-center bg-inherit focus:outline-none w-full" placeholder="***"> 
+                <div class="text-[.7rem] uppercase text-center leading-none">RUS</div> 
+            </div>
+        </div> 
+    </div>
+{% endif %}
+
+{% if type == 'Мото' %}  
+    <div class="flex">
+        <div class="border-2 border-black rounded-lg overflow-hidden bg-gradient-to-t from-gray-200 w-[140px]">
+            <div class="w-full">
+                <input type="text" value="" name="nums[]" maxlength="4" class="h-[45px] text-center bg-inherit text-xl focus:outline-none w-full" placeholder="****"> 
+            </div>  
+            <div class=" border-black w-full flex">
+                <div class="w-1/2">
+                    <input type="text" value="" name="nums[]" maxlength="2" class="h-[45px] text-center bg-inherit text-xl focus:outline-none w-full" placeholder="**"> 
+                </div>
+                <div class="border-l-2 flex-none w-1/2 relative border-black">
+                    <input type="text" value="" name="nums[]" maxlength="2" class="text-center h-[45px] bg-inherit focus:outline-none w-full" placeholder="***"> 
+                    <div class="text-[.7rem] uppercase text-center leading-none absolute left-2 -top-2">RUS</div> 
+                </div>                
+            </div>
+        </div> 
+    </div>    
+{% endif %}
+
+{% if type == 'Прицеп' %}                     
+    <div class="flex">
+        <div class="flex border-2 border-black rounded-lg overflow-hidden bg-gradient-to-t from-gray-200">
+            <input type="text" value="" name="nums[]" maxlength="2" class="h-[45px] text-center w-[45px] bg-inherit focus:outline-none" placeholder="**">   
+            <input type="text" value="" name="nums[]" maxlength="4" class="h-[45px] text-center w-[80px] bg-inherit text-xl focus:outline-none" placeholder="****">             
+            <div class="w-[55px] border-l-2 border-black">
+                <input type="text" value="" name="nums[]" maxlength="3" class="text-center bg-inherit focus:outline-none w-full" placeholder="***"> 
+                <div class="text-[.7rem] uppercase text-center leading-none">RUS</div> 
+            </div>
+        </div> 
+    </div>
+{% endif %}

@@ -1,0 +1,26 @@
+name: Мультиполе
+description: Набод полей
+icon: icon-server
+fields:
+  title:
+    label: Заголовок
+    span: auto
+    type: text
+    tab: Поле
+  multyTypes:
+    label: Тип поля
+    span: auto
+    type: dropdown
+    tab: Поле
+  ubtype:
+    label: Тип вывода
+    span: full
+    type: dropdown
+  ptitle:
+    label: Заголовок в заявке
+    span: full
+    type: text
+  kgroup:
+    label: Группа
+    span: full
+    type: text

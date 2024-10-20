@@ -1,0 +1,14 @@
+title: Ubforms
+modelClass: Saybme\Ub\Models\Ubform
+list: $/saybme/ub/models/ubform/columns.yaml
+recordUrl: 'saybme/ub/ubforms/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 10
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

@@ -1,0 +1,31 @@
+<div class="flex flex-wrap flex-col table:flex-row justify-between py-8 items-start">
+
+    <div class="w-full table:w-[calc(100%-420px)]">
+
+        <h1 class="table:text-txt-40 text-blue-2">Все услуги нашего сервиса</h1>
+
+        <div class=" mt-8 flex flex-col gap-7">
+            {% for row in pservises %}
+                <div class="">
+                    <h3 class="text-3xl font-gilroy-bold text-blue-2 first-letter:text-red-1">{{ row.name }}</h3>
+                    <div class="grid grid-cols-1 table_l:grid-cols-2 laptop:grid-cols-3 gap-4 mt-4">
+                        {% for item in row.children %}
+                            <a href="{{ item.link }}" class="flex flex-col bg-sota-small bg-blue-2 px-5 py-6 rounded-md border text-white">
+                                <h2 class="text-xl font-gilroy-medium flex-1 text-pretty leading-[1.1]">{{ item.name }}</h2>
+                                <div class="mt-2">                                    
+                                    <button class="btn-xs btn-red px-3 rounded-sm uppercase font-gilroy-medium">Заказать</button>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>        
+
+    </div>
+
+    <div class="w-full table:w-[380px] bg-white rounded-md mt-5 table:mt-0"> 
+        {% partial 'cabinet/sidebar' user=user pages=pages %}        
+    </div>
+
+</div>

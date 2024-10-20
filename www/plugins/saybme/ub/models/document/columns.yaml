@@ -1,0 +1,11 @@
+columns:
+    num:
+        label: Номер
+        type: text
+        searchable: true
+    created_at:
+        label: Создан
+        type: datetime
+    id:
+        label: ID
+        type: text

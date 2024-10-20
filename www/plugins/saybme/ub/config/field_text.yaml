@@ -1,0 +1,46 @@
+name: Текстовое поле
+description: Текстовое поле
+icon: icon-file-text-o
+fields:
+  is_required:
+    label: Обязательное поле
+    span: full
+    type: checkbox
+    default: 1
+    tab: Поле
+  title:
+    label: Заголовок
+    span: auto
+    type: text
+    tab: Поле  
+  type:
+    label: Тип поля
+    span: auto
+    type: dropdown
+    tab: Поле
+  comment:
+    label: Комментарий
+    span: auto
+    type: text
+    tab: Поле
+  clss:
+    label: Класс
+    span: auto
+    type: text
+    comment: Дефолтные классы ub-wfull
+    tab: Поле
+  kgroup:
+    label: Группа
+    span: auto
+    type: number
+    tab: Дополнительно
+  ubtype:
+    label: Тип вывода
+    span: auto
+    type: dropdown
+    tab: Дополнительно    
+  ptitle:
+    label: Заголовок в заявке
+    span: full
+    type: text
+    tab: Дополнительно 

@@ -1,0 +1,23 @@
+[viewBag]
+==
+<?php
+use Saybme\Ub\Classes\Servises\ServiseClass;
+
+function onStart(){
+    $q = new ServiseClass;
+    $this['menu'] = $q->getAllServises();
+}
+?>
+==
+<div class="bg-white flex-none mr-8 rounded-lg px-4 py-6">
+    <h4 class="text-blue-2 font-gilroy-bold text-3xl/none">Наши услуги:</h4>
+    <nav class="mt-4">
+        <ul class="list-disc ml-5 space-y-2 font-gilroy-medium">
+            {% for item in menu %}
+            <li class="">
+                <a href="{{ item.link }}" class="hover:underline hover:text-red-1 block">{{ item.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</div>

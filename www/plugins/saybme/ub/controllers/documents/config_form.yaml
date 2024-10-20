@@ -1,0 +1,10 @@
+name: Documents
+form: $/saybme/ub/models/document/fields.yaml
+modelClass: Saybme\Ub\Models\Document
+defaultRedirect: saybme/ub/documents
+create:
+    redirect: 'saybme/ub/documents/update/:id'
+    redirectClose: saybme/ub/documents
+update:
+    redirect: saybme/ub/documents
+    redirectClose: saybme/ub/documents
