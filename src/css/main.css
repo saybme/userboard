@@ -87,6 +87,10 @@
 
 @layer components {
 
+    header {
+        @apply border-b border-gray-200
+    }
+
     #apps .app_status_1 {
         @apply bg-green-100 border-green-100
     }

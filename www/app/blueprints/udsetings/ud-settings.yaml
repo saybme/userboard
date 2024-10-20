@@ -102,3 +102,9 @@ fields:
         type: textarea
         tab: Подвал
         size: small
+
+    seo_title:
+        label: SEO Заголовок
+        span: full
+        type: text
+        tab: SEO

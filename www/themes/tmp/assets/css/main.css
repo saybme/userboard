@@ -2621,6 +2621,11 @@ html {
 [dir="rtl"] .steps-vertical .step:before {
   margin-right: auto;
 }
+header {
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+}
 ul.nav-registration a:hover {
   --tw-text-opacity: 1;
   color: rgb(40 90 127 / var(--tw-text-opacity));
@@ -3009,9 +3014,6 @@ ul.nav-registration ul {
 .mt-\[2\.625rem\] {
   margin-top: 2.625rem;
 }
-.mt-\[2\.75rem\] {
-  margin-top: 2.75rem;
-}
 .mt-\[2rem\] {
   margin-top: 2rem;
 }
@@ -3266,6 +3268,9 @@ ul.nav-registration ul {
 }
 .gap-y-2 {
   row-gap: 0.5rem;
+}
+.gap-y-5 {
+  row-gap: 1.25rem;
 }
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -3586,6 +3591,9 @@ ul.nav-registration ul {
 .pt-2 {
   padding-top: 0.5rem;
 }
+.pt-3 {
+  padding-top: 0.75rem;
+}
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -3594,6 +3602,9 @@ ul.nav-registration ul {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pt-\[2\.5rem\] {
+  padding-top: 2.5rem;
 }
 .pt-\[2\.813rem\] {
   padding-top: 2.813rem;
@@ -3696,6 +3707,9 @@ ul.nav-registration ul {
 }
 .leading-\[1\.1\] {
   line-height: 1.1;
+}
+.leading-\[1\.2\] {
+  line-height: 1.2;
 }
 .leading-none {
   line-height: 1;
@@ -4140,9 +4154,6 @@ ul.nav-registration ul {
 .last\:border-0:last-child {
   border-width: 0px;
 }
-.target\:flex-nowrap:target {
-  flex-wrap: nowrap;
-}
 .checked\:bg-red-500:checked {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
@@ -4152,10 +4163,6 @@ ul.nav-registration ul {
 }
 .hover\:bg-black\/10:hover {
   background-color: rgb(0 0 0 / 0.1);
-}
-.hover\:bg-blue-1:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(11 47 79 / var(--tw-bg-opacity));
 }
 .hover\:bg-blue-2:hover {
   --tw-bg-opacity: 1;
@@ -4277,10 +4284,6 @@ ul.nav-registration ul {
 
   .table_l\:max-w-\[130px\] {
     max-width: 130px;
-  }
-
-  .table_l\:max-w-\[245px\] {
-    max-width: 245px;
   }
 
   .table_l\:max-w-none {
@@ -4557,10 +4560,6 @@ ul.nav-registration ul {
     gap: 1rem;
   }
 
-  .table\:gap-\[1\.563rem\] {
-    gap: 1.563rem;
-  }
-
   .table\:py-\[5\.938rem\] {
     padding-top: 5.938rem;
     padding-bottom: 5.938rem;
@@ -4667,10 +4666,6 @@ ul.nav-registration ul {
     gap: 1.25rem;
   }
 
-  .laptop\:gap-\[2\.813rem\] {
-    gap: 2.813rem;
-  }
-
   .laptop\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -4683,11 +4678,6 @@ ul.nav-registration ul {
 
   .laptop\:text-\[0\.813rem\] {
     font-size: 0.813rem;
-  }
-
-  .laptop\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 
   .laptop\:text-h1 {
@@ -4724,13 +4714,6 @@ ul.nav-registration ul {
   .laptop\:text-txt-22 {
     font-size: 1.375rem;
     line-height: 2.375rem;
-    letter-spacing: -0.039rem;
-    font-weight: 800;
-  }
-
-  .laptop\:text-txt-25 {
-    font-size: 1.563rem;
-    line-height: 2.875rem;
     letter-spacing: -0.039rem;
     font-weight: 800;
   }
