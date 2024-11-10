@@ -1,0 +1,10 @@
+name: Formgroups
+form: $/saybme/ub/models/formgoup/fields.yaml
+modelClass: Saybme\Ub\Models\Formgoup
+defaultRedirect: saybme/ub/formgroups
+create:
+    redirect: 'saybme/ub/formgroups/update/:id'
+    redirectClose: saybme/ub/formgroups
+update:
+    redirect: saybme/ub/formgroups
+    redirectClose: saybme/ub/formgroups

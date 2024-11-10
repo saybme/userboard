@@ -1,0 +1,33 @@
+[viewBag]
+snippetCode = "cabinetChildrens"
+snippetName = "Вложенные документы ресурса"
+snippetDescription = "Вложенные документы ресурса"
+snippetProperties[page_id][title] = "ID ресурса родителя"
+snippetProperties[page_id][type] = "string"
+snippetProperties[page_id][default] = ""
+snippetProperties[page_id][options][] = ""
+==
+<?php
+use Saybme\Ub\Classes\Cabinet\CabinetClass;
+function onStart(){    
+    $this['pagechilds'] = CabinetClass::getPageChildrens($this->page_id);
+}
+?>
+==
+
+<div class="mb-4 space-y-5">
+
+    {% for item in pagechilds %}
+        <div class="">
+            <h4 class="text-2xl text-blue-2 font-semibold">{{ item.name }}</h4>
+            <ul class="space-y-1 mt-4 text-base list-disc ml-5 font-semibold">
+                {% for child in item.children %}
+                    <li class="">
+                        <a href="{{ child.link }}" class="text-blue-2 underline hover:text-red-1 hover:no-underline">{{ child.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    
+</div>

@@ -1,0 +1,8 @@
+inputs:
+    label: Поля
+    view:
+        list: $/saybme/ub/models/forminput/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/ub/models/forminput/fields.yaml

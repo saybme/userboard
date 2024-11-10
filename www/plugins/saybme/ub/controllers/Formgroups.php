@@ -4,7 +4,7 @@ use Backend;
 use BackendMenu;
 use Backend\Classes\Controller;
 
-class Ubforms extends Controller
+class Formgroups extends Controller
 {
     public $implement = [
         \Backend\Behaviors\FormController::class,
@@ -19,7 +19,6 @@ class Ubforms extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('Saybme.Ub', 'main-menu-item2', 'side-menu-item');
     }
 
 }

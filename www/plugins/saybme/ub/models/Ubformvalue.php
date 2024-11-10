@@ -14,13 +14,7 @@ class Ubformvalue extends Model
         'name' => 'required'
     ];
 
-    public $hasMany = [
-        'values' => [
-            Formvalues::class,
-            'key' => 'parent_id',
-            'delete' => true
-        ],
-    ];
+    
     
 
 }

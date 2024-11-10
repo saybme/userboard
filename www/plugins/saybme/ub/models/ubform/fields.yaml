@@ -10,6 +10,10 @@ fields:
         type: text    
 tabs:
     fields:
+        groups:
+            span: full
+            tab: Группы
+            type: partial
         rows:
             label: Поля формы
             size: full
@@ -71,3 +75,8 @@ secondaryTabs:
             label: Цена
             span: full
             type: number
+        tpl:
+            label: Шаблон формы
+            span: full
+            type: text
+            comment: Кастомный шаблон

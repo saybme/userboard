@@ -1,0 +1,13 @@
+fields:
+    title:
+        label: Поле
+        span: auto
+        type: text
+    description:
+        label: Описание
+        span: auto
+        type: textarea
+    hash:
+        label: HASH
+        span: auto
+        type: text

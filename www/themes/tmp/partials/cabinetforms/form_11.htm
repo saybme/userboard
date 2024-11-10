@@ -1,0 +1,411 @@
+<form action="" data-request="onCreateApp" class="font-semibold block w-full" data-request-validate>
+
+    <input type="hidden" name="form" value="{{ form.id }}">
+
+    <h3 class="text-xl font-semibold">Порядок и условия подачи заявления в электронном виде</h3>
+
+    <div class="mt-5">
+        {% partial 'cabinetforms/reg-alert' type=1 %}
+    </div>
+
+    <div class="mt-5">
+        {% partial 'cabinetforms/reg-alert' type=2 %}
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <div class="">
+            <h2 class="text-2xl font-bold text-blue-2">1. Информация о транспортном средстве </h2>
+            <h3 class="text-xl font-semibold mt-2">2. Сведения о транспортном средстве</h3>
+        </div>       
+        <div class="mt-5 space-y-2">
+            {% for key, item in form.inputs.in_b6358f5d4db83bedbee187f7f3be8087.values %}
+                <div class="flex items-center">
+                    <input type="radio" name="in_b6358f5d4db83bedbee187f7f3be8087" value="{{ item.name }}" id="in_b6358f5d4db83bedbee187f7f3be8087_{{ key }}" class="radio radio-sm me-2 flex-none">
+                    <label for="in_b6358f5d4db83bedbee187f7f3be8087_{{ key }}">{{ item.name }}</label>
+                </div>
+            {% endfor %}        
+        </div>
+        <div class="mt-5 flex space-x-5">
+            <div class="flex-1">
+                <label for="" class="text-sm block mb-1">Марка</label>
+                <input type="text" name="in_3ae2f5d4459ebdf9ed24e1bd44351b80" value="" class="input input-bordered w-full">
+            </div>
+            <div class="flex-1">
+                <label for="" class="text-sm block mb-1">Модель</label>
+                <input type="text" name="in_fe45615ff153554a8ccc17829134246a" value="" class="input input-bordered w-full">
+            </div>
+            <div class="w-[130px] flex-none">
+                <label for="" class="text-sm block mb-1">Год выпуска</label>
+                <input type="number" max="4" min="4" name="in_3a242175740ef9e32f8c373e9d19d5cc" value="" class="input input-bordered w-full">
+            </div>
+        </div>  
+    </div>      
+        
+    <div class="grid grid-cols-2 gap-5 mt-5 bg-white rounded-lg p-5">
+        <div class="">
+            <label for="" class="text-sm block mb-1">Идентификационный номер транспортного средства (VIN)</label>
+            <input type="text" name="in_32c5d872fa2cf01b32582eb612d7ce77" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Категория ТС</label>
+            <input type="text" name="in_54b98cebe43a931a63a60e13892c56b4" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Номер кузова</label>
+            <input type="text" name="in_79c48bbac5563abda7fe2556afd22633" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Тип ТС</label>
+            <input type="text" name="in_50c405b86af1198065352e8c7a5988c7" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Номер шасси (рамы)</label>
+            <input type="text" name="in_23d5adb375c2b5832cdca5cc11bda5dc" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Расположения руля</label>
+            <input type="text" name="in_9e5e68cd61b5f95cb987a612492beaea" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Цвет</label>
+            <input type="text" name="in_5994f6e7e3300f2acbf45591ebca40ce" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Тип двигателя</label>
+            <input type="text" name="in_9fb681a177bad4a39f6021698149456e" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Допустимая максимальная масса, кг</label>
+            <input type="text" name="in_2330b452d3240ee204a92172c8296d57" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Тип привода</label>
+            <input type="text" name="in_3b4a8dae13ba8287d69e30d60e4179c3" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Масса в снаряжённом состоянии, кг</label>
+            <input type="text" name="in_cc01e4a3c2b9f99b40b72571274ee757" value="" class="input input-bordered w-full">
+        </div>
+        <div class="">
+            <label for="" class="text-sm block mb-1">Тип трансмиссии</label>
+            <input type="text" name="in_173e358ce28a122e7061f768a75c8f26" value="" class="input input-bordered w-full">
+        </div>
+    </div>
+    
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <div class="text-pretty">Для облегчения заполнения сведений о ТС можете прикрепить скан или фото электронного ПТС (обязательно все страницы)</div>
+        <div class="mt-2">
+            <input type="file" name="in_be80113dd94ed02df7ae2cdd641aee90" value="" class="file-input w-full">
+        </div>
+        <div class="mt-2 text-xs">Примечание! Скан или фото документов должны отчетливо читаться</div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">3. Где будете получать номера?</h3>
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=3 %}
+        </div>
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=4 %}
+        </div>
+        <div class="mt-5 space-y-2">
+            {% for key, item in form.inputs.in_b3ceaef296bc3477c903465ada0618ed.values %}
+                <div class="flex items-center">
+                    <input type="radio" name="in_b3ceaef296bc3477c903465ada0618ed" value="{{ item.name }}" id="in_b3ceaef296bc3477c903465ada0618ed_{{ key }}" class="radio radio-sm me-2 flex-none">
+                    <label for="in_b3ceaef296bc3477c903465ada0618ed_{{ key }}">{{ item.name }}</label>
+                </div>
+            {% endfor %} 
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">4. Документы о праве собственности</h3>
+        <h4 class="text-xl font-bold mt-2">Укажите данные документа о праве собственности</h4>
+        <div class="mt-5 space-y-5">
+            <div class="">
+                <label for="" class="text-sm block mb-1">Форма собственности</label>
+                <input type="text" name="in_e201ccd2a6ccb8393eafd37b49e2b671" value="" class="input input-bordered w-full">
+            </div>
+            <div class="">
+                <label for="" class="text-sm block mb-1">Наименование документа</label>
+                <input type="text" name="in_1c7e12b0f9634d4cb1044abfce09ae0a" value="" class="input input-bordered w-full">
+            </div>
+            <div class="">
+                <label for="" class="text-sm block mb-1">Серия и номер</label>
+                <input type="text" name="in_9086609047ec51801dc8f5e1f241db9b" value="" class="input input-bordered w-full">
+                <div class="text-xs text-gray-300 mt-1 ml-1">При наличии</div>
+            </div>
+            <div class="">
+                <label for="" class="text-sm block mb-1">Дата выдачи</label>
+                <input type="date" name="in_c22b4f80a067c9570667036f44197706" value="" class="input input-bordered w-full">
+                <div class="text-xs text-gray-300 mt-1 ml-1">Если это договор — дата заключения</div>
+            </div>
+            <div class="">
+                <label for="" class="text-sm block mb-1">Кем выдан</label>
+                <input type="text" name="in_398cece9bbb4545409e60c77dec531d2" value="" class="input input-bordered w-full">
+                <div class="text-xs text-gray-300 mt-1 ml-1">Наименование организации или ФИО</div>
+            </div>
+            <div class="">
+                <label for="" class="text-sm block mb-1">Дата продажи или передачи ТС</label>
+                <input type="date" name="in_4db447221f4b89b5a7fdbd1dbd018e09" value="" class="input input-bordered w-full">
+            </div>
+            <div class="">
+                <label for="" class="text-sm block mb-1">Стоимость</label>
+                <input type="number" name="in_47e9cbd0ca2adf5d59a8822953c31604" value="" class="input input-bordered w-full">
+                <div class="text-xs text-gray-300 mt-1 ml-1">В рублях</div>
+            </div>
+            <div class="">
+                <div class="">Для облегчения заполнения сведений о ТС можете прикрепить скан или фото документов о праве собственности</div>
+                <div class="mt-2">
+                    <input type="file" name="in_39c7ae337e430e079f1db352c374e674" class="file-input file-input-bordered w-full">
+                </div>
+                <div class="mt-2 text-red-1">
+                    Примечание! Скан или фото документов должны отчетливо читаться
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">5. Вы являетесь</h3>
+        <div class="mt-5 space-y-2">
+            {% for key, item in form.inputs.in_9162e9fc9875d891a4f5e4bebd20004e.values %}
+                <div class="flex items-center">
+                    <input type="radio" name="in_9162e9fc9875d891a4f5e4bebd20004e" value="{{ item.name }}" id="in_9162e9fc9875d891a4f5e4bebd20004e_{{ key }}" class="radio radio-sm me-2 flex-none">
+                    <label for="in_9162e9fc9875d891a4f5e4bebd20004e_{{ key }}">{{ item.name }}</label>
+                </div>
+            {% endfor %} 
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">6. Ваши данные</h3>
+        <div class="mt-5 space-y-2">
+            {% for key, item in form.inputs.in_a48b7558c78219868d21700742dbf115.values %}
+                <div class="flex items-center">
+                    <input type="radio" name="in_a48b7558c78219868d21700742dbf115" value="{{ item.name }}" id="in_a48b7558c78219868d21700742dbf115{{ key }}" class="radio radio-sm me-2 flex-none">
+                    <label for="in_a48b7558c78219868d21700742dbf115{{ key }}">{{ item.name }}</label>
+                </div>
+            {% endfor %} 
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-5">
+            <div class="">
+                <label for="" class="text-sm block mb-1">Фамилия</label>
+                <input type="text" name="in_740eea60c0b32b0a81aaf33af6bd0e21" value="" class="input input-bordered w-full">
+            </div>    
+            <div class="">
+                <label for="" class="text-sm block mb-1">Имя</label>
+                <input type="text" name="in_eeb20b285d547d1b81d7cdf67666c9d6" value="" class="input input-bordered w-full">
+            </div> 
+            <div class="">
+                <label for="" class="text-sm block mb-1">Отчество</label>
+                <input type="text" name="in_0bb0812f0f6e6b16a013c63b4d597880" value="" class="input input-bordered w-full">
+            </div> 
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-5">
+            <div class="">
+                <label for="" class="text-sm block mb-1">Дата рождения</label>
+                <input type="date" name="in_2daedbdbe4cb23d33ce566a9aa24c1ac" value="" class="input input-bordered w-full">
+            </div>    
+            <div class="">
+                <label for="" class="text-sm block mb-1">Контактный телефон</label>
+                <input type="text" name="in_2d94e479ba0716870719fe519f6c6ee3" value="" class="input input-bordered w-full">
+            </div> 
+            <div class="">
+                <label for="" class="text-sm block mb-1">Адрес электронной почты</label>
+                <input type="email" name="in_8df5e9a3014521c012c305a4f0c7c0d9" value="" class="input input-bordered w-full">
+            </div> 
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-5">
+            <div class="">
+                <label for="" class="text-sm block mb-1">Страна рождения</label>
+                <input type="text" name="in_b3151e123fee63b8e16357891b70a6b7" value="" class="input input-bordered w-full">
+                <div class="text-xs text-gray-300 mt-1 ml-1">Укажите страну рождения (как в документе, удостоверяющем личность)</div>
+            </div> 
+            <div class="">
+                <label for="" class="text-sm block mb-1">Регион рождения</label>
+                <input type="text" name="in_fc182b6efde5299c580fcaf5c895f39d" value="" class="input input-bordered w-full">
+            </div> 
+            <div class="">
+                <label for="" class="text-sm block mb-1">Место рождения</label>
+                <input type="text" name="in_049805ff562416e4c1b97eeeea0af51c" value="" class="input input-bordered w-full">
+            </div> 
+        </div>
+        <div class="mt-5">
+            <label for="" class="text-sm block mb-1">Гражданство</label>
+            <input type="text" name="in_62de30a9e2dea250b0498ddc9a96cb77" value="" class="input input-bordered w-full">
+        </div> 
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">7. Документ, удостоверяющий личность</h3>
+        <div class="mt-5">
+            <label class="text-sm block mb-1">Тип документа</label>
+            <select name="in_465ba2dd01c6e182dc4790ea3bdb5d97" class="select select-bordered w-full" id="">
+                <option value="">Выбрать</option>
+                {% for key, item in form.inputs.in_465ba2dd01c6e182dc4790ea3bdb5d97.values %}
+                    <option value="{{ item.name }}">{{ item.name }}</option>
+                {% endfor %} 
+            </select>
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-5">
+            <div class="">
+                <label for="" class="text-sm block mb-1">Серия</label>
+                <input type="text" name="in_08f8bd343c956a918f5ba8ad8d0c22e4" value="" class="input input-bordered w-full">
+            </div>     
+            <div class="">
+                <label for="" class="text-sm block mb-1">Номер</label>
+                <input type="text" name="in_45f2f85850ee66f80895e9b08c302d06" value="" class="input input-bordered w-full">
+            </div> 
+            <div class="">
+                <label for="" class="text-sm block mb-1">Дата выдачи</label>
+                <input type="date" name="in_0c09e655ad7ea094408cad13fa1645f3" value="" class="input input-bordered w-full">
+            </div>             
+        </div>
+        <div class="mt-5 flex gap-5">
+            <div class="flex-1">
+                <label for="" class="text-sm block mb-1">Кем выдан</label>
+                <input type="text" name="in_5435bde3f2eb6d20fd7555cd548577d3" value="" class="input input-bordered w-full">
+            </div> 
+            <div class="">
+                <label for="" class="text-sm block mb-1">Код подразделения</label>
+                <input type="text" name="in_dae06159ebff24580f54c9bdf234b9a0" value="" class="input input-bordered w-full">
+            </div> 
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">8. Адрес проживания (регистрации)</h3>
+        <div class="mt-5">            
+            <label for="" class="text-sm block mb-1">Адрес</label>
+            <input type="text" name="in_fe3fbde6b61b99fe26e6159991f371e5" value="" class="input input-bordered w-full">           
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-5">
+            <div class="">            
+                <label for="" class="text-sm block mb-1">Регион</label>
+                <input type="text" name="in_9ac88f1f9e65097dc32aae0a63b6409a" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="">            
+                <label for="" class="text-sm block mb-1">Населенный пункт</label>
+                <input type="text" name="in_d5a2a919942ce97aab6611568eb42d98" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="">            
+                <label for="" class="text-sm block mb-1">Район</label>
+                <input type="text" name="in_8cf21bde3392aa46acdcdb5bce718ac0" value="" class="input input-bordered w-full">           
+            </div>
+        </div>
+        <div class="mt-5 flex gap-5">            
+            <div class="flex-1">            
+                <label for="" class="text-sm block mb-1">Улица</label>
+                <input type="text" name="in_6124cce0118bcd009aa1647505089ccc" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="w-[100px]">            
+                <label for="" class="text-sm block mb-1">Дом</label>
+                <input type="text" name="in_7e26208d44c815b3dee69d462fcd6998" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="w-[100px]">            
+                <label for="" class="text-sm block mb-1">Строение</label>
+                <input type="text" name="in_c6233b5c196f6af6cca34ba16434e4ce" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="w-[120px]">            
+                <label for="" class="text-sm block mb-1">Квартира / офис</label>
+                <input type="text" name="in_bd1919a096361a9fb0e38e6a3e006dcb" value="" class="input input-bordered w-full">           
+            </div>            
+        </div>
+        <div class="mt-5 flex items-center">   
+            <input type="checkbox" name="in_c8c79db3fb1ff6f078affd5dc87cdf93" value="Без квартиры / офиса" class="checkbox checkbox-sm rounded-sm me-2" id="in_c8c79db3fb1ff6f078affd5dc87cdf93">        
+            <label for="in_c8c79db3fb1ff6f078affd5dc87cdf93" class="text-sm block mb-1 leading-none">Без квартиры / офиса</label>   
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">9. Где вы будете регистрировать транспортное средство?</h3>
+        <div class="mt-5">            
+            <label for="" class="text-sm block mb-1">Адрес</label>
+            <input type="text" name="in_bdd90aea4f7c327bb3452ba29a9b742d" value="" class="input input-bordered w-full">           
+        </div>
+        <div class="mt-5 grid grid-cols-3 gap-5">
+            <div class="">            
+                <label for="" class="text-sm block mb-1">Регион</label>
+                <input type="text" name="in_ee9faed778b3345f289eef87cb12471f" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="">            
+                <label for="" class="text-sm block mb-1">Населенный пункт</label>
+                <input type="text" name="in_c45e389f40b9ff5eb4c2b9e7a54fecb2" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="">            
+                <label for="" class="text-sm block mb-1">Район</label>
+                <input type="text" name="in_03381e87ef7c87c0f6ee4def413dbcf6" value="" class="input input-bordered w-full">           
+            </div>
+        </div>
+        <div class="mt-5 flex gap-5">            
+            <div class="flex-1">            
+                <label for="" class="text-sm block mb-1">Улица</label>
+                <input type="text" name="in_5f94d1114e8af9f0a43124cbbf794447" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="w-[100px]">            
+                <label for="" class="text-sm block mb-1">Дом</label>
+                <input type="text" name="in_68602c797fd7731ce0fb0ebe45494269" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="w-[100px]">            
+                <label for="" class="text-sm block mb-1">Строение</label>
+                <input type="text" name="in_5877a2d56b20e2f920019667f523c87f" value="" class="input input-bordered w-full">           
+            </div>
+            <div class="w-[120px]">            
+                <label for="" class="text-sm block mb-1">Квартира / офис</label>
+                <input type="text" name="in_8f49d6778b2b4568ff04e8543c2a87b0" value="" class="input input-bordered w-full">           
+            </div>            
+        </div>
+        <div class="mt-5 flex items-center">   
+            <input type="checkbox" name="in_38c7acf9a89346fb42585c0084583c48" value="Без квартиры / офиса" class="checkbox checkbox-sm rounded-sm me-2" id="in_38c7acf9a89346fb42585c0084583c48">        
+            <label for="in_38c7acf9a89346fb42585c0084583c48" class="text-sm block mb-1 leading-none">Без квартиры / офиса</label>   
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">10. Укажите дату и время постановки на регистрационный учет</h3>
+        <div class="mt-5">            
+            <label for="" class="text-sm block mb-1">Дата / время</label>
+            <input type="datetime-local" name="in_d44d8b68483e136cdfd3202840a211dc" value="" class="input input-bordered w-full">           
+        </div>
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=5 %}
+        </div>
+        <div class="mt-5 space-y-3">
+            <div class="flex items-start">
+                <input type="checkbox" id="check_politic" name="check_politic" value="1" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+                <label for="check_politic" class="leading-none">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
+            </div>
+            <div class="flex items-start">
+                <input type="checkbox" id="check_gos" name="check_gos" value="1" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+                <label for="check_gos" class="leading-none">Госпошлина была оплачена</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="text-2xl font-bold text-blue-2">Стоимость услуги <b>300</b> руб.</h3> 
+        <div class="mt-5">
+            <ul class="list-disc ml-5 space-y-1">
+                <li>госпошлина за выдачу регистрационных знаков на автомобиль или автобус 2000 рублей</li>
+                <li>госпошлина за выдачу регистрационных знаков мотоцикл или прицеп 1500 рублей</li>
+                <li>госпошлина за выдачу регистрационных знаков виртуальных 0 рублей</li>
+                <li>госпошлина за выдачу свидетельства о регистрации ТС 500 рублей</li>
+                <li>госпошлина за внесение изменений в выданный ранее паспорт ТС 350 рублей</li>
+                <li>госпошлина за выдачу паспорта ТС 800 рублей</li>
+                <li>госпошлина за выдачу электронного паспорта ТС 0 рублей</li>
+            </ul>
+        </div>   
+        <div class="mt-5 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2">
+            <p class="font-bold text-lg">Госпошлина не оплачивается</p>
+            <p class="text-sm">
+                в случае прекращения (снятия с учета) ТС, за исключением случая вывоза ТС за границу
+                Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки                
+            </p>
+        </div>  
+        <div class="mt-5">
+            <button class="btn btn-red" data-attach-loading>ОТПРАВИТЬ</button>
+        </div>  
+    </div>
+
+</form>

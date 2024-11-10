@@ -23,6 +23,13 @@ tabs:
             span: full
             tab: Дополнительно
             type: text
+        form:
+            label: Форма
+            span: full
+            type: relation
+            placeholder: -- Выбрать форму --
+            tab: Информация
+            comment: Связная форма
         created_at:
             label: Создан
             mode: datetime

@@ -1,0 +1,7 @@
+columns:
+    title:
+        label: Поле
+        type: text
+    hash:
+        label: HASH
+        type: text

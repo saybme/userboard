@@ -1,0 +1,45 @@
+fields:
+    title:
+        label: Заголовок
+        span: full
+        type: text
+tabs:
+    fields:
+        inputs:
+            label: Поля
+            span: full
+            type: repeater
+            tab: Поля группы
+            itemsExpanded: false
+            form:
+                fields:
+                    title:
+                        label: Поле
+                        type: text
+                        span: auto
+                    hash:
+                        label: HASH 
+                        span: auto
+                        type: text
+                        disabled: 1
+                    values:
+                        label: Значения
+                        span: full
+                        type: repeater
+                        itemsExpanded: false
+                        form:
+                            fields:
+                                name:
+                                    label: Значение
+                                    span: auto
+                                    type: text 
+                                hash:
+                                    label: HASH
+                                    span: auto
+                                    type: text 
+                                    disabled: 1
+        description:
+            label: Описание
+            span: full
+            type: textarea
+            tab: Описание

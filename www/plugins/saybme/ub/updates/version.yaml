@@ -186,3 +186,33 @@ v1.0.62:
 v1.0.63:
     - 'Updated table saybme_ub_applications'
     - builder_table_update_saybme_ub_applications_3.php
+v1.0.64:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_6.php
+v1.0.65:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_7.php
+v1.0.66:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_8.php
+v1.0.67:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_6.php
+v1.0.68:
+    - 'Created table saybme_ub_form_groups'
+    - builder_table_create_saybme_ub_form_groups.php
+v1.0.69:
+    - 'Updated table saybme_ub_form_groups'
+    - builder_table_update_saybme_ub_form_groups.php
+v1.0.70:
+    - 'Created table saybme_ub_form_inputs'
+    - builder_table_create_saybme_ub_form_inputs.php
+v1.0.71:
+    - 'Updated table saybme_ub_form_inputs'
+    - builder_table_update_saybme_ub_form_inputs.php
+v1.0.72:
+    - 'Drop table saybme_ub_form_inputs'
+    - builder_table_delete_saybme_ub_form_inputs.php
+v1.0.73:
+    - 'Created table saybme_ub_form_inputs'
+    - builder_table_create_saybme_ub_form_inputs_2.php

@@ -1,0 +1,8 @@
+groups:
+    label: Группы
+    view:
+        list: $/saybme/ub/models/formgoup/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/ub/models/formgoup/fields.yaml

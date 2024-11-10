@@ -21,6 +21,10 @@ class Prpage extends Model
         return $query->where('is_active', true);
     } 
 
+    public $belongsTo = [
+        'form' => \Saybme\Ub\Models\Ubform::class
+    ];
+
     public function getLinkAttribute(){
         $arr[] = 'cabinet';
         $arr[] = $this->slug;

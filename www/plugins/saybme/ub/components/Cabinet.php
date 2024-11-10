@@ -109,6 +109,12 @@ class Cabinet extends \Cms\Classes\ComponentBase
         // if($user->utype->id == 2){
         //     $tpl = 'applications/page-manager';
         // }
+
+        // Страница форма
+        if($page->form){
+            $tpl = 'cabinetforms/form_' . $page->form->id;    
+            $options['form'] = $page->form;
+        }
         
         $options['user'] = $user;
         $options['page'] = $page;
@@ -166,6 +172,12 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $user->save();
 
         return $user;
+    }
+
+    // Создаем заявку
+    function onCreateApp(){
+        $data = Input::get();
+        return $data;
     }
 
     // Меняем статус заявки

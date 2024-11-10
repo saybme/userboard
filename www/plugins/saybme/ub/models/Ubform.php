@@ -1,5 +1,7 @@
 <?php namespace Saybme\Ub\Models;
 
+use Saybme\Ub\Models\Forminput;
+use Saybme\Ub\Models\Formvalues;
 use Model;
 
 class Ubform extends Model
@@ -13,7 +15,7 @@ class Ubform extends Model
   
     public $rules = [
         'name' => 'required'
-    ];
+    ];   
 
     public function scopeActive($query) {
         return $query->where('is_active', true);
@@ -41,13 +43,24 @@ class Ubform extends Model
     //     $this->url = 'f/' . $this->hash;
     // }
 
-    public $hasMany = [
-        'rows' => [
-            Formrow::class,
-            'key' => 'parent_id',
-            'delete' => true
-        ],
+    public $hasMany = [       
+        'groups' => \Saybme\Ub\Models\Formgoup::class,
     ];    
+
+    public function getInputsAttribute(){
+        if(!$this->groups) return;
+        
+        $groups = $this->groups()->pluck('id');
+        $inputs = Forminput::whereIn('parent_id', $groups)->get();
+
+        $rows = array();
+
+        foreach($inputs as $input){
+            $rows[$input['hash']] = $input;
+        }
+
+        return collect($rows);
+    }
 
 
     public static function getMenuTypeInfo($type) {
