@@ -14,6 +14,7 @@ use Saybme\Ub\Models\Form;
 use Saybme\Ub\Models\Application;
 use Saybme\Ub\Models\Formrow;
 use Saybme\Ub\Models\Carnumber;
+use Saybme\Ub\Models\Forminput;
 use ValidationException;
 use Request;
 use Input;
@@ -174,8 +175,9 @@ class AuthClass {
 
     // Возвращаем типы услуг
     public function getTypeServises(){
-        $items = Srvcategory::get();
-        return $items;
+        // $items = Srvcategory::get();
+        // return $items;
+        return;
     }
 
     // Услуги кабинета
@@ -289,52 +291,16 @@ class AuthClass {
         $rows = array();
 
         foreach($data as $key => $item){
-            $obj = Formrow::where('value->hash', $key)->first();
-            $value = null;
-            $partial = null;
+            $obj = Forminput::where('value->hash', $key)->first();
             if($obj){
-                switch($obj->ubtype){
-                    case 'text':
-                        $value = AppformClass::getValueText($item, $obj);
-                        break;
-                    case 'formvalue':
-                        $value = $this->getValueForm($item, $obj->ubtype, $obj->kgroup);
-                        break;
-                    case 'radio':
-                        $value = AppformClass::getInValueRadio($item, $obj);
-                        break;
-                    case 'invalue':
-                        $value = AppformClass::getInValueForm($item, $obj);
-                        break;
-                    case 'date':
-                        $value = AppformClass::getValueDate($item, $obj);
-                        break;
-                    case 'array':
-                        $value = AppformClass::getValueArray($item, $obj);
-                        break;
-                    case 'date_time':
-                        $value = AppformClass::getValueDateTime($item, $obj);
-                        break;
-                    case 'checkbox':
-                        $value = AppformClass::getValueCheckboxs($item, $obj);
-                        break;
-                    case 'hide':
-                        $value = AppformClass::getValueHide($item, $obj);
-                    case 'dropzone':
-                        $value = AppformClass::getValueDropzone($item, $obj);
-                        $partial = 'forms/dropzone';
-                        break;
-                }
-
-                if($value){
-                    $rows[$obj->kgroup]['title'] = $this->getFormGroup($obj->kgroup); 
-                    $rows[$obj->kgroup]['partial'] = $partial; 
-                    $rows[$obj->kgroup]['items'][$key] = $value;                     
-                }
+                $arr['title'] = $obj->title;
+                $arr['value'] = $item;                
                 
+                //$rows[$obj->parent_id]['group'] = $arr;
+                $rows[$obj->parent_id]['items'][$key] = $arr;
             }            
-        }
-
+        }        
+        
         return collect($rows);
     }
 

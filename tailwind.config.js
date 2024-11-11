@@ -5,7 +5,9 @@ module.exports = {
     "./www/themes/tmp/layouts/*.htm",
     "./www/themes/tmp/partials/**/*.htm",
     "./www/themes/tmp/pages/**/*.htm",
-    "./www/themes/tmp/content/**/*.htm"
+    "./www/themes/tmp/content/**/*.htm",
+    "./www/plugins/saybme/ub/views/**/*.htm",
+    "./www/plugins/saybme/ub/components/**/*.htm"
   ],  
   theme: {
     screens: {

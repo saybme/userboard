@@ -1,6 +1,7 @@
 <?php namespace Saybme\Ub\Components;
 
 use Saybme\Ub\Models\Servise;
+use View;
 
 class Uservises extends \Cms\Classes\ComponentBase
 {
@@ -41,6 +42,12 @@ class Uservises extends \Cms\Classes\ComponentBase
         return $this->$type();
     }
 
+    // Все услуги сервиса
+    private function getServises(){
+        $options['items'] = $this->getAllServises();
+        return View::make('saybme.ub::servises.all', $options);
+    }
+
     private function getServise(){
 
         $tmp = 'servises/page';
@@ -56,7 +63,15 @@ class Uservises extends \Cms\Classes\ComponentBase
         $options['menu'] = Servise::select('id','name','slug')->active()->get();
         $options['page'] = $servise;
         $options['breadcrumbs'] = $this->getBreadcrumbs($servise);
+        $options['servises'] = $this->getAllServises();
+
         return $this->renderPartial($tmp, $options);
+    }
+
+    // Все услуги сервиса
+    private function getAllServises(){
+        $items = Servise::with('children')->select('id','name','description','parent_id','slug')->active()->getNested();
+        return $items;
     }
 
     private function getBreadcrumbs($servise){

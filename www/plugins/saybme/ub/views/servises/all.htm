@@ -1,0 +1,23 @@
+<div class="space-y-4 columns-4">
+    {% for item in items %}
+        <div class="break-inside-avoid">
+            <h2 class="text-xl/none font-bold text-blue-2">
+                <a href="{{ item.link }}" class="hover:underline">{{ item.name }}</a>
+            </h2>
+            {% if item.description %}
+                <div class="mt-2 text-xs text-gray-400">
+                    {{ item.description }}
+                </div>
+            {% endif %}
+            {% if item.children | length > 0 %}
+                <ul class="text-sm list-disc ml-5 mt-2">
+                    {% for child in item.children %}
+                        <li class="">
+                            <a href="{{ child.link }}" class="hover:text-blue-3 hover:underline">{{ child.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

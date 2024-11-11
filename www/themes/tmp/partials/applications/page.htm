@@ -8,38 +8,20 @@
     </div>
 {% endif %}
 
-<div class="font-gilroy-medium space-y-5">
+<div class="font-gilroy-medium space-y-5">    
 
     {% for rows in page.appcontent %}        
-        <div class="py-4 px-4 rounded-lg bg-white">
-
-            {% if rows.title %}
-                <h3 class="text-xl font-semibold">{{ rows.title }}</h3>
-                <hr class="my-2">
-            {% endif %}
-           
-            {% if rows.partial %}               
-                {% for item in rows.items %}
-                    <div class="py-2 border-b flex last:border-0 flex-col table_sm:flex-row">
-                        <h3 class="w-full table_sm:w-1/4 font-gilroy-bold">{{ item.title }}</h3>
-                        <div class="break-all w-full table_sm:w-3/4 table_sm:pl-5 mt-2 table_sm:mt-0">
-                            {% partial rows.partial items=item.value %}
-                        </div>                        
+        <div class="py-4 px-4 rounded-lg bg-white"> 
+            <h3 class="text-xl font-semibold text-blue-2">Группа</h3>
+            <hr class="my-2">
+            <div class="space-y-1">
+                {% for item in rows.items %}           
+                    <div class="flex">
+                        <div class="font-bold me-2">{{ item.title }}:</div>
+                        <div class="">{{ item.value }}</div>
                     </div>
-                {% endfor %} 
-            {% else %}
-                <div class="">
-                    {% for item in rows.items %}
-                        <div class="py-2 border-b flex last:border-0 flex-col table_sm:flex-row">
-                            <h3 class="w-full table_sm:w-1/4 font-gilroy-bold">{{ item.title }}</h3>
-                            <div class="break-all w-full table_sm:w-3/4 table_sm:pl-5 mt-2 table_sm:mt-0">
-                                {{ item.value | raw }}
-                            </div>                        
-                        </div>
-                    {% endfor %}   
-                </div>
-            {% endif %}
-
+                {% endfor %}
+            </div>
         </div>
     {% endfor %}
 

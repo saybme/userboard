@@ -1,9 +1,0 @@
-# config_relation.yaml
-servises:
-    label: Услуги
-    view:
-        list: $/saybme/ub/models/servise/columns.yaml
-        toolbarButtons: create|delete
-        recordsPerPage: 10
-    manage:
-        form: $/saybme/ub/models/servise/fields.yaml

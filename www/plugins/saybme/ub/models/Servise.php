@@ -14,17 +14,12 @@ class Servise extends Model
    
     public $rules = [
         'name' => 'required',
-        'slug' => 'required',
-        'srvcategory' => 'required'
+        'slug' => 'required'
     ];
 
     public $attachOne = [
         'photo' => \System\Models\File::class
-    ];
-
-    public $belongsTo = [
-        'srvcategory' => \Saybme\Ub\Models\Srvcategory::class
-    ];
+    ];    
 
     public function scopeActive($query) {
         return $query->where('is_active', true);

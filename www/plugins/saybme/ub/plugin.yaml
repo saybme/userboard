@@ -14,10 +14,6 @@ navigation:
                 label: Баннеры
                 url: saybme/ub/banners
                 icon: icon-image
-            side-menu-item7:
-                label: 'Категории услуг'
-                url: saybme/ub/srvcategories
-                icon: icon-share-alt
             side-menu-item2:
                 label: Услуги
                 url: saybme/ub/servises

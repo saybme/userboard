@@ -4,6 +4,14 @@
 
 @layer base {
 
+    .ubtitle {
+        @apply text-blue-2 *:text-red-1
+    }
+
+    .error {
+        @apply text-sm text-red-1 ml-1
+    }
+
     .about-text > p {
         @apply pb-5 text-base font-gilroy-medium
     }

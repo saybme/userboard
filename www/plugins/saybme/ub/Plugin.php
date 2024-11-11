@@ -21,8 +21,16 @@ class Plugin extends PluginBase
             'filters' => [
                 'phone' => [$this, 'formatPhone'],
                 'formvalues' => [$this, 'getFormValues'],
+                'ubtitle' => [$this, 'ubTitle'],
             ]
         ];
+    }
+
+    // Заголовок USERBOARD
+    public function ubTitle($value){
+        if(!$value) return;
+        $value = str_ireplace("board", "<span>BOARD</span>", $value);
+        return $value;
     }
 
     // Значения полей

@@ -42,13 +42,11 @@ fields:
         label: Услуга
         span: auto
         type: text
-    slug:
-        label: SLUG
+    parent:
+        label: Родительский ресурс
         span: auto
-        preset:
-            field: name
-            type: slug
-        type: text
+        placeholder: -- Выбрать родителя --
+        type: relation    
 secondaryTabs:
     fields:
         is_active:
@@ -60,16 +58,14 @@ secondaryTabs:
             label: Популярная
             span: full
             default: 1
-            type: checkbox
-        srvcategory:
-            label: Тип услуги
+            type: checkbox        
+        slug:
+            label: SLUG
             span: full
-            type: relation
-        parent:
-            label: Родительский ресурс
-            span: full
-            placeholder: -- Выбрать родителя --
-            type: relation
+            preset:
+                field: name
+                type: slug
+            type: text
         tmp:
             label: Шаблон
             span: full

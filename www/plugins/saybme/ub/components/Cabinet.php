@@ -91,9 +91,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options = array();
         $tpl = 'cabinet/default-text';
         $slug = $this->property('slug');
-
         
-        $page = $q->getPage($slug);   
+        $page = $q->getPage($slug);           
         
         if(!$user) {
             $tpl = 'cabinet/404';
@@ -122,7 +121,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['numbers'] = $q->getGosNumbers($user->id);
         $options['applications'] = $q->getUserApplications($user->id);  
         $options['content'] = $this->renderPartial($tpl, $options);    
-        $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page);        
+        $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page);          
+       
 
         return $this->renderPartial('cabinet/wrap', $options);
     }
@@ -276,7 +276,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
     // Создаем заявку
     public function onApp(){
         $q = new AppClass();
-        $app = $q->create();      
+        $app = $q->create();            
         return Redirect::to($app->link);
     }
 

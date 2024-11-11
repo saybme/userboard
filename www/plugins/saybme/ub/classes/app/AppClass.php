@@ -5,6 +5,7 @@ use Saybme\Ub\Models\Form;
 use Saybme\Ub\Models\Application;
 use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Models\Formrow;
+use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Carnumber;
 use Lang;
 use Request;
@@ -18,7 +19,7 @@ class AppClass {
     public function create(){
 
         // Сохраняем данные формы в сессию
-        $this->saveFormSession();
+        //$this->saveFormSession();
 
         // Валидация формы
         $this->validForm();        
@@ -72,28 +73,28 @@ class AppClass {
     }   
 
     // Сохраняем поля в сессию
-    private function saveFormSession(){
-        $id = Input::get('form');
-        $vars = Input::get();
-        Session::put('ubform.' . $id, $vars);
-        return;
-    }
+    // private function saveFormSession(){
+    //     $id = Input::get('form');
+    //     $vars = Input::get();
+    //     Session::put('ubform.' . $id, $vars);
+    //     return;
+    // }
 
     // Валидация формы
     private function validForm(){
         // Данные с формы
-        $vars = Input::get();
-        unset($vars['form']);
+        $vars = Input::get();        
+        unset($vars['form']);  
         
         $items = array();
         foreach($vars as $key => $item){
-            $obj = Formrow::where('value->hash', $key)->first();
-            if($obj){
-                if($obj->is_required){
-                    $items[$key] = 'required';
-                }                
+            $input = Forminput::where('value->hash', $key)->first();
+            if($input){
+                if($input->is_required){
+                    $items[$input->hash] = 'required';
+                }                 
             }            
-        };
+        };        
 
         Request::validate($items, Lang::get('saybme.ub::validation'));        
     }

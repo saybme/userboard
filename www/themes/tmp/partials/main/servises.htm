@@ -1,31 +1,16 @@
-[viewBag]
+[uservises]
+slug = "{{ :slug }}"
+type = "getServises"
 ==
-<?php
-use Saybme\Ub\Classes\Servises\ServiseClass;
 
-function onStart(){
-    $q = new ServiseClass;
-    $this['allservises'] = $q->getAllServises();
-    $this['popularservises'] = $q->getPupularServises();
-}
-?>
-==
 <div class="table:container pt-[2.5rem] pb-[4.125rem] px-2">
 
-    <h1 class="text-center text-txt-30 table:text-txt-40 laptop:text-h1 text-blue-1 leading-tight">
-        Услуги севиса 
-        USER<span class="text-red-3">BOARD</span>.RU
+    <h1 class="text-center text-txt-30 table:text-txt-40 laptop:text-h1 text-blue-1 leading-tight ubtitle">
+        Услуги сервиса {{ 'USERBOARD.RU' | ubtitle }}
     </h1> 
 
-    <div class="mt-[3rem] grid grid-cols-1 table_sm:grid-cols-3 gap-x-3 gap-y-5">
-        {% for item in popularservises %}    
-            <div class="py-8 px-4 laptop:px-10 bg-blue-4 text-white rounded-lg flex flex-col bg-sota-small bg-center bg-no-repeat bg-cover drop-shadow-ub-1">
-                <h2 class="font-gilroy-bold text-2xl leading-[1.2] text-pretty">{{ item.name }}</h2>                
-                <div class="mt-auto pt-3">
-                    <a href="{{ item.link }}" class="bg-red-3 text-white leading-none font-[700] inline-flex py-2 px-3 rounded-sm">Подробнее</a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>    
+    <div class="mt-10">
+        {% component 'uservises' %}
+    </div>
 
 </div>

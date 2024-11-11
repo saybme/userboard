@@ -2,12 +2,7 @@ columns:
     name:
         label: Услуга
         type: text
-        searchable: true
-    srvcategory:
-        label: Тип
-        type: text
-        select: name
-        relation: srvcategory
+        searchable: true    
     is_active:
         label: Опубликован
         type: switch

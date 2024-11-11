@@ -1,14 +1,15 @@
-url = "/servises/:slug"
+url = "/servises/:slug*"
 layout = "default"
 title = "Услуга"
 
 [uservises]
 slug = "{{ :slug }}"
 type = "getServise"
-==
 
+[staticMenu]
+==
 <div class="container">
 
-    {% component 'uservises' %}
+    {% component 'uservises' %}  
 
 </div>

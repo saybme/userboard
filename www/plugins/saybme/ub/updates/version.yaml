@@ -216,3 +216,6 @@ v1.0.72:
 v1.0.73:
     - 'Created table saybme_ub_form_inputs'
     - builder_table_create_saybme_ub_form_inputs_2.php
+v1.0.74:
+    - 'Drop table saybme_ub_srv_categories'
+    - builder_table_delete_saybme_ub_srv_categories.php

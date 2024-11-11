@@ -13,6 +13,10 @@ tabs:
             itemsExpanded: false
             form:
                 fields:
+                    is_required:
+                        label: Обязательное поле
+                        span: full
+                        type: checkbox
                     title:
                         label: Поле
                         type: text
@@ -31,13 +35,8 @@ tabs:
                             fields:
                                 name:
                                     label: Значение
-                                    span: auto
+                                    span: full
                                     type: text 
-                                hash:
-                                    label: HASH
-                                    span: auto
-                                    type: text 
-                                    disabled: 1
         description:
             label: Описание
             span: full

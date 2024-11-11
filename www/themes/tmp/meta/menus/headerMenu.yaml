@@ -1,22 +1,13 @@
 items:
     -
-        title: Услуги
-        nesting: null
-        type: cms-page
-        url: null
-        code: ''
-        reference: pages/uslugi
-        cmsPage: null
-        replace: null
-        viewBag:
-            isHidden: '0'
-            cssClass: ''
-            isExternal: '0'
-    -
         title: Госномера
+        nesting: null
         type: url
         url: /servises/kupit-avto-nomer
         code: ''
+        reference: null
+        cmsPage: null
+        replace: null
         viewBag:
             isHidden: '0'
             cssClass: ''
