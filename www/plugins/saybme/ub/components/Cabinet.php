@@ -44,11 +44,11 @@ class Cabinet extends \Cms\Classes\ComponentBase
     function onRun(){
         $this->addScripts(); // Скрипты
         $this->addStyles(); // Стили
-        $this->cabinet = $this->getContent();
+        $this->cabinet = $this->getContent();        
     }
 
     private function getContent(){
-        $type = $this->property('type');
+        $type = $this->property('type');        
         return $this->$type();
     }
 
@@ -61,6 +61,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         $q = new AuthClass;
         $user = $q->getActiveUser();        
+
+        
 
         if(!$user) {
             $tpl = 'cabinet/404';
@@ -111,7 +113,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         // Страница форма
         if($page->form){
-            $tpl = 'cabinetforms/form_' . $page->form->id;    
+            $tpl = 'cabinetforms/form_' . $page->form->id;               
             $options['form'] = $page->form;
         }
         
@@ -121,8 +123,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['numbers'] = $q->getGosNumbers($user->id);
         $options['applications'] = $q->getUserApplications($user->id);  
         $options['content'] = $this->renderPartial($tpl, $options);    
-        $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page);          
-       
+        $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page);  
 
         return $this->renderPartial('cabinet/wrap', $options);
     }

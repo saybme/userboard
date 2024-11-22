@@ -34,10 +34,6 @@ navigation:
                 label: Обращения
                 url: saybme/ub/supthemes
                 icon: icon-comment
-            side-menu-item8:
-                label: Формы
-                url: saybme/ub/forms
-                icon: icon-server
             side-menu-item9:
                 label: Заявки
                 url: saybme/ub/applications
@@ -54,11 +50,15 @@ navigation:
             side-menu-item:
                 label: Формы
                 url: saybme/ub/ubforms
-                icon: icon-slack
+                icon: icon-share-alt-square
             side-menu-item2:
-                label: 'Данные форм'
-                url: saybme/ub/ubformvalues
-                icon: icon-share-alt
+                label: 'Поля формы'
+                url: /
+                icon: icon-server
+            side-menu-item3:
+                label: 'Значения полей'
+                url: saybme/ub/formvalues
+                icon: icon-sitemap
     main-menu-item3:
         label: 'UB Объявления'
         url: /

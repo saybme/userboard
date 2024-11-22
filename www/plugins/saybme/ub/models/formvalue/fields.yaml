@@ -1,0 +1,21 @@
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    title:
+        label: Поле
+        span: full
+        type: text
+    description:
+        label: Описание
+        size: small
+        span: full
+        type: textarea
+tabs:
+    fields:
+        children:
+            span: full
+            type: partial
+            tabs: Параметры

@@ -1,0 +1,10 @@
+name: Formvalues
+form: $/saybme/ub/models/formvalue/fields.yaml
+modelClass: Saybme\Ub\Models\Formvalue
+defaultRedirect: saybme/ub/formvalues
+create:
+    redirect: 'saybme/ub/formvalues/update/:id'
+    redirectClose: saybme/ub/formvalues
+update:
+    redirect: saybme/ub/formvalues
+    redirectClose: saybme/ub/formvalues

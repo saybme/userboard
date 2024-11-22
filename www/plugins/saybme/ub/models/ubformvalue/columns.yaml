@@ -1,8 +1,0 @@
-columns:
-    name:
-        label: Заголовок
-        type: text
-        searchable: true
-    id:
-        label: ID
-        type: text

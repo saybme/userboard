@@ -36,32 +36,11 @@ class Ubform extends Model
 
     public $attachMany = [
         'photos' => \System\Models\File::class
-    ];
-    
+    ];   
 
-    // public function beforeSave() { 
-    //     $this->url = 'f/' . $this->hash;
-    // }
-
-    public $hasMany = [       
-        'groups' => \Saybme\Ub\Models\Formgoup::class,
+    public $hasMany = [
+        'inputs' => \Saybme\Ub\Models\Forminput::class,
     ];    
-
-    public function getInputsAttribute(){
-        if(!$this->groups) return;
-        
-        $groups = $this->groups()->pluck('id');
-        $inputs = Forminput::whereIn('parent_id', $groups)->get();
-
-        $rows = array();
-
-        foreach($inputs as $input){
-            $rows[$input['hash']] = $input;
-        }
-
-        return collect($rows);
-    }
-
 
     public static function getMenuTypeInfo($type) {
         $result = [];

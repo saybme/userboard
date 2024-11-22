@@ -1,0 +1,10 @@
+name: Forminputs
+form: $/saybme/ub/models/forminput/fields.yaml
+modelClass: Saybme\Ub\Models\Forminput
+defaultRedirect: saybme/ub/forminputs
+create:
+    redirect: 'saybme/ub/forminputs/update/:id'
+    redirectClose: saybme/ub/forminputs
+update:
+    redirect: saybme/ub/forminputs
+    redirectClose: saybme/ub/forminputs

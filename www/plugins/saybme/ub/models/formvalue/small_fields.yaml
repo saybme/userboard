@@ -1,0 +1,10 @@
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: checkbox
+    title:
+        label: Поле
+        span: full
+        type: text

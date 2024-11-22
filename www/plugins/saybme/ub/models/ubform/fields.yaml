@@ -10,27 +10,9 @@ fields:
         type: text    
 tabs:
     fields:
-        groups:
-            span: full
-            tab: Группы
+        inputs:
+            tab: Поля формы
             type: partial
-        rows:
-            label: Поля формы
-            size: full
-            tab: Форма
-            type: repeater          
-            prompt: Добавить блок
-            displayMode: builder
-            titleFrom: title    
-            useTabs: true        
-            groups: 
-                text: $/saybme/ub/config/field_text.yaml    
-                radio: $/saybme/ub/config/field_radio.yaml  
-                dropzone: $/saybme/ub/config/field_dropzone.yaml 
-                alert: $/saybme/ub/config/field_alert.yaml
-                group: $/saybme/ub/config/field_group.yaml
-                multy: $/saybme/ub/config/field_multy.yaml
-                partial: $/saybme/ub/config/field_partial.yaml
         description:
             label: Описание формы
             size: small

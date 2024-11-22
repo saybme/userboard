@@ -1,0 +1,14 @@
+title: Formvalues
+modelClass: Saybme\Ub\Models\Formvalue
+list: $/saybme/ub/models/formvalue/columns.yaml
+recordUrl: 'saybme/ub/formvalues/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+structure:
+    maxDepth: 10
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

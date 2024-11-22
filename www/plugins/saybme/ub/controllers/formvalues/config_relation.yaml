@@ -1,0 +1,9 @@
+children:
+    label: Параметры
+    view:
+        list: $/saybme/ub/models/formvalue/columns.yaml
+        toolbarButtons: create|delete
+        recordsPerPage: 10
+    manage:
+        form: $/saybme/ub/models/formvalue/small_fields.yaml
+    popupSize: small

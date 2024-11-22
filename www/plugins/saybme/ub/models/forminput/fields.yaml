@@ -1,13 +1,22 @@
 fields:
     title:
-        label: Поле
+        label: Наименование
         span: auto
         type: text
-    description:
-        label: Описание
-        span: auto
-        type: textarea
-    hash:
-        label: HASH
+    group_title:
+        label: Группа
         span: auto
         type: text
+    code:
+        label: 'Код поля'
+        span: full
+        disabled: 1
+        type: text
+tabs:
+    fields:
+        value:
+            label: Свазные параметры
+            span: full
+            type: relation
+            placeholder: -- Выбрать --
+            nameFrom: title

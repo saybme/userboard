@@ -1,29 +1,26 @@
 <?php namespace Saybme\Ub\Models;
 
-use October\Rain\Database\ExpandoModel;
+use Model;
 
-class Forminput extends ExpandoModel
+class Forminput extends Model
 {
-    use \October\Rain\Database\Traits\Sortable;
+    use \October\Rain\Database\Traits\Validation;
+    
+    public $table = 'saybme_ub_forminputs';
 
-    public $table = 'saybme_ub_form_inputs';
-
-    protected $expandoPassthru = ['parent_id', 'sort_order'];
-
-    public $attachMany = [
-        'photos' => \System\Models\File::class,
+    public $rules = [
+        'title' => 'required'
     ];
 
-    public function beforeCreate(){
-        $this->hash = 'in_' . md5(time());
+    public function beforeCreate() {
+        $this->code = 'ub' . md5(time());
     }
 
-    // public $hasMany = [
-    //     'values' => [
-    //         Formvalues::class,
-    //         'key' => 'parent_id',
-    //         'delete' => true
-    //     ],
-    // ];
+    public $belongsTo = [
+        'value' => [
+            \Saybme\Ub\Models\Formvalue::class,
+            'scope' => 'isDepth'
+        ]
+    ];
 
 }

@@ -219,3 +219,36 @@ v1.0.73:
 v1.0.74:
     - 'Drop table saybme_ub_srv_categories'
     - builder_table_delete_saybme_ub_srv_categories.php
+v1.0.75:
+    - 'Drop table saybme_ub_ubformvalues'
+    - builder_table_delete_saybme_ub_ubformvalues.php
+v1.0.76:
+    - 'Drop table saybme_ub_forms'
+    - builder_table_delete_saybme_ub_forms.php
+v1.0.77:
+    - 'Drop table saybme_ub_form_groups'
+    - builder_table_delete_saybme_ub_form_groups.php
+v1.0.78:
+    - 'Drop table saybme_ub_form_inputs'
+    - builder_table_delete_saybme_ub_form_inputs_2.php
+v1.0.79:
+    - 'Drop table saybme_ub_formrows'
+    - builder_table_delete_saybme_ub_formrows.php
+v1.0.80:
+    - 'Drop table saybme_ub_form_values'
+    - builder_table_delete_saybme_ub_form_values.php
+v1.0.81:
+    - 'Created table saybme_ub_forminputs'
+    - builder_table_create_saybme_ub_forminputs.php
+v1.0.82:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs.php
+v1.0.83:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_2.php
+v1.0.84:
+    - 'Created table saybme_ub_formvalues'
+    - builder_table_create_saybme_ub_formvalues.php
+v1.0.85:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_3.php

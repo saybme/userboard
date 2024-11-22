@@ -1,7 +1,11 @@
 columns:
     title:
-        label: Поле
+        label: Наименование
         type: text
-    hash:
-        label: HASH
+        searchable: true    
+    group_title:
+        label: Группа
+        type: text
+    code:
+        label: Код
         type: text
