@@ -1,0 +1,93 @@
+<div class="text-center  mb-6">
+    <h1 class="text-2xl text-blue-4 table_sm:text-3xl font-bold">Срочный выкуп гос номеров  и автомобилей с пробегом </h1>
+    <h2 class="text-xl table_sm:text-2xl font-bold mt-3">Теперь на USERBOARD можно выгодно заказать авто из Японии, Кореи и Китая, в том числе санкционные</h2>    
+    <h3 class="text-sm table_sm:text-xl mt-3">Оставьте заявку в форме ниже. Наш менеджер свяжется с вами в ближайшее время</h3>
+</div>
+
+<div class="">
+    <form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate data-request-files>
+
+        <input type="hidden" name="form" value="{{ form.id }}">
+        <input type="hidden" name="page_id" value="{{ page.id }}"> 
+    
+        <div class="space-y-4">
+            <div class="grid grid-cols-1 table_l:grid-cols-2 gap-4">
+                <div class="">
+                    {% partial 'inputs/text' input=ub8c1d957320204f9686e75d6edbb3886a %}
+                </div>
+                <div class="">
+                    {% partial 'inputs/text' input=ub05c1fe04e7bc20e11302512bd8182e13 %}
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 table_l:grid-cols-2 gap-4">
+                <div class="">
+                    {% partial 'inputs/text' input=ub1a290cca0ba9908cecf64ac8e4668a5e %}
+                </div>
+                <div class="">
+                    {% partial 'inputs/text' input=ub93f1bbb0d7e9bf8b235984c181cd3737 %}
+                </div>
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub9af37378d1f278d693c4673336bff9cb %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub3cf3b75cf21baad6c7789de3aab8d51f %}
+            </div>
+            <div class="grid grid-cols-1 table_l:grid-cols-2 gap-4">
+                <div class="">
+                    {% partial 'inputs/text' input=ub00b8ecaf06e826d7e4460ded1f2a843f %}
+                </div>
+                <div class="">
+                    {% partial 'inputs/text' input=ubc892ad459ff24eac63cf6e71ab0e8775 %}
+                </div>
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub790fd6f214453b6f169914329ff5d0d7 %}
+            </div>
+            <div class="">
+                <h4 class="text-lg font-semibold mb-2">Бюджет</h4>
+                <div class="grid grid-cols-1 table_l:grid-cols-2 gap-4">
+                    <div class="">
+                        {% partial 'inputs/text' input=ubd617ac6b93b940629fd0b68c9bbae490 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ub67843c732feb575be42860027cd6144d %}
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubcf0e18c6c454663a794cc8cd66aea18d %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubd5673a349fb98d6da08bee06a15c0aa3 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ube9e2c415ab6349ae606ec5edfe952b0e %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub3ed72293aeb2d350e8276c0093742c36 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/textarea' input=ub88b481bcd444428db366cd36a0e075d8 %}
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <div class=" flex items-center gap-x-1">
+                <input type="checkbox" id="check_politic" name="check_politic" class="checkbox checkbox-sm me-2 flex-none rounded-sm" checked>
+                <label for="check_politic" class="leading-none">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
+            </div>
+            <div data-validate-for="check_politic" class="error"></div>   
+        </div>
+    
+        <div class="mt-4">
+            <button class="btn btn-red" data-attach-loading>Отправить</button>
+        </div>
+    
+    </form>
+</div>
+
+<div class="mt-6 alert-box text-xs table_l:text-sm space-y-2">
+    {{ form.description | raw }}
+</div>
