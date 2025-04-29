@@ -62,7 +62,7 @@ class AppformClass {
         if(!$obj) return;
 
         $keys['index'] = 'Индекс';
-        $keys['region'] = 'Регион';
+        $keys['region'] = 'Регионddd';
         $keys['city'] = 'Населенный пункт';
         $keys['street'] = 'Улица';
         $keys['house'] = 'Дом';

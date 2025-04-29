@@ -1,0 +1,17 @@
+<div class="">
+    {% if input %}
+        <label for="" class="text-xs mob_l:text-sm block mb-1">
+            {{ input.title }} {{ input.is_required == true ? '<b class="text-red-1">*</b>' : '' }}
+        </label>
+        <select name="{{ input.code }}" id="{{ input.code }}" class="select select-bordered w-full">
+            {% for key, item in input.values %}
+                <option value="{{ item.id }}">{{ item.title }}</option>
+            {% endfor %}
+        </select>
+        <div data-validate-for="{{ input.code }}" class="error"></div>
+    {% else %}
+        <div class="alert alert-warning text-xs p-3 rounded-md">
+            Поле не создано!
+        </div>
+    {% endif %}
+</div>

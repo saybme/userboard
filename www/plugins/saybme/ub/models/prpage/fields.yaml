@@ -23,6 +23,11 @@ tabs:
             span: full
             tab: Дополнительно
             type: text
+        props[hide_title]:
+            label: Скрыть заголовок со страницы
+            span: full
+            type: checkbox
+            tab: Дополнительно
         form:
             label: Форма
             span: full
@@ -30,6 +35,11 @@ tabs:
             placeholder: -- Выбрать форму --
             tab: Информация
             comment: Связная форма
+            select: concat(name, '. ID:', id)
+        link_form@update:
+            label: Ссылка на форму
+            tab: Информация
+            type: partial
         created_at:
             label: Создан
             mode: datetime
@@ -51,6 +61,14 @@ secondaryTabs:
             span: full
             default: 1
             type: checkbox
+        hide_breadcrumbs:
+            label: Скрыть из крошек
+            span: full
+            type: checkbox
+        is_hide:
+            label: Скрыть страницу
+            span: full 
+            type: checkbox
         slug:
             label: SLUG
             span: full
@@ -65,10 +83,10 @@ secondaryTabs:
 fields:
     name:
         label: Страница
-        span: auto
+        span: full
         type: text
     parent:
         label: 'Родительский ресурс'
         placeholder: '-- Выбрать --'
-        span: auto
+        span: full
         type: relation   

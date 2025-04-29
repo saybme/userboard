@@ -20,6 +20,11 @@ class Uservises extends \Cms\Classes\ComponentBase
                 'description' => 'SLUG страницы',
                 'default' => '{{ :slug }}'
             ],
+            'servise' => [
+                'title' => 'ID услуги',
+                'description' => 'Укажите услугу',                
+                'type' => 'dropdown',
+            ],
             'type' => [
                 'title' => 'Тип вывода',
                 'description' => 'Укажите тип вывода',
@@ -27,10 +32,15 @@ class Uservises extends \Cms\Classes\ComponentBase
                 'type' => 'dropdown',
                 'options' => [
                     'getServises' => 'Все услуги',
-                    'getServise' => 'Услуга'
+                    'getServise' => 'Услуга',
+                    'getServiseId' => 'Услуга по ID'
                 ]               
             ]
         ];
+    }
+
+    public function getServiseOptions() {
+        return Servise::lists('name','id');
     }
     
     function onRun(){      
@@ -40,6 +50,16 @@ class Uservises extends \Cms\Classes\ComponentBase
     private function getContent(){
         $type = $this->property('type');       
         return $this->$type();
+    }
+
+    // Услуга по ID
+    private function getServiseId(){
+        $id = $this->property('servise');
+
+        $obj = Servise::find($id);
+        $obj->items = $obj->children()->active()->get();
+
+        return $obj;
     }
 
     // Все услуги сервиса

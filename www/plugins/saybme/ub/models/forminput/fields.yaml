@@ -1,4 +1,8 @@
 fields:
+    is_pay:
+        label: Услуга платная
+        span: full
+        type: checkbox
     title:
         label: Наименование
         span: auto
@@ -7,16 +11,94 @@ fields:
         label: Группа
         span: auto
         type: text
-    code:
+    code@create:
         label: 'Код поля'
         span: full
         disabled: 1
         type: text
+    code@update:
+        label: 'Код поля'
+        span: full
+        type: text
 tabs:
     fields:
+        type:
+            label: Тип поля 
+            span: auto
+            type: dropdown
+            tab: Связь параметров
         value:
             label: Свазные параметры
-            span: full
+            span: auto
             type: relation
             placeholder: -- Выбрать --
             nameFrom: title
+            tab: Связь параметров
+        is_required:
+            label: Обязательное поле 
+            span: full 
+            type: checkbox
+            tab: Дополнительно
+        comment:
+            label: Комментарий
+            tab: Дополнительно
+            type: text
+        input_type:
+            label: Тип поля 
+            span: full
+            type: dropdown
+            tab: Дополнительно
+            options:
+                text: Текст
+                email: E-mail
+                tel: Телефон
+                datetime-local: Дата и время
+        app_title:
+            label: Заголовок в заявке 
+            span: full 
+            type: text 
+            tab: Дополнительно
+        attr:
+            label: Атрибуты 
+            span: full
+            tab: Дополнительно
+            type: text 
+            size: small
+        price_code:
+            label: Рассчет стоимости 
+            span: full 
+            tab: Цены
+            type: codeeditor
+            size: huge
+            language: php
+        prices:
+            label: Цены 
+            span: full
+            tab: Цены
+            type: datatable
+            adding: true
+            deleting: true
+            columns:
+                srv_id:
+                    type: string
+                    title: ID
+                    validation:
+                    integer:
+                        message: Please enter a number
+                name:
+                    type: string
+                    title: Наименование
+                price:
+                    type: string
+                    title: Стоимость
+                    integer:
+                        message: Please enter a number
+            recordsPerPage: false
+            searching: false
+        app_rules:
+            label: Дополнительные проверки
+            span: full
+            tab: Проверки
+            type: codeeditor
+            size: huge
+

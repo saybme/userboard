@@ -1,8 +1,8 @@
 {% if page.status == 2 %}
 
-    <div class="text-2xl font-gilroy-bold text-red-1 underline">
-        Заявка выполнена.
-    </div>
+<div class="alert alert-success">
+    Заявка выполнена!    
+</div>
 
 {% else %}
 
@@ -12,10 +12,12 @@
         <div class="mt-1 flex gap-x-2">
             <select name="status" id="" class="select select-bordered w-full max-w-[360px]">
                 <option value="">Выбрать действие</option>
-                <option value="2">Заявки выполнена</option>
+                <option value="1" {{ page.status == 1 ? 'selected' : '' }}>Принята в работу</option>
+                <option value="2" {{ page.status == 2 ? 'selected' : '' }}>Заявка выполнена</option>
             </select>
             <button class="btn btn-red">Выполнить</button>
         </div>
-    </form>
+    </form>    
 
 {% endif %}
+

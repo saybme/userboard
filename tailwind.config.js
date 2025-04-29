@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+let plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
@@ -73,10 +74,16 @@ module.exports = {
   corePlugins: {
     aspectRatio: false,
   },
+  daisyui: {
+    themes: ["light"],
+  },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require("daisyui"),
-    require('tailwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide'),
+    plugin(function ({ addVariant }) {
+      addVariant('childs-a', '>&a')
+    })
   ],
 }
 

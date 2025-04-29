@@ -1,0 +1,14 @@
+{% if input %} 
+    <div class="flex gap-1 mob_l:gap-2">
+        {% for key, item in input.values %}
+            <div class="flex items-center">
+                <input type="checkbox" name="{{ input.code }}" data-title="{{ item.price_title }}" data-price="{{ item.price }}" value="{{ item.id }}" id="{{ input.code }}_{{ key }}" class="checkbox checkbox-xs rounded-md mob_l:radio-sm me-2 flex-none" {{ input.attr | raw }}>
+                <label for="{{ input.code }}_{{ key }}" class="text-sm mob_l:text-base cursor-pointer">{{ item.title }}</label>
+            </div>
+        {% endfor %} 
+    </div>
+{% else %}
+    <div class="alert alert-warning text-xs p-3 rounded-md">
+        Поле не создано!
+    </div>
+{% endif %}

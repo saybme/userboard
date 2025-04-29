@@ -6,3 +6,6 @@ columns:
     is_active:
         label: Опубликован
         type: switch
+    id:
+        label: ID 
+        type: number

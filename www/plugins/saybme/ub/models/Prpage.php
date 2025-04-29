@@ -9,6 +9,8 @@ class Prpage extends Model
     use \October\Rain\Database\Traits\NestedTree;
 
     protected $slugs = ['slug' => 'name'];
+
+    protected $jsonable = ['props'];
     
     public $table = 'saybme_ub_profile_pages';
     
@@ -32,7 +34,10 @@ class Prpage extends Model
         return url($url);
     }
 
-
+    public function getItemsAttribute(){
+        $items = $this->children()->where('is_hide', '!=', true)->get();
+        return $items;
+    }
 
     public static function getMenuTypeInfo($type) {
         $result = [];

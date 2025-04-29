@@ -3,9 +3,21 @@ columns:
         label: Наименование
         type: text
         searchable: true    
+        width: '250px'
+        cssClass: max-w-250px
     group_title:
         label: Группа
         type: text
+        searchable: true  
+        width: '250px'
     code:
         label: Код
         type: text
+        clickable: false
+        searchable: true  
+    is_required:
+        label: Обязательное 
+        type: switch
+    is_pay:
+        label: Платно 
+        type: switch

@@ -95,12 +95,66 @@
 
 @layer components {
 
+    
+
+    .form-label {
+        @apply text-xs mob_l:text-sm block mb-1
+    }
+
+    .form-group {
+        @apply bg-white rounded-lg p-3 mob_l:p-5
+    }
+
+    .form-title {
+        @apply text-base/none mob_l:text-lg/none table_l:text-2xl font-bold text-blue-2
+    }
+
+    .alert-box {
+        @apply text-xs mob_l:text-base bg-yellow-50 p-3 mob_l:p-6 rounded-md border border-yellow-300 [&>a]:text-red-2 [&>a]:underline hover:[&>a]:no-underline
+    }
+
+    .alert-box-yellow {
+        @apply alert alert-warning text-xs mob_l:text-base
+    }    
+
+    .alert-red-box-border-l {
+        @apply text-red-2 text-sm mob_l:text-lg bg-white p-3 mob_l:p-5 pl-3 mob_l:pl-5 border-l-4 border-red-1
+    }
+
+    .row-prices {
+        @apply flex flex-col items-start
+    } 
+
+    .row-prices li {
+        @apply text-pretty
+    }
+
+    .row-prices .row-price-active {
+        @apply relative text-red-2 after:block after:left-0 after:-bottom-[4px] after:bg-red-2 after:w-full after:h-[2px]
+    } 
+
+    .breadcrumbs-form {
+        @apply list-decimal ml-4 text-[.6rem] mob_l:text-xs space-y-1
+    }
+
+    .breadcrumbs-form a {
+        @apply text-blue-1 underline hover:no-underline
+    }
+
     header {
         @apply border-b border-gray-200
     }
 
     #apps .app_status_1 {
         @apply bg-green-100 border-green-100
+    }
+
+    .status.status_2 b {
+        @apply text-green-900
+    }
+
+    .status.status_1 b {
+        @apply text-yellow-700
     }
 
     ul.nav-registration a {
@@ -184,7 +238,7 @@
     }
 
     .btn-red {
-      @apply bg-gradient-to-t from-red-1 to-red-2 text-white
+      @apply bg-gradient-to-t from-red-1 to-red-2 text-white hover:cursor-pointer hover:bg-red-3
     }
 
     .header-fix {

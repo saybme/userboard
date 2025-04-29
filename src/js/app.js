@@ -19,6 +19,11 @@ addEventListener('ajax:done', function(event) {
         modal(event.detail.data);
     }
 
+    // onStatusApp
+    if(handler == 'onStatusApp'){
+        alert(1);
+    }
+
 });
 
 // dropzone
@@ -127,4 +132,468 @@ window.getWrapForm = function(data){
         }
     })
     
+}
+
+// Калькулятор формы регистрации транспорта
+window.calcSumForm = function(){
+
+    let form = document.getElementById('formApp');  
+    if(form == null) return;
+    
+    let items = form.querySelectorAll('[data-code="gde"]');
+
+    if(!items.length) return;
+
+    let rows = [];
+    
+    items.forEach(el => {
+        if(el.checked){
+            let gde_price = parseInt(el.getAttribute('data-price'));
+            if(gde_price)
+                rows['gde'] = {'price' : gde_price, 'name' : el.getAttribute('data-title-price')};  
+
+            let transports = form.querySelectorAll('[data-code="transport"]');
+            transports.forEach(tr => {
+                if(tr.checked){
+                    let transport_price = parseInt(tr.getAttribute('data-price'));
+                    rows['transport'] = {'price' : transport_price, 'name' : tr.getAttribute('data-title-price')};             
+                }   
+            })    
+
+        }        
+    })  
+
+    console.log(rows);
+
+    // Калькуляция
+    oc.ajax('onCalcFormSum', {
+        data: rows,
+        success: function(data) {
+            this.success(data);
+        }
+    })
+
+}
+
+document.gosCalc = function(data){
+
+    let formInput = document.getElementById('formPrices');
+    let formPrice = document.getElementById('formPrice');
+    let checkGos = document.getElementById('check_gos');    
+
+    let rows = [];
+    let ptsrow = null;
+    let prices = 0;    
+    let totalprices = 0; 
+    let transport = document.querySelector('input[data-name="transport"]:checked');
+    let gde = document.querySelector('input[data-name="gde"]:checked');
+    let certificate = document.querySelector('[data-prices="4"]');
+    let commission = document.querySelector('[data-prices="8"]');
+
+    if(transport == null || gde == null) return;   
+
+    document.querySelectorAll('[data-prices]').forEach(row => {        
+        row.classList.remove('row-price-active');
+    })
+    
+    // Где
+    if(transport.value == 5){
+        // Автотранспорт            
+        if(gde.value == 145 || gde.value == 27){
+            let pricerow = document.querySelector('[data-prices="1"]');
+            prices = prices + parseInt(pricerow.getAttribute('data-price'));
+            pricerow.classList.add('row-price-active');
+            rows.push(pricerow.getAttribute('data-title'));                
+        }           
+    } else if(transport.value == 6){
+        // Мототранспорт           
+        if(gde.value == 145 || gde.value == 27){
+            let pricerow = document.querySelector('[data-prices="2"]');
+            prices = prices + parseInt(pricerow.getAttribute('data-price'));
+            pricerow.classList.add('row-price-active');
+            rows.push(pricerow.getAttribute('data-title'));                
+        }
+    } else if(transport.value == 7){
+        // Прицеп
+        if(gde.value == 145 || gde.value == 27){
+            let pricerow = document.querySelector('[data-prices="2"]');
+            prices = prices + parseInt(pricerow.getAttribute('data-price'));
+            pricerow.classList.add('row-price-active');
+            rows.push(pricerow.getAttribute('data-title'));                
+        }
+    }
+
+    rows.push(certificate.getAttribute('data-title')); // госпошлина за выдачу свидетельства о регистрации ТС 500 рублей
+    prices = prices + parseInt(certificate.getAttribute('data-price'));
+    certificate.classList.add('row-price-active');
+
+    // Доп услуги  
+    rows.push(commission.getAttribute('data-title')); // 300 руб. комиссия
+    prices = prices;  
+    totalprices = prices + parseInt(commission.getAttribute('data-price')); 
+    commission.classList.add('row-price-active');    
+
+    let wrap = document.getElementById('resultSum');
+    wrap.innerHTML = '';
+    wrap.className = 'border border-blue-300 rounded-md px-4 py-4 bg-blue-50';
+    
+    const h3 = document.createElement("h3");
+    h3.className = 'text-lg/none mb-2 text-blue-1 underline font-bold';
+    h3.innerHTML = 'Стоимость услуги';
+
+    wrap.append(h3);    
+
+    for(let row in rows){
+        let srv = document.createElement("div");
+        srv.innerHTML = rows[row];       
+        wrap.append(srv);        
+    }   
+
+    formInput.value = JSON.stringify(rows);
+    formPrice.value = prices;
+    
+
+    if(checkGos.checked == false){
+
+        // Гос пошлина оплачена
+        const totalDiv = document.createElement("div");
+        totalDiv.innerHTML = 'Госпошлина: ' + '<b class="text-red-1">' + prices +'</b>'+ ' руб.';
+        totalDiv.className = 'mt-3 font-bold text-lg';
+        wrap.append(totalDiv);
+
+        const totalCommission = document.createElement("div");
+        totalCommission.innerHTML = 'Комиссия: ' + '<b class="text-red-1">' + parseInt(commission.getAttribute('data-price')) +'</b>'+ ' руб.';
+        totalCommission.className = 'font-bold text-lg';
+        wrap.append(totalCommission);
+
+    } else {
+        totalprices = parseInt(commission.getAttribute('data-price'));
+    }
+
+    const totalDivTotal = document.createElement("div");
+    totalDivTotal.innerHTML = 'Итого: ' + '<b class="text-red-1">'+ totalprices +'</b>'+ ' руб.';
+    totalDivTotal.className = 'font-bold text-base mob_l:text-lg text-pretty';
+    wrap.append(totalDivTotal);
+
+    
+    
+}
+
+
+document.gosCalcTwo = function(data){ 
+
+    let formInput = document.getElementById('formPrices');
+    let formPrice = document.getElementById('formPrice');
+    let checkGos = document.getElementById('check_gos'); 
+
+    let ptsrow = null;
+    let rows = [];
+    let prices = 0;    
+    let totalprices = 0; 
+    let transport = document.querySelector('input[data-name="transport"]:checked');
+    let gde = document.querySelector('input[data-name="gde"]:checked');
+    let pts = document.querySelector('input[data-name="pts"]:checked');
+    let certificate = document.querySelector('[data-prices="4"]');
+    let commission = document.querySelector('[data-prices="8"]');
+
+    if(transport == null || gde == null || pts == null) return;  
+    
+    document.querySelectorAll('[data-prices]').forEach(row => {
+        row.classList.remove('row-price-active');
+    })
+    
+    // Где
+    if(gde.value == 27 || gde.value == 145){
+        
+        if(transport.value == 5){
+            // Автотранспорт            
+            if(gde.value == 145 || gde.value == 27){
+                let pricerow = document.querySelector('[data-prices="1"]');
+                prices = prices + parseInt(pricerow.getAttribute('data-price'));
+                pricerow.classList.add('row-price-active');
+                rows.push(pricerow.getAttribute('data-title'));                
+            }           
+        } else if(transport.value == 6){
+            // Мототранспорт           
+            if(gde.value == 145 || gde.value == 27){
+                let pricerow = document.querySelector('[data-prices="2"]');
+                prices = prices + parseInt(pricerow.getAttribute('data-price'));
+                pricerow.classList.add('row-price-active');
+                rows.push(pricerow.getAttribute('data-title'));                
+            }
+        } else if(transport.value == 7){
+            // Прицеп
+            if(gde.value == 145 || gde.value == 27){
+                let pricerow = document.querySelector('[data-prices="2"]');
+                prices = prices + parseInt(pricerow.getAttribute('data-price'));
+                pricerow.classList.add('row-price-active');
+                rows.push(pricerow.getAttribute('data-title'));                
+            }
+        }
+
+    }    
+    
+    // ПТС
+    if(pts.value == 152){
+        // Внести изменения в текущий        
+        ptsrow = document.querySelector('[data-prices="5"]');
+        prices = prices + parseInt(ptsrow.getAttribute('data-price'));
+        ptsrow.classList.add('row-price-active');
+        rows.push(ptsrow.getAttribute('data-title'));
+    } else if(pts.value == 153){
+        // госпошлина за выдачу паспорта ТС 800 рублей
+        ptsrow = document.querySelector('[data-prices="6"]');
+        prices = prices + parseInt(ptsrow.getAttribute('data-price'));
+        ptsrow.classList.add('row-price-active');
+        rows.push(ptsrow.getAttribute('data-title'));
+    } else if(pts.value == 154){
+        // госпошлина за выдачу электронного паспорта ТС 0 рублей
+        ptsrow = document.querySelector('[data-prices="7"]');
+        prices = prices + parseInt(ptsrow.getAttribute('data-price'));
+        ptsrow.classList.add('row-price-active');
+        rows.push(ptsrow.getAttribute('data-title'));
+    }
+
+    rows.push(certificate.getAttribute('data-title')); // госпошлина за выдачу свидетельства о регистрации ТС 500 рублей
+    prices = prices + parseInt(certificate.getAttribute('data-price'));
+    certificate.classList.add('row-price-active');
+
+    rows.push(commission.getAttribute('data-title')); // 300 руб. комиссия
+    prices = prices;  
+    totalprices = prices + parseInt(commission.getAttribute('data-price')); 
+    commission.classList.add('row-price-active');       
+    
+
+    let wrap = document.getElementById('resultSum');
+    wrap.innerHTML = '';
+    wrap.className = 'border border-blue-300 rounded-md px-4 py-4 bg-blue-50';
+    
+    const h3 = document.createElement("h3");
+    h3.className = 'text-lg/none mb-2 text-blue-1 underline font-bold';
+    h3.innerHTML = 'Стоимость услуги';
+
+    wrap.append(h3);    
+
+    for(let row in rows){
+        let srv = document.createElement("div");
+        srv.innerHTML = rows[row];
+        wrap.append(srv);        
+    }   
+
+    formInput.value = JSON.stringify(rows);
+    formPrice.value = prices;
+
+    totalprices = prices + parseInt(commission.getAttribute('data-price')); 
+
+    if(checkGos.checked == false){
+
+        // Гос пошлина оплачена
+        const totalDiv = document.createElement("div");
+        totalDiv.innerHTML = 'Госпошлина: ' + '<b class="text-red-1">' + prices +'</b>'+ ' руб.';
+        totalDiv.className = 'mt-3 font-bold text-lg';
+        wrap.append(totalDiv);
+
+        const totalCommission = document.createElement("div");
+        totalCommission.innerHTML = 'Комиссия: ' + '<b class="text-red-1">' + parseInt(commission.getAttribute('data-price')) +'</b>'+ ' руб.';
+        totalCommission.className = 'font-bold text-lg';
+        wrap.append(totalCommission);
+
+    } else {
+        totalprices = parseInt(commission.getAttribute('data-price'));
+    }    
+
+    const totalDivTotal = document.createElement("div");
+    totalDivTotal.innerHTML = 'Итого: ' + '<b class="text-red-1">'+ totalprices +'</b>'+ ' руб.';
+    totalDivTotal.className = 'font-bold text-base mob_l:text-lg text-pretty';
+    wrap.append(totalDivTotal);
+    
+}
+
+document.gosCalcThree = function(data){ 
+
+    let formInput = document.getElementById('formPrices');
+    let formPrice = document.getElementById('formPrice');
+    let checkGos = document.getElementById('check_gos'); 
+
+    let ptsrow = null;
+    let rows = [];
+    let prices = 0;    
+    let totalprices = 0; 
+    let transport = document.querySelector('input[data-name="transport"]:checked');
+    let gde = document.querySelector('input[data-name="gde"]:checked');
+    let pts = document.querySelector('input[data-name="pts"]:checked');
+    let nomer = document.querySelector('input[data-name="nomer"]:checked');
+    let certificate = document.querySelector('[data-prices="4"]');
+    let commission = document.querySelector('[data-prices="8"]');
+
+    if(transport == null || nomer == null) return; 
+
+    document.querySelectorAll('[data-prices]').forEach(row => {
+        row.classList.remove('row-price-active');
+    })
+
+    // Что сделать с номерами
+    if(nomer){
+        if(nomer.value != '161'){
+            document.querySelectorAll('[data-name="gde"]').forEach(el => {
+                el.setAttribute('disabled', true);
+                el.checked = false;
+            })        
+        } else {
+            document.querySelectorAll('[data-name="gde"]').forEach(el => {
+                el.removeAttribute('disabled');
+            })     
+        }
+    }   
+
+    // Тип транспорта
+    if(transport){        
+
+        // Получить новые номера
+        if(nomer.value == 161){
+            if(gde == null) return; 
+        }
+
+        if(transport.value == 5 && nomer.value == 161){
+            // Автотранспорт
+            if(gde.value == 165){
+                let pricerow = document.querySelector('[data-prices="1"]');
+                prices = prices + parseInt(pricerow.getAttribute('data-price'));
+                pricerow.classList.add('row-price-active');
+                rows.push(pricerow.getAttribute('data-title'));                
+            }           
+        } else if(transport.value == 6 && nomer.value == 161){
+            // Мототранспорт
+            if(gde.value == 165){
+                let pricerow = document.querySelector('[data-prices="2"]');
+                prices = prices + parseInt(pricerow.getAttribute('data-price'));
+                pricerow.classList.add('row-price-active');
+                rows.push(pricerow.getAttribute('data-title'));                
+            }
+        } else if(transport.value == 7 && nomer.value == 161){
+            // Прицеп
+            if(gde.value == 165){
+                let pricerow = document.querySelector('[data-prices="2"]');
+                prices = prices + parseInt(pricerow.getAttribute('data-price'));
+                pricerow.classList.add('row-price-active');
+                rows.push(pricerow.getAttribute('data-title'));                
+            }
+        }
+        
+    }   
+
+    if(pts){        
+        if(pts.value == 152){
+            // Внести изменения в текущий
+            ptsrow = document.querySelector('[data-prices="5"]');
+            prices = prices + parseInt(ptsrow.getAttribute('data-price'));
+            ptsrow.classList.add('row-price-active');
+            rows.push(ptsrow.getAttribute('data-title'));
+        } else if(pts.value == 153){
+            // Получить новый
+            ptsrow = document.querySelector('[data-prices="6"]');
+            prices = prices + parseInt(ptsrow.getAttribute('data-price'));
+            ptsrow.classList.add('row-price-active');
+            rows.push(ptsrow.getAttribute('data-title'));
+        } else if(pts.value == 154){
+            // У меня электронный паспорт
+            ptsrow = document.querySelector('[data-prices="7"]');
+            prices = prices + parseInt(ptsrow.getAttribute('data-price'));
+            ptsrow.classList.add('row-price-active');
+            rows.push(ptsrow.getAttribute('data-title'));    
+        }
+    }
+    
+    rows.push(certificate.getAttribute('data-title')); // госпошлина за выдачу свидетельства о регистрации ТС 500 рублей
+    prices = prices + parseInt(certificate.getAttribute('data-price'));
+    certificate.classList.add('row-price-active');
+
+    rows.push(commission.getAttribute('data-title')); // 300 руб. комиссия
+    prices = prices;  
+    totalprices = prices + parseInt(commission.getAttribute('data-price')); 
+    commission.classList.add('row-price-active'); 
+  
+
+    let wrap = document.getElementById('resultSum');
+    wrap.innerHTML = '';
+    wrap.className = 'border border-blue-300 rounded-md px-4 py-4 bg-blue-50';
+    
+    const h3 = document.createElement("h3");
+    h3.className = 'text-lg/none mb-2 text-blue-1 underline font-bold';
+    h3.innerHTML = 'Стоимость услуги';
+
+    wrap.append(h3);    
+
+    for(let row in rows){
+        let srv = document.createElement("div");
+        srv.className = 'text-xs mob_l:text-base';
+        srv.innerHTML = rows[row];
+        wrap.append(srv);        
+    }   
+
+    formInput.value = JSON.stringify(rows);
+    formPrice.value = prices;
+
+    if(checkGos.checked == false){
+
+        // Гос пошлина оплачена
+        const totalDiv = document.createElement("div");
+        totalDiv.innerHTML = 'Госпошлина: ' + '<b class="text-red-1">' + prices +'</b>'+ ' руб.';
+        totalDiv.className = 'mt-3 font-bold text-base mob_l:text-lg text-pretty';
+        wrap.append(totalDiv);
+
+        const totalCommission = document.createElement("div");
+        totalCommission.innerHTML = 'Комиссия: ' + '<b class="text-red-1">' + parseInt(commission.getAttribute('data-price')) +'</b>'+ ' руб.';
+        totalCommission.className = 'font-bold text-lg';
+        wrap.append(totalCommission);
+
+    } else {
+        totalprices = parseInt(commission.getAttribute('data-price'));
+    }    
+
+    const totalDivTotal = document.createElement("div");
+    totalDivTotal.innerHTML = 'Итого: ' + '<b class="text-red-1">'+ totalprices +'</b>'+ ' руб.';
+    totalDivTotal.className = 'font-bold text-base mob_l:text-lg text-pretty';
+    wrap.append(totalDivTotal);
+    
+}
+
+// Получаем Partial
+window.getPartial = function(el){    
+
+    let options = [];
+    options['container'] = el.getAttribute('data-id');
+    options['partial'] = el.getAttribute('data-partial');
+    options['value'] = el.value;
+    options['form'] = el.getAttribute('data-form');   
+
+    if(el.checked == false){
+        options['value'] = null;    
+    }
+    
+    oc.ajax('onGetPartial', {
+        data: options,
+        success: function(data) {
+            this.success(data).done(function() {
+                console.log(data);
+            });
+        }
+    })
+       
+
+}
+
+// Копируем поле
+window.cloneInput = function(el, event){
+    event.preventDefault();
+
+    let id = el.getAttribute('data-id');
+    let wrap = document.getElementById(id);
+    let input = wrap.querySelector('input');
+
+    const clone = input.cloneNode(true);
+    clone.value = null;
+
+    wrap.append(clone);   
+    return false;
 }

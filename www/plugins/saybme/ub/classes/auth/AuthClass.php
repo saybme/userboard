@@ -4,6 +4,7 @@ use Saybme\Ub\Classes\App\SmsClass;
 use Saybme\Ub\Classes\App\AppClass;
 use Saybme\Ub\Classes\App\AppformClass;
 use Saybme\Ub\Models\User;
+use Saybme\Ub\Models\Formvalue;
 use Saybme\Ub\Models\Ubform;
 use Saybme\Ub\Models\Servise;
 use Saybme\Ub\Models\Prpage;
@@ -288,19 +289,66 @@ class AuthClass {
         $data = $page->data;
         unset($data['form']);
 
-        $rows = array();
+        $rows = array();        
 
         foreach($data as $key => $item){
-            $obj = Forminput::where('value->hash', $key)->first();
+            $obj = Forminput::where('code', $key)->first();
             if($obj){
-                $arr['title'] = $obj->title;
-                $arr['value'] = $item;                
-                
-                //$rows[$obj->parent_id]['group'] = $arr;
-                $rows[$obj->parent_id]['items'][$key] = $arr;
+
+                $arr['type'] = $obj->type ?: 'string';
+                $arr['title'] = $obj->app_title ?: $obj->title;                
+                $arr['group'] = $obj->group_title; 
+
+                if(gettype($item) == 'array'){
+                    $arr['value'] = json_encode($item); 
+                } else {
+                    $arr['value'] = $item;  
+                }
+
+                if($obj->value){
+                    $arr['value'] = Formvalue::find($item)->title;    
+                }
+
+                // Тип адрес
+                if($obj->type == 'address'){
+                    $arr['value'] = $this->getAddressTitle($item);      
+                }
+
+                // Тип связь
+                // if($obj->type == 'relation'){
+                //     $arr['value'] = 121;  
+                // }                
+
+                $rows[$obj->group_title]['items'][] = $arr; 
+                                 
             }            
-        }        
+        }  
+
+        //dd($rows);
         
+        return collect($rows);
+    }
+
+    // Адрес
+    private function getAddressTitle($arr = array()){
+        if(!count($arr)) return;
+
+        $titles['region'] = 'Регион';
+        $titles['city'] = 'Город';
+        $titles['street'] = 'Улица';
+        $titles['district'] = 'Район';
+        $titles['house'] = 'Дом';
+        $titles['build'] = 'Строение';
+        $titles['flat'] = 'Квартира';
+        $titles['noflat'] = 'Без квартиры';
+
+        $rows = array();
+        foreach($arr as $key => $item){
+            if(trim($item)){
+                $rows[$titles[$key]] = $item;
+            }            
+        }
+
         return collect($rows);
     }
 

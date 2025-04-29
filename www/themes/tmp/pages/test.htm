@@ -1,0 +1,15 @@
+title = "Тест"
+layout = "default"
+url = "/test"
+==
+<?php
+use Saybme\Ub\Models\Application;
+
+function onStart(){
+
+    $app = Application::with('files')->find(135);
+    return $app;
+
+}
+?>
+==

@@ -1,0 +1,41 @@
+<div class="flex flex-col gap-4">
+
+    <div class="">
+        <div class="flex items-start">
+            <input type="checkbox" id="check_politic" name="check_politic" value="1" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+            <label for="check_politic" class="leading-none">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
+        </div>
+        <div data-validate-for="check_politic" class="error"></div> 
+    </div>
+    
+    {% if gos == 1 %}
+        <div class="">
+            <div class="flex items-start">
+                <input type="checkbox" id="check_gos" name="check_gos" value="1" onchange="gosCalc(this)" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+                <label for="check_gos" class="leading-none">Госпошлина была оплачена</label>
+            </div>
+            <div data-validate-for="check_gos" class="error"></div> 
+        </div>
+    {% endif %}
+
+    {% if gos == 2 %}
+        <div class="">
+            <div class="flex items-start">
+                <input type="checkbox" id="check_gos" name="check_gos" value="1" onchange="gosCalcTwo(this)" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+                <label for="check_gos" class="leading-none">Госпошлина была оплачена</label>
+            </div>
+            <div data-validate-for="check_gos" class="error"></div> 
+        </div>
+    {% endif %}
+
+    {% if gos == 3 %}
+        <div class="">
+            <div class="flex items-start">
+                <input type="checkbox" id="check_gos" name="check_gos" value="1" onchange="gosCalcThree(this)" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+                <label for="check_gos" class="leading-none">Госпошлина была оплачена</label>
+            </div>
+            <div data-validate-for="check_gos" class="error"></div> 
+        </div>
+    {% endif %}
+
+</div>

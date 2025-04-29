@@ -4,6 +4,7 @@ use System\Classes\PluginBase;
 use Saybme\Ub\Classes\Rules\SmsRule;
 use Saybme\Ub\Classes\Rules\PhoneRule;
 use Saybme\Ub\Classes\Auth\AuthClass;
+use System\Models\File;
 
 /**
  * Plugin class
@@ -22,8 +23,15 @@ class Plugin extends PluginBase
                 'phone' => [$this, 'formatPhone'],
                 'formvalues' => [$this, 'getFormValues'],
                 'ubtitle' => [$this, 'ubTitle'],
+                'getPhoto' => [$this, 'getPhoto'],
             ]
         ];
+    }
+
+    // Фото заявки
+    public function getPhoto($value){
+        $file = File::where('title', $value)->first();
+        return $file;
     }
 
     // Заголовок USERBOARD

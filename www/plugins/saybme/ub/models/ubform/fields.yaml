@@ -25,6 +25,12 @@ tabs:
             span: full
             type: richeditor
             tab: Описание   
+        code:
+            label: Формула рассчета 
+            span: full 
+            tab: Дополнительно 
+            type: codeeditor
+            mode: php
         menutitle:
             label: Заголовок страницы
             span: full

@@ -4,5 +4,7 @@ inputs:
         list: $/saybme/ub/models/forminput/columns.yaml
         toolbarButtons: create|delete
         recordsPerPage: 10
+        showSearch: true
     manage:
         form: $/saybme/ub/models/forminput/fields.yaml
+    

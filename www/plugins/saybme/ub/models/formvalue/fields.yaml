@@ -18,4 +18,13 @@ tabs:
         children:
             span: full
             type: partial
-            tabs: Параметры
+            tab: Параметры
+        price_title:
+            label: Заголовок услуги 
+            span: auto
+            tab: Дополнительно
+        price:
+            label: Цена
+            span: auto
+            type: number
+            tab: Дополнительно

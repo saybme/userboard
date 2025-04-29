@@ -8,6 +8,7 @@ showSetup: true
 showCheckboxes: true
 structure:
     maxDepth: 10
+    treeExpanded: false
 toolbar:
     buttons: list_toolbar
     search:

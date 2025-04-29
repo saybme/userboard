@@ -1,0 +1,60 @@
+{% if input %}
+
+    <div class="grid mob_l:grid-cols-3 gap-3 mob_l:gap-5">
+        <div class="">            
+            <label for="" class="form-label">Регион <b class="text-red-1">*</b></label>
+            <input type="text" name="{{ input.code }}[region]" value="" class="input input-bordered w-full">   
+            <div data-validate-for="{{ input.code }}[region]" class="error"></div>          
+        </div>
+        <div class="">            
+            <label for="" class="form-label">Населенный пункт <b class="text-red-1">*</b></label>
+            <input type="text" name="{{ input.code }}[city]" value="" class="input input-bordered w-full">
+            <div data-validate-for="{{ input.code }}[city]" class="error"></div>            
+        </div>
+        <div class="">            
+            <label for="" class="form-label">Район</label>
+            <input type="text" name="{{ input.code }}[district]" value="" class="input input-bordered w-full">     
+            <div data-validate-for="{{ input.code }}[district]" class="error"></div>        
+        </div>
+    </div>
+
+    <div class="mt-3 mob_l:mt-5 flex gap-3 mob_l:gap-5 flex-wrap">            
+        <div class="mob_l:flex-1 w-full mob_l:w-auto">            
+            <label for="" class="form-label">Улица</label>
+            <input type="text" name="{{ input.code }}[street]" value="" class="input input-bordered w-full">     
+            <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">При наличии</div>
+            <div data-validate-for="{{ input.code }}[street]" class="error"></div>          
+        </div>
+        <div class="flex-1 mob_l:w-[100px]">            
+            <label for="" class="form-label">Дом</label>
+            <input type="text" name="{{ input.code }}[house]" value="" class="input input-bordered w-full">  
+            <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">При наличии</div>  
+            <div data-validate-for="{{ input.code }}[house]" class="error"></div>         
+        </div>
+        <div class="flex-1 mob_l:w-[100px]">            
+            <label for="" class="form-label">Строение</label>
+            <input type="text" name="{{ input.code }}[build]" value="" class="input input-bordered w-full"> 
+            <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">При наличии</div>    
+            <div data-validate-for="{{ input.code }}[build]" class="error"></div>         
+        </div>
+        <div class="flex-1 mob_l:w-[120px]">            
+            <label for="" class="form-label">Квартира / офис</label>
+            <input type="text" name="{{ input.code }}[flat]" value="" class="input input-bordered w-full">   
+            <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">При наличии</div>
+            <div data-validate-for="{{ input.code }}[flat]" class="error"></div>           
+        </div>            
+    </div>
+
+    
+
+    <div class="mt-5">
+        <div class="alert-box">
+            Примечание! Если в населенном пункте, в котором Вы собираетесь совершать регистрационное действие, имеется несколько регистрационных отделов (РЭО ГИБДД) к примеру в г. Москва, тогда  указывайте конкретное регистрационное подразделение с указанием полного юридического адреса. 
+        </div>
+    </div>
+
+{% else %}
+    <div class="alert alert-warning text-xs p-3 rounded-md">
+        Поле не создано!
+    </div>
+{% endif %}

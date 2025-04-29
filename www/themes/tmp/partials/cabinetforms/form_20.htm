@@ -1,0 +1,186 @@
+<form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate  data-request-files>
+
+    <div class="mb-4">
+        {% partial 'cabinet/form-breadcrumbs' breadcrumbs=breadcrumbs %}        
+    </div>
+
+    <input type="hidden" name="form" value="{{ form.id }}">
+    <input type="hidden" name="page_id" value="{{ page.id }}">
+
+    <h3 class="text-xl font-semibold">Порядок и условия подачи заявления в электронном виде</h3>
+
+    <div class="mt-5">
+        {% partial 'cabinetforms/reg-alert' type=1 %}
+    </div>
+
+    <div class="mt-5">
+        {% partial 'cabinetforms/reg-alert' type=2 %}
+    </div>     
+
+    <div class="mt-5 form-group">
+        <div class="">
+            <h2 class="form-title">1. Сведения о транспортном средстве</h2>
+        </div>  
+        <div class="mt-5 space-y-2">             
+            {% partial 'inputs/radio' input=ub11004f36dfb4b5a25464e4fadad4b8f6 code='transport' ajax='calcSumForm()' %} 
+        </div> 
+        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">            
+            <div class="">
+                {% partial 'inputs/text' input=ubce3adc1e3695d1608df9e1c75909e60b %}              
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub8bbf6648c07fe368e2b61932bc498485 %}              
+            </div>
+        </div>  
+    </div>  
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">2. Что хотите сделать с номерами?</h3>
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=3 %}
+        </div>
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=4 %}
+        </div>
+        <div class="mt-5 ">
+            {% partial 'inputs/radio' input=ubf9f69926f27999e42c9aaf2abede7534 %} 
+        </div>       
+    </div>     
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">3. Где будете получать номера?</h3>
+        <div class="mt-5">
+            {% partial 'inputs/radio' input=ubcfecb350415500401032d05930f79cb5 code='gde' ajax='calcSumForm()' %} 
+        </div>
+    </div>
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">4. Что нужно сделать с ПТС</h3>   
+        <div class="mt-5 text-xs mob_l:text-base">
+            <p class="underline">Получите новый ПТС, если старый утрачен, пришёл в негодность или в нём закончилось свободное место</p>
+        </div>
+        <div class="mt-5">
+            {% partial 'inputs/radio' input=ubaeb28a1f5911a453da0cc2d841dcddcb %} 
+        </div>        
+    </div>
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">5. Документы о праве собственности</h3>   
+        <div class="mt-5 ">
+            {% partial 'inputs/file' input=ub313197aa21dd8c0ae103bfabcd37e60c %}
+        </div>  
+        <div class="mt-5 grid grid-cols-1 gap-3 mob_l:gap-5">
+            <div class="">
+                {% partial 'inputs/select' input=ub414ac61b0eff03464e209d9193bc7231 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/select' input=ub5b6b1e77fdbfdbcbda58806bdd83363d %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubc42cc7ec69b1c1579191e76fc3604c78 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubee52b960d8a89e2fb02196d5697cefff %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub03b1215326c4c4bcf736a79ca3964349 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub978940e53502a0f5010c0f1e7444ce15 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub80fc67aed94a621f966eb78d4eb0adcb %}
+            </div>
+        </div> 
+    </div>
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">6. Ваши данные</h3>      
+        <div class="mt-5">
+            {% partial 'inputs/radio' input=ubf01012cf8226fbc0144c8a5e3f279abf %}
+        </div>  
+        <div class="mt-5 grid mob_l:grid-cols-4 gap-3 mob_l:gap-5">
+            <div class="">
+                {% partial 'inputs/text' input=ub33bef23da872b96d3b3bd703c1a1a222 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub93d4bd1f19b7808f95027ce8ec3acb00 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub195aab9962fbc776956f1ff5fd78e88f %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubba51ef916e8ca97c36d19891b3acd1f3 %}
+            </div>
+        </div>  
+        <div class="mt-5 grid mob_l:grid-cols-2 gap-3 mob_l:gap-5">
+            <div class="">
+                {% partial 'inputs/text' input=ubcb00e4bbafbd07950b098626cecdff0c %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub23d1e31de2a0e9de5ac6640ce6f9abfc %}
+            </div>
+        </div>
+        <div class="mt-3 mob_l:mt-5">
+            {% partial 'inputs/text' input=ubf244d6ba2128c703bd6cf3f4e4a328f4 %}
+        </div>
+        <div class="mt-3 mob_l:mt-5 grid mob_l:grid-cols-2 gap-3 mob_l:gap-5">
+            <div class="">
+                {% partial 'inputs/text' input=ub28f078e35dad796b1f08b3906788a410 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubfccd798e57a60579c396c5993490aa97 %}
+            </div>
+        </div>
+        <div class="mt-5">
+            {% partial 'inputs/text' input=ubd453f5e4314709a4d1e908cac6bd6247 %}
+        </div>
+    </div>
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">7. Где вы будете переоформлять ТС?</h3>      
+        <div class="mt-5">
+            {% partial 'inputs/address' input=ub7fc037a38dc6e781fd4676ed48d3c11f %}
+        </div>
+    </div>      
+
+    <div class="mt-5 form-group">
+        <h3 class="form-title">8. Укажите дату и время переоформления ТС</h3>
+        <div class="mt-5">
+            {% partial 'inputs/text' input=ubd45c29b21d8b527e7f09f6af12278bf0 %}
+        </div>  
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=5 %}
+        </div>
+        <div class="mt-5">
+            {% partial 'cabinetforms/check' gos='3' %}            
+        </div>
+    </div>
+
+    <div class="mt-5 form-group">
+        <div class="mt-5">
+            {% partial 'cabinetforms/prices' %}             
+        </div>   
+        <div class="mt-5 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2">
+            <p class="font-bold text-base mob_l:text-lg">Госпошлина не оплачивается</p>
+            <p class="text-xs mob_l:text-sm">
+                в случае прекращения (снятия с учета) ТС, за исключением случая вывоза ТС за границу
+                Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки                
+            </p>
+        </div>       
+        <div class="mt-5">
+            <div class="" id="resultSum">
+                {% partial 'cabinetforms/form_total' %}                
+            </div>
+            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+                Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
+            </div>
+        </div>
+        <input type="hidden" name="prices" value="" id="formPrices">
+        <input type="hidden" name="price" value="" id="formPrice">
+        <div class="mt-5">
+            <button class="btn btn-red w-full max-w-[200px]" data-attach-loading>ОТПРАВИТЬ</button>
+        </div> 
+    </div>
+
+</form>

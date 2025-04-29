@@ -1,0 +1,30 @@
+<div class="">
+
+    {% if input %}
+
+        <div class="text-pretty text-xs mob_l:text-base">{{ input.title }}</div>    
+
+        <div class="mt-2">
+            <input type="file" name="{{ input.code }}" value="" class="file-input file-input-bordered w-full">
+            {% if input.is_required %}
+                <div class="text-xs underline mx-2">
+                    Поле обязательно для заполнения. <span class="text-red-1">*</span>
+                </div>
+            {% endif %}
+        </div>       
+
+
+        {% if input.comment %}
+            <div class="mt-2 text-xs text-red-1">{{ input.comment }}</div>
+        {% endif %}  
+        <div data-validate-for="{{ input.code }}" class="error"></div>
+
+        
+
+    {% else %}
+        <div class="alert alert-warning text-xs p-3 rounded-md">
+            Поле не создано!
+        </div>
+    {% endif %}
+
+</div>

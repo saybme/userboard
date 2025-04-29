@@ -1,0 +1,117 @@
+<form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate data-request-files>
+    
+    <h1 class="text-4xl font-bold mb-6">Оформить полис ОСАГО</h1>
+
+    <input type="hidden" name="form" value="{{ form.id }}">
+    <input type="hidden" name="page_id" value="{{ page.id }}">       
+
+    <div class="grid grid-cols-3 gap-4">
+        <div class="">
+            {% partial 'inputs/select' input=ub0403229fc1fce2a47c2ecba88d069663 %}
+        </div>   
+        <div class="">
+            {% partial 'inputs/text' input=ub551a9e9093dca934876b2124c6cb3a7b %}
+        </div>
+        <div class="">
+            {% partial 'inputs/text' input=ub19551af4db88c4f7bf9243cbd862e1a0 %}
+        </div>
+    </div>   
+
+    <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+        <legend class="font-gilroy-medium text-lg px-3 m-0">Страхователь</legend>
+        <p>Страхователь и собственник одно лицо</p>
+        <div class="">
+            {% partial 'inputs/radio' row='1' input=ub9b3a04e08c68e64d0aae4fef44febb3f %}
+        </div>
+        <div class="mt-4">
+            {% partial 'inputs/file' input=ubb6db2c5fb468f6bbf1f79e4dceba92d5 %}
+        </div>
+    </fieldset> 
+    
+
+    <div id="strahovatel"></div>
+    
+
+    <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+        <legend class="font-gilroy-medium text-lg px-3 m-0">Транспортное средство</legend>        
+        
+        <div class="space-y-4">
+            <div class="">     
+                <p>Используется с прицепом</p>       
+                {% partial 'inputs/radio' row='1' input=ub06037cc784e977e625111f13bbc493ee %}
+            </div> 
+            <div class="">
+                {% partial 'inputs/file' input=ub854856f205fd8d0b9b35df28d9eb5e5f %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub2b8618d532ac0bd7083cccc53389a1e2 %}
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+        <legend class="font-gilroy-medium text-lg px-3 m-0">Указать предыдущий полис (если таков имеется) </legend>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="">
+                {% partial 'inputs/text' input=ub53dce5df3da2d9ec153da1eddb65c820 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub78d0f3c3565523475d82c1034ee9c325 %}
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+        <legend class="font-gilroy-medium text-lg px-3 m-0">Лица, допущенные к управлению  транспортным средством </legend>
+        <div class="">
+            {% partial 'inputs/checkbox' input=ub76fceb4f3ab0b14f70c477d4a6ab6725 %}
+        </div>
+        <div class="mt-4" id="bezogranichenii"></div>
+    </fieldset>  
+
+    <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+        <legend class="font-gilroy-medium text-lg px-3 m-0">Контактная информация</legend>
+
+        <div class="">
+            {% partial 'inputs/text' input=ub6fee19bf0a1904283958ff99196fe930 %}
+        </div>
+
+        <div class="mt-2 grid grid-cols-2 gap-4">
+            <div class="">
+                {% partial 'inputs/text' input=ubb245dcdbb95bf01217766b4d57c80d77 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubb94eb3c82d63af8daf464d830d18f1ef %}
+            </div>
+        </div>
+
+        <div class="mt-2">
+            {% partial 'inputs/text' input=ubb00f865cfebc26096c941cef60ac4613 %}
+        </div>
+
+    </fieldset>
+
+    
+
+    <div class="alert alert-warning mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+        <span>
+            Внимание! Оплата производиться только после того как наш оператор свяжется с вами по телефону и подтвердит регистрацию заявки
+        </span>
+    </div>        
+
+    <div class="alert alert-info mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>Оставайтесь на связи, в  ближайшее время  наш оператор с вами свяжется!</span>
+    </div>
+
+    <div class="mt-2">
+        <button class="btn btn-red w-full max-w-[200px]" data-attach-loading>ОТПРАВИТЬ</button>
+    </div>
+
+    
+    
+
+</form>
+

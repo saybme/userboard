@@ -4,15 +4,15 @@
 
 <div class="pt-2 pb-9">    
 
-    <div class="flex items-start gap-x-10">
+    <div class="flex items-start gap-x-10 flex-col table:flex-row">
         <div class="flex-1">
             <h1 class="title-h1">{{ page.name }}</h1>
             <div class="text space-y-4">
                 {{ page.content | content }}
             </div>
         </div>
-        <div class="w-[350px] flex-none sticky top-0">
-            <div class="h-[500px] bg-white rounded-md flex items-center justify-center border border-gray-300">
+        <div class="w-full table:w-[350px] flex-none table:sticky top-0">
+            <div class="h-[140px] table:h-[500px] bg-white rounded-md flex items-center justify-center border border-gray-300">
                 <span class="text-center uppercase text-gray-500 font-semibold">Здесь может быть <br> Ваша реклама</span>
             </div>
         </div>

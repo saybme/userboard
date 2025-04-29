@@ -8,7 +8,7 @@ class Application extends Model
 
     protected $jsonable = ['data'];
 
-    protected $fillable = ['user','data'];
+    protected $fillable = ['user','data','files','price'];
     
     public $table = 'saybme_ub_applications';
     
@@ -20,6 +20,11 @@ class Application extends Model
     public $belongsTo = [
         'user' => \Saybme\Ub\Models\User::class
     ];
+
+    public $attachMany = [
+        'files' => \System\Models\File::class
+    ];
+    
 
     public function getLinkAttribute(){
 
@@ -36,9 +41,24 @@ class Application extends Model
         return $name;
     }
 
+    // Список цен
+    public function getPricesAttribute(){
+        if(!$this->data || !$this->price) return;
+
+        if(key_exists('prices', $this->data)){
+            $prices = $this->data['prices'];
+            return json_decode($prices, true);
+        }
+
+        return;
+    }
+
     public function getStatusOptions(){
-        $options[1] = 'Новая';
-        $options[2] = 'Заявка обработана';
+
+        $options[0] = 'Новая';
+        $options[1] = 'Принята в работу';
+        $options[2] = 'Заявка выполнена';
+
         return $options;
     }
 

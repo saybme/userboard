@@ -10,13 +10,13 @@
 <p class="text-center mt-6">
     СХЕМА ВНЕСЕНИЯ ИЗМЕНЕНИЯ В КОНСТРУКЦИЮ <br>
     (ПЕРЕОБОРУДОВАНИЯ) ТРАНСПОРТНОГО СРЕДСТВА
-</p>
+</p> 
 
 <div class="mt-6">
-    <h3 class="text-center text-3xl font-gilroy-bold">Получение разрешения</h3>
+    <h3 class="text-center text-3xl font-gilroy-bold">Получение разрешения</h3>   
     <form action="">
         <div class="grid grid-cols-1 mob_l:grid-cols-2 table_l:grid-cols-3 laptop:grid-cols-4 gap-3 table_l:gap-5 mt-6">
-            {% for key, item in page.children %}                
+            {% for key, item in page.items %}                
                 <div class="">
                     <input type="radio" name="tab" id="tab_{{ key }}" value="{{ item.id }}" data-request="onGetCabinetContent" class="hidden peer" {{ key == 0 ? 'checked' : '' }}>          
                     <label class="bg-white block h-full py-3 px-3 rounded-md hover:cursor-pointer peer-checked:bg-blue-2 peer-checked:text-white" for="tab_{{ key }}"> 
@@ -30,5 +30,5 @@
 </div>
 
 <div class="mt-6" id="content-result">
-    {% partial 'pagecabinet/content' content=page.children | first . content | content %}   
+    {% partial 'pagecabinet/content' content=page.items | first . content | content %}   
 </div>

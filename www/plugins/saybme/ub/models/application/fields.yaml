@@ -1,22 +1,5 @@
 fields:
-    num@create:
-        label: 'Номер заявки'
-        span: auto
-        type: text
-    num@update:
-        label: 'Номер заявки'
-        span: auto
-        type: text
-        disabled: true
-    user:
-        label: Пользователь
-        span: auto
-        type: relation
-        nameFrom: phone
-    status:
-        label: Статус заявки
-        span: full
-        type: dropdown
+    
     description:
         label: Описание
         span: full
@@ -29,6 +12,12 @@ tabs:
             span: full
             tab: Данные
             type: partial
+        files:
+            label: Файлы
+            span: full
+            tab: Файлы 
+            type: fileupload
+            mode: file
         created_at:
             label: Создан
             mode: datetime
@@ -43,3 +32,27 @@ tabs:
             disabled: 1
             type: datepicker
             tab: Информация
+secondaryTabs:
+    fields:
+        num@create:
+            label: 'Номер заявки'
+            span: full
+            type: text
+        num@update:
+            label: 'Номер заявки'
+            span: full
+            type: text
+            disabled: true
+        user:
+            label: Пользователь
+            span: full
+            type: relation
+            nameFrom: phone
+        status:
+            label: Статус заявки
+            span: full
+            type: dropdown
+        price:
+            label: Стоимость 
+            span: full
+            type: number

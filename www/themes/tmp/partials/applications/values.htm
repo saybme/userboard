@@ -1,0 +1,78 @@
+{% if item.type == 'string' or item.type == 'text'  %}
+    <div class="flex">
+        <div class="">
+            <div class="font-bold me-2">{{ item.title }}:</div>              
+        </div>
+        <div class="">
+            {{ item.value }}
+        </div>
+    </div>
+{% endif %}
+
+{% if item.type == 'file' %}
+    {% if item.value | getPhoto . path %}
+        <div class="">       
+            <div class="font-bold me-2">{{ item.title }}:</div>  
+        </div>
+        <div class="mt-1">
+            <a href="{{ item.value | getPhoto . path }}" target="_blank" class="btn btn-sm btn-red">
+                Открыть файл
+            </a>
+        </div>
+    {% endif %}
+{% endif %}
+
+{% if item.type == 'date' %}
+    <div class="flex">
+        <div class="">
+            <div class="font-bold me-2">{{ item.title }}:</div>  
+        </div>
+        <div class="">
+            {{ item.value | date("d.m.Y") }}
+        </div>
+    </div>
+{% endif %}
+
+{% if item.type == 'date-time' %}
+    <div class="flex">
+        <div class="">
+            <div class="font-bold me-2">{{ item.title }}:</div>  
+        </div>
+        <div class="">
+            {{ item.value | date("d.m.Y H:i") }}
+        </div>
+    </div>
+{% endif %}
+
+{% if item.type == 'datetime-local' %}
+    <div class="flex">
+        <div class="">
+            <div class="font-bold me-2">{{ item.title }}:</div>  
+        </div>
+        <div class="">
+            {{ item.value | date("d.m.Y H:i") }}
+        </div>
+    </div>
+{% endif %}
+
+{% if item.type == 'address' %}
+    <div class="">
+        {% for key, row in item.value %}
+            <div class="flex">
+                <div class="font-bold me-2">{{ key }}:</div>
+                <div class="">{{ row }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if item.type == 'relation' %}
+    <div class="flex">
+        <div class="">
+            <div class="font-bold me-2">{{ item.title }}:</div>  
+        </div>
+        <div class="">
+            {{ item.value }}
+        </div>
+    </div>
+{% endif %}

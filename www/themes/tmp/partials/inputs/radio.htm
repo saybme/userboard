@@ -1,0 +1,37 @@
+<div class="">
+    {% if input %} 
+
+        {% if row %}
+            <div class="flex gap-1 mob_l:gap-2">
+                {% for key, item in input.values %}
+                    <div class="flex items-center">
+                        <input type="radio" name="{{ input.code }}" data-title="{{ item.price_title }}" data-price="{{ item.price }}" value="{{ item.id }}" id="{{ input.code }}_{{ key }}" class="radio radio-xs mob_l:radio-sm me-2 flex-none" {{ input.attr | raw }}>
+                        <label for="{{ input.code }}_{{ key }}" class="text-sm mob_l:text-base cursor-pointer">{{ item.title }}</label>
+                    </div>
+                {% endfor %} 
+            </div>
+        {% else %}
+            <div class="flex gap-1 mob_l:gap-2 flex-col">
+                {% for key, item in input.values %}
+                    <div class="flex items-center">
+                        <input type="radio" name="{{ input.code }}" data-title="{{ item.price_title }}" data-price="{{ item.price }}" value="{{ item.id }}" id="{{ input.code }}_{{ key }}" class="radio radio-xs mob_l:radio-sm me-2 flex-none" {{ input.attr | raw }}>
+                        <label for="{{ input.code }}_{{ key }}" class="text-sm mob_l:text-base cursor-pointer">{{ item.title }}</label>
+                    </div>
+                {% endfor %} 
+            </div>
+        {% endif %}
+
+        <div data-validate-for="{{ input.code }}" class="error"></div>
+
+        {% if input.is_required %}
+            <div class="text-xs bg-yellow-50 mt-2 px-2 py-1 rounded-sm">
+                Поле обязательно для заполнения. <span class="text-red-1">*</span>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-warning text-xs p-3 rounded-md">
+            Поле не создано!
+        </div>
+    {% endif %}
+</div>

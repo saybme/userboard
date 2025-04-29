@@ -6,28 +6,55 @@ snippetProperties[page_id][title] = "ID ресурса родителя"
 snippetProperties[page_id][type] = "string"
 snippetProperties[page_id][default] = ""
 snippetProperties[page_id][options][] = ""
+snippetProperties[is_support][title] = "Блок поддержка"
+snippetProperties[is_support][type] = "checkbox"
+snippetProperties[is_support][default] = ""
+snippetProperties[is_support][options][] = ""
+snippetProperties[depth][title] = "Уровень"
+snippetProperties[depth][type] = "string"
+snippetProperties[depth][default] = ""
+snippetProperties[depth][options] = ""
 ==
 <?php
 use Saybme\Ub\Classes\Cabinet\CabinetClass;
 function onStart(){    
-    $this['pagechilds'] = CabinetClass::getPageChildrens($this->page_id);
+    $this['pagechilds'] = CabinetClass::getPageChildrens($this->page_id, $this->depth);
 }
 ?>
 ==
-
-<div class="mb-4 space-y-5">
-
-    {% for item in pagechilds %}
-        <div class="">
-            <h4 class="text-2xl text-blue-2 font-semibold">{{ item.name }}</h4>
-            <ul class="space-y-1 mt-4 text-base list-disc ml-5 font-semibold">
-                {% for child in item.children %}
-                    <li class="">
-                        <a href="{{ child.link }}" class="text-blue-2 underline hover:text-red-1 hover:no-underline">{{ child.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+{% if is_support %}
+    <div class="table_l:float-right table_l:max-w-[320px] bg-yellow-50 p-4 rounded-md border border-yellow-600 text-center mb-4 table_l:ml-4">
+        <h3 class="text-lg font-semibold text-blue-1 uppercase">Тех поддержка</h3>
+        <div class="text-sm leading-tight mt-2">По любым непонятным вопросам пишите, наш оператор вас проконсультирует</div>
+        <div class="mt-2">
+            <a href="/cabinet/tehnicheskaya-podderzhka" class="btn btn-red w-full btn-sm">Написать в поддержку</a>
         </div>
-    {% endfor %}
-    
-</div>
+    </div>
+{% endif %}
+
+{% if depth %}
+    <div class="mb-4 space-y-5">
+        <ul class="space-y-1 mt-4 text-base list-disc ml-5 font-semibold">
+            {% for item in pagechilds %}                                   
+                <li class="">
+                    <a href="{{ item.link }}" class="text-blue-2 underline hover:text-red-1 hover:no-underline">{{ item.name }}</a>
+                </li>   
+            {% endfor %}    
+        </ul>
+    </div>
+{% else %}
+    <div class="mb-4 space-y-5">
+        {% for item in pagechilds %}
+            <div class="">
+                <h4 class="text-lg/tight table_l:text-2xl text-blue-2 font-semibold">{{ item.name }}</h4>
+                <ul class="space-y-1 mt-4 text-xs table_l:text-base list-disc ml-5 font-semibold">
+                    {% for child in item.children %}
+                        <li class="">
+                            <a href="{{ child.link }}" class="text-blue-2 underline hover:text-red-1 hover:no-underline">{{ child.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}    
+    </div>
+{% endif %}

@@ -252,3 +252,57 @@ v1.0.84:
 v1.0.85:
     - 'Updated table saybme_ub_forminputs'
     - builder_table_update_saybme_ub_forminputs_3.php
+v1.0.86:
+    - 'Updated table saybme_ub_formvalues'
+    - builder_table_update_saybme_ub_formvalues.php
+v1.0.87:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_4.php
+v1.0.88:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_5.php
+v1.0.89:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_6.php
+v1.0.90:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_7.php
+v1.0.91:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_8.php
+v1.0.92:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_9.php
+v1.0.93:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_10.php
+v1.0.94:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_7.php
+v1.0.95:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_9.php
+v1.0.96:
+    - 'Updated table saybme_ub_formvalues'
+    - builder_table_update_saybme_ub_formvalues_2.php
+v1.0.97:
+    - 'Updated table saybme_ub_formvalues'
+    - builder_table_update_saybme_ub_formvalues_3.php
+v1.0.98:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_11.php
+v1.0.99:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_12.php
+v1.0.100:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_13.php
+v1.0.101:
+    - 'Updated table saybme_ub_forminputs'
+    - builder_table_update_saybme_ub_forminputs_14.php
+v1.0.102:
+    - 'Updated table saybme_ub_applications'
+    - builder_table_update_saybme_ub_applications_4.php
+v1.0.103:
+    - 'Updated table saybme_ub_profile_pages'
+    - builder_table_update_saybme_ub_profile_pages_10.php

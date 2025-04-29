@@ -7,6 +7,7 @@ use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Models\Formrow;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Carnumber;
+use System\Models\File;
 use Lang;
 use Request;
 use Input;
@@ -19,7 +20,7 @@ class AppClass {
     public function create(){
 
         // Сохраняем данные формы в сессию
-        //$this->saveFormSession();
+        //$this->saveFormSession();        
 
         // Валидация формы
         $this->validForm();        
@@ -30,13 +31,75 @@ class AppClass {
 
         // Данные формы
         $data['data'] = Input::get();
-        $data['user'] = $user->id;
+        $data['price'] = Input::get('price');
+        $data['user'] = $user->id;  
+
+        $fileKey = $user->id . time();
+        
+        // Сохраняем в форму даннеы полей файла
+        if(count($_FILES)){            
+            foreach($_FILES as $key => $file){
+                $data['data'][$key] = md5($fileKey . $key);
+            }
+        }   
+        
 
         $obj = new Application;
         $obj->fill($data);
         $obj->save();
 
+        $this->getInputFiles($obj, $fileKey);       
+
         return $obj;
+    }
+
+    // Перебор полей и поиск файлов
+    private function getInputFiles($model, $fileKey = null){
+
+        $files = $_FILES;           
+
+        if(!count($_FILES)) return;
+
+        foreach($files as $key => $item){             
+
+            if(Input::has($key)){                
+
+                $fileData = Input::file($key);
+
+                if(gettype($fileData) == 'object'){
+
+                    $file = new \System\Models\File;
+                    $file->data = $fileData;
+                    $file->is_public = true;
+                    $file->title = md5($fileKey . $key);
+                    $file->save();
+
+                    $model->files()->add($file); 
+
+                } elseif(gettype($fileData) == 'array'){
+
+                    foreach($fileData as $fileDataRow){
+
+                        $file = new \System\Models\File;
+                        $file->data = $fileDataRow;
+                        $file->is_public = true;
+                        $file->title = md5($fileKey . $key);
+                        $file->save();
+
+                        $model->files()->add($file); 
+
+                        Log::error($fileDataRow);
+                    }
+                    
+
+                }                
+
+                
+            }
+                                 
+        }
+
+        return;
     }
 
     // формируем номер телефона
@@ -84,17 +147,25 @@ class AppClass {
     private function validForm(){
         // Данные с формы
         $vars = Input::get();        
-        unset($vars['form']);  
-        
+        unset($vars['form']);           
+
         $items = array();
         foreach($vars as $key => $item){
-            $input = Forminput::where('value->hash', $key)->first();
-            if($input){
-                if($input->is_required){
-                    $items[$input->hash] = 'required';
-                }                 
+            $input = Forminput::where('is_required', true)->where('code', $key)->first();           
+            if($input){                
+                $items[$key] = 'required';                
             }            
-        };        
+        }; 
+
+        // Дополнительная валидация
+        foreach($vars as $key => $item){
+            $input = Forminput::where('code', $key)->first();            
+            if($input){   
+                if($input->app_rules){
+                    $items[$key] = $input->app_rules; 
+                }             
+            }            
+        };
 
         Request::validate($items, Lang::get('saybme.ub::validation'));        
     }

@@ -3,8 +3,13 @@
 use Saybme\Ub\Classes\App\SmsClass;
 use Saybme\Ub\Classes\App\AppClass;
 use Saybme\Ub\Classes\Auth\AuthClass;
+use Saybme\Ub\Classes\Cabinet\CabinetClass;
 use Saybme\Ub\Models\User;
 use Saybme\Ub\Models\Formrow;
+use Saybme\Ub\Models\Formvalue;
+use Saybme\Ub\Models\Ubform;
+use Saybme\Ub\Models\Forminput;
+use Saybme\Ub\Models\Prpage;
 use Response;
 use Input;
 use Redirect;
@@ -48,7 +53,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
     }
 
     private function getContent(){
-        $type = $this->property('type');        
+        $type = $this->property('type');                  
         return $this->$type();
     }
 
@@ -94,7 +99,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $tpl = 'cabinet/default-text';
         $slug = $this->property('slug');
         
-        $page = $q->getPage($slug);           
+        $page = $q->getPage($slug);            
+        
         
         if(!$user) {
             $tpl = 'cabinet/404';
@@ -111,21 +117,92 @@ class Cabinet extends \Cms\Classes\ComponentBase
         //     $tpl = 'applications/page-manager';
         // }
 
+       
         // Страница форма
         if($page->form){
-            $tpl = 'cabinetforms/form_' . $page->form->id;               
+            $tpl = 'cabinetforms/form_' . $page->form->id;       
+            $inputs = $page->form->inputs;        
             $options['form'] = $page->form;
-        }
+            $arr = CabinetClass::getFormOptions($inputs);            
+            $options = array_merge($options, $arr);
+        }         
         
         $options['user'] = $user;
         $options['page'] = $page;
         $options['pages'] = $q->getUserPages();
         $options['numbers'] = $q->getGosNumbers($user->id);
-        $options['applications'] = $q->getUserApplications($user->id);  
-        $options['content'] = $this->renderPartial($tpl, $options);    
-        $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page);  
+        $options['applications'] = $q->getUserApplications($user->id);          
+
+        if($page->ptype == 'app'){
+            $options['breadcrumbs'] = $this->cabinetBreadcrumbsApp($page);; 
+        } else {
+            $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page); 
+        }           
+                
+        $options['content'] = $this->renderPartial($tpl, $options); 
 
         return $this->renderPartial('cabinet/wrap', $options);
+    }
+
+    // Расчет стоимости
+    public function onCalcFormSum(){
+
+        $items = Input::get();
+        $gde = Input::get('gde');       
+
+        $options['sum'] = array_sum(array_column($items, 'price'));
+        $options['items'] = $items;       
+
+        $result['#resultSum'] = $this->renderPartial('cabinetforms/form_total', $options);
+        return $result;       
+
+        // $items = array();  
+        // $formId = Input::get('form');   
+
+        // // Форма 9
+        // if(Input::get('ub444ad693f15f068221c47be0381e92f5') == 27){
+        //     // ГИБДД
+        //     if(Input::get('ube442f58019d82168c37b39726df8a975') == 5){
+        //         $items[0]['name'] = 'госпошлина за выдачу регистрационных знаков на автомобиль или автобус 2000 рублей';
+        //         $items[0]['price'] = 2000;  
+        //     }
+        //     if(Input::get('ube442f58019d82168c37b39726df8a975') == 6){
+        //         $items[0]['name'] = 'госпошлина за выдачу регистрационных знаков мотоцикл или прицеп 1500 рублей';
+        //         $items[0]['price'] = 1500;  
+        //     }
+        //     if(Input::get('ube442f58019d82168c37b39726df8a975') == 7){
+        //         $items[0]['name'] = 'госпошлина за выдачу регистрационных знаков мотоцикл или прицеп 1500 рублей';
+        //         $items[0]['price'] = 1500;  
+        //     }
+        // }      
+
+        // // Поля формы
+        // $rows = Input::get();              
+
+        // $rows_1['name'] = 'госпошлина за выдачу свидетельства о регистрации ТС 500 рублей';
+        // $rows_1['price'] = 500;
+
+        // array_push($items, $rows_1);       
+
+        // $options['sum'] = array_sum(array_column($items, 'price'));
+        // $options['items'] = $items;
+
+        // $result['#resultSum'] = $this->renderPartial('cabinetforms/form_total', $options);
+        // return $result;
+    }
+
+    // Поиск в массиве
+    private function in_array_r($prices, $value) {
+        
+        $rows = array();
+        foreach($prices as $price){
+            if(key_exists('srv_id',$price)){
+                $rows[$price['srv_id']] = $price; 
+            }            
+        }
+
+        if(!key_exists($value, $rows)) return;
+        return $rows[$value];
     }
 
     // Хлебные крошки кабинета
@@ -136,7 +213,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $items = array();
         
         if($page->ptype == 'page'){
-            $items = $page->getParentsAndSelf();
+            $items = $page->getParentsAndSelf()->where('hide_breadcrumbs', null);
         }        
 
         if(count($items)){
@@ -146,6 +223,28 @@ class Cabinet extends \Cms\Classes\ComponentBase
                 $item->isActive = $page->id === $item->id;
             });
         }        
+
+        return $items;
+    }
+
+    // Хлебные крошки объявления
+    private function cabinetBreadcrumbsApp($page){
+        $data = $page->data;
+        if(!key_exists('page_id', $data)) return;
+
+        // ID страницы
+        $page_id = $data['page_id'];
+        $obj = Prpage::active()->find($page_id);
+
+        $items = $obj->getParentsAndSelf()->where('hide_breadcrumbs', null);
+
+        if(count($items)){
+            $items->each(function ($item, $key) use ($page) {
+                $item->title = $item->name;
+                $item->url = $item->link;
+                $item->isActive = $page->id === $item->id;
+            });
+        } 
 
         return $items;
     }
@@ -280,6 +379,28 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $app = $q->create();            
         return Redirect::to($app->link);
     }
+
+    // Замена блоки формы
+    function onGetPartial(){
+
+        $data = Input::get();
+        $formId = Input::get('form');
+        $partial = Input::get('partial');
+
+        $form = Ubform::find($formId);
+        if(!$form) return;
+
+        foreach($form->inputs as $row){
+            $options[$row->code] = $row;   
+        }
+
+        $options['form'] = $form;
+        $options['value'] = Input::get('value');
+
+        $result[$data['container']] = $this->renderPartial($partial, $options);
+        return $result;
+    }
+
 
     private function addScripts(){
         // $scripts[] = 'saybme/ub/assets/javascript/support.js';

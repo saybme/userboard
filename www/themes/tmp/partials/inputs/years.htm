@@ -1,0 +1,25 @@
+[viewBag]
+==
+<?php
+function onStart(){
+
+    $arr = array();
+
+    for ($n = 1960; $n <= 2024; $n++) {
+    	$arr[] = $n;
+    }
+    krsort($arr);
+    $this['years'] = collect($arr);
+}
+?>
+==
+<label for="" class="text-sm block mb-1 ml-1">Год выпуска</label>
+
+<select name="{{ id }}" class="select select-bordered w-full" id="{{ id }}">
+    <option value="">-</option>
+    {% for item in years %}
+        <option value="{{ item }}">{{ item }}</option>
+    {% endfor %}
+</select>
+
+<div data-validate-for="{{ id }}" class="error"></div>

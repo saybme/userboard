@@ -8,21 +8,42 @@
     </div>
 {% endif %}
 
-<div class="font-gilroy-medium space-y-5">    
+<div class="font-gilroy-medium space-y-2 mob_l:space-y-5">   
 
-    {% for rows in page.appcontent %}        
-        <div class="py-4 px-4 rounded-lg bg-white"> 
-            <h3 class="text-xl font-semibold text-blue-2">Группа</h3>
+    <h2 class="text-xl mob_l:text-2xl font-bold text-blue-2 mb-4">Номер заявления: №{{ page.num }}</h2>
+
+    <div class="mb-4 py-2 mob_l:py-4 px-2 mob_l:px-4 rounded-lg bg-white">
+        {% partial 'cabinet/form-breadcrumbs' breadcrumbs=breadcrumbs %}        
+    </div>        
+    
+
+    {% for key, rows in page.appcontent %}        
+        <div class="py-2 mob_l:py-4 px-2 mob_l:px-4 rounded-lg bg-white"> 
+            <h3 class="text-base mob_l:text-xl font-semibold text-blue-2">{{ key }}</h3>
             <hr class="my-2">
-            <div class="space-y-1">
-                {% for item in rows.items %}           
-                    <div class="flex">
-                        <div class="font-bold me-2">{{ item.title }}:</div>
-                        <div class="">{{ item.value }}</div>
+            <div class="space-y-1 text-xs mob_l:text-base">
+                {% for item in rows.items %}      
+                    <div class="">
+                        {% partial 'applications/values' page=page item=item %}
                     </div>
                 {% endfor %}
             </div>
         </div>
     {% endfor %}
+
+    {% if page.price %}
+        <div class="mb-4 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2 flex flex-col gap-y-3">
+            <div class="me-8 flex-1">
+                <ul class="list-disc ml-5 text-xs mob_l:text-base">
+                    {% for item in page.prices %}
+                        <li class="">{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="flex-none text-nowrap text-xl mob_l:text-3xl">
+                <b class="text-red-1">{{ page.price }}</b> руб.
+            </div>
+        </div>
+    {% endif %}
 
 </div>

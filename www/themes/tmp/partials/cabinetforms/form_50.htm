@@ -1,0 +1,124 @@
+<form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate  data-request-files>
+
+    <div class="mb-4">
+        {% partial 'cabinet/form-breadcrumbs' breadcrumbs=breadcrumbs %}        
+    </div>
+
+    <input type="hidden" name="form" value="{{ form.id }}">
+    <input type="hidden" name="page_id" value="{{ page.id }}">
+
+    <h3 class="text-xl font-semibold">Порядок и условия подачи заявления в электронном виде</h3>
+
+    <div class="mt-5">
+        {% partial 'cabinetforms/reg-alert' type=1 %}
+    </div>
+
+    <div class="mt-5">
+        {% partial 'cabinetforms/reg-alert' type=2 %}
+    </div>        
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <div class="">
+            <h2 class="form-title">1. Сведения о транспортном средстве</h2>
+        </div>  
+        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">            
+            <div class="">
+                {% partial 'inputs/text' input=ubf1de978dbf6f14412ed5e0d0c8951a4a %}              
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubea9542c04e5c412766635f40651c2bb4 %}              
+            </div>
+        </div>  
+        <div class="mt-5">
+            <h2 class="text-base mob_l:text-xl">Укажите дату продажи или передачи ТС</h2>
+            <div class="mt-1 underline text-xs mob_l:text-base">
+                С момента продажи или передачи должно пройти не менее 10 календарных дней
+            </div>
+            <div class="mt-2">                
+                {% partial 'inputs/text' input=ub2fd935938863d47649041c442e7f6041 %}  
+            </div>
+        </div> 
+        <div class="mt-5">                
+            {% partial 'inputs/file' input=ubcc7d653bbee46ce78e2218a8d3434567 %}  
+        </div> 
+    </div>    
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <h3 class="form-title">2. Ваши данные</h3>   
+        <div class="mt-5 ">
+            {% partial 'inputs/radio' input=ube1af057421953e2545075c530e9930f8 %}
+        </div>    
+        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+            <div class="">
+                {% partial 'inputs/text' input=ub3c2aaf72fa07991029c35bcdaa475936 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubc90c5f59cc5c20b6276daa5f5985714a %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub1c3fd557c6780a5ef0c32cdfcdf4162f %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub38aa4c086a0947b553f4fdaa2bf19c46 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub4c05732ceb04f4c8b87e83c189f4ab96 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub557c228b226a222ae3ab0c8f3a9f922d %}
+            </div>
+        </div>
+        <div class="mt-5">
+            {% partial 'inputs/text' input=ube586027081a4fe0b34979dc66551ca04 %}
+        </div>
+        <div class="mt-5 grid grid-cols-2 gap-5">
+            <div class="">
+                {% partial 'inputs/text' input=ub52dba0fb0b27e7b9e77b8f63e7dea40e %}    
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubaf58480625c67f30537def57a6a15c23 %}    
+            </div>
+        </div>
+        <div class="mt-5">
+            {% partial 'inputs/text' input=ub2228eba00598ee2846e26472212d08b1 %}    
+        </div>
+    </div>      
+
+    <div class="mt-5 bg-white rounded-lg p-5">
+        <div class="mt-5">
+            {% partial 'cabinetforms/reg-alert' type=6 %}
+        </div>        
+        <div class="mt-5 space-y-3">
+            <div class="">
+                <div class="flex items-start">
+                    <input type="checkbox" id="check_politic" name="check_politic" value="1" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
+                    <label for="check_politic" class="leading-none text-sm mob_l:text-base">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
+                </div>
+                <div data-validate-for="check_politic" class="error"></div> 
+            </div>
+        </div> 
+        <div class="mt-5 underline text-xs mob_l:text-base">
+            Госпошлина за данное регистрационное действие не оплачивается
+        </div>      
+        <div class="mt-5">
+            <div class="" id="resultSum">
+                <div class="border border-blue-300 rounded-md px-4 py-4 bg-blue-50">
+                    <h3 class="text-lg/none mb-2 text-blue-1 underline"><b>Стоимость услуги</b></h3>
+                    <ul class="list-disc ml-5 space-y-1 mt-3 leading-none">
+                        <li class="">300 руб. комиссия</li>
+                    </ul>     
+                    <div class="mt-3 font-bold text-lg">Итого: <span class="text-red-1">{{ sum + 300 }}</span> руб. </div>
+                </div>               
+            </div>
+            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+                Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
+            </div>
+        </div>
+        <input type="hidden" name="prices" value="" id="formPrices">
+        <input type="hidden" name="price" value="" id="formPrice">
+        <div class="mt-5">
+            <button class="btn btn-red w-full max-w-[200px]" data-attach-loading>ОТПРАВИТЬ</button>
+        </div> 
+    </div>
+
+</form>

@@ -1,0 +1,20 @@
+{% if items | length > 0 %}
+
+    <div class="border border-blue-300 rounded-md px-4 py-4 bg-blue-50">
+        <h3 class="text-lg/none mb-2 text-blue-1 underline"><b>Стоимость услуги</b></h3>
+        <ul class="list-disc ml-5 space-y-1 mt-3 leading-none text-base">
+            {% for item in items %}
+                <li class="">{{ item.name }}</li>
+            {% endfor %}
+            <li class="">300 руб. комиссия</li>
+        </ul>     
+        <div class="mt-3 font-bold text-lg">Итого: <span class="text-red-1">{{ sum + 300 }}</span> руб. </div>
+    </div>
+
+{% else %}
+
+    <div class="text-base mob_l:text-xl border border-blue-300 rounded-md px-3 mob_l:px-4 py-2 mob_l:py-4 bg-blue-50 text-pretty">
+        Для рассчета стоимости заполните форму.
+    </div>
+
+{% endif %}
