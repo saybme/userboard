@@ -175,7 +175,7 @@ window.calcSumForm = function(){
 
 }
 
-document.gosCalc = function(data){
+document.gosCalc = function(data){    
 
     let formInput = document.getElementById('formPrices');
     let formPrice = document.getElementById('formPrice');
@@ -244,16 +244,18 @@ document.gosCalc = function(data){
     wrap.append(h3);    
 
     for(let row in rows){
-        let srv = document.createElement("div");
-        srv.innerHTML = rows[row];       
-        wrap.append(srv);        
+        if(checkGos.checked == false){
+            let srv = document.createElement("div");
+            srv.innerHTML = rows[row];       
+            wrap.append(srv); 
+        }            
     }   
 
     formInput.value = JSON.stringify(rows);
     formPrice.value = prices;
     
 
-    if(checkGos.checked == false){
+    if(checkGos.checked == false){        
 
         // Гос пошлина оплачена
         const totalDiv = document.createElement("div");
@@ -267,8 +269,20 @@ document.gosCalc = function(data){
         wrap.append(totalCommission);
 
     } else {
+
+        document.querySelectorAll('[data-prices]').forEach(element => {
+            element.classList.remove('row-price-active');
+        })
+
+        let comissData = document.querySelector('[data-prices="8"]');
+
+        const comiss = document.createElement("div");
+        comiss.innerHTML = comissData.getAttribute('data-title');  
+        wrap.append(comiss); 
+
         totalprices = parseInt(commission.getAttribute('data-price'));
-    }
+    }   
+   
 
     const totalDivTotal = document.createElement("div");
     totalDivTotal.innerHTML = 'Итого: ' + '<b class="text-red-1">'+ totalprices +'</b>'+ ' руб.';
@@ -375,9 +389,11 @@ document.gosCalcTwo = function(data){
     wrap.append(h3);    
 
     for(let row in rows){
-        let srv = document.createElement("div");
-        srv.innerHTML = rows[row];
-        wrap.append(srv);        
+        if(checkGos.checked == false){
+            let srv = document.createElement("div");
+            srv.innerHTML = rows[row];
+            wrap.append(srv);   
+        }  
     }   
 
     formInput.value = JSON.stringify(rows);
@@ -399,7 +415,19 @@ document.gosCalcTwo = function(data){
         wrap.append(totalCommission);
 
     } else {
+        
+        document.querySelectorAll('[data-prices]').forEach(element => {
+            element.classList.remove('row-price-active');
+        })
+
+        let comissData = document.querySelector('[data-prices="8"]');
+
+        const comiss = document.createElement("div");
+        comiss.innerHTML = comissData.getAttribute('data-title');  
+        wrap.append(comiss); 
+
         totalprices = parseInt(commission.getAttribute('data-price'));
+
     }    
 
     const totalDivTotal = document.createElement("div");
@@ -524,11 +552,13 @@ document.gosCalcThree = function(data){
 
     wrap.append(h3);    
 
-    for(let row in rows){
-        let srv = document.createElement("div");
-        srv.className = 'text-xs mob_l:text-base';
-        srv.innerHTML = rows[row];
-        wrap.append(srv);        
+    for(let row in rows){            
+        if(checkGos.checked == false){
+            let srv = document.createElement("div");
+            srv.className = 'text-xs mob_l:text-base';
+            srv.innerHTML = rows[row];
+            wrap.append(srv);     
+        }    
     }   
 
     formInput.value = JSON.stringify(rows);
@@ -548,7 +578,19 @@ document.gosCalcThree = function(data){
         wrap.append(totalCommission);
 
     } else {
+        
+        document.querySelectorAll('[data-prices]').forEach(element => {
+            element.classList.remove('row-price-active');
+        })
+
+        let comissData = document.querySelector('[data-prices="8"]');
+
+        const comiss = document.createElement("div");
+        comiss.innerHTML = comissData.getAttribute('data-title');  
+        wrap.append(comiss); 
+
         totalprices = parseInt(commission.getAttribute('data-price'));
+
     }    
 
     const totalDivTotal = document.createElement("div");
