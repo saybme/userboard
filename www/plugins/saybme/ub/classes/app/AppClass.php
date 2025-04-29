@@ -145,6 +145,13 @@ class AppClass {
 
     // Валидация формы
     private function validForm(){
+
+        $alertMessate['check_politic.accepted'] = 'Поле должно быть принято.';
+
+        Request::validate([
+            'check_politic' => 'accepted'
+        ], $alertMessate);
+
         // Данные с формы
         $vars = Input::get();        
         unset($vars['form']);           

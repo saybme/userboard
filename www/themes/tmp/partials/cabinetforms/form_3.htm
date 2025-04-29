@@ -1,34 +1,50 @@
-<h1 class="title-h1 text-center">Срочный выкуп автомобилей, гос номеров</h1>
-<h2 class="title-h2 text-center">Теперь на USERBOARD можно выгодно <br> заказать автозапчасти из Японии, Кореи, Китая</h2>    
+<div class="text-center text-blue-4 mb-6">
+    <h1 class="text-2xl table_sm:text-3xl font-bold">Срочный выкуп гос номеров и автомобилей с пробегом </h1>
+    <h2 class="text-xl table_sm:text-2xl font-bold">Заказ автозапчастей из Японии с аукционных автомобилей</h2>    
+    <h3 class="text-sm table_sm:text-xl mt-3">Оставьте заявку в форме ниже. Наш менеджер свяжется с вами в ближайшее время</h3>
+</div>
 
-<form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate data-request-files>
+<div class="">
+    <form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate data-request-files>
 
-    <input type="hidden" name="form" value="{{ form.id }}">
-    <input type="hidden" name="page_id" value="{{ page.id }}"> 
-
-    <div class="space-y-4">
-        <div class="">
-            {% partial 'inputs/file' input=uba7815276ea316e9ce6d1b1a10c97f6bb %}
-        </div>
-        <div class="">
-            {% partial 'inputs/text' input=ub42531ee3676d2c34b8544e8b80e2eb52 %}
-        </div>
-        <div class="grid grid-cols-2 gap-4">
+        <input type="hidden" name="form" value="{{ form.id }}">
+        <input type="hidden" name="page_id" value="{{ page.id }}"> 
+    
+        <div class="space-y-4">
             <div class="">
-                {% partial 'inputs/text' input=ub51586b47af300685ef73da9eacc9ff32 %}
+                {% partial 'inputs/file' input=uba7815276ea316e9ce6d1b1a10c97f6bb %}
             </div>
             <div class="">
-                {% partial 'inputs/text' input=ubc9dcbf9f1a83491da157769f342b4281 %}
+                {% partial 'inputs/text' input=ub42531ee3676d2c34b8544e8b80e2eb52 %}
+            </div>
+            <div class="grid grid-cols-1 table_l:grid-cols-2 gap-4">
+                <div class="">
+                    {% partial 'inputs/text' input=ub51586b47af300685ef73da9eacc9ff32 %}
+                </div>
+                <div class="">
+                    {% partial 'inputs/text' input=ubc9dcbf9f1a83491da157769f342b4281 %}
+                </div>
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=uba9d83383a46ac89a43829aa49bba83ff %}
             </div>
         </div>
-        <div class="">
-            {% partial 'inputs/text' input=uba9d83383a46ac89a43829aa49bba83ff %}
+
+        <div class="mt-4">
+            <div class=" flex items-center gap-x-1">
+                <input type="checkbox" id="check_politic" name="check_politic" class="checkbox checkbox-sm me-2 flex-none rounded-sm" checked>
+                <label for="check_politic" class="leading-none">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
+            </div>
+            <div data-validate-for="check_politic" class="error"></div>   
         </div>
-    </div>
+    
+        <div class="mt-4">
+            <button class="btn btn-red" data-attach-loading>Заказать услугу</button>
+        </div>
+    
+    </form>
+</div>
 
-    <div class="mt-4">
-        <button class="btn btn-red" data-attach-loading>Заказать услугу</button>
-    </div>
-
-</form>     
-
+<div class="mt-6 alert-box text-xs table_l:text-sm space-y-2">
+    {{ form.description | raw }}
+</div>
