@@ -3418,6 +3418,10 @@ ul.nav-registration ul {
 .gap-\[2px\] {
   gap: 2px;
 }
+.gap-x-1 {
+  -moz-column-gap: 0.25rem;
+       column-gap: 0.25rem;
+}
 .gap-x-10 {
   -moz-column-gap: 2.5rem;
        column-gap: 2.5rem;
@@ -3445,10 +3449,6 @@ ul.nav-registration ul {
 }
 .gap-y-5 {
   row-gap: 1.25rem;
-}
-.gap-x-1 {
-  -moz-column-gap: 0.25rem;
-       column-gap: 0.25rem;
 }
 .space-x-3 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -3581,14 +3581,6 @@ ul.nav-registration ul {
 .border-yellow-600 {
   --tw-border-opacity: 1;
   border-color: rgb(202 138 4 / var(--tw-border-opacity));
-}
-.border-orange-900 {
-  --tw-border-opacity: 1;
-  border-color: rgb(124 45 18 / var(--tw-border-opacity));
-}
-.border-b-orange-900 {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(124 45 18 / var(--tw-border-opacity));
 }
 .bg-black\/20 {
   background-color: rgb(0 0 0 / 0.2);
@@ -3944,6 +3936,10 @@ ul.nav-registration ul {
   --tw-text-opacity: 1;
   color: rgb(40 90 127 / var(--tw-text-opacity));
 }
+.text-blue-4 {
+  --tw-text-opacity: 1;
+  color: rgb(46 97 134 / var(--tw-text-opacity));
+}
 .text-error {
   --tw-text-opacity: 1;
   color: hsl(var(--er) / var(--tw-text-opacity));
@@ -3999,10 +3995,6 @@ ul.nav-registration ul {
 .text-yellow-600 {
   --tw-text-opacity: 1;
   color: rgb(202 138 4 / var(--tw-text-opacity));
-}
-.text-blue-4 {
-  --tw-text-opacity: 1;
-  color: rgb(46 97 134 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;
@@ -4705,6 +4697,10 @@ ul.nav-registration ul {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .table_l\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .table_l\:flex-row {
     flex-direction: row;
   }
@@ -4753,6 +4749,11 @@ ul.nav-registration ul {
     line-height: 1.75rem;
   }
 
+  .table_l\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
   .table_l\:text-txt-30 {
     font-size: 1.875rem;
     line-height: normal;
@@ -4763,11 +4764,6 @@ ul.nav-registration ul {
   .table_l\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  .table_l\:text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
   }
 }
 @media (min-width: 768px) {
@@ -4875,6 +4871,16 @@ ul.nav-registration ul {
     padding-top: 4.063rem;
   }
 
+  .table_sm\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .table_sm\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
   .table_sm\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -4909,16 +4915,6 @@ ul.nav-registration ul {
   .table_sm\:text-xl {
     font-size: 1.25rem;
     line-height: 1.75rem;
-  }
-
-  .table_sm\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  .table_sm\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
   }
 
   .table_sm\:opacity-100 {
