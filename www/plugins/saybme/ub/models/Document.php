@@ -5,6 +5,9 @@ use Model;
 class Document extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+
+    protected $jsonable = ['data'];
+    protected $fillable = ['data','user'];
    
     public $table = 'saybme_ub_documents';
     
@@ -39,5 +42,7 @@ class Document extends Model
         $num = time();
         return $num;
     }
+
+    // Данные формы
 
 }

@@ -1,0 +1,9 @@
+url = "/cabinet/documents/:slug/open"
+layout = "default"
+title = "Документ"
+
+[cabinet]
+slug = "{{ :slug }}"
+type = "getCabinet"
+==
+{% component 'cabinet' %}

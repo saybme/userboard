@@ -69,7 +69,7 @@
     }
 
     .profile-sidebar {
-        @apply w-full table:w-[380px] bg-white rounded-md
+        @apply w-full table:w-[380px] bg-white rounded-md flex-none
     }
 
     .dropzones {

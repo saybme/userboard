@@ -3,15 +3,20 @@
 </div>
 
 <div class="">
-    <form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate data-request-files>
+    <form action="" id="formApp" data-request="onDocument" class="font-semibold block w-full" data-request-validate data-request-files>
 
         <input type="hidden" name="form" value="{{ form.id }}">
         <input type="hidden" name="page_id" value="{{ page.id }}"> 
     
         <div class="space-y-4">
 
-            <div class="">
-                {% partial 'inputs/text' input=ubc65966cadb13e5706122b53eb17fbea7 %}
+            <div class="grid gap-4 grid-cols-[1fr,200px]">
+                <div class="">
+                    {% partial 'inputs/text' input=ubc65966cadb13e5706122b53eb17fbea7 %}
+                </div>
+                <div class="">
+                    {% partial 'inputs/text' input=ub773b284a8e8b4263b2f3c7d67be8ad5f %}
+                </div>
             </div>
 
             <div class="">
@@ -86,6 +91,145 @@
             </div>
             <div class="">
                 {% partial 'inputs/text' input=ubb1bf3c386e44a11a26d122f46c39747b %}
+            </div>
+            <div class="">
+                <h4 class="text-lg font-semibold">Доверенность</h4>
+                <hr class="my-3">
+                <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4 ">
+                    <div class="">
+                        {% partial 'inputs/text' input=ub1f94370d29f8b14f7e03700069798b93 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ubd1cb41abcd576d05d24628ce9022874b %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ubacc9a48e92f815fdc93cf25401ad3651 %}
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub64f0077abda44b9ed8758b3a5cbd08d0 %}
+            </div>
+            <div class="">
+                <h4 class="text-lg font-semibold">и Покупатель</h4>
+                <hr class="my-3">   
+                <div class="grid grid-cols-1 table_l:grid-cols-4 gap-4"> 
+                    <div class="">
+                        {% partial 'inputs/text' input=ubd8c93995c91aecf357822790f5d09bf5 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ubde07983e5acb7dd65c2b14abdd713cc9 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ub972a351971665aeaa8a63028ec75b743 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ub3bdeabb3914e5b73a2039d798048d8c0 %}
+                    </div>
+                </div> 
+            </div>
+            <div class="">
+                <h4 class="text-lg font-semibold">Паспорт</h4>
+                <hr class="my-3">   
+                <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4 ">
+                    <div class="">
+                        {% partial 'inputs/text' input=ube1a7f4811c3f981dbef5b624a6d18156 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ubd459848c5cecdcb91cc3421cc0212d17 %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ub9e5e646f513bfd83932cab54b3a26bca %}
+                    </div>
+                </div> 
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub303a961a2e74a61a4b5027d75fb35649 %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub623433b7eea7ecf45a000c3315c56f5d %}
+            </div>
+        </div>
+
+        <div class="mt-4 text-lg">
+            <p class=""><b>заключили настоящий договор о нижеследующем:</b></p>
+            <p class=""><b>Продавец</b> продал, а <b>Покупатель</b> купил транспортное средство (прицеп, номерной агрегат)</p>
+        </div>
+
+        <div class="mt-4 grid grid-cols-2 gap-4">
+            <div class="">
+                {% partial 'inputs/text' input=ub4f33258903b0f6a043cff651f772741c %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubfa916d042eee33d53ae758926407241c %}
+            </div>    
+        </div>
+
+        <div class="mt-4 space-y-4">
+            <div class="">
+                {% partial 'inputs/text' input=ub2b84e182c014b2fa45740d989f59ec75 %}
+            </div>   
+            <div class="">
+                {% partial 'inputs/text' input=ub20538c592a229aaf184429c934c3b26e %}
+            </div>  
+            <div class="mt-4 grid grid-cols-2 gap-4">
+                <div class="">
+                    {% partial 'inputs/text' input=ub6bb1be84ccb3cf54aa1aefdb52b50019 %}
+                </div> 
+                <div class="">
+                    {% partial 'inputs/text' input=ubcc153dda469f24d13bfa6710ea1c7e31 %}
+                </div> 
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubda8549c121cbbb0c383a7aa1cd52d7e0 %}
+            </div> 
+            <div class="">
+                {% partial 'inputs/text' input=ub59cd336913b10a54bc14e138b8748c28 %}
+            </div> 
+            <div class="">
+                {% partial 'inputs/text' input=ub9d6e41c7d597e4dbfdede88f663a7f3f %}
+            </div> 
+            <div class="">
+                <h4 class="text-lg font-semibold">Паспорт транспортного средства</h4>
+                <hr class="my-3">
+                <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4 ">
+                    <div class="">
+                        {% partial 'inputs/text' input=ub1d5333e1d38ec91a171c1fbaff5f285c %}
+                    </div> 
+                    <div class="">
+                        {% partial 'inputs/text' input=ubf462f99138b4d6ac6fa94e47ae27a1d9 %}
+                    </div> 
+                    <div class="">
+                        {% partial 'inputs/text' input=ubd45217bd10063ea19c3202bea596060e %}
+                    </div> 
+                </div>    
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ubda7955f2a1ddef2ecb9201d9ea4a1605 %}
+            </div>
+            <div class="">
+                <h4 class="text-lg font-semibold">Свидетельство о регистрации ТС</h4>
+                <hr class="my-3">
+                <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4 ">
+                    <div class="">
+                        {% partial 'inputs/text' input=ub9b010da79cae5a1dc21899670d3f7c7b %}
+                    </div> 
+                    <div class="">
+                        {% partial 'inputs/text' input=ubee4c7788434ef5754aa166a299a5f1b8 %}
+                    </div> 
+                    <div class="">
+                        {% partial 'inputs/text' input=ub736e1ac85e417373953d215024792368 %}
+                    </div> 
+                </div>    
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub38d9d5de0ed0b4600d1190f357fe269d %}
+            </div>
+            <div class="">
+                {% partial 'inputs/text' input=ub167441a1472d707582f08df5403e7b11 %}
+            </div>
+            <div class="alert-box">
+                Продавец передает его Покупателю, а Покупатель принимает данное транспортное средство (прицеп номерной агрегат) и оплачивает его стоимость. Продавец гарантирует, что  автомобиль никому не продан, автомобиль,  (прицеп номерной агрегат)  в розыске не значатся, в залоге не состоит, ограничения, запреты на совершение регистрационных действий (арест) не наложены.   Настоящий договор вступает в силу с момента подписания и составлен в трех экземплярах, имеющий равную юридическую силу.
             </div>
         </div>
 

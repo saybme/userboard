@@ -1,5 +1,10 @@
 tabs:
     fields:
+        data:
+            label: Данные формы
+            span: full
+            tab: Данные
+            type: partial
         hash:
             label: HASH
             span: auto

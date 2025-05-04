@@ -1,0 +1,140 @@
+<div class="container flex py-8 items-start gap-x-8">
+    
+    <div class="profile-content font-gilroy-medium">
+
+        <div class="mb-4 border-b border-gray-200 pb-4 flex">
+            <div class="flex-1">
+                <div class="text-sm">Документ создан:</div>
+                <div class=""><b>{{ document.created_at | date('d.m.Y год. H:i') }}</b></div> 
+            </div>   
+            <a href="{{ document.link }}/open?type=pdf" target="_blank" class="btn btn-red px-4 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                </svg>                  
+                Распечатать
+            </a>
+        </div>       
+
+        <h2 class="text-3xl text-blue-4 font-semibold text-pretty mb-6">Договор купли-продажи транспортного средства  (номерного  агрегата)</h2>
+
+        <div class="space-y-6">
+
+            <div class="bg-white p-4 rounded-lg flex justify-between font-bold">
+                <div class="">Место составления {{ document.data.ubc65966cadb13e5706122b53eb17fbea7 }}</div>
+                <div class="">{{ document.data.ub773b284a8e8b4263b2f3c7d67be8ad5f | date('d.m.Y год.') }}</div>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Мы, Продавец</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Фамилия:</b> {{ document.data.ub53c98b6d38610f07ae012064315a5c32 }}</div>
+                    <div class=""><b>Имя:</b> {{ document.data.uba3e105ee913b56cfec000a35499dcd47 }}</div>
+                    <div class=""><b>Отчество:</b> {{ document.data.ube92cba9ee44475afb1ecfa249f25ab7c }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ubf16e6c5c4067950c35b18c5645829f55 | date('d.m.Y год.') }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub2e8f10973549ad175c51917c10790b58 }}</div>   
+                    <div class=""><b>Номер:</b> {{ document.data.ub8dc0718b9d1bd93084142623660bb8f4 }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ub1d4431ec21669ef49b3a017b57e67b1e | date('d.m.Y год.') }}</div>  
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ube4de3eb186f6fd7e109d4308b0523973 }}</div>  
+                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ub78feef39b85cad81ba69a839e713ee69 }}</div> 
+                </div>
+            </div>
+    
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Представитель собственника</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Фамилия:</b> {{ document.data.ub4be93eeceea6120281a0054229dbc8a6 }}</div>
+                    <div class=""><b>Имя:</b> {{ document.data.ub56d2ccff210e13c17d2be48865ce8d63 }}</div>
+                    <div class=""><b>Отчество:</b> {{ document.data.ubf2ddbf3946db0d59421528e4d51cea2d }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ub42e1e4a62837888edeb86823e6bcf496 | date('d.m.Y год.') }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub6603bcf1355498d2cae059e5a74f99d4 }}</div>   
+                    <div class=""><b>Номер:</b> {{ document.data.ubd136cdae3550e68bd95b0247b0e41d41 }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ub4cfb20aa21a8caf3152a8829cc100904 | date('d.m.Y год.') }}</div>  
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ub63d5b862dc44935929d3e68d99c24cd4 }}</div>  
+                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ubb1bf3c386e44a11a26d122f46c39747b }}</div> 
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">Доверенность</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub1f94370d29f8b14f7e03700069798b93 }}</div>   
+                    <div class=""><b>Номер:</b> {{ document.data.ubd1cb41abcd576d05d24628ce9022874b }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ubacc9a48e92f815fdc93cf25401ad3651 | date('d.m.Y год.') }}</div>  
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ub64f0077abda44b9ed8758b3a5cbd08d0 }}</div>  
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">и Покупатель</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Фамилия:</b> {{ document.data.ubd8c93995c91aecf357822790f5d09bf5 }}</div>
+                    <div class=""><b>Имя:</b> {{ document.data.ubde07983e5acb7dd65c2b14abdd713cc9 }}</div>
+                    <div class=""><b>Отчество:</b> {{ document.data.ub972a351971665aeaa8a63028ec75b743 }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ub3bdeabb3914e5b73a2039d798048d8c0 | date('d.m.Y год.') }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ube1a7f4811c3f981dbef5b624a6d18156 }}</div>   
+                    <div class=""><b>Номер:</b> {{ document.data.ubd459848c5cecdcb91cc3421cc0212d17 }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ub9e5e646f513bfd83932cab54b3a26bca | date('d.m.Y год.') }}</div>  
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ub303a961a2e74a61a4b5027d75fb35649 }}</div>  
+                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ub623433b7eea7ecf45a000c3315c56f5d }}</div> 
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Транспортное средство</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Марка:</b> {{ document.data.ubd8c93995c91aecf357822790f5d09bf5 }}</div>
+                    <div class=""><b>Модель:</b> {{ document.data.ubde07983e5acb7dd65c2b14abdd713cc9 }}</div>
+                    <div class=""><b>Тип транспортного средства (легковой, грузовой, автобус и т.д.):</b> {{ document.data.ub2b84e182c014b2fa45740d989f59ec75 }}</div>
+                    <div class=""><b>Государственный регистрационный знак:</b> {{ document.data.ub20538c592a229aaf184429c934c3b26e }}</div>
+                    <div class=""><b>Год выпуска:</b> {{ document.data.ub6bb1be84ccb3cf54aa1aefdb52b50019 | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Цвет:</b> {{ document.data.ubcc153dda469f24d13bfa6710ea1c7e31 }}</div>
+                    <div class=""><b>Идентификационный номер (VIN):</b> {{ document.data.ubda8549c121cbbb0c383a7aa1cd52d7e0 }}</div>
+                    <div class=""><b>Номер кузова:</b> {{ document.data.ub59cd336913b10a54bc14e138b8748c28 }}</div>
+                    <div class=""><b>Номер шасси (рамы):</b> {{ document.data.ub9d6e41c7d597e4dbfdede88f663a7f3f }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">Паспорт транспортного средства</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub1d5333e1d38ec91a171c1fbaff5f285c }}</div>
+                    <div class=""><b>Номер:</b> {{ document.data.ubf462f99138b4d6ac6fa94e47ae27a1d9 }}</div>
+                    <div class=""><b>Когда:</b> {{ document.data.ubd45217bd10063ea19c3202bea596060e | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ubda7955f2a1ddef2ecb9201d9ea4a1605 }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">Свидетельство о регистрации ТС</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub9b010da79cae5a1dc21899670d3f7c7b }}</div>
+                    <div class=""><b>Номер:</b> {{ document.data.ubee4c7788434ef5754aa166a299a5f1b8 }}</div>
+                    <div class=""><b>Когда:</b> {{ document.data.ub736e1ac85e417373953d215024792368 | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ub38d9d5de0ed0b4600d1190f357fe269d }}</div>
+                    <div class=""><b>Стоимостью:</b> {{ document.data.ub167441a1472d707582f08df5403e7b11 }}</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                Продавец передает его Покупателю, а Покупатель принимает данное транспортное средство (прицеп номерной агрегат) и оплачивает его стоимость. Продавец гарантирует, что  автомобиль никому не продан, автомобиль,  (прицеп номерной агрегат)  в розыске не значатся, в залоге не состоит, ограничения, запреты на совершение регистрационных действий (арест) не наложены.   Настоящий договор вступает в силу с момента подписания и составлен в трех экземплярах, имеющий равную юридическую силу.
+            </div>
+
+        </div>       
+
+    </div>
+
+    <div class="profile-sidebar"> 
+        {% partial 'cabinet/sidebar' user=user pages=pages %}        
+    </div>
+
+</div>

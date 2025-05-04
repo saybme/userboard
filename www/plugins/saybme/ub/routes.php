@@ -2,6 +2,7 @@
 
 use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Classes\Auth\FilesClass;
+use Saybme\Ub\Classes\Document\DocumentClass;
 
 Route::get('api/auth/logout', function() {
     return redirect('/')->withCookie(Cookie::forget('auth'));

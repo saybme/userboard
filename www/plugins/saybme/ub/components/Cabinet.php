@@ -3,6 +3,7 @@
 use Saybme\Ub\Classes\App\SmsClass;
 use Saybme\Ub\Classes\App\AppClass;
 use Saybme\Ub\Classes\Auth\AuthClass;
+use Saybme\Ub\Classes\Document\DocumentClass;
 use Saybme\Ub\Classes\Cabinet\CabinetClass;
 use Saybme\Ub\Models\User;
 use Saybme\Ub\Models\Formrow;
@@ -10,6 +11,7 @@ use Saybme\Ub\Models\Formvalue;
 use Saybme\Ub\Models\Ubform;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Prpage;
+use Saybme\Ub\Models\Document;
 use Response;
 use Input;
 use Redirect;
@@ -59,14 +61,16 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
     private function getCabinet(){
 
+        // SLUG страницы
+        $slug = $this->property('slug');  
+
         $sms = new SmsClass;
 
         $options = array();
         $tpl = 'cabinet/profile';
 
         $q = new AuthClass;
-        $user = $q->getActiveUser();        
-
+        $user = $q->getActiveUser();   
         
 
         if(!$user) {
@@ -84,6 +88,20 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['servises'] = $q->getTypeServises();
         $options['pages'] = $q->getUserPages();    
         $options['pservises'] = $q->getCabinetServises();
+
+        // Страница документ
+        $document = Document::where('hash', $slug)->first();
+        if($document){
+            $type = Input::get('type');
+            // PDF
+            if($type == 'pdf'){
+                return DocumentClass::pdf();
+            }
+            $options['type'] = $type;
+            $options['document'] = $document;
+            $tpl = 'cabinet/profile-document';
+        }
+        
 
         return $this->renderPartial($tpl, $options);
     }
@@ -378,6 +396,13 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $q = new AppClass();
         $app = $q->create();            
         return Redirect::to($app->link);
+    }
+
+    // Создаем заявку
+    public function onDocument(){
+        $q = new DocumentClass();
+        $document = $q->create();
+        return $document;
     }
 
     // Замена блоки формы
