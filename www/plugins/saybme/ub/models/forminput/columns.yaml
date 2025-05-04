@@ -21,3 +21,6 @@ columns:
     is_pay:
         label: Платно 
         type: switch
+    id:
+        label: ID 
+        type: text
