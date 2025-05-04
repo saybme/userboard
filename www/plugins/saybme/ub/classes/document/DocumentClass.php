@@ -8,6 +8,7 @@ use Log;
 
 require dirname(dirname(__FILE__)) .'/pdf/vendor/autoload.php';
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 class DocumentClass {
@@ -33,12 +34,14 @@ class DocumentClass {
     // PDF файл
     static function pdf(){      
 
-        $html = View::make('saybme.ub::documents.page');
+        $tmp = sys_get_temp_dir();
+        $html = View::make('saybme.ub::documents.page');      
 
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('defaultFont', 'dejavu sans');  
+        $options->set('isRemoteEnabled', true);
         
-        $dompdf->set_option('defaultFont', 'Helvetica');
-        $dompdf->set_option('isRemoteEnabled', TRUE);
+        $dompdf = new Dompdf($options);
 
         $dompdf->loadHtml($html, 'UTF-8');
         $dompdf->setPaper('A4', 'portrait');
