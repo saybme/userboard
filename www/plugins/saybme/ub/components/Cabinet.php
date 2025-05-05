@@ -35,6 +35,11 @@ class Cabinet extends \Cms\Classes\ComponentBase
                 'description' => 'SLUG страницы',
                 'default' => '{{ :slug }}'
             ],
+            'mode' => [
+                'title' => 'MODE',
+                'description' => 'MODE страницы',
+                'default' => '{{ :mode }}'
+            ],
             'type' => [
                 'title' => 'Тип вывода',
                 'description' => 'Укажите тип вывода отзывов',
@@ -95,7 +100,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
             $type = Input::get('type');
             // PDF
             if($type == 'pdf'){
-                return DocumentClass::pdf();
+                return DocumentClass::pdf($document);
             }
             $options['type'] = $type;
             $options['document'] = $document;
@@ -402,7 +407,9 @@ class Cabinet extends \Cms\Classes\ComponentBase
     public function onDocument(){
         $q = new DocumentClass();
         $document = $q->create();
-        return $document;
+        // Ссылка
+        $link = $document->link . '/open';
+        return Redirect::to($link);
     }
 
     // Замена блоки формы

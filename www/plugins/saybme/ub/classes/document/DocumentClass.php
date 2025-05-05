@@ -32,17 +32,17 @@ class DocumentClass {
     }
 
     // PDF файл
-    static function pdf(){      
-
-        $tmp = sys_get_temp_dir();
-        $html = View::make('saybme.ub::documents.page');      
+    static function pdf($document = null){      
+        if(!$document) return;   
+     
+        $arr['document'] = $document;
+        $html = View::make('saybme.ub::documents.page', $arr);      
 
         $options = new Options();
         $options->set('defaultFont', 'dejavu sans');  
         $options->set('isRemoteEnabled', true);
         
-        $dompdf = new Dompdf($options);
-
+        $dompdf = new Dompdf($options);        
         $dompdf->loadHtml($html, 'UTF-8');
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
@@ -51,6 +51,6 @@ class DocumentClass {
             'Attachment' => false
         ]);
         
-    }
+    }   
 
 }
