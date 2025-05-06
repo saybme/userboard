@@ -306,3 +306,6 @@ v1.0.102:
 v1.0.103:
     - 'Updated table saybme_ub_profile_pages'
     - builder_table_update_saybme_ub_profile_pages_10.php
+v1.0.104:
+    - 'Updated table saybme_ub_documents'
+    - builder_table_update_saybme_ub_documents_2.php

@@ -629,6 +629,16 @@ window.getPartial = function(el){
 window.cloneInput = function(el, event){
     event.preventDefault();
 
+    // DIV для поля
+    let div = document.createElement('div');
+    div.className = 'flex gap-x-2';
+
+    // Кнопка удаления
+    let btnremove = document.createElement('button');
+    btnremove.className = 'btn btn-red';
+    btnremove.innerText = 'x';
+    btnremove.setAttribute('onclick', 'deleteInputRow(this); return false;');
+
     let id = el.getAttribute('data-id');
     let wrap = document.getElementById(id);
     let input = wrap.querySelector('input');
@@ -636,6 +646,19 @@ window.cloneInput = function(el, event){
     const clone = input.cloneNode(true);
     clone.value = null;
 
-    wrap.append(clone);   
+    // Вкладываем поле в DIV
+    div.append(clone);  
+
+    // Вкладываем button в DIV
+    div.append(btnremove); 
+
+    // Добвляем поле в конец списка
+    wrap.append(div);      
+
     return false;
+}
+
+// Удаялем поле
+window.deleteInputRow = function(el){
+    el.parentElement.remove();
 }

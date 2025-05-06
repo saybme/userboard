@@ -34,8 +34,13 @@ tabs:
 fields:
     num:
         label: 'Номер документа'
-        span: auto
+        span: full
         type: text
+    form:
+        label: Форма 
+        span: auto
+        type: relation
+        placeholder: -- Выбрать --
     user:
         label: Пользователь
         span: auto

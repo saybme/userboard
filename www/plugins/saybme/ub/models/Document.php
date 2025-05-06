@@ -7,17 +7,19 @@ class Document extends Model
     use \October\Rain\Database\Traits\Validation;
 
     protected $jsonable = ['data'];
-    protected $fillable = ['data','user'];
+    protected $fillable = ['data','user','form'];
    
     public $table = 'saybme_ub_documents';
     
     public $rules = [
         'user' => 'required',
-        //'data' => 'required'
+        'data' => 'required',
+        'form' => 'required'
     ];
 
     public $belongsTo = [
-        'user' => \Saybme\Ub\Models\User::class
+        'user' => \Saybme\Ub\Models\User::class,
+        'form' => \Saybme\Ub\Models\Ubform::class
     ];
 
     public function getLinkAttribute(){

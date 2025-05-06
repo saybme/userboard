@@ -60,7 +60,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
     }
 
     private function getContent(){
-        $type = $this->property('type');                  
+        $type = $this->property('type');                      
         return $this->$type();
     }
 
@@ -93,6 +93,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['servises'] = $q->getTypeServises();
         $options['pages'] = $q->getUserPages();    
         $options['pservises'] = $q->getCabinetServises();
+
+        
 
         // Страница документ
         $document = Document::where('hash', $slug)->first();
@@ -160,7 +162,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
             $options['breadcrumbs'] = $this->cabinetBreadcrumbsApp($page);; 
         } else {
             $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page); 
-        }           
+        }  
                 
         $options['content'] = $this->renderPartial($tpl, $options); 
 
