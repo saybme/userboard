@@ -20,6 +20,7 @@ class DocumentClass {
         $q = new AuthClass;
         $user = $q->getActiveUser();
 
+        $vars['form'] = Input::get('form');
         $vars['data'] = Input::get();
         $vars['user'] = $user->id;
 
@@ -34,9 +35,13 @@ class DocumentClass {
     // PDF файл
     static function pdf($document = null){      
         if(!$document) return;   
+
+        $tpl = $document->form->pdf_tpl; // Шаблон
+        if(!trim($tpl)) return;
+       
      
         $arr['document'] = $document;
-        $html = View::make('saybme.ub::documents.page', $arr);      
+        $html = View::make($tpl, $arr);      
 
         $options = new Options();
         $options->set('defaultFont', 'dejavu sans');  

@@ -3561,6 +3561,9 @@ ul.nav-registration ul {
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+.grid-cols-\[1fr\2c 160px\] {
+  grid-template-columns: 1fr 160px;
+}
 .grid-cols-\[1fr\2c 200px\] {
   grid-template-columns: 1fr 200px;
 }
@@ -4908,6 +4911,14 @@ ul.nav-registration ul {
 
   .table_l\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .table_l\:grid-cols-\[1fr\2c 200px\] {
+    grid-template-columns: 1fr 200px;
+  }
+
+  .table_l\:grid-cols-\[1fr\2c 160px\] {
+    grid-template-columns: 1fr 160px;
   }
 
   .table_l\:flex-row {

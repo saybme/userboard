@@ -42,6 +42,15 @@ tabs:
             type: text
             tab: Дополнительно
             disabled: 1
+        _settings_form:
+            label: Настройки формы 
+            span: full
+            tab: Дополнительно
+            type: section
+        pdf_tpl:
+            label: PDF шаблон 
+            span: full
+            tab: Дополнительно
         photos:
             label: Фото
             span: full

@@ -309,3 +309,6 @@ v1.0.103:
 v1.0.104:
     - 'Updated table saybme_ub_documents'
     - builder_table_update_saybme_ub_documents_2.php
+v1.0.105:
+    - 'Updated table saybme_ub_ubforms'
+    - builder_table_update_saybme_ub_ubforms_8.php

@@ -4,6 +4,7 @@ use System\Classes\PluginBase;
 use Saybme\Ub\Classes\Rules\SmsRule;
 use Saybme\Ub\Classes\Rules\PhoneRule;
 use Saybme\Ub\Classes\Auth\AuthClass;
+use Saybme\Ub\Models\Formvalue;
 use System\Models\File;
 
 /**
@@ -22,6 +23,7 @@ class Plugin extends PluginBase
             'filters' => [
                 'phone' => [$this, 'formatPhone'],
                 'formvalues' => [$this, 'getFormValues'],
+                'formvalue' => [$this, 'getFormValue'],
                 'ubtitle' => [$this, 'ubTitle'],
                 'getPhoto' => [$this, 'getPhoto'],
             ]
@@ -44,9 +46,17 @@ class Plugin extends PluginBase
     // Значения полей
     public function getFormValues($id){
         if(!$id) return;
-        $obj = \Saybme\Ub\Models\Ubformvalue::find($id);
+        $obj = Formvalue::find($id);
         if(!$obj) return false;
         return $obj->values;
+    }
+
+    // Значение поля
+    public function getFormValue($id){
+        if(!$id) return;
+        $obj = Formvalue::find($id);
+        if(!$obj) return false;
+        return $obj->title;
     }
 
     // ФОрмат телефона
