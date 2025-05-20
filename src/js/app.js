@@ -662,3 +662,19 @@ window.cloneInput = function(el, event){
 window.deleteInputRow = function(el){
     el.parentElement.remove();
 }
+
+// Отключаем поля в блоке
+window.refreshBoxInputs = function(id){
+    let box = document.getElementById(id);
+
+    box.classList.toggle('hidden');
+
+    box.querySelectorAll('input').forEach(el => {
+        if(box.classList.contains('hidden') == false){
+            el.removeAttribute('disabled');    
+        } else {            
+            el.setAttribute('disabled', true);
+        }        
+    })
+    
+}

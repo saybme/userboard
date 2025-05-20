@@ -58,40 +58,48 @@
             </div>
 
             <div class="">
-                <h4 class="text-lg font-semibold">Представитель собственника </h4>
+                <div class="flex items-center gap-2 font-semibold">
+                    <input type="checkbox" onchange="refreshBoxInputs('representativeBox')" id="representative" class="checkbox checkbox-sm rounded-md">
+                    <label for="representative">Представитель собственника</label>
+                </div>
                 <hr class="my-3">
+                
+            </div>   
+
+            <div id="representativeBox" class="grid gap-4 hidden"> 
                 <div class="grid grid-cols-1 table_l:grid-cols-4 gap-4">                     
                     <div class="">
-                        {% partial 'inputs/text' input=ub4be93eeceea6120281a0054229dbc8a6 %}
+                        {% partial 'inputs/text' input=ub4be93eeceea6120281a0054229dbc8a6 disabled=true %}
                     </div>
                     <div class="">
-                        {% partial 'inputs/text' input=ub56d2ccff210e13c17d2be48865ce8d63 %}
+                        {% partial 'inputs/text' input=ub56d2ccff210e13c17d2be48865ce8d63 disabled=true %}
                     </div>
                     <div class="">
-                        {% partial 'inputs/text' input=ubf2ddbf3946db0d59421528e4d51cea2d %}
+                        {% partial 'inputs/text' input=ubf2ddbf3946db0d59421528e4d51cea2d disabled=true %}
                     </div>
                     <div class="">
-                        {% partial 'inputs/text' input=ub42e1e4a62837888edeb86823e6bcf496 %}
+                        {% partial 'inputs/text' input=ub42e1e4a62837888edeb86823e6bcf496 disabled=true %}
                     </div>
                 </div>
-            </div>            
-            <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4">
-                <div class="">
-                    {% partial 'inputs/text' input=ub6603bcf1355498d2cae059e5a74f99d4 %}
+                <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4">
+                    <div class="">
+                        {% partial 'inputs/text' input=ub6603bcf1355498d2cae059e5a74f99d4 disabled=true %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ubd136cdae3550e68bd95b0247b0e41d41 disabled=true %}
+                    </div>
+                    <div class="">
+                        {% partial 'inputs/text' input=ub4cfb20aa21a8caf3152a8829cc100904 disabled=true %}
+                    </div>
                 </div>
                 <div class="">
-                    {% partial 'inputs/text' input=ubd136cdae3550e68bd95b0247b0e41d41 %}
+                    {% partial 'inputs/text' input=ub63d5b862dc44935929d3e68d99c24cd4 disabled=true %}
                 </div>
                 <div class="">
-                    {% partial 'inputs/text' input=ub4cfb20aa21a8caf3152a8829cc100904 %}
+                    {% partial 'inputs/text' input=ubb1bf3c386e44a11a26d122f46c39747b disabled=true %}
                 </div>
-            </div>
-            <div class="">
-                {% partial 'inputs/text' input=ub63d5b862dc44935929d3e68d99c24cd4 %}
-            </div>
-            <div class="">
-                {% partial 'inputs/text' input=ubb1bf3c386e44a11a26d122f46c39747b %}
-            </div>
+            </div> 
+
             <div class="">
                 <h4 class="text-lg font-semibold">Доверенность</h4>
                 <hr class="my-3">

@@ -70,6 +70,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         // SLUG страницы
         $slug = $this->property('slug');  
 
+        //dd($slug);
+
         $sms = new SmsClass;
 
         $options = array();
@@ -434,6 +436,12 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         $result[$data['container']] = $this->renderPartial($partial, $options);
         return $result;
+    }
+
+    // Обновление блоков
+    function onRefreshPartial(){
+        $data = Input::get();
+        return $data;
     }
 
 

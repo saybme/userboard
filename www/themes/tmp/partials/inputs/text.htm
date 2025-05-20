@@ -3,7 +3,7 @@
         <label for="" class="form-label">
             {{ input.title }} {{ input.is_required == true ? '<b class="text-red-1">*</b>' : '' }}
         </label>
-        <input type="{{ input.type ?: 'text' }}" name="{{ input.code }}" value="" class="input input-bordered w-full">   
+        <input type="{{ input.type ?: 'text' }}" name="{{ input.code }}" value="" class="input input-bordered w-full" {{ disabled == true ? 'disabled' : '' }}>   
         {% if input.comment %}
             <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">{{ input.comment }}</div>
         {% endif %}
@@ -12,5 +12,6 @@
         <div class="alert alert-warning text-xs p-3 rounded-md">
             Поле не создано!
         </div>
-    {% endif %}   
+    {% endif %}  
+
 </div>
