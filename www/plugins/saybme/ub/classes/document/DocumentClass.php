@@ -33,7 +33,7 @@ class DocumentClass {
     }
 
     // PDF файл
-    static function pdf($document = null){      
+    static public function pdf($document = null){      
         if(!$document) return;   
 
         $tpl = $document->form->pdf_tpl; // Шаблон

@@ -2,6 +2,7 @@
 
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Formvalues;
+use Log;
 use Model;
 
 class Ubform extends Model
@@ -20,6 +21,30 @@ class Ubform extends Model
     public function scopeActive($query) {
         return $query->where('is_active', true);
     } 
+    
+    // Событие после создания
+    public function afterCreate(){
+        $this->createForm();        
+    }
+
+    // Перед удалением
+    public function beforeDelete(){
+        // Удаляем шаблон
+        $filename = dirname(dirname(__FILE__)) . '/views/ubforms/form_' . $this->id . '.htm'; 
+        unlink($filename);    
+    }
+
+    // Создаем шаблон формы
+    private function createForm(){    
+
+        $text = '';  
+        $filename = dirname(dirname(__FILE__)) . '/views/ubforms/form_' . $this->id . '.htm';      
+        
+        $fh = fopen($filename, 'w');
+        fwrite($fh, $text);
+        fclose($fh);
+
+    }
 
     public function beforeCreate() {    
         $hash = md5(time());     
@@ -35,7 +60,8 @@ class Ubform extends Model
     }
 
     public $attachMany = [
-        'photos' => \System\Models\File::class
+        'photos' => \System\Models\File::class,
+        'pfiles' => \System\Models\File::class
     ];   
 
     public $hasMany = [

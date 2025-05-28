@@ -16,6 +16,8 @@
         @apply pb-5 text-base font-gilroy-medium
     }
 
+    
+
     .slide-text {
         @apply max-w-[680px] mt-3
     }
@@ -95,7 +97,9 @@
 
 @layer components {
 
-    
+    .btn-secondary {
+        @apply bg-blue-2 text-white border-blue-2 hover:border-blue-1 hover:bg-blue-1
+    }
 
     .form-label {
         @apply text-xs mob_l:text-sm block mb-1

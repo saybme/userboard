@@ -56,6 +56,12 @@ tabs:
             span: full
             tab: Файлы
             type: fileupload
+        pfiles:
+            label: Файлы
+            span: full
+            tab: Файлы
+            type: fileupload
+            mode: file
 secondaryTabs:
     fields:
         hash:

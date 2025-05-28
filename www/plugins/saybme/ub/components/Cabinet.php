@@ -104,7 +104,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
         if($document){
             $type = Input::get('type');
             // PDF
-            if($type == 'pdf'){
+            if($type == 'pdf'){                
                 return DocumentClass::pdf($document);
             }
             $options['type'] = $type;
@@ -112,6 +112,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
             $tpl = 'cabinet/profile-document';
         }
         
+        //dd($tpl);
 
         return $this->renderPartial($tpl, $options);
     }
