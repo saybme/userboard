@@ -2,6 +2,7 @@
 
 use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Models\Document;
+use ValidationException;
 use View;
 use Input;
 use Log;
@@ -20,9 +21,14 @@ class DocumentClass {
         $q = new AuthClass;
         $user = $q->getActiveUser();
 
+        $data = Input::get();
+        $data = array_diff($data, array(''));
+
         $vars['form'] = Input::get('form');
-        $vars['data'] = Input::get();
-        $vars['user'] = $user->id;
+        $vars['data'] = $data;
+        $vars['user'] = $user->id;       
+
+        // throw new ValidationException(['name' => 'You must give a name!']);
 
         // Создаем документ
         $doc = new Document;

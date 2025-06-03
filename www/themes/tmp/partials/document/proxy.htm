@@ -1,0 +1,130 @@
+<div class="container flex py-8 items-start gap-x-8">
+    
+    <div class="profile-content font-gilroy-medium">
+
+        <div class="mb-4 border-b border-gray-200 pb-4 flex gap-4">
+            <div class="flex-1">
+                <div class="text-sm">Документ создан:</div>
+                <div class=""><b>{{ document.created_at | date('d.m.Y год. H:i') }}</b></div> 
+            </div>   
+            <a href="{{ document.form.pfiles | first . path }}" target="_blank" class="btn btn-secondary px-4 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256"><path d="M214.67,72H200V40a8,8,0,0,0-8-8H64a8,8,0,0,0-8,8V72H41.33C27.36,72,16,82.77,16,96v80a8,8,0,0,0,8,8H56v32a8,8,0,0,0,8,8H192a8,8,0,0,0,8-8V184h32a8,8,0,0,0,8-8V96C240,82.77,228.64,72,214.67,72ZM72,48H184V72H72ZM184,208H72V160H184Zm40-40H200V152a8,8,0,0,0-8-8H64a8,8,0,0,0-8,8v16H32V96c0-4.41,4.19-8,9.33-8H214.67c5.14,0,9.33,3.59,9.33,8Zm-24-52a12,12,0,1,1-12-12A12,12,0,0,1,200,116Z"></path></svg>
+                Скачать пустой бланк
+            </a>
+            <a href="{{ document.link }}/open?type=pdf" target="_blank" class="btn btn-red px-4 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256"><path d="M224,152a8,8,0,0,1-8,8H192v16h16a8,8,0,0,1,0,16H192v16a8,8,0,0,1-16,0V152a8,8,0,0,1,8-8h32A8,8,0,0,1,224,152ZM92,172a28,28,0,0,1-28,28H56v8a8,8,0,0,1-16,0V152a8,8,0,0,1,8-8H64A28,28,0,0,1,92,172Zm-16,0a12,12,0,0,0-12-12H56v24h8A12,12,0,0,0,76,172Zm88,8a36,36,0,0,1-36,36H112a8,8,0,0,1-8-8V152a8,8,0,0,1,8-8h16A36,36,0,0,1,164,180Zm-16,0a20,20,0,0,0-20-20h-8v40h8A20,20,0,0,0,148,180ZM40,112V40A16,16,0,0,1,56,24h96a8,8,0,0,1,5.66,2.34l56,56A8,8,0,0,1,216,88v24a8,8,0,0,1-16,0V96H152a8,8,0,0,1-8-8V40H56v72a8,8,0,0,1-16,0ZM160,80h28.69L160,51.31Z"></path></svg>
+                Открыть для печати
+            </a>
+        </div>         
+
+        <h2 class="text-3xl text-blue-4 font-semibold text-pretty mb-6">{{ document.form.name }}</h2>        
+
+        <div class="space-y-6">
+
+            <div class="bg-white p-4 rounded-lg flex justify-between font-bold">
+                <div class="">Место составления {{ document.data.ubd99b68dc6835ed4f06fced0eef2f0c51 }}</div>
+                <div class="">{{ document.data.ube5b7911a48da1eecb0d074421414e627 | date('d.m.Y год.') }}</div>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Доверитель</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>ФИО:</b> {{ document.data.ub6c1d1f69488b64ebb952181bcad0c068 }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ubf16e6c5c4067950c35b18c5645829f55 | date('d.m.Y год.') }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub3a56a90d676cbcd6cbc460675b63e6a3 }}</div>   
+                    <div class=""><b>Номер:</b> {{ document.data.ub5704d2a9d9a835afdd7ac78ff4fb3235 }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ub90192c39f01634de36d7faa2349af028 | date('d.m.Y год.') }}</div>  
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ubf5bc8bce0dc63ad99ed77fc12d5c7d13 }}</div>  
+                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ubf5bc8bce0dc63ad99ed77fc12d5c7d13 }}</div> 
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Имея в собственности транспортное средство</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Марка, модель:</b> {{ document.data.ubc1f52bde2ca0f7438ad4a7e65ba56200 }}</div>
+                    <div class=""><b>Регистрационный знак:</b> {{ document.data.ubad07c0f03583669780c02fb29f3d39ba }}</div>
+                    <div class=""><b>Год выпуска:</b> {{ document.data.ubf4ea92e36e6d39ac8ef088d113c740d1 }}</div>
+                    <div class=""><b>Цвет:</b> {{ document.data.ubbf82f1a71e467270263f98634d77502b }}</div>
+                    <div class=""><b>Идентификационный номер (VIN):</b> {{ document.data.ub0dcb5888fcfb2f3dd06a2417d12a54b4 }}</div>
+                    <div class=""><b>Номер кузова:</b> {{ document.data.ubc89ca777063a99bc0b66f1aeabcae22b }}</div>
+                    <div class=""><b>Номер шасси:</b> {{ document.data.ub80f5a5d129d4fad8f19b184fb574810f }}</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Паспорт транспортного средства</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub87fb721af4a2350e32dd6cbf2599f4f7 }}</div>
+                    <div class=""><b>Номер:</b> {{ document.data.ub4ef1a62a8d3927acb5f14d74ff275520 }}</div>
+                    <div class=""><b>Дата выдачи:</b> {{ document.data.ub720eae5a49acc947b4e8e34380d51bd3 | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Выдан:</b> {{ document.data.ubfb50b22e4ffa50dcf3c639a4eab47ea6 }}</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Свидетельство о регистрации транспортного средства (СТС)</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ubc9dd364aa98f126fff23f52f02967ae1 }}</div>
+                    <div class=""><b>Номер:</b> {{ document.data.ubef2850190a6a41374f1935612e9834d7 }}</div>
+                    <div class=""><b>Дата выдачи:</b> {{ document.data.ub58dfaa105321f3f93794f356c845d442 | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Выдано:</b> {{ document.data.ubbb5bbcc81eec143509c6a24ce1450f02 }}</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Состоит на регистрационном учете в ГИБДД</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Состоит на регистрационном учете в ГИБДД:</b> {{ document.data.ube36a04d0ce3711fbdebb8b849f37ddfc | formvalue }}</div>
+                    <div class=""><b>Наименование регистрационного подразделения ГИБДД:</b> {{ document.data.ub2dc25dd34f90a236e5034fc8d12fdde9 }}</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Доверяю</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>ФИО:</b> {{ document.data.ube4be515d9bc1071e9a7f34e2262052ea }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ubac2bdd85abc25461d186687b7fe58c9b | date('d.m.Y год.') }}</div>
+                </div>
+                <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Серия:</b> {{ document.data.ub8f7845d1d51ae3ea37eb12dbe6f9a22c }}</div>
+                    <div class=""><b>Номер:</b> {{ document.data.ubc0402fce54002d91d5e50c37960c46d8 }}</div>
+                    <div class=""><b>Выдан:</b> {{ document.data.ub0b1cd6942e14e39e9a66a6af838b349b | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Кем выдан:</b> {{ document.data.ub4b5a1f853edf499f674416dc883eb390 }}</div>
+                    <div class=""><b>Адрес регистрации:</b> {{ document.data.ub647d332843cb6b4c61fe6ab5efc0b9ff }}</div>
+                </div>
+            </div>           
+           
+            <div class="bg-white p-4 rounded-lg">
+                <h4 class="text-xl font-semibold text-blue-2">Доверенность выдана сроком</h4>
+                <hr class="my-2" >
+                <div class="mb-2">
+                    <div class=""><b>Доверенность выдана сроком на:</b> {{ document.data.ub0e88ee2076a37fadbfdd13f50d6d7f7e | date('d.m.Y год') }}</div>
+                </div>
+            </div>  
+
+            <div class="alert-box">
+                Продавец передает его Покупателю, а Покупатель принимает данное транспортное средство (прицеп номерной агрегат) и оплачивает его стоимость. Продавец гарантирует, что  автомобиль никому не продан, автомобиль,  (прицеп номерной агрегат)  в розыске не значатся, в залоге не состоит, ограничения, запреты на совершение регистрационных действий (арест) не наложены.   Настоящий договор вступает в силу с момента подписания и составлен в трех экземплярах, имеющий равную юридическую силу.
+            </div>
+
+        </div>       
+
+    </div>
+
+    <div class="profile-sidebar"> 
+        {% partial 'cabinet/sidebar' user=user pages=pages %}        
+    </div>
+
+</div>

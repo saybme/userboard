@@ -2237,6 +2237,11 @@ details.collapse summary::-webkit-details-marker {
   transform: rotate(225deg);
   margin-top: 0;
 }
+.mockup-phone .display {
+  overflow: hidden;
+  border-radius: 40px;
+  margin-top: -25px;
+}
 .mockup-browser .mockup-browser-toolbar .input {
   position: relative;
   margin-left: auto;
@@ -3286,10 +3291,6 @@ ul.nav-registration ul {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -4042,6 +4043,9 @@ ul.nav-registration ul {
 .pt-2 {
   padding-top: 0.5rem;
 }
+.pt-4 {
+  padding-top: 1rem;
+}
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -4059,9 +4063,6 @@ ul.nav-registration ul {
 }
 .pt-\[4\.063rem\] {
   padding-top: 4.063rem;
-}
-.pt-4 {
-  padding-top: 1rem;
 }
 .text-center {
   text-align: center;
@@ -4953,10 +4954,6 @@ ul.nav-registration ul {
 
   .table_l\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .table_l\:grid-cols-\[1fr\2c 160px\] {
-    grid-template-columns: 1fr 160px;
   }
 
   .table_l\:grid-cols-\[1fr\2c 200px\] {

@@ -110,9 +110,15 @@ class Cabinet extends \Cms\Classes\ComponentBase
             $options['type'] = $type;
             $options['document'] = $document;
             $tpl = 'cabinet/profile-document';
+
+            if($document->form->tpl){
+                // Шаблон формы
+                $tpl = $document->form->tpl;    
+            }
+
         }
         
-        //dd($tpl);
+        //dd($document->form->tpl);
 
         return $this->renderPartial($tpl, $options);
     }
