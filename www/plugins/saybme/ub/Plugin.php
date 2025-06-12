@@ -26,8 +26,18 @@ class Plugin extends PluginBase
                 'formvalue' => [$this, 'getFormValue'],
                 'ubtitle' => [$this, 'ubTitle'],
                 'getPhoto' => [$this, 'getPhoto'],
+                'dob' => [$this, 'getDob'],
             ]
         ];
+    }
+
+    // Дата рождения
+    public function getDob($value = ''){
+        if(!$value) return;
+
+        $arr = json_decode($value, true);
+
+        return implode(' ', $arr) . ' год.';
     }
 
     // Фото заявки

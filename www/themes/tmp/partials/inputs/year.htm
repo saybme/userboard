@@ -1,0 +1,22 @@
+<div class="">    
+
+    {% if input %}
+
+        <label for="" class="form-label">{{ input.title }} {{ input.is_required == true ? '<b class="text-red-1">*</b>' : '' }}</label> 
+        <select name="{{ input.code }}" id="" class="select select-bordered w-full" {{ disabled == true ? 'disabled' : '' }}>
+            {% for row in input.years %}
+                <option value="{{ row }}">{{ row }}</option>
+            {% endfor %}
+        </select>
+        {% if input.comment %}
+            <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">{{ input.comment }}</div>
+        {% endif %}
+        <div data-validate-for="{{ input.code }}" class="error"></div>    
+
+    {% else %}   
+        <div class="alert alert-warning text-xs p-3 rounded-md">
+            Поле не создано!
+        </div>
+    {% endif %}     
+
+</div>

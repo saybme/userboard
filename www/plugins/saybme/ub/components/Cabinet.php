@@ -118,7 +118,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         }
         
-        //dd($document->form->tpl);
+        // dd($tpl);
 
         return $this->renderPartial($tpl, $options);
     }
@@ -151,6 +151,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         // if($user->utype->id == 2){
         //     $tpl = 'applications/page-manager';
         // }
+
+       
 
        
         // Страница форма

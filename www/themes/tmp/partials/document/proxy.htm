@@ -38,9 +38,9 @@
                 <div class="mb-2">
                     <div class=""><b>Серия:</b> {{ document.data.ub3a56a90d676cbcd6cbc460675b63e6a3 }}</div>   
                     <div class=""><b>Номер:</b> {{ document.data.ub5704d2a9d9a835afdd7ac78ff4fb3235 }}</div>  
-                    <div class=""><b>Когда:</b> {{ document.data.ub90192c39f01634de36d7faa2349af028 | date('d.m.Y год.') }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ub90192c39f01634de36d7faa2349af028 }}</div>  
                     <div class=""><b>Кем выдан:</b> {{ document.data.ubf5bc8bce0dc63ad99ed77fc12d5c7d13 }}</div>  
-                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ubf5bc8bce0dc63ad99ed77fc12d5c7d13 }}</div> 
+                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ub8d6f0bfa328f3460b13375454056f1cd }}</div> 
                 </div>
             </div>
 
@@ -94,16 +94,16 @@
                 <hr class="my-2" >
                 <div class="mb-2">
                     <div class=""><b>ФИО:</b> {{ document.data.ube4be515d9bc1071e9a7f34e2262052ea }}</div>
-                    <div class=""><b>Дата рождения:</b> {{ document.data.ubac2bdd85abc25461d186687b7fe58c9b | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ubac2bdd85abc25461d186687b7fe58c9b | dob }}</div>
                 </div>
                 <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
                 <hr class="my-2" >
                 <div class="mb-2">
                     <div class=""><b>Серия:</b> {{ document.data.ub8f7845d1d51ae3ea37eb12dbe6f9a22c }}</div>
                     <div class=""><b>Номер:</b> {{ document.data.ubc0402fce54002d91d5e50c37960c46d8 }}</div>
-                    <div class=""><b>Выдан:</b> {{ document.data.ub0b1cd6942e14e39e9a66a6af838b349b | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Выдан:</b> {{ document.data.ub0b1cd6942e14e39e9a66a6af838b349b }}</div>
                     <div class=""><b>Кем выдан:</b> {{ document.data.ub4b5a1f853edf499f674416dc883eb390 }}</div>
-                    <div class=""><b>Адрес регистрации:</b> {{ document.data.ub647d332843cb6b4c61fe6ab5efc0b9ff }}</div>
+                    <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ub647d332843cb6b4c61fe6ab5efc0b9ff }}</div>
                 </div>
             </div>           
            
@@ -111,7 +111,7 @@
                 <h4 class="text-xl font-semibold text-blue-2">Доверенность выдана сроком</h4>
                 <hr class="my-2" >
                 <div class="mb-2">
-                    <div class=""><b>Доверенность выдана сроком на:</b> {{ document.data.ub0e88ee2076a37fadbfdd13f50d6d7f7e | date('d.m.Y год') }}</div>
+                    <div class=""><b>Доверенность выдана сроком до:</b> {{ document.data.ub0e88ee2076a37fadbfdd13f50d6d7f7e | date('d.m.Y год') }}</div>
                 </div>
             </div>  
 

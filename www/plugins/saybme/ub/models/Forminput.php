@@ -49,8 +49,52 @@ class Forminput extends Model
         $options['address'] = 'Адрес';
         $options['tel'] = 'Телефон';
         $options['email'] = 'E-mail';
+        $options['year'] = 'Год';
+        $options['dob'] = 'Год рождения';
 
         return $options;
+    }
+
+    public function getDobAttribute(){
+
+        $arr = array();
+        $dob = date('Y', time()) - 18;
+
+        for ($n = 1940; $n <= $dob; $n++) {
+            $arr[$n] = $n;
+        }
+        krsort($arr);
+
+        // Месяца
+        $months[1] = 'Января';
+        $months[2] = 'Февраля';
+        $months[3] = 'Марта';
+        $months[4] = 'Апреля';
+        $months[5] = 'Мая';
+        $months[6] = 'Июня';
+        $months[7] = 'Июля';
+        $months[8] = 'Августа';
+        $months[9] = 'Сентября';
+        $months[11] = 'Октября';
+        $months[12] = 'Декабря';
+
+        $result['months'] = $months;
+        $result['years'] = $arr;
+
+        return collect($result);
+    }
+
+    public function getYearsAttribute(){
+
+        $arr = array();
+        $dob = date('Y', time());
+
+        for ($n = 1940; $n <= $dob; $n++) {
+            $arr[$n] = $n;
+        }
+        krsort($arr);
+
+        return collect($arr);
     }
 
 }

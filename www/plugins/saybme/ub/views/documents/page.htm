@@ -37,9 +37,23 @@
 </head>
 <body >      
 
-    <div class="" style="margin-bottom: 15px;">
-        <img src="https://userboard.ru/themes/tmp/assets/images/doc-logo.png" alt="" style="display: block; width: auto; height: 40px; margin: 0;">
-    </div>
+    <table style="margin-bottom: 15px;" width="100%">
+        <tbody>
+            <tr>
+                <td><img src="https://userboard.ru/themes/tmp/assets/images/doc-logo.png" alt="" style="display: block; width: auto; height: 40px; margin: 0;"></td>
+                <td align="right">
+                    <table width="100%">
+                        <tbody>
+                            <tr>
+                                <td align="right">Доверенность создана при помощи сервиса <br>USERBOARD.RU</td>
+                                <td align="right"><img src="https://userboard.ru/themes/tmp/assets/images/qr.png" alt="" style="display: block; width: auto; height: 40px; margin: 0;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <table width="100%">
         <tbody>
@@ -86,55 +100,7 @@
                 </tr>
             </tbody>
         </table> 
-    </div>    
-
-    {% if document.data.ub4be93eeceea6120281a0054229dbc8a6  %}
-        <div class="">
-            <h3 class="" style="margin: 0;">Представитель собственника</h3>
-            <table width="100%" style="margin-bottom: 15px;">
-                <tbody>
-                    <tr>
-                        <td style="border-bottom: 1px solid #808080;">
-                            {{ document.data.ub4be93eeceea6120281a0054229dbc8a6 }} {{ document.data.ub56d2ccff210e13c17d2be48865ce8d63 }} {{ document.data.ubf2ddbf3946db0d59421528e4d51cea2d }} {{ document.data.ub42e1e4a62837888edeb86823e6bcf496 | date('d.m.Y год') }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">фамилия, имя, отчество, дата рождения</td>
-                    </tr>
-                    <tr>
-                        <td style="border-bottom: 1px solid #808080;">
-                            <b>паспорт:</b> {{ document.data.ub6603bcf1355498d2cae059e5a74f99d4 }}, {{ document.data.ubd136cdae3550e68bd95b0247b0e41d41 }}, {{ document.data.ub4cfb20aa21a8caf3152a8829cc100904 | date('d.m.Y год') }}, {{ document.data.ub63d5b862dc44935929d3e68d99c24cd4 }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">серия, номер, когда, кем выдан</td>
-                    </tr>
-                    <tr>
-                        <td style="border-bottom: 1px solid #808080;">{{ document.data.ubb1bf3c386e44a11a26d122f46c39747b }}</td>
-                    </tr>
-                    <tr>
-                        <td class="label">адрес регистрации (прописки)</td>
-                    </tr>
-                </tbody>
-            </table> 
-        </div>
-    {% endif %}
-    
-    <div class="">
-        <h3 class="" style="margin: 0;">Действующий по доверенности</h3>    
-        <table width="100%" style="margin-bottom: 15px;">
-            <tbody>
-                <tr>
-                    <td style="border-bottom: 1px solid #808080;">
-                        {{ document.data.ub1f94370d29f8b14f7e03700069798b93 }}, {{ document.data.ubd1cb41abcd576d05d24628ce9022874b }}, {{ document.data.ubacc9a48e92f815fdc93cf25401ad3651 | date('d.m.Y год') }}, {{ document.data.ub64f0077abda44b9ed8758b3a5cbd08d0 }}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">серия, номер, когда, кем выдана</td>
-                </tr>                
-            </tbody>
-        </table> 
-    </div>     
+    </div>  
     
     <div class="">
         <h3 class="" style="margin: 0;">и Покупатель</h3>    
@@ -181,7 +147,7 @@
                 </tr>
                 <tr>
                     <td style="border-bottom: 1px solid #808080;">
-                        Тип транспортного средства (легковой, грузовой, автобус и т.д: {{ document.data.ub2b84e182c014b2fa45740d989f59ec75 }}
+                        Тип транспортного средства (легковой, грузовой, автобус и т.д): {{ document.data.ub2b84e182c014b2fa45740d989f59ec75 }}
                     </td>
                 </tr>
                 <tr>
@@ -191,7 +157,12 @@
                 </tr>
                 <tr>
                     <td style="border-bottom: 1px solid #808080;">
-                        Год выпуска: {{ document.data.ub6bb1be84ccb3cf54aa1aefdb52b50019 }}, Цвет: {{ document.data.ubcc153dda469f24d13bfa6710ea1c7e31 }}
+                        Год выпуска: {{ document.data.ub6bb1be84ccb3cf54aa1aefdb52b50019 }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border-bottom: 1px solid #808080;">
+                        Цвет: {{ document.data.ubcc153dda469f24d13bfa6710ea1c7e31 }}
                     </td>
                 </tr>
                 <tr>
@@ -247,25 +218,17 @@
         <table width="100%">
             <tbody>
                 <tr style="border-bottom: 1px solid #808080;">
-                    <td>Стоимостью, руб: {{ document.data.ub167441a1472d707582f08df5403e7b11 }}</td>
+                    <td>Стоимостью: {{ document.data.ub167441a1472d707582f08df5403e7b11 }} руб</td>
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="" style="margin-bottom: 15px;">
+    <div class="" style="margin-bottom: 15px; text-align: justify;">
         Продавец передает его Покупателю, а Покупатель принимает данное транспортное средство (прицеп номерной агрегат) и оплачивает его стоимость. Продавец гарантирует, что  автомобиль никому не продан, автомобиль,  (прицеп номерной агрегат)  в розыске не значатся, в залоге не состоит, ограничения, запреты на совершение регистрационных действий (арест) не наложены.   Настоящий договор вступает в силу с момента подписания и составлен в трех экземплярах, имеющий равную юридическую силу.                                                     
     </div>
 
-    <div class="" style="margin: 0 0 15px;">
-        <table width="100%">
-            <tbody>
-                <tr style="border-bottom: 1px solid #808080;">
-                    <td>Деньги в сумме, руб: {{ document.data.ub167441a1472d707582f08df5403e7b11 }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    
     
     <table style="width: 100%;">
         <tbody>

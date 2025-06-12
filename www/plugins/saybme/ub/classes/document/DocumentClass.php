@@ -22,7 +22,19 @@ class DocumentClass {
         $user = $q->getActiveUser();
 
         $data = Input::get();
-        $data = array_diff($data, array(''));
+
+        $rows = array();
+        foreach($data as $key => $row){
+            if(gettype($row) == 'array'){
+                $rows[$key] = json_encode($row, JSON_UNESCAPED_UNICODE);
+            } else {
+                $rows[$key] = $row;
+            }                       
+        }
+
+        //Log::error($rows);
+
+        $data = array_diff($rows, array(''));
 
         $vars['form'] = Input::get('form');
         $vars['data'] = $data;

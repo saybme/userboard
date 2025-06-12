@@ -22,12 +22,12 @@
 
             <fieldset class="border px-4 py-6 rounded-lg">
                 <legend class="text-2xl font-bold text-blue-4 px-4">Доверитель</legend>
-                <div class="mb-4 grid grid-cols-[1fr,200px] gap-4">
+                <div class="mb-4 grid grid-cols-[1fr,400px] gap-4">
                     <div class="">
                         {% partial 'inputs/text' input=ub6c1d1f69488b64ebb952181bcad0c068 %}
                     </div>
                     <div class="">
-                        {% partial 'inputs/text' input=ubda395266f3e666775194ca2f18990227 %}
+                        {% partial 'inputs/dob' input=ubda395266f3e666775194ca2f18990227 %}
                     </div>
                 </div> 
                 <div class="">
@@ -64,7 +64,7 @@
                             {% partial 'inputs/text' input=ubad07c0f03583669780c02fb29f3d39ba %}
                         </div>
                         <div class="">
-                            {% partial 'inputs/text' input=ubf4ea92e36e6d39ac8ef088d113c740d1 %}
+                            {% partial 'inputs/year' input=ubf4ea92e36e6d39ac8ef088d113c740d1 %}
                         </div>
                         <div class="">
                             {% partial 'inputs/text' input=ubbf82f1a71e467270263f98634d77502b %}
@@ -102,30 +102,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="pt-4">
-                    <h4 class="text-lg font-bold">Свидетельство о регистрации транспортного средства (СТС) </h4>
-                    <hr class="my-3" >  
+                <div class="pt-4">                                       
                     <div class="grid gap-4">
-                        <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4">   
-                            <div class="">
-                                {% partial 'inputs/text' input=ubc9dd364aa98f126fff23f52f02967ae1 %}
+                        <div class="">
+                            <div class="flex items-center gap-2 font-semibold">
+                                <input type="checkbox" name="representative" onchange="refreshBoxInputs('representativeBox')" id="representative" class="checkbox checkbox-sm rounded-md">
+                                <label for="representative">Состоит на регистрационном учете в ГИБДД</label>
                             </div>
-                            <div class="">
-                                {% partial 'inputs/text' input=ubef2850190a6a41374f1935612e9834d7 %}
+                        </div>
+                        <div class="hidden" id="representativeBox">
+                            <h4 class="text-lg font-bold">Свидетельство о регистрации транспортного средства (СТС) </h4>
+                            <hr class="my-3" > 
+                            <div class="grid gap-4">
+                                <div class="grid grid-cols-1 table_l:grid-cols-3 gap-4">   
+                                    <div class="">
+                                        {% partial 'inputs/text' input=ubc9dd364aa98f126fff23f52f02967ae1 %}
+                                    </div>
+                                    <div class="">
+                                        {% partial 'inputs/text' input=ubef2850190a6a41374f1935612e9834d7 %}
+                                    </div>
+                                    <div class="">
+                                        {% partial 'inputs/text' input=ub58dfaa105321f3f93794f356c845d442 %}
+                                    </div> 
+                                </div>
+                                <div class="">
+                                    {% partial 'inputs/text' input=ubbb5bbcc81eec143509c6a24ce1450f02 %}
+                                </div>                        
+                                <div class="">
+                                    {% partial 'inputs/text' input=ub2dc25dd34f90a236e5034fc8d12fdde9 %}
+                                </div>
                             </div>
-                            <div class="">
-                                {% partial 'inputs/text' input=ub58dfaa105321f3f93794f356c845d442 %}
-                            </div> 
-                        </div>
-                        <div class="">
-                            {% partial 'inputs/text' input=ubbb5bbcc81eec143509c6a24ce1450f02 %}
-                        </div>
-                        <div class="">
-                            <h4 class="text-lg font-bold mb-2">{{ ube36a04d0ce3711fbdebb8b849f37ddfc.title }}</h4>
-                            {% partial 'inputs/radio' input=ube36a04d0ce3711fbdebb8b849f37ddfc %}
-                        </div>
-                        <div class="">
-                            {% partial 'inputs/text' input=ub2dc25dd34f90a236e5034fc8d12fdde9 %}
                         </div>
                     </div>  
                 </div>
@@ -134,12 +140,12 @@
             <fieldset class="border px-4 py-6 rounded-lg">
                 <legend class="text-2xl font-bold text-blue-4 px-4">Доверяю</legend>
                 <div class="grid gap-4">
-                    <div class="grid grid-cols-[1fr,200px] gap-4">
+                    <div class="grid grid-cols-[1fr,400px] gap-4">
                         <div class="">
                             {% partial 'inputs/text' input=ube4be515d9bc1071e9a7f34e2262052ea %}
                         </div>
                         <div class="">
-                            {% partial 'inputs/text' input=ubac2bdd85abc25461d186687b7fe58c9b %}
+                            {% partial 'inputs/dob' input=ubac2bdd85abc25461d186687b7fe58c9b %}
                         </div>
                     </div>
                     <div class="">

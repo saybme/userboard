@@ -1,0 +1,34 @@
+<div class="">    
+
+    {% if input %}
+
+        <label for="" class="form-label">{{ input.title }} {{ input.is_required == true ? '<b class="text-red-1">*</b>' : '' }}</label> 
+        
+        <div class="grid grid-cols-[100px,1fr,100px] border border-gray-300 rounded-lg overflow-hidden">
+            <input type="number" name="{{ input.code }}[day]" class="input rounded-none focus:outline-none" placeholder="День">
+            <select name="{{ input.code }}[mounth]" id="" class="select rounded-none focus:outline-none text-center">
+                <option value="" disabled selected hidden class="text-gray-400">Месяц</option>
+                {% for row in input.dob.months %}
+                    <option value="{{ row }}">{{ row }}</option>
+                {% endfor %}
+            </select>
+            <select name="{{ input.code }}[years]" id="" class="select rounded-none focus:outline-none text-center">
+                <option value="" disabled selected>Год</option>
+                {% for row in input.dob.years %}
+                    <option value="{{ row }}">{{ row }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        {% if input.comment %}
+            <div class="text-[.6rem] mob_l:text-xs text-gray-300 mt-1 ml-1">{{ input.comment }}</div>
+        {% endif %}
+        <div data-validate-for="{{ input.code }}" class="error"></div>    
+
+    {% else %}   
+        <div class="alert alert-warning text-xs p-3 rounded-md">
+            Поле не создано!
+        </div>
+    {% endif %}     
+
+</div>
