@@ -3610,26 +3610,14 @@ ul.nav-registration ul {
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
+.grid-cols-\[100px\2c 1fr\2c 100px\] {
+  grid-template-columns: 100px 1fr 100px;
+}
 .grid-cols-\[1fr\2c 200px\] {
   grid-template-columns: 1fr 200px;
 }
 .grid-cols-\[1fr\2c 400px\] {
   grid-template-columns: 1fr 400px;
-}
-.grid-cols-\[70px\2c 1fr\2c 1fr\] {
-  grid-template-columns: 70px 1fr 1fr;
-}
-.grid-cols-\[80px\2c 1fr\2c 1fr\] {
-  grid-template-columns: 80px 1fr 1fr;
-}
-.grid-cols-\[80px\2c 1fr\2c 90px\] {
-  grid-template-columns: 80px 1fr 90px;
-}
-.grid-cols-\[80px\2c 1fr\2c 100px\] {
-  grid-template-columns: 80px 1fr 100px;
-}
-.grid-cols-\[100px\2c 1fr\2c 100px\] {
-  grid-template-columns: 100px 1fr 100px;
 }
 .flex-row {
   flex-direction: row;
@@ -3763,16 +3751,6 @@ ul.nav-registration ul {
   border-right-width: calc(2px * var(--tw-divide-x-reverse));
   border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));
 }
-.divide-x > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(1px * var(--tw-divide-x-reverse));
-  border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-}
-.divide-y > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-y-reverse: 0;
-  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
-}
 .divide-black > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-divide-opacity));
@@ -3810,14 +3788,14 @@ ul.nav-registration ul {
 .rounded-md {
   border-radius: 0.375rem;
 }
+.rounded-none {
+  border-radius: 0px;
+}
 .rounded-sm {
   border-radius: 0.125rem;
 }
 .rounded-xl {
   border-radius: 0.75rem;
-}
-.rounded-none {
-  border-radius: 0px;
 }
 .border {
   border-width: 1px;
@@ -3833,9 +3811,6 @@ ul.nav-registration ul {
 }
 .border-l-4 {
   border-left-width: 4px;
-}
-.border-r {
-  border-right-width: 1px;
 }
 .border-dashed {
   border-style: dashed;
@@ -3870,10 +3845,6 @@ ul.nav-registration ul {
 .border-yellow-600 {
   --tw-border-opacity: 1;
   border-color: rgb(202 138 4 / var(--tw-border-opacity));
-}
-.border-gray-100 {
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
 .bg-black\/20 {
   background-color: rgb(0 0 0 / 0.2);
