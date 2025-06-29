@@ -1,0 +1,74 @@
+<div class="container mt-7 pb-10 px-2">
+
+    <div class="">
+
+        {% for key, row in params %}
+            <div class="collapse collapse-arrow bg-gray-50 mb-2 border-2">
+                <input type="radio" name="my-accordion" id="my-accordion-{{ key }}" /> 
+                <label class="text-2xl font-medium collapse-title" for="my-accordion-{{ key }}">{{ row.p_size }}</label>
+                <div class="flex space-x-8 collapse-content">
+
+                    <div class="w-1/3">
+                        <table class="table table-xs">
+                            <tbody>
+                                <tr>
+                                    <td>PR</td>
+                                    <td>{{ row.pr }}</td>
+                                </tr>
+                                <tr>
+                                    <td>LOADINDEX</td>
+                                    <td>{{ row.loadindex }}</td>
+                                </tr>
+                                <tr>
+                                    <td>SPEED RATING</td>
+                                    <td>{{ row.speed_rating }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="w-1/3">
+                        <table class="table table-xs">
+                            <tbody>
+                                <tr>
+                                    <td>SECTION WIDTH</td>
+                                    <td>{{ row.section_width }}</td>
+                                </tr>
+                                <tr>
+                                    <td>MAX.LOAD (kg)</td>
+                                    <td>{{ row.max_load }}</td>
+                                </tr>
+                                <tr>
+                                    <td>STANDARD RIM</td>
+                                    <td>{{ row.standard_rim }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="w-1/3">
+                        <table class="table table-xs">
+                            <tbody>
+                                <tr>
+                                    <td>OVERALL DIAMETER</td>
+                                    <td>{{ row.overall_diameter }}</td>
+                                </tr>
+                                <tr>
+                                    <td>PRESSURE (kpa)</td>
+                                    <td>{{ row.pressure }}</td>
+                                </tr>
+                                <tr>
+                                    <td>TREAD DEPTH (mm)</td>
+                                    <td>{{ row.tread_depth }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>   

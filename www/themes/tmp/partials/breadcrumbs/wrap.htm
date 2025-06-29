@@ -1,0 +1,15 @@
+<ul class="breadcrumbs">
+
+    <li><a href="/">Главная</a></li>
+
+    {% for item in items %}
+        <li>
+            {% if item.is_active %}
+                <span class="text-gray-50">{{ item.name }}</span>
+            {% else %}
+                <a href="{{ item.link }}">{{ item.name }}</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+
+</ul>

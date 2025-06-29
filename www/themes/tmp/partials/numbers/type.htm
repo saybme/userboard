@@ -1,0 +1,58 @@
+{% if item.type == 1 %}
+
+<div class="number-plate">
+    <div class="number-plate-left space-x-[2px]">
+        <div class="number-plate__letter" data-gos-nums="1">{{ item.props.series.0 }}</div>
+        <div class="">{{ item.props.number.0 }}</div>
+        <div class="">{{ item.props.number.1 }}</div>
+        <div class="">{{ item.props.number.2 }}</div>
+        <div class="number-plate__letter" data-gos-nums="5">{{ item.props.series.1 }}</div>
+        <div class="number-plate__letter" data-gos-nums="6">{{ item.props.series.2 }}</div>
+    </div>
+    <div class="number-plate-right">
+        <div class="flex-1" data-gos-nums="7">{{ item.props.region }}</div>
+        <div class="text-[.6em]">RUS</div>
+    </div>
+</div>
+
+{% endif %}
+
+{% if item.type == 2 %}
+
+<div class="number-plate max-w-[95px] flex-col">
+    <div class="flex text-center text-2xl/none px-3 py-1 font-bold w-full">
+        <div class="h-[38px] flex-1 flex items-center justify-center">{{ item.props.number | join('') }}</div>
+    </div>
+    <div class="flex text-xl font-bold">
+        <div class="w-1/2 flex px-3 ">
+            <div class="h-[38px] flex-1 flex items-center justify-center">{{ item.props.series | join('') }}</div>
+        </div>
+        <div class="w-1/2 relative">
+            <div class="absolute left-0 top-0 text-[.5rem] leading-none flex w-full items-center gap-2 -translate-y-[70%]">
+                <span class="">RUS</span>
+                <span class="block flex-1 bg-black h-[2px]"></span>
+            </div>       
+            <div class="absolute left-0 bottom-0 w-[2px] h-[calc(100%-8px)] bg-black"></div>         
+            <div class="h-[38px] flex items-center justify-center">{{ item.props.region }}</div>
+        </div>
+    </div>
+</div>  
+
+{% endif %}
+
+{% if item.type == 3 %}
+<div class="number-plate">
+    <div class="number-plate-left">
+        <div class="number-plate__letter" data-gos-nums="1">{{ item.props.series.0 }}</div>
+        <div class="number-plate__letter" data-gos-nums="2">{{ item.props.series.1 }}</div>
+        <div class="" data-gos-nums="3">{{ item.props.number.0 }}</div>
+        <div class="" data-gos-nums="4">{{ item.props.number.1 }}</div>
+        <div class="" data-gos-nums="5">{{ item.props.number.2 }}</div>
+        <div class="" data-gos-nums="6">{{ item.props.number.3 }}</div>
+    </div>
+    <div class="number-plate-right">
+        <div class="flex-1" data-gos-nums="7">{{ item.props.region }}</div>
+        <div class="text-[.6em]">RUS</div>
+    </div>
+</div>
+{% endif %}

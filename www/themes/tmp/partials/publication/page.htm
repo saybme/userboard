@@ -1,0 +1,11 @@
+<div class="border-t border-gray-10">
+    <div class="container">
+        {% partial 'breadcrumbs/wrap' items=page.breadcrumbs %}
+    </div>
+</div>
+
+<div class="container pt-2 relative z-10 pb-[9rem]">
+    <div class="text">
+        {{ page.content | raw }}
+    </div>
+</div>

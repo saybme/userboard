@@ -1,0 +1,12 @@
+url = "/faq/:link*"
+layout = "default"
+title = "Публикация"
+
+[dpublication]
+link = "{{ :link }}"
+type = "getPage"
+==
+
+{% set dpublication = dpublication.dpublication %}
+
+{% partial 'publication/page' page=dpublication %}

@@ -1,5 +1,5 @@
 columns:
-    num:
+    carnumber:
         label: Номер
         type: text
     is_active:

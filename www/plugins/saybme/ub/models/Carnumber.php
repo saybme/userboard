@@ -1,13 +1,15 @@
 <?php namespace Saybme\Ub\Models;
 
 use Model;
+use Input;
+use Log;
 
 class Carnumber extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
     protected $fillable = [
-        'num',
+        'number',
         'user',
         'type',
         'pay',
@@ -20,7 +22,9 @@ class Carnumber extends Model
         'props',
         'price',
         'address',
-        'is_active'
+        'is_active',
+        'series',
+        'region'
     ];
 
     protected $jsonable = ['address','props'];
@@ -28,7 +32,6 @@ class Carnumber extends Model
     public $table = 'saybme_ub_carnumbers';
     
     public $rules = [
-        'num' => 'required',
         'user' => 'required'
     ];
 
@@ -40,6 +43,23 @@ class Carnumber extends Model
         return $query->where('is_active', true);
     }  
 
+    public function beforeCreate(){
+        
+        // Серия
+        $series = Input::get('props.series');
+        $this->series = implode('', $series);
+
+        // Номер
+        $number = Input::get('props.number');
+        $this->number = implode('', $number);
+
+        // Регион
+        $region = Input::get('props.region');
+        $this->region = $region;
+
+    }
+
+
     public function getLinkAttribute(){
         $arr[] = 'gossnumbers';
         $arr[] = $this->id;
@@ -47,20 +67,45 @@ class Carnumber extends Model
         return url($url);
     }
 
-    public function getCarNumberAttribute(){
-        if(!$this->num) return;
-        $arr = explode('|', $this->num);
-        if(count($arr) <= 2) return;
+    public function getCarNumberAttribute(){    
+
+        $series = null;
+
+        if(key_exists('series', $this->props)){
+            // Серия        
+            $series = implode('', $this->props['series']);
+            $arr['series'] = substr($series, 0, 1);    
+        }
+
+        if(key_exists('number', $this->props)){
+            // Номер
+            $number = implode('', $this->props['number']);
+            $arr['number'] = $number;    
+        }
+
+          
         
-        $data[0] = $arr[0] .' '. $arr[1] .' '. $arr[2];
-        $data[1] = $arr[3];
+        // Серия
+        $arr['series_2'] = substr($series, 1, 2);
         
-        return collect($data);
+
+        if(key_exists('region', $this->props)){
+            // Регион
+            $arr['region'] = $this->props['region'];   
+        }
+        
+        return implode('-', $arr);
     }
 
     public $attachOne = [
         'photo' => \System\Models\File::class
     ];
     
+    public function getTypeOptions(){
+        $options[1] = 'Авто';
+        $options[2] = 'Мото';
+        $options[3] = 'Прицеп';
+        return $options;
+    }
 
 }

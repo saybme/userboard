@@ -6,6 +6,7 @@ use Saybme\Ub\Classes\Rules\PhoneRule;
 use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Models\Formvalue;
 use System\Models\File;
+use Input;
 
 /**
  * Plugin class
@@ -27,8 +28,15 @@ class Plugin extends PluginBase
                 'ubtitle' => [$this, 'ubTitle'],
                 'getPhoto' => [$this, 'getPhoto'],
                 'dob' => [$this, 'getDob'],
+                'get' => [$this, 'getParams'],
             ]
         ];
+    }
+
+    // Параметры
+    public function getParams($value = ''){
+        if(!$value) return;
+        return Input::get('type');
     }
 
     // Дата рождения

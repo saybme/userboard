@@ -1,0 +1,35 @@
+<form action="" data-request="onFilter" id="formFilter">
+
+    <div class="flex gap-4 items-end border flex-wrap rounded-md border-gray-10 px-4 py-4 bg-gray-10/60">        
+
+        {% if vendors | length %}
+            <div class="space-y-[3px]">
+                <label for="vendor" class="block text-xs">Производитель</label>
+                <select name="vendor" class="select select-bordered select-sm w-full" onchange="formFilter()" id="">
+                    <option value="">-- Выбрать --</option>
+                    {% for vendor in vendors %}
+                        <option value="{{ vendor.id }}">{{ vendor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endif %}        
+
+        <div class="flex gap-4 flex-wrap flex-1">
+            {% for rows in filters %}
+                <div class="space-y-[3px]">
+                    <label for="option_{{ rows.code }}" class="block text-xs">{{ rows.name }}</label>
+                    <select name="{{ rows.code }}" id="option_{{ rows.code }}" class="select select-bordered select-sm" onchange="formFilter()">
+                        <option value="">-- Выбрать --</option>
+                        {% for item in rows.values %}
+                            <option value="{{ item.value }}" {{ item.active == true ? 'selected' : '' }}>{{ item.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button class="btn btn-sm flex-none btn-warning" onclick="resetFormFilter()">x Очистить фильтр</button>
+
+    </div>
+
+</form>

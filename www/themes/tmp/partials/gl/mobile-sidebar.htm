@@ -1,0 +1,45 @@
+[staticMenu mobileMenu]
+code = "footerMenu"
+==
+<?php
+use Saybme\Dvioil\Classes\Catalog\CatalogClass;
+
+function onStart(){
+    $this['menu'] = CatalogClass::getMenu();
+}
+?>
+==
+<div class="fixed left-0 top-0 w-full h-screen z-[99999] bg-black/50 hidden" id="mmSidebar">
+
+    <div class="w-full max-w-80 bg-white h-full relative">
+
+        <button onclick="closeMenu();" class="absolute right-0 top-5 translate-x-[150%] text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>              
+        </button>
+
+        <div class="py-5 border-b px-5">
+            <a href="/" class="block">
+                <img src="{{ global.header_logo.path }}" alt="" class="block h-auto w-full">
+            </a>
+        </div>
+
+        <div class="px-5 py-5">
+        
+            <ul>
+                {% partial mobileMenu ~ "::items" items=mobileMenu.menuItems %}
+            </ul>
+        
+            <nav class="block mt-4">
+                <h3 class="text-lg font-bold">Каталог</h3>
+                <ul class="menu mt-4 px-0 flex flex-col gap-y-2 font-semibold">
+                    {% partial 'menu/collapsible-tree' items=menu %}
+                </ul>
+            </nav>
+
+        </div>
+
+    </div>
+
+</div>

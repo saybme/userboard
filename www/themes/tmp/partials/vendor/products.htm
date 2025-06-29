@@ -1,0 +1,19 @@
+<div class="grid grid-cols-2 xl:grid-cols-3 gap-4 mb-4">
+    {% for item in products %}
+        {% partial 'catalog/product-item' item=item %}
+    {% endfor %}
+</div>
+
+{% if products.hasMorePages %}
+    <div class="flex justify-center">
+        <button
+            class="btn btn-secondary"
+            data-request="onAjax"
+            data-request-update="{ _self: '@' }"
+            data-request-success="this.parentElement.remove()"
+            data-request-data="{ page: {{ products.currentPage + 1 }} }"
+            data-attach-loading>
+            Показать больше
+        </button>
+    </div>
+{% endif %}

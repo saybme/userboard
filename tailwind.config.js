@@ -59,7 +59,8 @@ module.exports = {
         'gilroy-regular': ['Gilroy Regular', ...defaultTheme.fontFamily.sans],
         'gilroy-bold': ['Gilroy Extra Bold', ...defaultTheme.fontFamily.sans],
         'gilroy-medium': ['Gilroy Medium', ...defaultTheme.fontFamily.sans],
-        'bebas': ['"Bebas Neue"', ...defaultTheme.fontFamily.sans]
+        'bebas': ['"Bebas Neue"', ...defaultTheme.fontFamily.sans],
+        'manrope': ['"Manrope", sans-serif', ...defaultTheme.fontFamily.sans]
       },
       backgroundImage: {
         'sota-small': "url('../images/bg/small-sota.svg')",

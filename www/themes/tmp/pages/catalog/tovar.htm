@@ -1,0 +1,10 @@
+url = "/products/:slug"
+layout = "default"
+title = "Товар"
+
+[catalog]
+slug = "{{ :slug }}"
+category = 1
+type = "getProduct"
+==
+{% component 'catalog' %}

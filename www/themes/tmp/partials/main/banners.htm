@@ -1,0 +1,27 @@
+[viewBag]
+==
+<?php
+use Saybme\Dvioil\Models\Banner;
+
+function onStart(){
+    $this['banners'] = Banner::active()->get();
+}
+?>
+==
+
+<div class="f-carousel hidden" id="mainCarousel">
+    {% for item in banners %}
+        <div class="f-carousel__slide" style="background: {{ item.props.bg ?: '#fff' }};">            
+            <picture class="aspect-w-16 aspect-h-6 block">
+                <source srcset="{{ item.photo.thumb(600, 600, {mode: 'crop'}) }}" media="(max-width: 600px)">
+                <img data-lazy-src="{{ item.photo.thumb(false,800) }}" alt="{{ item.name }}" class="block size-full object-contain">
+            </picture>
+        </div>
+    {% endfor %}
+</div>
+
+{% put scripts %}
+    <script>
+        mainCarousel();
+    </script>
+{% endput %}

@@ -32,7 +32,41 @@ fields:
         span: full
         default: 1
         type: checkbox
-    num:
-        label: 'Номер заявки'
-        span: auto
+    type:
+        label: Тип 
+        type: dropdown
+    props[series][0]:
+        label: 'Серия'
+        span: row
         type: text
+        spanClass: col-1
+    props[number][0]:
+        label: 'Номер'
+        span: row
+        type: text
+        spanClass: col-1
+    props[number][1]:
+        label: 'Номер'
+        span: row
+        type: text
+        spanClass: col-1
+    props[number][2]:
+        label: 'Номер'
+        span: row
+        type: text
+        spanClass: col-1
+    props[series][1]:
+        label: 'Серия'
+        span: row
+        type: text
+        spanClass: col-1
+    props[series][2]:
+        label: 'Серия'
+        span: row
+        type: text
+        spanClass: col-1
+    props[region]:
+        label: 'Регион'
+        span: row
+        type: text
+        spanClass: col-1

@@ -1,0 +1,20 @@
+{% for item in items %}
+    <li class="p-0">       
+
+        {% if item.children | length > 0 %}
+
+            <details class="">
+                <summary class="text-base p-0 hover:bg-none hover:text-blue-1">{{ item.name }}</summary>
+                <ul class="text-sm py-0 px-0 m-0">
+                    {% partial 'menu/tree' items=item.children %}   
+                </ul>
+            </details>
+
+        {% else %}
+
+            <a href="{{ item.link }}">{{ item.name }}</a>
+
+        {% endif %}
+
+    </li>
+{% endfor %}

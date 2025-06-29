@@ -1,0 +1,11 @@
+url = "/faq"
+layout = "default"
+title = "База данных"
+
+[dpublication]
+link = "{{ :link }}"
+type = "getAll"
+==
+{% set dpublication = dpublication.dpublication %}
+
+{% partial "publication/wrap" items=dpublication %}

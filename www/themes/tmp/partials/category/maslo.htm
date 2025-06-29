@@ -1,0 +1,25 @@
+<div class=" bg-blue/5">
+    <div class="container py-1 lg:py-3">
+        {% partial 'breadcrumbs/wrap' items=breadcrumbs %}
+    </div>
+</div>
+
+<div class="container mt-7 pb-16">   
+    
+     <h1 class="title-h1">{{ this.page.title }}</h1>
+     
+     <div class="mt-5 grid grid-cols-6 relative z-10 gap-4">
+        {% for item in brands %}
+            <div class="">
+                <a href="" class="block border-gray-50 border aspect-w-8 aspect-h-3 bg-white rounded-lg">
+                    <img src="{{ item.logo.path }}" alt="" class="block size-full object-contain">
+                </a>
+            </div>
+        {% endfor %}
+     </div>
+
+    <div class="mt-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-x-3 lg:gap-x-6 gap-y-6">
+        {% partial 'catalog/products' items=items %}           
+    </div>
+
+</div>

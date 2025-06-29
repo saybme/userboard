@@ -1,0 +1,28 @@
+[catalog mproducts]
+slug = "{{ :slug }}"
+category = 1
+type = "randomProducts"
+==
+<div class="container py-14 px-2">
+    <h3 class="section-title text-center">
+        <a href="/products">Каталог</a>
+    </h3>
+    <div class="mt-6">
+        {% set products = mproducts.catalog %}
+        
+        <div class="f-carousel relative z-10" id="main-products">
+            {% for item in products %}
+                <div class="f-carousel__slide">
+                    {% partial 'catalog/product-item' item=item %}
+                </div>
+            {% endfor %}
+        </div>        
+       
+    </div>
+</div>
+
+{% put scripts %}
+    <script>
+        randomCarousel();
+    </script>
+{% endput %}

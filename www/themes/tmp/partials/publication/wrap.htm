@@ -1,0 +1,51 @@
+[viewBag]
+==
+<?php
+function onStart(){
+    $breadcrumbs[0]['name'] = $this->page->title;
+    $breadcrumbs[0]['is_active'] = true;
+    $this['breadcrumbs'] = $breadcrumbs;
+}
+?>
+==
+<div class="border-t border-gray-10 px-2">
+    <div class="container">
+        {% partial 'breadcrumbs/wrap' items=breadcrumbs %}
+    </div>
+</div>
+
+<div class="px-2">
+    <div class="container pt-2 relative z-10 pb-[9rem] ">
+        <h1 class="text-2xl sm:text-3xl font-semibold mb-8">{{ this.page.title }}</h1>
+        <div class="">
+            {% for item in items %}            
+                <div class="sm:flex amin-item">
+                    <a href="{{ item.url }}" class="size-[50px] sm:size-[80px] flex-none sm:mr-5 rounded-md overflow-hidden block float-right border border-gray-10 shadow-lg">
+                        <img src="{{ item.preview.thumb(80,80,{mode:'crop'}) }}" class="block size-full object-cover shadow-lg" alt="">
+                    </a>
+                    <div class="flex-1">
+                        <div class="text-xs sm:text-xs/none text-gray-50 flex items-center mb-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-2 sm:size-3 mr-1 flex-none"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" /></svg>
+                            {{ item.created_at | date('d.m.Y год') }}
+                        </div>
+                        <h2 class="text-sm sm:text-lg lg:text-xl font-semibold">
+                            <a href="{{ item.url }}" title="{{ item.title }}" class="hover:underline hover:text-red">{{ item.title }}</a>
+                        </h2>
+                        {% if item.introtext %}
+                            <div class="text-[.6rem] sm:text-xs lg:text-sm mt-1">
+                                {{ item.introtext }}
+                            </div>
+                        {% endif %}
+                        <div class="mt-2">
+                            <a href="{{ item.url }}" class="text-red underline hover:no-underline flex gap-1 items-center text-xs sm:text-sm lg:text-base">
+                                Подробнее
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4"><path fill-rule="evenodd" d="M2 8a.75.75 0 0 1 .75-.75h8.69L8.22 4.03a.75.75 0 0 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06-1.06l3.22-3.22H2.75A.75.75 0 0 1 2 8Z" clip-rule="evenodd" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>    
+                <hr class="my-5 border-gray-10" >       
+            {% endfor %}
+        </div>
+    </div>
+</div>

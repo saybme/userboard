@@ -72,7 +72,7 @@ class Uservises extends \Cms\Classes\ComponentBase
 
         $tmp = 'servises/page';
         $slug = $this->property('slug');
-        $servise = Servise::active()->where('url', $slug)->first();
+        $servise = Servise::active()->where('url', $slug)->first();        
 
         if(!$servise) return;
 
@@ -84,6 +84,8 @@ class Uservises extends \Cms\Classes\ComponentBase
         $options['page'] = $servise;
         $options['breadcrumbs'] = $this->getBreadcrumbs($servise);
         $options['servises'] = $this->getAllServises();
+
+        
 
         return $this->renderPartial($tmp, $options);
     }

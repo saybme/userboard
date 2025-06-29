@@ -678,3 +678,34 @@ window.refreshBoxInputs = function(id){
     })
     
 }
+
+// Применение гос номеров
+window.gosNumInput = function(el){
+    let value = el.getAttribute('data-num');
+    let div = document.querySelector('[data-gos-nums="'+value+'"]');
+    el.value = el.value.slice(0,1);
+    div.innerHTML = el.value;
+}
+
+// Применение гос номеров регион
+window.gosNumInputRegion = function(el){
+    let value = el.getAttribute('data-num');
+    let div = document.querySelector('[data-gos-nums="'+value+'"]');
+    el.value = el.value.slice(0,3);
+    div.innerHTML = el.value;
+}
+
+// Пошаговая форма
+window.stepFormInput = function(input){
+    let maxlength = input.getAttribute('maxlength');
+
+    if(input.value.length == maxlength){
+        const event = document.dispatchEvent(new KeyboardEvent('keydown', {
+            key: 'Tab',
+            code: 'Tab',
+        }));
+        input.dispatchEvent(event);
+    };
+
+    
+}

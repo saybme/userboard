@@ -312,3 +312,18 @@ v1.0.104:
 v1.0.105:
     - 'Updated table saybme_ub_ubforms'
     - builder_table_update_saybme_ub_ubforms_8.php
+v1.0.106:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_9.php
+v1.0.107:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_10.php
+v1.0.108:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_11.php
+v1.0.109:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_12.php
+v1.0.110:
+    - 'Updated table saybme_ub_carnumbers'
+    - builder_table_update_saybme_ub_carnumbers_13.php

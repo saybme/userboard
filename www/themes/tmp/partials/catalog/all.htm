@@ -1,0 +1,45 @@
+[viewBag]
+==
+<?php
+function onStart(){
+    $breadcrumbs[0]['name'] = $this->page->title;
+    $breadcrumbs[0]['is_active'] = true;
+    $this['breadcrumbs'] = $breadcrumbs;
+}
+?>
+==
+<div class=" bg-blue/5">
+    <div class="container py-1 lg:py-3">
+        {% partial 'breadcrumbs/wrap' items=breadcrumbs %}
+    </div>
+</div>
+
+<div class="px-2 pb-16 mt-7">
+
+    <div class="container relative z-10">    
+
+        <div class="space-y-11">
+            {% for row in groups %}
+                <div class="">
+                    <h2 class="section-title text-center">{{ row.name }}</h2> 
+                    <div class="categories mt-6">
+                        {% for item in row.children %}
+                            {% if item.is_active %}
+                                <div class="category-item-anim">
+                                    <a href="{{ item.link }}" class="category-item">
+                                        <div class="">
+                                            <img src="{{ item.photo.thumb(false,45) }}" alt="{{ item.name }}" class="category-item-icon">
+                                        </div>
+                                        <h2 class="category-item-h2">{{ item.name }}</h2>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>                   
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>

@@ -22,12 +22,12 @@
 
             <fieldset class="border px-4 py-6 rounded-lg">
                 <legend class="text-2xl font-bold text-blue-4 px-4">Доверитель</legend>
-                <div class="mb-4 grid grid-cols-[1fr,400px] gap-4">
+                <div class="mb-4 grid gap-4 table_l:grid-cols-[1fr,200px]">
                     <div class="">
                         {% partial 'inputs/text' input=ub6c1d1f69488b64ebb952181bcad0c068 %}
                     </div>
                     <div class="">
-                        {% partial 'inputs/dob' input=ubda395266f3e666775194ca2f18990227 %}
+                        {% partial 'inputs/text' input=ubda395266f3e666775194ca2f18990227 %}
                     </div>
                 </div> 
                 <div class="">
@@ -127,10 +127,7 @@
                                 </div>
                                 <div class="">
                                     {% partial 'inputs/text' input=ubbb5bbcc81eec143509c6a24ce1450f02 %}
-                                </div>                        
-                                <div class="">
-                                    {% partial 'inputs/text' input=ub2dc25dd34f90a236e5034fc8d12fdde9 %}
-                                </div>
+                                </div>   
                             </div>
                         </div>
                     </div>  
@@ -140,12 +137,12 @@
             <fieldset class="border px-4 py-6 rounded-lg">
                 <legend class="text-2xl font-bold text-blue-4 px-4">Доверяю</legend>
                 <div class="grid gap-4">
-                    <div class="grid grid-cols-[1fr,400px] gap-4">
+                    <div class=" grid gap-4 table_l:grid-cols-[1fr,200px]">
                         <div class="">
                             {% partial 'inputs/text' input=ube4be515d9bc1071e9a7f34e2262052ea %}
                         </div>
                         <div class="">
-                            {% partial 'inputs/dob' input=ubac2bdd85abc25461d186687b7fe58c9b %}
+                            {% partial 'inputs/text' input=ubac2bdd85abc25461d186687b7fe58c9b %}
                         </div>
                     </div>
                     <div class="">

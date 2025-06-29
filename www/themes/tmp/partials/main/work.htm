@@ -1,0 +1,35 @@
+[viewBag]
+==
+<?php
+use Tailor\Models\EntryRecord;
+
+function onStart(){
+    $this['works'] = EntryRecord::inSectionUuid('7b0a13dd-f9ae-4061-a3cd-7323e49a2add')->get();
+}
+?>
+==
+<div class="bg-gray py-5 sm:py-9 pb-16">
+
+    <div class="lg:container px-2 lg:px-0">
+
+        <div class="text-center">
+            <h3 class="section-title">Работать с нами легко и просто:</h3>
+            <p class="section-intro ">ВЫСОКОЕ КАЧЕСТВО - ПРИЯТНАЯ ЦЕНА</p>
+        </div>
+
+        <div class="mt-14 flex sm:flex-wrap sm:justify-center gap-y-14 overflow-auto">
+            
+            {% for item in works %}
+                <div class="w-[calc(50%-8%)] sm:w-1/3 lg:w-1/4 xl:w-1/5 px-4 text-center text-xs sm:text-base xl:text-lg flex-none">
+                    <div class="h-[45px] sm:h-[95px] ">
+                        <img src="{{ item.icon.path }}" alt="{{ item.title }}" class="block object-contain mx-auto size-full">
+                    </div>
+                    <p class="mt-3">{{ item.title }}</p>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>

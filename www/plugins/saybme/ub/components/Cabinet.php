@@ -153,7 +153,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
         // }
 
        
-
+        //dd($tpl);
        
         // Страница форма
         if($page->form){

@@ -1,0 +1,38 @@
+<div class=" bg-blue/5">
+    <div class="container py-1 lg:py-3">
+        {% partial 'breadcrumbs/wrap' items=breadcrumbs %}
+    </div>
+</div>
+
+<div class="container flex gap-x-9 mt-7 items-start pb-16 px-2 relative z-10">
+
+    <div class="w-[300px] bg-gray-10 relative z-10 hidden lg:block flex-none">
+        <div class="sticky top-0">
+            {% partial 'catalog/sidebar' %}
+        </div>
+    </div>
+    
+    <div class="w-full lg:w-[calc(100%-300px)]">
+
+        <div class="text">
+            {{ page.description | raw }}
+        </div>
+
+        {% if page.boxes | length %}
+            <hr class="my-6">
+            <div class="">
+                {% partial 'vendor/boxes' items=page.boxes %}                
+            </div>
+        {% endif %}
+
+        {% if products | length %}
+            <hr class="my-6">
+            <h4 class="text-xl font-semibold mb-4">Продукция:</h4>
+            <div class="">
+                {% ajaxPartial 'vendor/products' products=products %}
+            </div>            
+        {% endif %}        
+
+    </div>
+
+</div>

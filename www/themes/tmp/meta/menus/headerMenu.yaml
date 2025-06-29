@@ -1,13 +1,9 @@
 items:
     -
         title: Госномера
-        nesting: null
         type: url
-        url: /servises/kupit-avto-nomer
+        url: /servises/transportnye-uslugi/kupit-gos-nomer
         code: ''
-        reference: null
-        cmsPage: null
-        replace: null
         viewBag:
             isHidden: '0'
             cssClass: ''

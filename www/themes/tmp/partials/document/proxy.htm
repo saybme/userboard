@@ -31,14 +31,14 @@
                 <hr class="my-2" >
                 <div class="mb-2">
                     <div class=""><b>ФИО:</b> {{ document.data.ub6c1d1f69488b64ebb952181bcad0c068 }}</div>
-                    <div class=""><b>Дата рождения:</b> {{ document.data.ubf16e6c5c4067950c35b18c5645829f55 | date('d.m.Y год.') }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ubda395266f3e666775194ca2f18990227 | date('d.m.Y год.') }}</div>
                 </div>
                 <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
                 <hr class="my-2" >
                 <div class="mb-2">
                     <div class=""><b>Серия:</b> {{ document.data.ub3a56a90d676cbcd6cbc460675b63e6a3 }}</div>   
                     <div class=""><b>Номер:</b> {{ document.data.ub5704d2a9d9a835afdd7ac78ff4fb3235 }}</div>  
-                    <div class=""><b>Когда:</b> {{ document.data.ub90192c39f01634de36d7faa2349af028 }}</div>  
+                    <div class=""><b>Когда:</b> {{ document.data.ub90192c39f01634de36d7faa2349af028 | date('d.m.Y год.') }}</div>  
                     <div class=""><b>Кем выдан:</b> {{ document.data.ubf5bc8bce0dc63ad99ed77fc12d5c7d13 }}</div>  
                     <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ub8d6f0bfa328f3460b13375454056f1cd }}</div> 
                 </div>
@@ -69,39 +69,33 @@
                 </div>
             </div>
 
-            <div class="bg-white p-4 rounded-lg">
-                <h4 class="text-xl font-semibold text-blue-2">Свидетельство о регистрации транспортного средства (СТС)</h4>
-                <hr class="my-2" >
-                <div class="mb-2">
-                    <div class=""><b>Серия:</b> {{ document.data.ubc9dd364aa98f126fff23f52f02967ae1 }}</div>
-                    <div class=""><b>Номер:</b> {{ document.data.ubef2850190a6a41374f1935612e9834d7 }}</div>
-                    <div class=""><b>Дата выдачи:</b> {{ document.data.ub58dfaa105321f3f93794f356c845d442 | date('d.m.Y год.') }}</div>
-                    <div class=""><b>Выдано:</b> {{ document.data.ubbb5bbcc81eec143509c6a24ce1450f02 }}</div>
+            {% if document.data.ubc9dd364aa98f126fff23f52f02967ae1 %}
+                <div class="bg-white p-4 rounded-lg">
+                    <h4 class="text-xl font-semibold text-blue-2">Свидетельство о регистрации транспортного средства (СТС)</h4>
+                    <hr class="my-2" >
+                    <div class="mb-2">
+                        <div class=""><b>Серия:</b> {{ document.data.ubc9dd364aa98f126fff23f52f02967ae1 }}</div>
+                        <div class=""><b>Номер:</b> {{ document.data.ubef2850190a6a41374f1935612e9834d7 }}</div>
+                        <div class=""><b>Дата выдачи:</b> {{ document.data.ub58dfaa105321f3f93794f356c845d442 | date('d.m.Y год.') }}</div>
+                        <div class=""><b>Выдано:</b> {{ document.data.ubbb5bbcc81eec143509c6a24ce1450f02 }}</div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg">
-                <h4 class="text-xl font-semibold text-blue-2">Состоит на регистрационном учете в ГИБДД</h4>
-                <hr class="my-2" >
-                <div class="mb-2">
-                    <div class=""><b>Состоит на регистрационном учете в ГИБДД:</b> {{ document.data.ube36a04d0ce3711fbdebb8b849f37ddfc | formvalue }}</div>
-                    <div class=""><b>Наименование регистрационного подразделения ГИБДД:</b> {{ document.data.ub2dc25dd34f90a236e5034fc8d12fdde9 }}</div>
-                </div>
-            </div>
+            {% endif %}
+            
 
             <div class="bg-white p-4 rounded-lg">
                 <h4 class="text-xl font-semibold text-blue-2">Доверяю</h4>
                 <hr class="my-2" >
                 <div class="mb-2">
                     <div class=""><b>ФИО:</b> {{ document.data.ube4be515d9bc1071e9a7f34e2262052ea }}</div>
-                    <div class=""><b>Дата рождения:</b> {{ document.data.ubac2bdd85abc25461d186687b7fe58c9b | dob }}</div>
+                    <div class=""><b>Дата рождения:</b> {{ document.data.ubac2bdd85abc25461d186687b7fe58c9b | date('d.m.Y год') }}</div>
                 </div>
                 <h4 class="text-lg font-semibold text-blue-2">паспорт</h4>
                 <hr class="my-2" >
                 <div class="mb-2">
                     <div class=""><b>Серия:</b> {{ document.data.ub8f7845d1d51ae3ea37eb12dbe6f9a22c }}</div>
                     <div class=""><b>Номер:</b> {{ document.data.ubc0402fce54002d91d5e50c37960c46d8 }}</div>
-                    <div class=""><b>Выдан:</b> {{ document.data.ub0b1cd6942e14e39e9a66a6af838b349b }}</div>
+                    <div class=""><b>Выдан:</b> {{ document.data.ub0b1cd6942e14e39e9a66a6af838b349b | date('d.m.Y год') }}</div>
                     <div class=""><b>Кем выдан:</b> {{ document.data.ub4b5a1f853edf499f674416dc883eb390 }}</div>
                     <div class=""><b>Адрес регистрации (прописки):</b> {{ document.data.ub647d332843cb6b4c61fe6ab5efc0b9ff }}</div>
                 </div>

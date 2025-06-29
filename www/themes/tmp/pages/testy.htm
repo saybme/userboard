@@ -1,0 +1,21 @@
+title = "Тесты"
+layout = "default"
+url = "/testy"
+is_hidden = 1
+==
+<?php
+use Saybme\Dvioil\Models\Category;
+
+function onStart(){
+
+    $page = Category::find(20);
+
+    $a = array('meta_title' => null,'keywords' => null,'meta_description' => null);
+    $b = $page->props;   
+    
+
+    return array_merge($a, $b);
+
+}
+?>
+==

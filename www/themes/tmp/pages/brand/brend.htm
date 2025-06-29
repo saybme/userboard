@@ -1,0 +1,10 @@
+url = "/brend/:slug"
+layout = "default"
+title = "Бренд"
+
+[catalog]
+slug = "{{ :slug }}"
+category = 1
+type = "getVendorPage"
+==
+{% component 'catalog' %}

@@ -1,0 +1,15 @@
+<div class=" bg-blue/5">
+    <div class="container py-1 lg:py-3">
+        {% partial 'breadcrumbs/wrap' items=breadcrumbs %}
+    </div>
+</div>
+
+<div class="px-2 relative mt-7 z-10 pb-16">   
+
+    <div class="container">
+        <div class="text">
+            {{ page.content | content }}
+        </div>
+    </div>
+
+</div>

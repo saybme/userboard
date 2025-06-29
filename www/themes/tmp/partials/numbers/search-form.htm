@@ -1,0 +1,103 @@
+[viewBag]
+==
+<?php
+function onStart(){
+    
+    $types[1]['title'] = 'Авто';
+    $types[2]['title'] = 'Мото';
+    $types[3]['title'] = 'Прицеп';
+
+    $this['types'] = $types;
+    $this['activeType'] = Input::get('type') ?: 1;
+}
+?>
+==
+
+
+<form action="" class="block">
+
+    <input type="hidden" name="type" value="{{ activeType }}">
+
+    <div class="bg-white px-4 py-6 rounded-md border border-gray-100 space-y-5">
+
+        <h3 class="text-3xl font-bold mb-5 text-blue-2 uppercase">Подобрать номер</h3>        
+
+        <div class="gos-number-types">
+            {% for key, item in types %}                
+                <a href="?type={{ key }}" class="gos-number-type {{ activeType == key ? 'active' : '' }}">{{ item.title }}</a> 
+            {% endfor %}
+        </div>         
+
+        <div class="flex justify-between items-end">
+            <div class="">
+                {% if activeType == 1 %}
+                    <div class="border-2 border-black rounded-md overflow-hidden number-plate max-w-none">
+                        <div class="p-2 flex items-end gap-2">
+                            <input type="text" name="series[]" value="{{ numberdata.series.0 }}" maxlength="1" tabindex="1" oninput="stepFormInput(this)" class="input input-sm input-bordered w-[60px] text-center" placeholder="*">
+                            <input type="text" name="number" value="{{ numberdata.number }}" maxlength="3" tabindex="2" oninput="stepFormInput(this)" class="input text-xl input-bordered text-center w-[150px]" placeholder="***">
+                            <input type="text" name="series[]" value="{{ numberdata.series.1 }}" maxlength="2" tabindex="3" oninput="stepFormInput(this)" class="input input-sm input-bordered w-[60px] text-center" placeholder="**">
+                        </div>
+                        <div class="p-2 border-l-2 border-black flex flex-col gap-1">
+                            <input type="text" name="region" value="{{ numberdata.region }}" maxlength="3" tabindex="4" class="input input-sm input-bordered w-[60px] text-center" placeholder="***">
+                            <div class="text-xs text-center flex leading-none justify-center">
+                                <div class="me-1">RUS</div>
+                                <div class="w-[22px] border border-black flex flex-col">
+                                    <div class="w-full bg-white flex-1"></div>
+                                    <div class="w-full bg-blue-1 flex-1"></div>
+                                    <div class="w-full bg-red-1 flex-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if activeType == 2 %}
+                    <div class="border-2 border-black rounded-md overflow-hidden number-plate max-w-none w-[180px] flex-col">
+                        <div class="p-2 flex items-end gap-2 flex-col">
+                            <input type="text" name="number" value="{{ numberdata.number }}" maxlength="4" tabindex="1" oninput="stepFormInput(this)" class="input text-xl input-bordered text-center w-full" placeholder="****">
+                        </div>
+                        <div class=" flex">
+                            <div class="w-1/2 px-2 pb-2">
+                                <input type="text" name="series[]" value="{{ numberdata.series.1 }}" maxlength="2" tabindex="3" oninput="stepFormInput(this)" class="input input-bordered w-full text-center" placeholder="**">
+                            </div>
+                            <div class="w-[2px] bg-black flex-none"></div>
+                            <div class="w-1/2 px-2 pb-2 relative">
+                                <div class="text-xs flex leading-none mb-1">
+                                    <div class="me-1">RUS</div>
+                                    <div class="w-[22px] border border-black flex flex-col">
+                                        <div class="w-full bg-white flex-1"></div>
+                                        <div class="w-full bg-blue-1 flex-1"></div>
+                                        <div class="w-full bg-red-1 flex-1"></div>
+                                    </div>
+                                </div>
+                                <input type="text" name="region" value="{{ numberdata.region }}" maxlength="3" tabindex="4" class="input input-sm input-bordered w-full text-center" placeholder="***">
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if activeType == 3 %}
+                    <div class="border-2 border-black rounded-md overflow-hidden number-plate max-w-none">
+                        <div class="p-2 flex items-end gap-2">
+                            <input type="text" name="series[]" value="{{ numberdata.series.0 }}" maxlength="1" tabindex="1" oninput="stepFormInput(this)" class="input input-sm input-bordered w-[60px] text-center" placeholder="*">
+                            <input type="text" name="number" value="{{ numberdata.number }}" maxlength="4" tabindex="2" oninput="stepFormInput(this)" class="input text-xl input-bordered text-center w-[150px]" placeholder="****">
+                        </div>
+                        <div class="p-2 border-l-2 border-black flex flex-col gap-1">
+                            <input type="text" name="region" value="{{ numberdata.region }}" maxlength="3" tabindex="4" class="input input-sm input-bordered w-[60px] text-center" placeholder="***">
+                            <div class="text-xs text-center flex leading-none justify-center">
+                                <div class="me-1">RUS</div>
+                                <div class="w-[22px] border border-black flex flex-col">
+                                    <div class="w-full bg-white flex-1"></div>
+                                    <div class="w-full bg-blue-1 flex-1"></div>
+                                    <div class="w-full bg-red-1 flex-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <button class="btn btn-red max-h-none h-auto btn-xl text-xl">Подобрать</button>
+        </div>
+        
+    </div>  
+
+</form>
+

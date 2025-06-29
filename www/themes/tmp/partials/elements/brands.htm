@@ -1,0 +1,9 @@
+<div class="brands-logo mt-5 sm:mt-10" id="brands-logo">
+    {% for item in element.data %}
+        <div class="brands-logo-item">
+            <a href="{{ item.link | link }}" class="aspect-w-16 aspect-h-8 block ">
+                <img src="{{ item.image | media | resize(false,150) ?: global.header_logo.path }}" alt="{{ item.name }}" class="brand-logo">
+            </a>
+        </div>
+    {% endfor %}
+</div>

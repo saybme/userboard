@@ -1,0 +1,30 @@
+url = "/brands"
+layout = "default"
+title = "Бренды"
+
+[dvibrand]
+slug = "{{ :slug }}"
+type = "getAll"
+==
+{% set dvibrand = dvibrand.dvibrand %}
+
+<div class="pt-6 sm:pt-[6rem] pb-[9rem] px-2">
+
+    <div class="container relative z-10">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-7">
+            {% for item in dvibrand %}
+                <div class="">
+                    <a href="{{ item.link }}" title="{{ item.name }}" class="flex flex-col bg-white group hover:text-red">
+                        <div class="aspect-w-12 aspect-h-9 border rounded-md overflow-hidden shadow-lg group-hover:border-red">
+                            <div class="p-6">
+                                <img src="{{ item.logo.thumb(false, 200) }}" alt="{{ item.name }}" class="block size-full object-contain">
+                            </div>
+                        </div>
+                        <h2 class="text-sm lg:text-lg mt-2 text-center font-semibold">{{ item.name }}</h2>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,77 @@
+[catalog maslo]
+slug = "{{ :slug }}"
+category = 1
+type = "getCategoryPage"
+
+[catalog tehnika]
+slug = "{{ :slug }}"
+category = 2
+type = "getCategoryPage"
+==
+<div class=" bg-blue/5">
+    <div class="container py-1 lg:py-3">
+        {% partial 'breadcrumbs/wrap' items=breadcrumbs %}
+    </div>
+</div>
+<div class="container flex gap-x-9 mt-7 items-start pb-16 px-2">    
+
+    <div class="w-[300px] bg-gray-10 relative z-10 hidden lg:block">
+        {% partial 'catalog/sidebar' %}
+    </div>
+    
+    <div class="flex-1">    
+        
+        <div class="catalog-logo mb-7" id="brands-logo">
+            {% for item in vendors %}
+                <div class="catalog-logo-item">
+                    <a href="{{ item.link }}" class="aspect-w-16 aspect-h-8 block">
+                        <img src="{{ item.logo.thumb(false,73) ?: global.header_logo.path }}" alt="{{ item.name }}" class="brand-logo">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% set maslo = maslo.catalog %}
+        
+        <h3 class="section-title text-center">{{ maslo.page.name }}</h3>  
+
+        
+
+        <div class="mt-6 categories">
+            {% for item in maslo.items %}
+                <div class="category-item-anim">
+                    <a href="{{ item.link }}" class="category-item">
+                        <div class="">
+                            <img src="{{ item.photo.thumb(false,45) }}" alt="{{ item.name }}" class="category-item-icon">
+                        </div>
+                        <h2 class="category-item-h2">{{ item.name }}</h2>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>     
+
+        {% set tehnika = tehnika.catalog %}
+        
+        <div class="mt-14">
+            <div class="flex items-center justify-center relative z-10">
+                <img src="{{ tehnika.page.photo.path }}" alt="{{ tehnika.page.name }}" class="block w-auto h-[15px] sm:h-[27px]">
+            </div>
+        
+            <h3 class="section-title text-center mt-6">{{ tehnika.page.name }}</h3>
+            
+            <div class="mt-6 categories-4">
+                {% for item in tehnika.items %}
+                    <a href="{{ item.link }}" class="category-item">
+                        <div class="">
+                            <img src="{{ item.photo.thumb(false,45) }}" alt="{{ item.name }}" class="category-item-icon">
+                        </div>
+                        <h2 class="category-item-h2">{{ item.name }}</h2>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>          
+          
+
+    </div>
+
+</div>

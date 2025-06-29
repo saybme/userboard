@@ -1,0 +1,19 @@
+{% for item in items %}
+    <li class="{{ item.menu_active == true ? 'active' : '' }}">       
+
+        {% if item.children | length > 0 %}
+
+            <b class="text-base"><a href="{{ item.link }}">{{ item.name }}</a></b>
+
+            <ul>
+                {% partial 'menu/tree' items=item.children %}   
+            </ul>
+
+        {% else %}
+
+            <a href="{{ item.link }}">{{ item.name }}</a>
+
+        {% endif %}
+
+    </li>
+{% endfor %}

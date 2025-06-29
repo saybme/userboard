@@ -1,0 +1,8 @@
+url = "/:slug*"
+layout = "default"
+title = "Страница"
+
+[dvipage]
+slug = "{{ :slug }}"
+==
+{% component 'dvipage' %}

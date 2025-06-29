@@ -1,0 +1,9 @@
+title = "Страница галереи"
+layout = "default"
+url = "/galleries/:slug"
+
+[dgallery]
+slug = "{{ :slug }}"
+type = "getPage"
+==
+{% component 'dgallery' %}

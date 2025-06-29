@@ -1,0 +1,21 @@
+[ditem]
+id = 1
+tmp = "elements/brands"
+==
+<?php
+use Saybme\Dvioil\Models\Vendor;
+
+function onStart(){
+    $vendors = Vendor::active()->get();
+    $this['vendors'] = $vendors;
+}
+?>
+==
+<div class="pt-7 sm:pt-14 pb-10 sm:pb-20 bg-gray-10 relative z-10">
+    <div class="container">
+        <h3 class="section-title text-center">БРЕНДЫ</h3>
+        <div class="mx-auto max-w-4xl">
+            {% component 'ditem' %}   
+        </div>     
+    </div>
+</div>

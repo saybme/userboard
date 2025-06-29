@@ -209,7 +209,7 @@ class AppClass {
 
         $data['user'] = $user->id;
         $data['is_active'] = true;
-        $data['num'] = implode('|', $data['nums']);
+        //$data['num'] = implode('|', $data['nums']);
 
         $app = new Carnumber;
         $app->fill($data);

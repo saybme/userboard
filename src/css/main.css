@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,7 +24,37 @@
         @apply pb-5 text-base font-gilroy-medium
     }
 
-    
+    .form-legend {
+        @apply text-2xl font-bold text-blue-4 px-4
+    }
+
+    .gos-number-types {
+        @apply flex gap-2
+    }
+
+    .gos-number-type {
+        @apply font-semibold block px-5 py-1 border-2 border-gray-400
+    }
+
+    .gos-number-type.active {
+        @apply text-red-1 border-red-1
+    }
+
+    .number-plate {
+        @apply flex uppercase border-2 shadow-md border-black rounded-md w-full max-w-[180px] font-manrope text-center cursor-not-allowed bg-gradient-to-t from-[#dfdfdf] to-white
+    }
+
+    .number-plate-left {
+        @apply flex flex-1 items-center border-r-2 border-black min-h-[32px] px-2 justify-center font-bold tracking-widest text-xl h-[38px]
+    }
+
+    .number-plate-right {
+        @apply w-1/4 p-2 flex flex-col h-[38px] leading-none font-bold
+    }
+
+    .number-plate__letter {
+        @apply text-base top-[1px] relative
+    }
 
     .slide-text {
         @apply max-w-[680px] mt-3
@@ -31,6 +63,7 @@
     .slide-text > h2 {
         @apply text-txt-30 table_sm:text-txt-40 laptop:text-txt-50 text-blue-2 mb-[1.875rem]
     }
+    
 
     .slide-text > p {
         @apply font-gilroy-medium text-sm laptop:text-base leading-[1.238rem] laptop:leading-[1.938rem]

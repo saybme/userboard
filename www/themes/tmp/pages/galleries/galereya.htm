@@ -1,0 +1,17 @@
+url = "/galleries"
+layout = "default"
+title = "Галерея"
+
+[dgallery]
+slug = "{{ :slug }}"
+type = "getAll"
+==
+<?php
+function onStart(){
+    $breadcrumbs[0]['name'] = $this->page->title;
+    $breadcrumbs[0]['is_active'] = true;
+    $this['breadcrumbs'] = $breadcrumbs;
+}
+?>
+==
+{% component 'dgallery' %}

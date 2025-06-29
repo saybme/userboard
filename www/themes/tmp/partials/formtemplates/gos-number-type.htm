@@ -1,45 +1,58 @@
 {% if type == 'Авто' %}                     
-    <div class="flex">
-        <div class="flex border-2 border-black rounded-lg overflow-hidden bg-gradient-to-t from-gray-200">
-            <input type="text" value="" name="nums[]" maxlength="1" class="h-[45px] text-center w-[45px] bg-inherit focus:outline-none" placeholder="*">   
-            <input type="text" value="" name="nums[]" maxlength="3" class="h-[45px] text-center w-[80px] bg-inherit text-xl focus:outline-none" placeholder="***">  
-            <input type="text" value="" name="nums[]" maxlength="2" class="h-[45px] text-center w-[45px] bg-inherit focus:outline-none" placeholder="**">  
-            <div class="w-[55px] border-l-2 border-black">
-                <input type="text" value="" name="nums[]" maxlength="3" class="text-center bg-inherit focus:outline-none w-full" placeholder="***"> 
-                <div class="text-[.7rem] uppercase text-center leading-none">RUS</div> 
-            </div>
-        </div> 
+    <div class="number-plate">
+        <div class="number-plate-left">
+            <div class="number-plate__letter" data-gos-nums="1">*</div>
+            <div class="" data-gos-nums="2">*</div>
+            <div class="" data-gos-nums="3">*</div>
+            <div class="" data-gos-nums="4">*</div>
+            <div class="number-plate__letter" data-gos-nums="5">*</div>
+            <div class="number-plate__letter" data-gos-nums="6">*</div>
+        </div>
+        <div class="number-plate-right">
+            <div class="flex-1" data-gos-nums="7">***</div>
+            <div class="text-[.6em]">RUS</div>
+        </div>
     </div>
 {% endif %}
 
 {% if type == 'Мото' %}  
-    <div class="flex">
-        <div class="border-2 border-black rounded-lg overflow-hidden bg-gradient-to-t from-gray-200 w-[140px]">
-            <div class="w-full">
-                <input type="text" value="" name="nums[]" maxlength="4" class="h-[45px] text-center bg-inherit text-xl focus:outline-none w-full" placeholder="****"> 
-            </div>  
-            <div class=" border-black w-full flex">
-                <div class="w-1/2">
-                    <input type="text" value="" name="nums[]" maxlength="2" class="h-[45px] text-center bg-inherit text-xl focus:outline-none w-full" placeholder="**"> 
-                </div>
-                <div class="border-l-2 flex-none w-1/2 relative border-black">
-                    <input type="text" value="" name="nums[]" maxlength="2" class="text-center h-[45px] bg-inherit focus:outline-none w-full" placeholder="***"> 
-                    <div class="text-[.7rem] uppercase text-center leading-none absolute left-2 -top-2">RUS</div> 
-                </div>                
+    <div class="number-plate max-w-[95px] flex-col">
+        <div class="flex text-center text-xl px-3 py-1 font-bold w-full">
+            <div class="h-[38px] flex-1 flex items-center justify-center" data-gos-nums="1">*</div>
+            <div class="h-[38px] flex-1 flex items-center justify-center" data-gos-nums="2">*</div>
+            <div class="h-[38px] flex-1 flex items-center justify-center" data-gos-nums="3">*</div>
+            <div class="h-[38px] flex-1 flex items-center justify-center" data-gos-nums="4">*</div>
+        </div>
+        <div class="flex text-xl font-bold">
+            <div class="w-1/2 flex px-3 ">
+                <div class="h-[38px] flex-1 flex items-center justify-center" data-gos-nums="5">*</div>
+                <div class="h-[38px] flex-1 flex items-center justify-center" data-gos-nums="6">*</div>
             </div>
-        </div> 
+            <div class="w-1/2 relative">
+                <div class="absolute left-0 top-0 text-[.5rem] leading-none flex w-full items-center gap-2 -translate-y-[70%]">
+                    <span class="">RUS</span>
+                    <span class="block flex-1 bg-black h-[2px]"></span>
+                </div>       
+                <div class="absolute left-0 bottom-0 w-[2px] h-[calc(100%-8px)] bg-black"></div>         
+                <div class="h-[38px] flex items-center justify-center" data-gos-nums="7">***</div>
+            </div>
+        </div>
     </div>    
 {% endif %}
 
 {% if type == 'Прицеп' %}                     
-    <div class="flex">
-        <div class="flex border-2 border-black rounded-lg overflow-hidden bg-gradient-to-t from-gray-200">
-            <input type="text" value="" name="nums[]" maxlength="2" class="h-[45px] text-center w-[45px] bg-inherit focus:outline-none" placeholder="**">   
-            <input type="text" value="" name="nums[]" maxlength="4" class="h-[45px] text-center w-[80px] bg-inherit text-xl focus:outline-none" placeholder="****">             
-            <div class="w-[55px] border-l-2 border-black">
-                <input type="text" value="" name="nums[]" maxlength="3" class="text-center bg-inherit focus:outline-none w-full" placeholder="***"> 
-                <div class="text-[.7rem] uppercase text-center leading-none">RUS</div> 
-            </div>
-        </div> 
+    <div class="number-plate">
+        <div class="number-plate-left">
+            <div class="number-plate__letter" data-gos-nums="1">*</div>
+            <div class="number-plate__letter" data-gos-nums="2">*</div>
+            <div class="" data-gos-nums="3">*</div>
+            <div class="" data-gos-nums="4">*</div>
+            <div class="" data-gos-nums="5">*</div>
+            <div class="" data-gos-nums="6">*</div>
+        </div>
+        <div class="number-plate-right">
+            <div class="flex-1" data-gos-nums="7">***</div>
+            <div class="text-[.6em]">RUS</div>
+        </div>
     </div>
 {% endif %}
