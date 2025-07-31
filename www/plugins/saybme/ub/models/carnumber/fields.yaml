@@ -35,6 +35,11 @@ fields:
     type:
         label: Тип 
         type: dropdown
+        span: auto
+    type_pay:
+        label: Действие 
+        type: dropdown
+        span: auto
     props[series][0]:
         label: 'Серия'
         span: row

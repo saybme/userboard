@@ -29,6 +29,16 @@ module.exports = {
       }
     },
     extend: {
+      animation: {
+        marquee: 'marquee 25s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '50%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        }
+      },
       colors: {
         'blue-1': '#0B2F4F',
         'blue-2': '#285A7F',

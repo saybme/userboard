@@ -10,45 +10,200 @@
             {% partial 'sidebars/servises' %}
         </div>        
     
-        <div class="flex-1">
+        <div class="flex-1">      
+            {% if page.type_pay == 1 %}
 
-            <h1 class="title-h1">Гос номер: {{ page.num }}</h1> 
+                <h1 class="text-3xl font-bold mb-6 text-blue-2">Продам гос.номер</h1>                
 
-            <div class="space-y-2">
-                <div class="bg-white px-3 py-2">
-                    <div class="font-gilroy-bold">Место:</div>
-                    {{ page.address | join(' ') }}
-                </div>
-                <div class="bg-white px-3 py-2">
-                    <div class="font-gilroy-bold">Телефон:</div>
-                     {{ page.contacts }}
-                </div>
-                <div class="bg-white px-3 py-2">
-                    <div class="font-gilroy-bold">Номер:</div>
-                    {{ page.props.num_sklad }}
-                </div>               
-                <div class="bg-white px-3 py-2">
-                    <div class="font-gilroy-bold">Оформление:</div> 
-                    {{ page.props.is_play }}
-                </div>
-                <div class="bg-white px-3 py-2">
-                    <div class="font-gilroy-bold">Оформлением занимается: </div>
-                    {{ page.props.paperwork }}
-                </div>   
-                <div class="bg-white px-3 py-2">
-                    <a href="{{ page.photo.path }}" data-fancybox>
-                        <img src="{{ page.photo.thumb(100,100,{mode:'crop'}) }}" alt="">
-                    </a>
-                </div>              
-            </div>    
+                {% if page.type == 1 %}
+                    <div class="mb-6 font-bold flex">
+                        <div class="flex bg-white border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope">
+                            <div class="py-3 px-8 text-5xl">{{ page.series | substr(0,1) }} {{ page.number }} {{ page.series | substr(1,3) }}</div>
+                            <div class="p-3 border-l-2 border-black text-center">
+                                <div class="text-3xl/none">{{ page.region }}</div>
+                                <div class="">RUS</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
 
-            <div class="mt-9">
-                <h3 class="text-2xl font-gilroy-bold">Лента обьявлений по продаже покупке номеров</h3>
-                <div class="mt-4 space-y-3">
-                    {% partial 'announcements/items' items=items %}
-                </div>
-            </div>   
+                {% if page.type == 2 %}
+                    <div class="font-bold bg-white mb-6 border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope max-w-[230px] text-5xl">
+                        <div class="p-6 pb-8 text-center">{{ page.number }}</div>
+                        <div class="flex text-center uppercase">
+                            <div class="py-4 w-1/2">{{ page.series }}</div>
+                            <div class="py-4 w-1/2 border-l-2 border-black relative">
+                                <div class="text-xl/none absolute left-0 top-0 flex items-center w-full gap-2 -translate-y-[100%] pl-2">
+                                    <div class="">RUS</div>
+                                    <div class="h-[16px] w-[25px] mx-auto bg-white flex-none border border-black">
+                                        <div class="bg-white h-1/3"></div>
+                                        <div class="bg-blue-2 h-1/3"></div>
+                                        <div class="bg-red-2 h-1/3"></div>
+                                    </div>
+                                    <div class="border-t-2 border-black flex-1"></div>
+                                </div>
+                                <div class="">{{ page.region }}</div>                                
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}                  
+                
+                {% if page.type == 3 %}
+                    <div class="mb-6 font-bold flex">
+                        <div class="flex bg-white border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope">
+                            <div class="py-3 px-8 text-5xl">{{ page.series }} {{ page.number }}</div>
+                            <div class="p-3 border-l-2 border-black text-center">
+                                <div class="text-3xl/none">{{ page.region }}</div>
+                                <div class="">RUS</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}                
 
+                <div class="flex gap-10">
+
+                    <div class="text-xl space-y-1 flex-1">
+                        {% if page.urgently %}
+                            <div class="flex bg-white border-b-2 border-gray-200 p-2">
+                                <div class="">Продам: <b class="text-red-1 underline">СРОЧНО!</b></div>
+                            </div>
+                        {% endif %}
+
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                            <div class=""><b>Имя:</b></div>
+                            <div class="">{{ page.username }}</div>
+                        </div>
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                            <div class=""><b>Телефон, вацап, телеграмм, почта:</b></div>
+                            <div class="">{{ page.contacts }}</div>
+                        </div>
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                            <div class=""><b>Сумма:</b></div>
+                            {% if page.type_price == 'Фиксированная цена' %}
+                                <div class="">Фиксированная цена {{ page.price == true ? page.price ~ ' руб.' : '' }}</div>
+                            {% elseif page.type_price == 'Договорная' %}
+                                <div class="">Договорная {{ page.sum_start == true ? 'от '~page.sum_start~' руб. ' : '' }} {{ page.sum_end == true ? 'до '~page.sum_end~' руб.' : '' }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="">
+                            <div class="space-y-1">
+                                <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                    <div class="text-pretty"><b>Адрес собственника номера:</b> <br> {{ page.fulladdress | join(', ') }}</div>
+                                </div>
+                                {% if page.props.num_sklad %}
+                                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                        <div class=""><b>Номер:</b></div>
+                                        <div class="">{{ page.props.num_sklad }}</div>
+                                    </div>
+                                {% endif %}
+                                <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                    <div class=""><b>Что включено:</b></div>
+                                    <div class="">{{ page.props.is_play }}</div>
+                                </div>
+                                <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                    <div class=""><b>Оформлением занимается:</b></div>
+                                    <div class="">{{ page.props.paperwork }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>    
+                    
+                    {% if page.photo %}
+                        <div class="flex-none">
+                            <a href="{{ page.photo.path }}" target="_blank" class="block border border-gray-300 rounded-md overflow-hidden p-1 hover:border-red-1 bg-white" data-fancybox>
+                                <img src="{{ page.photo.thumb(250,250) }}" alt="" class="block rounded-md">  
+                            </a>                  
+                        </div>
+                    {% endif %}
+                
+                </div>
+
+            {% endif %}
+
+
+            {% if page.type_pay == 2 %}
+
+                <h1 class="text-3xl font-bold mb-6 text-blue-2">Куплю гос.номер</h1>
+
+                {% if page.type == 1 %}
+                    {% if page.number %}
+                        <div class="mb-6 font-bold flex">
+                            <div class="flex bg-white border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope">
+                                <div class="py-3 px-8 text-5xl">{{ page.series | substr(0,1) }} {{ page.number }} {{ page.series | substr(1,3) }}</div>
+                                <div class="p-3 border-l-2 border-black text-center">
+                                    <div class="text-3xl/none">{{ page.region }}</div>
+                                    <div class="">RUS</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if page.type == 2 %}
+                    <div class="font-bold bg-white mb-6 border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope max-w-[230px] text-5xl">
+                        <div class="p-6 pb-8 text-center">{{ page.number }}</div>
+                        <div class="flex text-center uppercase">
+                            <div class="py-4 w-1/2">{{ page.series }}</div>
+                            <div class="py-4 w-1/2 border-l-2 border-black relative">
+                                <div class="text-xl/none absolute left-0 top-0 flex items-center w-full gap-2 -translate-y-[100%] pl-2">
+                                    <div class="">RUS</div>
+                                    <div class="h-[16px] w-[25px] mx-auto bg-white flex-none border border-black">
+                                        <div class="bg-white h-1/3"></div>
+                                        <div class="bg-blue-2 h-1/3"></div>
+                                        <div class="bg-red-2 h-1/3"></div>
+                                    </div>
+                                    <div class="border-t-2 border-black flex-1"></div>
+                                </div>
+                                <div class="">{{ page.region }}</div>                                
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}                  
+                
+                {% if page.type == 3 %}
+                    <div class="mb-6 font-bold flex">
+                        <div class="flex bg-white border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope">
+                            <div class="py-3 px-8 text-5xl">{{ page.series }} {{ page.number }}</div>
+                            <div class="p-3 border-l-2 border-black text-center">
+                                <div class="text-3xl/none">{{ page.region }}</div>
+                                <div class="">RUS</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="text-xl space-y-1">    
+                    
+                    {% if page.description %}
+                        <div class=" pb-3">
+                            <div class="alert alert-warning rounded-md">
+                                {{ page.description }}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                        <div class=""><b>Имя:</b></div>
+                        <div class="">{{ page.username }}</div>
+                    </div>
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                        <div class=""><b>Телефон, вацап, телеграмм, почта:</b></div>
+                        <div class="">{{ page.contacts }}</div>
+                    </div>
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                        <div class=""><b>Сумма:</b></div>
+                        {% if page.type_price == 'Фиксированная цена' %}
+                            <div class="">Фиксированная цена {{ page.price == true ? page.price ~ ' руб.' : '' }}</div>
+                        {% elseif page.type_price == 'Договорная' %}
+                            <div class="">Договорная {{ page.sum_start == true ? 'от '~page.sum_start~' руб. ' : '' }} {{ page.sum_end == true ? 'до '~page.sum_end~' руб.' : '' }}</div>
+                        {% endif %}
+                    </div>                    
+
+                </div>                
+
+            {% endif %}
         </div>        
     
     </div>

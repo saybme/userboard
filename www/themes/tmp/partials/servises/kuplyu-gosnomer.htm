@@ -1,0 +1,118 @@
+[viewBag]
+==
+<?php
+use Saybme\Ub\Classes\Servises\ServiseClass;
+function onStart(){
+    $q = new ServiseClass();
+    $this['numberdata'] = Input::get();
+    $this['numbers'] = $q->getCarnumber(2);
+    $this['lenta'] = $q->getCarnumber(3);
+    $this['topnumbers'] = $q->getCarnumber(2, 'top');
+}
+?>
+==
+
+<div class="pt-2 pb-5 bg-gray-300">
+    <h3 class="text-xl font-bold text-blue-2 text-center mb-4">Лента обьявлений по продаже покупке номеров</h3>
+    <div class="f-carousel [--f-carousel-slide-width:auto] [--f-carousel-gap:20px]" id="numberCarousel">
+        {% for item in lenta %}
+            <div class="f-carousel__slide max-w-none w-[400px]">
+                <a href="{{ item.link }}" class="block bg-white px-6 py-4 rounded-md group hover:text-red-1">
+                    <div class="mb-1 w-full overflow-hidden text-nowrap text-ellipsis border-b border-dashed border-gray-400">
+                        <div class="group-hover:animate-marquee pb-1">{{ item.description }}</div>
+                    </div>
+                    <div class="flex gap-3 items-center">
+                        <div class="flex-1">
+                            <div class="text-xs">Покупатель</div>
+                            <div class=""><b>{{ item.user.phone }}</b></div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="size-7" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-93.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32Z"></path></svg>
+                    </div>
+                </a>   
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% put scripts %}
+    <script>
+        numberCarousel();
+    </script>
+{% endput %}
+
+
+<div class="container">
+    {% partial "breadcrumbs/items" items=breadcrumbs %}   
+</div>
+
+<div class="pt-2 pb-9 container">    
+
+    <div class="flex items-start gap-x-10 flex-col table:flex-row">
+        <div class="flex-1">
+
+            <div class="mb-4">
+                {% partial 'numbers/search-form' type=1 %}                
+            </div>  
+            
+            <h3 class="text-3xl font-bold mb-4 text-blue-2">Галерея покупки номеров</h3>
+
+            <div class="flex text-base font-bold uppercase mb-2 gap-6">
+                <h2 class=""><a href="{{ 72 | servise . link }}" class="text-gray-400 hover:text-blue-2">Продам гос.номеров</a></h2>
+                <h2 class="text-red-2 underline">Куплю гос.номер</h2>
+            </div>           
+
+            <div class=" mb-6 grid grid-cols-1 gap-2">
+                {% partial 'numbers/items' items=numbers %}                
+            </div>
+
+            <div class="mb-6">
+                <div class="alert-box-yellow">
+                    <div class="space-y-2">
+                        <div class="">Если вы не нашли подходящий вариант в галереи продажи номеров, оставьте заказ по ниже указанной форме, ваш заказ попадает в ленту и при просмотре объявлений в ленте обязательно найдется тот, кто захочет вам продать желаемый номер, подобрать за вознаграждение или купить ваш номер.</div>
+                        <div class="">
+                            <a href="/cabinet/zakazat-gosnomer" class="btn btn-red">Форма по подбору номеров</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text space-y-4">
+                {{ page.content | content }}
+            </div>
+        </div>
+        <div class="w-full table:w-[350px] flex-none table:sticky top-0">
+            <h4 class="text-blue-2 mb-3 text-lg font-bold">Топ номеров:</h4>           
+            <div class="mb-4 grid gap-3" id="">
+                {% for item in topnumbers %}
+                    <div class="">
+                        <a href="{{ item.link }}" class="bg-white px-4 py-2 rounded-md shadow-md block group">
+                            <div class="">
+                                {% partial 'numbers/type' item=item %}
+                            </div>
+                            <hr class="block w-full my-2" >
+                            <div class="flex items-center">
+                                <div class="flex-1 gap-2">
+                                    <div class="text-xs">Покупатель</div>
+                                    <div class=""><b>{{ item.user.phone }}</b></div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-7 flex-none group-hover:text-red-1" fill="currentColor" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm45.66-93.66a8,8,0,0,1,0,11.32l-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32Z"></path></svg>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="h-[140px] table:h-[500px] bg-white rounded-md flex items-center justify-center border border-gray-300">
+                <span class="text-center uppercase text-gray-500 font-semibold">Здесь может быть <br> Ваша реклама</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h3 class="text-3xl font-bold text-blue-2 ubtitle">Перечень услуг {{ 'USERBOARD.RU' | ubtitle }}</h3>
+        <hr class="mt-3 w-full">        
+        <div class="mt-8">
+            {% partial '::all' items=servises %}            
+        </div>
+    </div>
+
+</div>

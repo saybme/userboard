@@ -4,6 +4,7 @@ use System\Classes\PluginBase;
 use Saybme\Ub\Classes\Rules\SmsRule;
 use Saybme\Ub\Classes\Rules\PhoneRule;
 use Saybme\Ub\Classes\Auth\AuthClass;
+use Saybme\Ub\Classes\Servises\ServiseClass;
 use Saybme\Ub\Models\Formvalue;
 use System\Models\File;
 use Input;
@@ -29,8 +30,35 @@ class Plugin extends PluginBase
                 'getPhoto' => [$this, 'getPhoto'],
                 'dob' => [$this, 'getDob'],
                 'get' => [$this, 'getParams'],
+                'servises' => [$this, 'getServises'],
+                'servise' => [$this, 'getServise'],
+                'gnumbers' => [$this, 'getGosNumbers'],
+                'substr' => [$this, 'substrString'],
             ]
         ];
+    }
+
+    // Обрезать строку
+    public function substrString($value, $start = 0, $stop = 1){
+        return mb_substr($value, $start, $stop);
+    }
+
+    // Гос номера
+    public function getGosNumbers($value = ''){
+        if(!$value) return;
+        return ServiseClass::carnumber($value);
+    }
+
+    // Услуги по ID
+    public function getServise($value = ''){
+        if(!$value) return;
+        return ServiseClass::getServisesId($value);
+    }
+
+    // Услуги по ID
+    public function getServises($value = ''){
+        if(!$value) return;
+        return ServiseClass::getServisesIdx($value);
     }
 
     // Параметры

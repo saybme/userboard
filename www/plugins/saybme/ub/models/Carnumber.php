@@ -24,7 +24,9 @@ class Carnumber extends Model
         'address',
         'is_active',
         'series',
-        'region'
+        'region',
+        'type_pay',
+        'description'
     ];
 
     protected $jsonable = ['address','props'];
@@ -32,7 +34,8 @@ class Carnumber extends Model
     public $table = 'saybme_ub_carnumbers';
     
     public $rules = [
-        'user' => 'required'
+        'user' => 'required',
+        'type_pay' => 'required'
     ];
 
     public $belongsTo = [
@@ -106,6 +109,53 @@ class Carnumber extends Model
         $options[2] = 'Мото';
         $options[3] = 'Прицеп';
         return $options;
+    }
+
+    // Действие
+    public function getTypePayOptions(){
+        $options[1] = 'Продам';
+        $options[2] = 'Куплю';
+        return $options;    
+    }
+
+    // Фиксированная цена
+    public function getFixPriceAttribute(){
+
+        $types['sum_start'] = 'от';
+        $types['sum_end'] = 'до';
+
+        $prices['sum_start'] = $this->sum_start;
+        $prices['sum_end'] = $this->sum_end;
+
+        $rows = array();
+        foreach($prices as $key => $price){
+            if(trim($price)){
+                $rows[$key] = $types[$key] .' '. $price . 'руб.';
+            }    
+        }
+
+        return implode(' ', $rows);
+    }
+
+    // Адрес собственника
+    public function getFullAddressAttribute(){
+
+        $types['index'] = '';
+        $types['region'] = '';
+        $types['city'] = 'г. ';
+        $types['street'] = 'ул. ';
+        $types['house'] = 'дом ';
+        $types['building'] = 'строение ';
+        $types['room'] = 'кв. ';
+
+        $arr = array();
+        foreach($this->address as $key => $row){
+            if(trim($row)){
+                $arr[] = $types[$key] . $row;    
+            }
+        }
+
+        return collect($arr);
     }
 
 }

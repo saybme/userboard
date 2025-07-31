@@ -1,0 +1,35 @@
+{% for item in items %}
+    <div class="bg-white px-4 py-2 rounded-md border border-gray-100 flex items-center">
+        <div class="flex-1 flex gap-4 items-center">
+            <div class="w-1/4">
+                {% partial 'numbers/type' item=item %}
+            </div>
+            <div class="w-1/4">
+                <p class="text-xs leading-none">Размещен</p>
+                <p class="font-bold">{{ item.created_at | date('d.m.Y год.') }}</p>
+            </div>
+            <div class="w-1/4">
+                {% if item.type_pay == 1 %}
+                    <p class="text-xs leading-none">Продавец</p>
+                {% elseif item.type_pay == 2 %}
+                    <p class="text-xs leading-none">Покупатель</p>
+                {% endif %}
+                <p class="font-bold">{{ item.user.phone }}</p>
+            </div>
+            <div class="w-1/4">
+                <p class="text-xs leading-none">Цена</p>
+                {% if item.type_price %}
+                    <p class="font-bold">{{ item.type_price }}</p>
+                    {% if item.type_price == 'Договорная' %}
+                        <div class="text-xs">
+                            {{ item.fix_price }}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p class="font-bold">от {{ item.sum_start }} руб.</p>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{{ item.link }}" class="btn btn-red btn-sm">Подробнее</a>
+    </div>
+{% endfor %}

@@ -5,59 +5,58 @@ use Saybme\Ub\Classes\Servises\ServiseClass;
 function onStart(){
     $q = new ServiseClass();
     $this['numberdata'] = Input::get();
-    $this['numbers'] = $q->getCarnumber();
+    $this['numbers'] = $q->getCarnumber(1);
 }
 ?>
 ==
-<div class="">
+
+<div class="pt-2 pb-5 bg-gray-300">
+    <h3 class="text-xl font-bold text-blue-2 text-center mb-4">Лента обьявлений по продаже покупке номеров</h3>
+    <div class="f-carousel [--f-carousel-slide-width:auto]" id="numberCarousel">
+        {% for item in numbers %}
+            <div class="f-carousel__slide max-w-none w-[200px]">
+                <a href="{{ item.link }}" class="block">
+                    {% partial 'numbers/type' item=item %}  
+                    <div class="text-center pt-1">
+                        <div class="text-xs">Продавец</div>
+                        <div class=""><b>{{ item.user.phone }}</b></div>
+                    </div>
+                </a>   
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% put scripts %}
+    <script>
+        numberCarousel();
+    </script>
+{% endput %}
+
+
+<div class="container">
     {% partial "breadcrumbs/items" items=breadcrumbs %}   
 </div>
 
-<div class="pt-2 pb-9">    
+<div class="pt-2 pb-9 container">    
 
     <div class="flex items-start gap-x-10 flex-col table:flex-row">
         <div class="flex-1">
 
-            <div class="mb-6">
+            <div class="mb-4">
                 {% partial 'numbers/search-form' type=1 %}                
+            </div>   
+
+            <h3 class="text-3xl font-bold mb-4 text-blue-2">Галерея продажи номеров</h3>
+
+            <div class="flex text-base font-bold uppercase mb-2 gap-6">
+                <h2 class="text-red-2 underline">Продам гос.номеров</h2>
+                <h2 class=""><a href="{{ 73 | servise . link }}" class="text-gray-400 hover:text-blue-2">Куплю гос.номер</a></h2>
             </div>
 
-            <h3 class="text-xl font-bold text-blue-2">Галерея продажи номеров</h3>
-            <hr class="w-full my-3 border-gray-200">
             <div class=" mb-6 grid grid-cols-1 gap-2">
-                {% for item in numbers %}
-                    <div class="bg-white px-4 py-2 rounded-md border border-gray-100 flex items-center">
-                        <div class="flex-1 flex gap-4 items-center">
-                            <div class="w-1/4">
-                                {% partial 'numbers/type' item=item %}
-                            </div>
-                            <div class="w-1/4">
-                                <p class="text-xs leading-none">Размещен</p>
-                                <p class="font-bold">{{ item.created_at | date('d.m.Y год.') }}</p>
-                            </div>
-                            <div class="w-1/4">
-                                <p class="text-xs leading-none">Продавец</p>
-                                <p class="font-bold">{{ item.user.phone }}</p>
-                            </div>
-                            <div class="w-1/4">
-                                <p class="text-xs leading-none">Цена</p>
-                                {% if item.type_price %}
-                                    <p class="font-bold">{{ item.type_price }}</p>
-                                {% else %}
-                                    <p class="font-bold">от {{ item.sum_start }} руб.</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <a href="{{ item.link }}" class="btn btn-red btn-sm">Подробнее</a>
-                    </div>
-                {% endfor %}
-            </div>
-
-            <div class="mb-6">
-                <div class="alert-box-yellow">
-                    <div class="">Если вы не нашли подходящий вариант в галереи продажи номеров, оставьте заказ по ниже указанной форме, ваш заказ попадает в ленту и при просмотре объявлений в ленте обязательно найдется тот, кто захочет вам продать желаемый номер, подобрать за вознаграждение или купить ваш номер.</div>
-                </div>
-            </div>
+                {% partial 'numbers/items' items=numbers %}                
+            </div>            
 
             <div class="text space-y-4">
                 {{ page.content | content }}
@@ -72,7 +71,7 @@ function onStart(){
 
     <div class="mt-8">
         <h3 class="text-3xl font-bold text-blue-2 ubtitle">Перечень услуг {{ 'USERBOARD.RU' | ubtitle }}</h3>
-        <hr class="mt-3 w-full">
+        <hr class="mt-3 w-full">        
         <div class="mt-8">
             {% partial '::all' items=servises %}            
         </div>

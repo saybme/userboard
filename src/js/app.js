@@ -1,7 +1,7 @@
-import { Fancybox } from "@fancyapps/ui";
-import { Carousel } from "@fancyapps/ui/dist/carousel/carousel.esm.js";
-import { Autoplay } from "@fancyapps/ui/dist/carousel/carousel.autoplay.esm.js";
-
+import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
+import { Carousel } from "@fancyapps/ui/dist/carousel/";
+import { Autoplay } from "@fancyapps/ui/dist/carousel/carousel.autoplay.js";
+import { Autoscroll } from "@fancyapps/ui/dist/carousel/carousel.autoscroll.js";
 
 import { Dropzone } from "dropzone";
 
@@ -78,10 +78,9 @@ window.setPhone = function(phone){
 
 // Модальное окно
 function modal(data){
-    new Fancybox([
+    Fancybox.show([
         {
-            src: data.modal,
-            type: "html",
+            html: data.modal
         },
     ]);      
 }
@@ -97,10 +96,11 @@ if(swiperbnrs){
 
 // Слайды отзывы
 let swiperreview = document.getElementById('swiper-review');
-if(swiperreview){
-    new Carousel(swiperreview, { 
+if(swiperreview){  
+    const options = {
         infinite: false 
-    });
+    };
+    Carousel(swiperreview, options, { Autoscroll }).init();  
 }
 
 // Карусель гос номеров
@@ -681,10 +681,33 @@ window.refreshBoxInputs = function(id){
 
 // Применение гос номеров
 window.gosNumInput = function(el){
-    let value = el.getAttribute('data-num');
+
+    let parent = el.parentElement;
+    let value = parseInt(el.getAttribute('data-num'));
     let div = document.querySelector('[data-gos-nums="'+value+'"]');
     el.value = el.value.slice(0,1);
     div.innerHTML = el.value;
+    
+    //console.log(parent.querySelector('[data-num="'+(value+1)+'"]'));
+
+    parent.querySelector('[data-num="'+(value+1)+'"]').focus();
+
+}
+
+// Выбор стоимости
+window.selectTypePrice = function(el){
+    let id = el.getAttribute('data-id');
+
+    document.querySelectorAll('.data-input-row').forEach(row => {
+        row.querySelector('input').setAttribute('disabled', true);    
+        row.classList.add('hidden');
+    })
+
+    document.querySelectorAll('[data-input-id="'+id+'"]').forEach(row => {
+        row.querySelector('input').removeAttribute('disabled');
+        row.classList.remove('hidden');
+    })
+
 }
 
 // Применение гос номеров регион
@@ -708,4 +731,41 @@ window.stepFormInput = function(input){
     };
 
     
+}
+
+// Карусель гос номеров
+window.numberCarousel = function(){    
+    const container = document.getElementById("numberCarousel");
+    if(container){
+        const options = {
+            Autoscroll: {
+                speedOnHover: 0
+            }            
+        };
+        Carousel(container, options, { Autoscroll }).init();
+    }    
+}
+
+// Лента гос номеров
+window.numberCarouselLenta = function(){
+    const container = document.getElementById("numberCarouselLenta");
+    if(container){
+        const options = {
+            Autoscroll: {
+                speedOnHover: 0
+            }            
+        };
+        Carousel(container, options, { Autoscroll }).init();
+    }   
+}
+
+// Карусель гос номеров вертикальная
+window.numberCarouselVertical = function(){    
+    const containerV = document.getElementById("numberCarouselVertical");
+    if(containerV){
+        const options = {
+            vertical: true          
+        };
+        Carousel(containerV, options).init();
+    }    
 }

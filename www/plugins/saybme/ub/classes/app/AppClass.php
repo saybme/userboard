@@ -197,7 +197,11 @@ class AppClass {
 
     // Создаем объявление о гос номере
     public function createGosNum(){
+
         $data = Input::get();
+
+        $data['sum_start'] = Input::get('sum_start') ?: null;
+        $data['sum_end'] = Input::get('sum_end') ?: null;
 
         // Профиль
         $q = new AuthClass;
@@ -209,7 +213,8 @@ class AppClass {
 
         $data['user'] = $user->id;
         $data['is_active'] = true;
-        //$data['num'] = implode('|', $data['nums']);
+        //$data['num'] = implode('|', $data['nums']);        
+        
 
         $app = new Carnumber;
         $app->fill($data);

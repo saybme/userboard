@@ -5,18 +5,33 @@ use Saybme\Ub\Classes\Servises\ServiseClass;
 
 function onStart(){
     $q = new ServiseClass;
-    $this['menu'] = $q->getAllServises();
+    $this['menu'] = $q->getAllServisesMenu();
 }
 ?>
 ==
 <div class="bg-white flex-none mr-8 rounded-lg px-4 py-6">
     <h4 class="text-blue-2 font-gilroy-bold text-3xl/none">Наши услуги:</h4>
     <nav class="mt-4">
-        <ul class="list-disc ml-5 space-y-2 font-gilroy-medium">
+        <ul class="space-y-2 font-gilroy-medium">
             {% for item in menu %}
-            <li class="">
-                <a href="{{ item.link }}" class="hover:underline hover:text-red-1 block">{{ item.name }}</a>
-            </li>
+                <li class="group">                    
+                    {% if item.children | length %}
+                        <span class="hover:underline hover:text-red-1 flex items-center gap-2 cursor-pointer justify-between group-[.active]:text-red-1" onclick="this.parentElement.classList.toggle('active')">
+                            {{ item.name }}
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 flex-none hidden group-[.active]:block" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 flex-none group-[.active]:hidden" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>
+                        </span>
+                        <ul class="space-y-1 list-disc ml-5 pt-2 hidden group-[.active]:block">
+                            {% for child in item.children %}
+                                <li class="text-xs">
+                                    <a href="{{ child.link }}">{{ child.name }}</a>
+                                </li>
+                            {% endfor %}    
+                        </ul>
+                    {% else %}
+                        <a href="{{ item.link }}" class="hover:underline hover:text-red-1 block">{{ item.name }}</a>
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
     </nav>

@@ -1,7 +1,12 @@
 columns:
-    carnumber:
+    carnumber_full:
         label: Номер
-        type: text
+        type: partial
+    type:
+        label: Тип
+        type: partial
+    type_pay:
+        label: Действие
     is_active:
         label: Опубликован
         type: switch

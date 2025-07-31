@@ -41,7 +41,7 @@
     }
 
     .number-plate {
-        @apply flex uppercase border-2 shadow-md border-black rounded-md w-full max-w-[180px] font-manrope text-center cursor-not-allowed bg-gradient-to-t from-[#dfdfdf] to-white
+        @apply flex uppercase border-2 shadow-md border-black rounded-md w-full max-w-[180px] font-manrope text-center bg-gradient-to-t from-[#dfdfdf] to-white
     }
 
     .number-plate-left {
@@ -49,7 +49,7 @@
     }
 
     .number-plate-right {
-        @apply w-1/4 p-2 flex flex-col h-[38px] leading-none font-bold
+        @apply w-1/4 py-2 flex flex-col h-[38px] leading-none font-bold items-center
     }
 
     .number-plate__letter {
@@ -265,7 +265,7 @@
     }
 
     #swiper-review {
-        @apply [--f-carousel-slide-width:calc((100%/2)-15px)] table_l:[--f-carousel-slide-width:calc((100%/3)-15px)] table:[--f-carousel-slide-width:calc((100%/4)-15px)] [--f-carousel-spacing:20px] [--f-carousel-dot-color:#0B2F4F]
+        @apply [--f-carousel-slide-width:calc((100%/2)-15px)] table_l:[--f-carousel-slide-width:calc((100%/3)-15px)] table:[--f-carousel-slide-width:calc((100%/4)-15px)] [--f-carousel-gap:20px] [--f-carousel-dot-color:#0B2F4F]
     }
 
     #carousel-numbers {

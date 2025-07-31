@@ -1,0 +1,25 @@
+<?php if($record->type == 1):?>
+    <div class="">
+        <?=$record->props['series'][0];?>   
+
+        <?=$record->number;?>  
+
+        <?=$record->props['series'][1];?>  
+        <?=$record->props['series'][2];?> 
+        |
+        <?=$record->props['region'];?> 
+    </div>
+<?php endif;?>
+
+<?php if($record->type == 2):?>
+    <div class="">
+        <?=$record->number;?> <?=$record->series;?> | <?=$record->props['region'];?>           
+    </div>
+<?php endif;?>
+
+
+<?php if($record->type == 3):?>
+    <div class="">
+        <?=$record->series;?> <?=$record->number;?> | <?=$record->props['region'];?>           
+    </div>
+<?php endif;?>

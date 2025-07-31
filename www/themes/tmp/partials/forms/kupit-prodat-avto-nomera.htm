@@ -2,15 +2,14 @@
 
 <div class="" id="result-form">
 
-    <form action="" data-request="onAddApp" class="block w-full"  data-request-files>
+    <form action="" data-request="onAddApp" class="block w-full"  data-request-files data-request-redirect="/servises/transportnye-uslugi/kupit-gos-nomer">
 
         {% set type = 'type' | get ?: '1' %}
 
         <input type="hidden" name="pay" class="radio checked:bg-red-500" value="Продам">
         <input type="hidden" name="mode" value="carnumber">
-        <input type="hidden" name="type" value="{{ type }}">  
-
-        <h1 class="text-4xl font-bold text-blue-2 mb-8">Продам номер</h1>
+        <input type="hidden" name="type" value="{{ type }}">       
+        <input type="hidden" name="type_pay" value="1">   
 
         <div class="gos-number-types mb-5">
             {% set types = ['Авто','Мото','Прицеп'] %}
@@ -18,6 +17,11 @@
                 <a href="?type={{ key+1 }}" class="gos-number-type {{ key+1 == type ? 'active' : '' }}">{{ item }}</a> 
            {% endfor %}
         </div> 
+
+        <div class="flex gap-6 text-xl font-semibold mb-5 text-gray-500">
+            <span class="underline text-blue-1">Продам</span>
+            <a href="/cabinet/zakazat-gosnomer" class="hover:text-red-1">Куплю</a>
+        </div>
 
         <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
             <legend class="form-legend">Продать</legend>                   
@@ -124,24 +128,28 @@
             <h4 class="font-gilroy-medium text-lg mt-4">Сумма, руб.</h4>
             <div class="mt-2">
                 <label class="label cursor-pointer py-1">  
-                    <input type="checkbox" name="type_price" class="checkbox" value="Договорная">
+                    <input type="radio" name="type_price" class="radio radio-sm" value="Договорная" data-id="1" onchange="selectTypePrice(this)" checked>
                     <span class="label-text ml-2 flex-1">Договорная</span> 
+                </label>
+                <label class="label cursor-pointer py-1">  
+                    <input type="radio" name="type_price" class="radio radio-sm" data-id="2" onchange="selectTypePrice(this)" value="Фиксированная цена">
+                    <span class="label-text ml-2 flex-1">Фиксированная цена</span> 
                 </label>
             </div>
             <div class="flex gap-2 mt-2">
-                <div class="">
+                <div class="data-input-row " data-input-id="1">
                     <span class="block w-full text-sm mb-1 pl-1">от</span>
                     <input type="number" value="" name="sum_start" class="input input-bordered w-full max-w-[150px]" placeholder="" id="sum_start"> 
                 </div> 
-                <div class="">
+                <div class="data-input-row " data-input-id="1">
                     <span class="block w-full text-sm mb-1 pl-1">до</span>
                     <input type="number" value="" name="sum_end" class="input input-bordered w-full max-w-[150px]" placeholder="" id="sum_end"> 
                 </div> 
-                <div class="">
-                    <span class="block w-full text-sm mb-1 pl-1">Фиксированная цена</span>
-                    <input type="number" value="" name="price" class="input input-bordered w-full max-w-[200px]" placeholder="" id="price"> 
+                <div class="data-input-row hidden" data-input-id="2">
+                    <span class="block w-full text-sm mb-1 pl-1">Укажите цену</span>
+                    <input type="number" value="" disabled name="price" class="input input-bordered w-full max-w-[200px]" placeholder="" id="price"> 
                 </div>
-            </div>   
+            </div>  
             <h4 class="font-gilroy-medium text-lg mt-4">Адрес собственника номера</h4>
             <div class="mt-2">                          
                 <div class="mt-2 flex gap-x-5 flex-wrap table_sm:flex-nowrap gap-y-2">
@@ -181,10 +189,13 @@
             
             </div>
 
-            <div class="mt-2">
-                <h4 class="font-gilroy-medium text-lg mt-4">Номер на хранении</h4>
+            <div class="mt-2 grid gap-0">
                 <label class="label cursor-pointer py-1">  
-                    <input type="checkbox" name="props[num_sklad]" class="checkbox" value="На авто">
+                    <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на хранении" checked>
+                    <span class="label-text ml-2 flex-1">Номер на хранении</span> 
+                </label>
+                <label class="label cursor-pointer py-1">  
+                    <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На авто">
                     <span class="label-text ml-2 flex-1">На авто</span> 
                 </label>
             </div>

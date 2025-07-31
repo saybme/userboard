@@ -26,9 +26,17 @@ class Ubapps extends \Cms\Classes\ComponentBase {
                 'type' => 'dropdown',
                 'options' => [
                     'getNumbers' => 'Вывод всех гос номеров',
+                    'payNumbersJson' => 'Гос номера продажа',
+                    'buyNumbersJson' => 'Гос номера покупка',
+                    'buyNumbersLenta' => 'Лента гос номеров покупка',
                     'getNumber' => 'Страница гос номер',
-                    'getTopNumbers' => 'Вывод топа номеров',
+                    'getTopNumbers' => 'Вывод топа номеров'
                 ]               
+            ],
+            'max' => [
+                'title' => 'Количество',
+                'description' => 'Количество для выода',
+                'default' => 30   
             ]
         ];
     }
@@ -45,6 +53,21 @@ class Ubapps extends \Cms\Classes\ComponentBase {
     private function getNumbers(){        
         $options['items'] = Carnumber::active()->orderBy('id', 'desc')->get();
         return $this->renderPartial('announcements/wrap', $options);
+    }
+
+    private function payNumbersJson(){     
+        $max = $this->property('max') ?: 30; 
+        return Carnumber::active()->where('type_pay', 1)->where('type', 1)->orderBy('id', 'desc')->get()->take($max);
+    }
+
+    private function buyNumbersJson(){     
+        $max = $this->property('max') ?: 30; 
+        return Carnumber::active()->where('type_pay', 2)->orderBy('id', 'desc')->get()->take($max);
+    }
+
+    private function buyNumbersLenta(){     
+        $max = $this->property('max') ?: 30; 
+        return Carnumber::active()->where('type_pay', 2)->where('description', '!=', '')->orderBy('id', 'desc')->get()->take($max);
     }
 
     // Топ номеров
