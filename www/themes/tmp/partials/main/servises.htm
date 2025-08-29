@@ -66,18 +66,15 @@ function onStart(){
 
     <div class="bg-white px-[2rem] py-[2rem] rounded-2xl">
         {% set gosnum = '72' | servises | first %}
-        <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея продажи номеров</h2>  
-        <hr class="block border-b-2 border-blue-2 my-4 max-w-[250px] mx-auto" >
         <div class="py-6 border-t border-gray-400 border-dashed border-b mb-6 bg-gray-100">
-            <div class="">
-                <div class="f-carousel [--f-carousel-slide-width:auto]" id="numberCarousel">
-                    {% for item in paygusnumber.ubapps %}
-                        <div class="f-carousel__slide max-w-none w-[200px]">
-                            {% partial 'numbers/type' item=item %}    
-                        </div>
-                    {% endfor %}
-                </div>
-            </div> 
+            <h2 class="text-xl font-bold text-blue-2 text-center mb-4">Лента объявлений по продаже номеров</h2> 
+            <div class="f-carousel [--f-carousel-slide-width:auto]" id="numberCarousel">
+                {% for item in paygusnumber.ubapps %}
+                    <div class="f-carousel__slide max-w-none w-[200px]">
+                        {% partial 'numbers/type' item=item %}    
+                    </div>
+                {% endfor %}
+            </div>
         </div>
         {% put scripts %}
             <script>
@@ -88,7 +85,7 @@ function onStart(){
         <div class="space-y-6">
             <div class="">
                 <div class="space-y-4 mb-6">
-                    <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Продажа госномеров</h2>  
+                    <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея продажи номеров</h2>  
                     <div class="flex justify-between gap-4 py-2">
                         <div class="gos-number-types">
                             {% for key, item in types %}                
@@ -112,7 +109,7 @@ function onStart(){
             <div class="">                
                 
                 <div class="py-6 border-t border-gray-400 border-dashed border-b mb-6 bg-gray-100">
-                    <h3 class="text-xl font-bold text-blue-2 text-center mb-4">Лента обьявлений по продаже покупке номеров</h3>
+                    <h3 class="text-xl font-bold text-blue-2 text-center mb-4">Лента объявлений по покупке номеров</h3>
                     <div class="f-carousel [--f-carousel-slide-width:auto] [--f-carousel-gap:20px]" id="numberCarouselLenta">
                         {% for item in buyLenta.ubapps %}
                             <div class="f-carousel__slide max-w-none w-[400px]">
@@ -142,7 +139,7 @@ function onStart(){
                 
                 
                 <div class="space-y-4 mb-6">
-                    <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Покупка госномеров</h2>  
+                    <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея покупки номеров</h2>  
                     <div class="flex justify-between gap-4 py-2">
                         <div class="gos-number-types">
                             {% for key, item in types %}                

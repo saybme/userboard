@@ -464,7 +464,7 @@ input[type="number"]::-webkit-inner-spin-button,
   color: rgb(239 50 50 / var(--tw-text-opacity));
 }
 
-.error{
+.error, .text-error{
   margin-left: 0.25rem;
   font-size: 0.875rem;
   line-height: 1.25rem;

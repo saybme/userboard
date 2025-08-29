@@ -8,6 +8,7 @@ use Saybme\Ub\Models\Formrow;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Carnumber;
 use System\Models\File;
+use ValidationException;
 use Lang;
 use Request;
 use Input;
@@ -196,7 +197,23 @@ class AppClass {
     }
 
     // Создаем объявление о гос номере
-    public function createGosNum(){
+    public function createGosNum(){        
+
+        $rules['photo'] = 'image|max:5024';
+        $rules['username'] = 'required';
+        $rules['contacts'] = 'required';  
+        
+        if(Input::get('type_pay') == 2){
+            $number = count(array_diff(Input::get('props.number'), array('')));
+            $description = trim(Input::get('description'));
+            if($number == 0 AND empty($description)){
+                throw new ValidationException(['number' => 'Заполните гос номер или поле лента объявлений.']);  
+            }        
+        }         
+
+        $rules['sum_start'] = 'required_if:type_price,Договорная';
+        $rules['sum_end'] = 'required_if:type_price,Договорная';
+        $rules['price'] = 'required_if:type_price,Фиксированная цена';
 
         $data = Input::get();
 
@@ -207,9 +224,8 @@ class AppClass {
         $q = new AuthClass;
         $user = $q->getActiveUser(); 
 
-        Request::validate([
-            'photo' => 'image|max:5024'
-        ]);
+        // Валидиция
+        Request::validate($rules, Lang::get('saybme.ub::validation'));
 
         $data['user'] = $user->id;
         $data['is_active'] = true;
@@ -224,7 +240,7 @@ class AppClass {
         $app->photo = files('photo');
         $app->save();
 
-        return $app;
+        return $data;
     }
 
 }

@@ -685,21 +685,28 @@ window.gosNumInput = function(el){
     let parent = el.parentElement;
     let value = parseInt(el.getAttribute('data-num'));
     let div = document.querySelector('[data-gos-nums="'+value+'"]');
-    el.value = el.value.slice(0,1);
-    div.innerHTML = el.value;
-    
-    //console.log(parent.querySelector('[data-num="'+(value+1)+'"]'));
 
-    parent.querySelector('[data-num="'+(value+1)+'"]').focus();
+    // Только текст
+    if(el.getAttribute('type') == 'text'){
+        el.value = el.value.slice(0,1).toUpperCase().replace(/[^а-яё\s]/gi, '');
+    }
+    
+    div.innerHTML = el.value.toUpperCase();   
+
+    if(el.value){
+        parent.querySelector('[data-num="'+(value+1)+'"]').focus();
+    }
+    
 
 }
 
 // Выбор стоимости
 window.selectTypePrice = function(el){
+
     let id = el.getAttribute('data-id');
 
     document.querySelectorAll('.data-input-row').forEach(row => {
-        row.querySelector('input').setAttribute('disabled', true);    
+        row.querySelector('input').setAttribute('disabled', true);   
         row.classList.add('hidden');
     })
 

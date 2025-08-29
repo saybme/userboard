@@ -16,7 +16,7 @@
         @apply text-blue-2 *:text-red-1
     }
 
-    .error {
+    .error, .text-error {
         @apply text-sm text-red-1 ml-1
     }
 

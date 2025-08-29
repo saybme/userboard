@@ -38,7 +38,7 @@ class ServiseClass {
 
         // Лента
         if($typePay == 3) {
-            $items = Carnumber::active()->where('type', 1)->where('type_pay', 2)->orderBy('id','desc')->where('description','!=','');  
+            $items = Carnumber::active()->whereIn('type', [1,2,3])->where('type_pay', 2)->orderBy('id','desc')->where('description','!=','');  
             return $items->get();       
         }       
         

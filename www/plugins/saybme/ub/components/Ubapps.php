@@ -46,7 +46,7 @@ class Ubapps extends \Cms\Classes\ComponentBase {
     }
 
     private function getContent(){
-        $type = $this->property('type');       
+        $type = $this->property('type');           
         return $this->$type();
     }
 
@@ -66,7 +66,7 @@ class Ubapps extends \Cms\Classes\ComponentBase {
     }
 
     private function buyNumbersLenta(){     
-        $max = $this->property('max') ?: 30; 
+        $max = $this->property('max') ?: 30;         
         return Carnumber::active()->where('type_pay', 2)->where('description', '!=', '')->orderBy('id', 'desc')->get()->take($max);
     }
 
