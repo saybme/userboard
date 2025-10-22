@@ -21,18 +21,16 @@ class PaymentClass {
 
     // Платежная ссылка
     public function initPay($data = null){        
-        // Инициализация cURL сессии
-        $ch = curl_init();
-
-        // Настройка параметров cURL
-        curl_setopt($ch, CURLOPT_URL, 'https://sandbox3.payture.com/apim/Init');
+        
+        $ch = curl_init();       
+        
+        curl_setopt($ch, CURLOPT_URL, 'https://secure.payture.com/apim/Init');
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/x-www-form-urlencoded'
-        ]);       
-
-        // Подготовка данных для отправки
+        ]);
+        
         $data = [
             'Key' => 'UserBoardPSBEGW3DS',
             'Data' => http_build_query([
@@ -47,30 +45,19 @@ class PaymentClass {
             ], '', ';')
         ];        
 
-        // Установка POST данных
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-
-        // Выполнение запроса
+        
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));        
         $response = curl_exec($ch);
-
-        // Проверка на ошибки
+        
         if(curl_errno($ch)) {
             echo 'Ошибка cURL: ' . curl_error($ch);
-        } else {
-
-            Log::error($response);
-            
-            // Декодирование JSON ответа
+        } else {               
             $arr = $this->xmlStringToArray($response);
-            $SessionId = $arr['@attributes']['SessionId'];                  
-            
-            // Вывод результата
+            $SessionId = $arr['@attributes']['SessionId'];              
             return $SessionId;
-        }
+        }       
 
-        // Закрытие cURL сессии
         curl_close($ch);
-
     }
     
 

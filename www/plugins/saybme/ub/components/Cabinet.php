@@ -215,7 +215,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $SessionId = $qpay->initPay($payment);   
         
         // Редирект по ссылке
-        $link = 'https://sandbox3.payture.com/apim/Pay?SessionId=' . $SessionId;
+        $link = 'https://secure.payture.com/apim/Pay?SessionId=' . $SessionId;
         return redirect($link);
     }
 
