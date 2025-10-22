@@ -1,0 +1,10 @@
+name: Payments
+form: $/saybme/ub/models/payment/fields.yaml
+modelClass: Saybme\Ub\Models\Payment
+defaultRedirect: saybme/ub/payments
+create:
+    redirect: 'saybme/ub/payments/update/:id'
+    redirectClose: saybme/ub/payments
+update:
+    redirect: saybme/ub/payments
+    redirectClose: saybme/ub/payments

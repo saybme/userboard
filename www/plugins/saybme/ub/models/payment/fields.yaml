@@ -1,0 +1,33 @@
+fields:
+    name:
+        label: Наименование платежа
+        span: auto
+        type: text
+    user:
+        label: Пользователь 
+        span: auto
+        type: relation
+        placeholder: -- Выбрать --
+        nameFrom: phone
+    description:
+        label: Описание платежа
+        span: full
+        type: textarea
+        size: small
+tabs:
+    fields:
+        uuid:
+            label: UUID
+            span: full
+            type: text
+            disabled: true
+        created_at:
+            label: Создан
+            span: auto
+            type: datepicker
+            disabled: true
+        updated_at:
+            label: Обновлен
+            span: auto
+            type: datepicker
+            disabled: true

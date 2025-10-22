@@ -1,0 +1,14 @@
+columns:
+    user:
+        label: Пользователь
+        type: text
+        relation: user
+        select: phone
+        searchable: true
+    sum:
+        label: Сумма
+        type: number
+    created_at:
+        label: Создан
+        type: datetime
+        width: '200px'

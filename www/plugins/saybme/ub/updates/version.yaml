@@ -339,3 +339,9 @@ v1.0.113:
 v1.0.114:
     - 'Updated table saybme_ub_carnumbers'
     - builder_table_update_saybme_ub_carnumbers_17.php
+v1.0.115:
+    - 'Created table saybme_ub_payments'
+    - builder_table_create_saybme_ub_payments.php
+v1.0.116:
+    - 'Updated table saybme_ub_payments'
+    - builder_table_update_saybme_ub_payments.php

@@ -1,8 +1,10 @@
-<div class="">
+<div class="">    
 
-    <div class="p-8 pb-2 border-b">
-        <span class="block w-full text-sm font-gilroy-medium text-grey-1">Ваш номер телефона:</span>
-        <h3 class="text-4xl text-blue-2 font-bebas mt-1">+{{ user.phone }}</h3> 
+    <div class="px-8 py-2 bg-gray-100 border-b">
+        <h4 class="text-lg font-semibold mb-2">Оплата услуг</h4>
+        <div class="">
+            <a href="/cabinet/oplata" class="btn btn-red w-full">Оплатить</a>
+        </div>
     </div>
 
     {% if user.utype.id == 2 %}

@@ -213,7 +213,7 @@ class AuthClass {
 
     // Странцы профиля
     public function getUserPages(){
-        $pages = Prpage::active()->where('parent_id', 5)->get();
+        $pages = Prpage::active()->where('parent_id', 5)->whereNull('hide_breadcrumbs')->get();
         return $pages;
     }
 

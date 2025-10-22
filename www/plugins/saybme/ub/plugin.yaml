@@ -42,6 +42,10 @@ navigation:
                 label: Документы
                 url: saybme/ub/documents
                 icon: icon-file
+            side-menu-item7:
+                label: Платежи
+                url: saybme/ub/payments
+                icon: icon-money
     main-menu-item2:
         label: 'UB настройки'
         url: /

@@ -12,6 +12,9 @@ use Saybme\Ub\Models\Ubform;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Prpage;
 use Saybme\Ub\Models\Document;
+use Saybme\Ub\Classes\Payment\PaymentClass;
+use Request;
+use ValidationException;
 use Response;
 use Input;
 use Redirect;
@@ -97,7 +100,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['pages'] = $q->getUserPages();    
         $options['pservises'] = $q->getCabinetServises();
 
-        
+       
 
         // Страница документ
         $document = Document::where('hash', $slug)->first();
@@ -118,7 +121,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         }
         
-        // dd($tpl);
+        //dd($tpl);
 
         return $this->renderPartial($tpl, $options);
     }
@@ -168,7 +171,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['page'] = $page;
         $options['pages'] = $q->getUserPages();
         $options['numbers'] = $q->getGosNumbers($user->id);
-        $options['applications'] = $q->getUserApplications($user->id);          
+        $options['applications'] = $q->getUserApplications($user->id);             
+        
 
         if($page->ptype == 'app'){
             $options['breadcrumbs'] = $this->cabinetBreadcrumbsApp($page);; 
@@ -179,6 +183,40 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $options['content'] = $this->renderPartial($tpl, $options); 
 
         return $this->renderPartial('cabinet/wrap', $options);
+    }
+
+    // Оплата услуги
+    public function onPay(){
+        $data = Input::get();
+
+        $messages = [
+            'required' => 'Обязательное поле.',
+            'description.required' => 'Заполните поле описание.',
+            'sum.min' => 'Минимальная сумма оплаты :min руб.'
+        ];
+
+        // Валидация
+        Request::validate([
+            'user' => 'required',
+            'description' => 'required',
+            'sum' => 'required'
+        ], $messages);
+
+        // Проверка суммы
+        if($data['sum'] < 100){
+            throw new ValidationException(['sum' => 'Минимальная сумма оплаты 100 руб.']);
+        }
+
+        // Создаем платеж
+        $payment = PaymentClass::add($data);   
+
+        // Ссылка на нлатеж
+        $qpay = new PaymentClass; 
+        $SessionId = $qpay->initPay($payment);   
+        
+        // Редирект по ссылке
+        $link = 'https://sandbox3.payture.com/apim/Pay?SessionId=' . $SessionId;
+        return redirect($link);
     }
 
     // Расчет стоимости
