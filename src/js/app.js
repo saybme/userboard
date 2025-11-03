@@ -223,6 +223,13 @@ document.gosCalc = function(data){
         }
     }
 
+    if(gde.value == 28 || gde.value == 29){
+        let pricerow = document.querySelector('[data-prices="3"]');
+        prices = prices + parseInt(pricerow.getAttribute('data-price'));
+        pricerow.classList.add('row-price-active');
+        rows.push(pricerow.getAttribute('data-title'));     
+    }
+
     rows.push(certificate.getAttribute('data-title')); // госпошлина за выдачу свидетельства о регистрации ТС 500 рублей
     prices = prices + parseInt(certificate.getAttribute('data-price'));
     certificate.classList.add('row-price-active');
