@@ -49,6 +49,7 @@ class Uservises extends \Cms\Classes\ComponentBase
 
     private function getContent(){
         $type = $this->property('type');       
+        
         return $this->$type();
     }
 

@@ -4,16 +4,16 @@
         {% partial "breadcrumbs/items" items=breadcrumbs %}   
     </div>
     
-    <div class="flex items-start pt-2 pb-9">
+    <div class="flex table_l:items-start pt-2 pb-9 flex-col-reverse table_l:flex-row gap-6">
         
-        <div class="w-[320px] flex-none">
+        <div class="w-full table_l:w-[320px] flex-none">
             {% partial 'sidebars/servises' %}
         </div>        
     
         <div class="flex-1">      
             {% if page.type_pay == 1 %}
 
-                <h1 class="text-3xl font-bold mb-6 text-blue-2">Продам гос.номер</h1>                
+                <h1 class="text-xl table_l:text-3xl font-bold mb-3 table_l:mb-6 text-blue-2">Продам гос.номер</h1>                
 
                 {% if page.type == 1 %}
                     <div class="mb-6 font-bold flex">
@@ -62,22 +62,22 @@
 
                 <div class="flex gap-10">
 
-                    <div class="text-xl space-y-1 flex-1">
+                    <div class="text-base table_l:text-xl space-y-1 flex-1">
                         {% if page.urgently %}
-                            <div class="flex bg-white border-b-2 border-gray-200 p-2">
+                            <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                                 <div class="">Продам: <b class="text-red-1 underline">СРОЧНО!</b></div>
                             </div>
                         {% endif %}
 
-                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                             <div class=""><b>Имя:</b></div>
                             <div class="">{{ page.username }}</div>
                         </div>
-                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                             <div class=""><b>Телефон, вацап, телеграмм, почта:</b></div>
                             <div class="">{{ page.contacts }}</div>
                         </div>
-                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                             <div class=""><b>Сумма:</b></div>
                             {% if page.type_price == 'Фиксированная цена' %}
                                 <div class="">Фиксированная цена {{ page.price == true ? page.price ~ ' руб.' : '' }}</div>
@@ -88,20 +88,20 @@
 
                         <div class="">
                             <div class="space-y-1">
-                                <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                                     <div class="text-pretty"><b>Адрес собственника номера:</b> <br> {{ page.fulladdress | join(', ') }}</div>
                                 </div>
                                 {% if page.props.num_sklad %}
-                                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                    <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                                         <div class=""><b>Номер:</b></div>
                                         <div class="">{{ page.props.num_sklad }}</div>
                                     </div>
                                 {% endif %}
-                                <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                                     <div class=""><b>Что включено:</b></div>
                                     <div class="">{{ page.props.is_play }}</div>
                                 </div>
-                                <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                                <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                                     <div class=""><b>Оформлением занимается:</b></div>
                                     <div class="">{{ page.props.paperwork }}</div>
                                 </div>
@@ -125,7 +125,7 @@
 
             {% if page.type_pay == 2 %}
 
-                <h1 class="text-3xl font-bold mb-6 text-blue-2">Куплю гос.номер</h1>
+                <h1 class="text-xl table_l:text-3xl font-bold mb-6 text-blue-2">Куплю гос.номер</h1>
 
                 {% if page.type == 1 %}
                     {% if page.number %}
@@ -174,7 +174,7 @@
                     </div>
                 {% endif %}
 
-                <div class="text-xl space-y-1">    
+                <div class="text-base table_l:text-xl space-y-1">    
                     
                     {% if page.description %}
                         <div class=" pb-3">
@@ -184,15 +184,15 @@
                         </div>
                     {% endif %}
 
-                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 table_l:gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Имя:</b></div>
                         <div class="">{{ page.username }}</div>
                     </div>
-                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 table_l:gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Телефон, вацап, телеграмм, почта:</b></div>
                         <div class="">{{ page.contacts }}</div>
                     </div>
-                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4">
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Сумма:</b></div>
                         {% if page.type_price == 'Фиксированная цена' %}
                             <div class="">Фиксированная цена {{ page.price == true ? page.price ~ ' руб.' : '' }}</div>

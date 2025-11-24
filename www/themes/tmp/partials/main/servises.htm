@@ -41,7 +41,7 @@ function onStart(){
         Услуги сервиса {{ 'USERBOARD.RU' | ubtitle }}
     </h1> 
 
-    <div class="mt-10 grid grid-cols-3 gap-4">
+    <div class="mt-10 grid table_l:grid-cols-3 gap-4 max-w-[320px] mx-auto table_l:max-w-none">
         {% for item in '33,32,34' | servises %}
             <a href="{{ item.link }}" class="block border border-gray-400 overflow-hidden rounded-md bg-blue-2 text-white">
                 <img src="{{ item.photo.thumb(340,210,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto">
@@ -53,12 +53,12 @@ function onStart(){
         {% endfor %}
     </div>
 
-    <div class="py-10 flex justify-center gap-6">
-        <a href="/cabinet/doverennost-na-upravlenie-avtomobilem" class="btn btn-secondary rounded-full px-8 h-[42px] max-h-0">
+    <div class="py-5 table_l:py-10 flex justify-center gap-3 table_l:gap-6 flex-wrap">
+        <a href="/cabinet/doverennost-na-upravlenie-avtomobilem" class="btn btn-secondary rounded-full px-8 table_l:h-[42px] max-h-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 256 256"><path d="M240,104H229.2L201.42,41.5A16,16,0,0,0,186.8,32H69.2a16,16,0,0,0-14.62,9.5L26.8,104H16a8,8,0,0,0,0,16h8v80a16,16,0,0,0,16,16H64a16,16,0,0,0,16-16V184h96v16a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16V120h8a8,8,0,0,0,0-16ZM69.2,48H186.8l24.89,56H44.31ZM216,200H192V176a8,8,0,0,0-8-8H72a8,8,0,0,0-8,8v24H40V120H216Z"></path></svg>
             Доверенность на управление автомобилем
         </a>
-        <a href="/cabinet/dogovor-kupli-prodazhi-avto" class="btn btn-red rounded-full px-8 h-[42px] max-h-0">
+        <a href="/cabinet/dogovor-kupli-prodazhi-avto" class="btn btn-red rounded-full px-8 table_l:h-[42px] max-h-0">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 256 256"><path d="M52,144H36a8,8,0,0,0-8,8v56a8,8,0,0,0,8,8H52a36,36,0,0,0,0-72Zm0,56H44V160h8a20,20,0,0,1,0,40Zm169.53-4.91a8,8,0,0,1,.25,11.31A30.06,30.06,0,0,1,200,216c-17.65,0-32-16.15-32-36s14.35-36,32-36a30.06,30.06,0,0,1,21.78,9.6,8,8,0,0,1-11.56,11.06A14.24,14.24,0,0,0,200,160c-8.82,0-16,9-16,20s7.18,20,16,20a14.24,14.24,0,0,0,10.22-4.66A8,8,0,0,1,221.53,195.09ZM128,144c-17.65,0-32,16.15-32,36s14.35,36,32,36,32-16.15,32-36S145.65,144,128,144Zm0,56c-8.82,0-16-9-16-20s7.18-20,16-20,16,9,16,20S136.82,200,128,200ZM48,120a8,8,0,0,0,8-8V40h88V88a8,8,0,0,0,8,8h48v16a8,8,0,0,0,16,0V88a8,8,0,0,0-2.34-5.66l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40v72A8,8,0,0,0,48,120ZM160,51.31,188.69,80H160Z"></path></svg>
             Договор купли продажи
         </a>
@@ -66,8 +66,8 @@ function onStart(){
 
     <div class="bg-white px-[2rem] py-[2rem] rounded-2xl">
         {% set gosnum = '72' | servises | first %}
-        <div class="py-6 border-t border-gray-400 border-dashed border-b mb-6 bg-gray-100">
-            <h2 class="text-xl font-bold text-blue-2 text-center mb-4">Лента объявлений по продаже номеров</h2> 
+        <div class="py-3 table_l:py-6 border-t border-gray-400 border-dashed border-b mb-6 bg-gray-100">
+            <h2 class="text-lg table_l:text-xl font-bold text-blue-2 text-center mb-4">Лента объявлений по продаже номеров</h2> 
             <div class="f-carousel [--f-carousel-slide-width:auto]" id="numberCarousel">
                 {% for item in paygusnumber.ubapps %}
                     <div class="f-carousel__slide max-w-none w-[200px]">
@@ -85,8 +85,8 @@ function onStart(){
         <div class="space-y-6">
             <div class="">
                 <div class="space-y-4 mb-6">
-                    <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея продажи номеров</h2>  
-                    <div class="flex justify-between gap-4 py-2">
+                    <h2 class="text-xl table_l:text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея продажи номеров</h2>  
+                    <div class="flex justify-between gap-y-2 gap-x-4 py-2 flex-wrap">
                         <div class="gos-number-types">
                             {% for key, item in types %}                
                                 <a href="/servises/transportnye-uslugi/kupit-gos-nomer?type={{ key }}" class="gos-number-type {{ activeType == key ? 'active' : '' }}">{{ item.title }}</a> 
@@ -102,14 +102,14 @@ function onStart(){
                     </div>
                 </div>  
                 <div class="flex justify-center">
-                    <a href="{{ gosnum.link }}" class="btn btn-red rounded-full text-2xl px-6">Каталог госномеров</a>
+                    <a href="{{ gosnum.link }}" class="btn btn-red rounded-full text-lg table_l:text-2xl px-6">Каталог госномеров</a>
                 </div> 
             </div> 
             <hr>
             <div class="">                
                 
-                <div class="py-6 border-t border-gray-400 border-dashed border-b mb-6 bg-gray-100">
-                    <h3 class="text-xl font-bold text-blue-2 text-center mb-4">Лента объявлений по покупке номеров</h3>
+                <div class="py-3 table_l:py-6 border-t border-gray-400 border-dashed border-b mb-6 bg-gray-100">
+                    <h3 class="text-xl font-bold text-blue-2 text-center mb-3 table_l:mb-4">Лента объявлений по покупке номеров</h3>
                     <div class="f-carousel [--f-carousel-slide-width:auto] [--f-carousel-gap:20px]" id="numberCarouselLenta">
                         {% for item in buyLenta.ubapps %}
                             <div class="f-carousel__slide max-w-none w-[400px]">
@@ -139,8 +139,8 @@ function onStart(){
                 
                 
                 <div class="space-y-4 mb-6">
-                    <h2 class="text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея покупки номеров</h2>  
-                    <div class="flex justify-between gap-4 py-2">
+                    <h2 class="text-xl table_l:text-[2em] text-blue-2 font-gilroy-bold leading-none text-center">Галерея покупки номеров</h2>  
+                    <div class="flex table_l:justify-between gap-y-2 gap-x-4 py-2 flex-col table_l:flex-row">
                         <div class="gos-number-types">
                             {% for key, item in types %}                
                                 <a href="/servises/transportnye-uslugi/kupit-gos-nomer/kuplyu-gosnomer?type={{ key }}" class="gos-number-type {{ activeType == key ? 'active' : '' }}">{{ item.title }}</a> 
@@ -157,7 +157,7 @@ function onStart(){
                     </div>
                 </div>  
                 <div class="flex justify-center">
-                    <a href="{{ gosnum.link }}" class="btn btn-red rounded-full text-2xl px-6">Каталог госномеров</a>
+                    <a href="{{ gosnum.link }}" class="btn btn-red rounded-full text-lg table_l:text-2xl px-6">Каталог госномеров</a>
                 </div> 
             </div> 
         </div>

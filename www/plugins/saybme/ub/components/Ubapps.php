@@ -43,10 +43,11 @@ class Ubapps extends \Cms\Classes\ComponentBase {
 
     function onRun(){      
         $this->ubapps = $this->getContent();
+        
     }
 
     private function getContent(){
-        $type = $this->property('type');           
+        $type = $this->property('type');          
         return $this->$type();
     }
 

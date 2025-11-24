@@ -21,7 +21,7 @@
         <div class="">
             <h2 class="form-title">1. Сведения о транспортном средстве</h2>
         </div>  
-        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">            
+        <div class="mt-5 grid gap-3 table_l:gap-5 table_l:grid-cols-2">            
             <div class="">
                 {% partial 'inputs/text' input=ub88f8e7db560e27939eda1761b0556611 %}              
             </div>
@@ -34,7 +34,7 @@
     <div class="mt-5 bg-white rounded-lg p-5">
         <div class="">
             <h2 class="form-title">2. Хотите сохранить номера?</h2>
-            <div class="mt-2 underline text-xs mob_l:text-base">
+            <div class="mt-2 underline text-xs table_l:text-base">
                 Примечание! Старые номера можно сохранить за собой на срок до 1 года.
             </div>
         </div>  
@@ -48,7 +48,7 @@
         <div class="mt-5 ">
             {% partial 'inputs/radio' input=ub357cbea2abaeaf6260c084fcd2d1b193 %}
         </div>    
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ubd63614a955deb5911020b11b16324069 %}
             </div>
@@ -71,7 +71,7 @@
         <div class="mt-5">
             {% partial 'inputs/text' input=ubbff9447c62aff18998bc8c2a9a8cf77f %}
         </div>
-        <div class="mt-5 grid grid-cols-2 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-2 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub5b3dd83d642ebcb2bdc6778ae84e8422 %}    
             </div>
@@ -91,26 +91,26 @@
         <div class="mt-5 space-y-3">
             <div class="">
                 <div class="flex items-start">
-                    <input type="checkbox" id="check_politic" name="check_politic" value="1" class="checkbox checkbox-sm me-2 flex-none rounded-sm">
-                    <label for="check_politic" class="leading-none text-sm mob_l:text-base">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
+                    <input type="checkbox" id="check_politic" name="check_politic" value="1" class="checkbox checkbox-xs table_l:checkbox-sm me-2 flex-none rounded-sm">
+                    <label for="check_politic" class="leading-none text-sm table_l:text-base">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
                 </div>
                 <div data-validate-for="check_politic" class="error"></div> 
             </div>
         </div> 
-        <div class="mt-5 underline text-xs mob_l:text-base">
+        <div class="mt-5 underline text-xs table_l:text-base">
             Госпошлина за данное регистрационное действие не оплачивается
         </div>      
         <div class="mt-5">
             <div class="" id="resultSum">
                 <div class="border border-blue-300 rounded-md px-4 py-4 bg-blue-50">
-                    <h3 class="text-lg/none mb-2 text-blue-1 underline"><b>Стоимость услуги</b></h3>
+                    <h3 class="text-base table_l:text-lg/none mb-2 text-blue-1 underline"><b>Стоимость услуги</b></h3>
                     <ul class="list-disc ml-5 space-y-1 mt-3 leading-none">
                         <li class="">300 руб. комиссия</li>
                     </ul>     
-                    <div class="mt-3 font-bold text-lg">Итого: <span class="text-red-1">{{ sum + 300 }}</span> руб. </div>
+                    <div class="mt-3 font-bold text-base table_l:text-lg">Итого: <span class="text-red-1">{{ sum + 300 }}</span> руб. </div>
                 </div>               
             </div>
-            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+            <div class="font-bold text-yellow-600 mt-5 text-xs table_l:text-base">
                 Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
             </div>
         </div>

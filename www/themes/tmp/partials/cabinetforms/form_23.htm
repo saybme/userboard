@@ -31,7 +31,7 @@
         <div class="mt-5 space-y-2">          
             {% partial 'inputs/radio' input=ub6a2c382f0e727ba1b6a008e193bb7ec5 code='transport' ajax='calcSumForm()' %}   
         </div> 
-        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">            
+        <div class="mt-5 grid gap-3 table_l:gap-5 table_l:grid-cols-2">            
             <div class="">
                 {% partial 'inputs/text' input=ub4f7f42c17260d4d9b958b626760d0b92 %}              
             </div>
@@ -64,7 +64,7 @@
     <div class="mt-5 bg-white rounded-lg p-5">
         <h3 class="form-title">4. Что нужно сделать с ПТС</h3>   
         <div class="mt-5">
-            <p class="underline text-xs mob_l:text-base">Получите новый ПТС, если старый утрачен, пришёл в негодность или в нём закончилось свободное место</p>
+            <p class="underline text-xs table_l:text-base">Получите новый ПТС, если старый утрачен, пришёл в негодность или в нём закончилось свободное место</p>
         </div>
         <div class="mt-5">
             {% partial 'inputs/radio' input=ubb479533f7250764822985203d6441fb7 %} 
@@ -106,7 +106,7 @@
         <div class="mt-5">
             {% partial 'inputs/radio' input=ub13161b4d554dd1946adba984d40f0b95 %}
         </div>  
-        <div class="mt-5 grid mob_l:grid-cols-4 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-4 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub8a56268ab5e18628a4bfeeeced1a5f0b %}
             </div>
@@ -120,7 +120,7 @@
                 {% partial 'inputs/text' input=uba35f8461960b256560d8de9d157de749 %}
             </div>
         </div>  
-        <div class="mt-5 grid mob_l:grid-cols-2 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-2 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ubfb073f0369efd3280c6b30fdc06a749b %}
             </div>
@@ -131,7 +131,7 @@
         <div class="mt-5">
             {% partial 'inputs/text' input=ub184f14a12ee03833c31e4d441ef1a891 %}
         </div>
-        <div class="mt-5 grid grid-cols-2 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-2 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub1f1f4997a259e9c2b0e2f58bf2bd08cf %}
             </div>
@@ -169,8 +169,8 @@
             {% partial 'cabinetforms/prices' %} 
         </div>   
         <div class="mt-5 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2">
-            <p class="font-bold text-lg">Госпошлина не оплачивается</p>
-            <p class="text-xs mob_l:text-sm">
+            <p class="font-bold text-base table_l:text-lg">Госпошлина не оплачивается</p>
+            <p class="text-xs table_l:text-sm">
                 в случае прекращения (снятия с учета) ТС, за исключением случая вывоза ТС за границу
                 Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки                
             </p>
@@ -179,7 +179,7 @@
             <div class="" id="resultSum">
                 {% partial 'cabinetforms/form_total' %}                
             </div>
-            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+            <div class="font-bold text-yellow-600 mt-5 text-xs table_l:text-base">
                 Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
             </div>
         </div>

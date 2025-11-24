@@ -28,6 +28,7 @@ class Ubreview extends \Cms\Classes\ComponentBase
 
     function onRun(){
         $this->ubreview = $this->getContent();
+        
     }
 
     private function getContent(){

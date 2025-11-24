@@ -91,11 +91,11 @@
     </div>    
 
     <div class="mt-5 bg-white rounded-lg p-5">
-        <h3 class="form-title">4. Ваши данные</h3>
+        <h3 class="form-title mb-3">4. Ваши данные</h3>
         <div class="">
             {% partial 'inputs/radio' input=ub1925689e5109e345b6a33f3866b36418 %}   
         </div>
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub0c980201bef135ab8af8eaecd5fced26 %}
             </div>    
@@ -106,7 +106,7 @@
                 {% partial 'inputs/text' input=ub64901bceeee2e805d42d7e5f95f16613 %}
             </div> 
         </div>
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub1ee21b297140fa08d6201dde4d850840 %}
             </div>    
@@ -117,7 +117,7 @@
                 {% partial 'inputs/text' input=ubb645ac3872948cfad39c26f6e3001419 %}
             </div> 
         </div>
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ubeea88dbf88738361393fd63e75d2ed0e %}
             </div> 
@@ -157,7 +157,7 @@
 
     <div class="mt-5 bg-white rounded-lg p-5">
         <h3 class="form-title">6. Укажите сведения о собственнике</h3>    
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">    
                 {% partial 'inputs/text' input=ub676bd20415913c4c238bdc4622ce9bce %}    
             </div>
@@ -174,7 +174,7 @@
         <div class="mt-5">    
             {% partial 'inputs/radio' input=ub72aafd099c8efe60a83fbc09c563bb25 %}    
         </div>
-        <div class="mt-5 grid gap-5 mob_l:grid-cols-3">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub401997ee84623e6be765cc1457f2eabd %}       
             </div>
@@ -193,7 +193,7 @@
                 {% partial 'inputs/text' input=ub6c1cf8fd016b9eb3139e87dc77c116e6 %}       
             </div>
         </div> 
-        <div class="mt-5 grid gap-5 grid-cols-2"> 
+        <div class="mt-5 grid gap-3 table_l:gap-5 table_l:grid-cols-2"> 
             <div class="">
                 {% partial 'inputs/text' input=ub25be2d1fe18bda6debcd61d9f4ec31d4 %}       
             </div>
@@ -206,7 +206,7 @@
     <div class="mt-5 bg-white rounded-lg p-5">
         <h3 class="form-title">7. Документ, удостоверяющий личность</h3>       
         <div class="mt-5 grid grid-cols-1 gap-5">
-            <div class="grid mob_l:grid-cols-3 gap-5">
+            <div class="grid table_l:grid-cols-3 gap-3 table_l:gap-5">
                 <div class="">
                     {% partial 'inputs/select' input=ubb3da0edb915469ca0ce566cfe68da661 %}  
                 </div>   
@@ -220,7 +220,7 @@
             <div class="">
                 {% partial 'inputs/text' input=ube5ab1935dea7cdd362b053cb29663dfd %}  
             </div>
-            <div class="grid gap-5 mob_l:grid-cols-[1fr,200px]">
+            <div class="grid gap-3 table_l:gap-5 table_l:grid-cols-[1fr,200px]">
                 <div class="">
                     {% partial 'inputs/text' input=uba3305127924030303d7013c5b64659a5 %}  
                 </div>
@@ -263,8 +263,8 @@
             {% partial 'cabinetforms/prices' %}             
         </div>   
         <div class="mt-5 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2">
-            <p class="font-bold text-base mob_l:text-lg">Госпошлина не оплачивается</p>
-            <p class="text-xs mob_l:text-sm">
+            <p class="font-bold text-base table_l:text-lg">Госпошлина не оплачивается</p>
+            <p class="text-xs table_l:text-sm">
                 в случае прекращения (снятия с учета) ТС, за исключением случая вывоза ТС за границу
                 Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки                
             </p>
@@ -273,7 +273,7 @@
             <div class="" id="resultSum">
                 {% partial 'cabinetforms/form_total' %}                
             </div>
-            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+            <div class="font-bold text-yellow-600 mt-5 text-xs table_l:text-base">
                 Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
             </div>
         </div>

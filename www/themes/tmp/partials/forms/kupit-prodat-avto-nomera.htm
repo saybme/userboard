@@ -51,7 +51,7 @@
                     </div>
                     <div class="">
                         <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
-                        <div class="mt-2 grid grid-cols-7 max-w-[500px] gap-2">
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
                             <input type="text" name="props[series][0]" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
                             <input type="number" name="props[number][0]" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
                             <input type="number" name="props[number][1]" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
@@ -74,7 +74,7 @@
                     </div>
                     <div class="">
                         <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
-                        <div class="mt-2 grid grid-cols-7 max-w-[500px] gap-2">
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
                             <input type="number" name="props[number][0]" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
                             <input type="number" name="props[number][1]" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
                             <input type="number" name="props[number][2]" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="">
                         <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
-                        <div class="mt-2 grid grid-cols-7 max-w-[500px] gap-2">
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
                             <input type="text" name="props[series][0]" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
                             <input type="text" name="props[series][1]" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
                             <input type="number" name="props[number][0]" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
@@ -116,7 +116,7 @@
         </fieldset>
 
         <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
-            <legend class="font-gilroy-medium text-lg px-3 m-0">Заполнение формы продажи номеров в галерею номеров</legend>  
+            <legend class="font-gilroy-medium text-xs table_l:text-lg px-3 m-0">Заполнение формы продажи номеров в галерею номеров</legend>  
             <div class="">
                 <label for="username" class="block w-full text-sm mb-1">Как к Вам обращаться</label>
                 <input type="text" value="" name="username" class="input input-bordered w-full" placeholder="" id="username">    
@@ -254,7 +254,7 @@
         </div>
 
         {% if page.content %}
-            <div class="text mt-12">
+            <div class="text mt-12 text-xs table_l:text-base">
                 {{ page.content | raw }}
             </div>
         {% endif %} 

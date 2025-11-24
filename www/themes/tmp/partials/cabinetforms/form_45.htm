@@ -33,7 +33,7 @@
         <div class="mt-5 space-y-2">             
             {% partial 'inputs/radio' input=ubca91edfc0190e9b1369b0e65794c27b9 code='transport' ajax='calcSumForm()' %} 
         </div> 
-        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">            
+        <div class="mt-5 grid gap-3 table_l:gap-5 table_l:grid-cols-2">            
             <div class="">
                 {% partial 'inputs/text' input=ube7837a351d2494655ca08421fa9cde05 %}              
             </div>
@@ -44,7 +44,7 @@
         <div class="mt-5">
             {% partial 'inputs/text' input=ubbcd9e887ba5c825a4975124daaa62350 %}      
         </div>
-        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">
+        <div class="mt-5 grid gap-3 table_l:gap-5 table_l:grid-cols-2">
             <div class="">
                 {% partial 'inputs/text' input=ubb83db95614f1f9ad79e8a2ef8af24c8a %}              
             </div>
@@ -72,7 +72,7 @@
 
     <div class="mt-5 bg-white rounded-lg p-5">
         <h3 class="form-title">3. Что нужно сделать с ПТС</h3>
-        <div class="mt-5 underline text-xs mob_l:text-base">Получите новый ПТС, если старый утрачен, пришёл в негодность или в нём закончилось свободное место</div>
+        <div class="mt-5 underline text-xs table_l:text-base">Получите новый ПТС, если старый утрачен, пришёл в негодность или в нём закончилось свободное место</div>
         <div class="mt-5">
             {% partial 'inputs/radio' input=ub7c4b4a9d911df68403a9a0a8e8ed571e %} 
         </div>
@@ -113,7 +113,7 @@
         <div class="mt-5 ">
             {% partial 'inputs/radio' input=ub7fec0cb866f304e4c9e998ce7173d38e %}
         </div>    
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=uba636b1df5cfa74c04cbdd978afc3f29c %}
             </div>
@@ -174,7 +174,7 @@
             {% partial 'inputs/radio' input=ubb36f3aac0340aa78a3622fbda623afe7 %}
         </div>  
 
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=uba6b6b1ea347f5bcadcfc5b0684e8995f %}
             </div>
@@ -214,7 +214,7 @@
         <div class="mt-5">
             {% partial 'inputs/select' input=ub2969d9de92de9d96d0178d47ae15b08b %}
         </div>  
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ubc9e2cd80d8ec3a36fd3353f3cb16c0a8 %}
             </div>
@@ -225,7 +225,7 @@
                 {% partial 'inputs/text' input=ub05b820e10df76bb7b8cba7e91a261190 %}
             </div>
         </div>
-        <div class="mt-5 flex gap-5 flex-col mob_l:flex-row">
+        <div class="mt-5 flex gap-3 table_l:gap-5 flex-col table_l:flex-row">
             <div class="flex-1">
                 {% partial 'inputs/text' input=uba3c5973ac1723c4cf537870ec7b8a5c7 %}
             </div>
@@ -267,8 +267,8 @@
             {% partial 'cabinetforms/prices' %} 
         </div>   
         <div class="mt-5 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2">
-            <p class="font-bold text-lg">Госпошлина не оплачивается</p>
-            <p class="text-xs mob_l:text-sm">
+            <p class="font-bold text-sm table_l:text-lg">Госпошлина не оплачивается</p>
+            <p class="text-xs table_l:text-sm">
                 в случае прекращения (снятия с учета) ТС, за исключением случая вывоза ТС за границу
                 Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки                
             </p>
@@ -277,7 +277,7 @@
             <div class="" id="resultSum">
                 {% partial 'cabinetforms/form_total' %}                
             </div>
-            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+            <div class="font-bold text-yellow-600 mt-5 text-xs table_l:text-base">
                 Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
             </div>
         </div>

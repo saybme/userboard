@@ -94,7 +94,7 @@
     }
 
     .title-h1 {
-        @apply text-txt-40 text-blue-2 mb-6
+        @apply text-2xl table_l:text-txt-40 text-blue-2 mb-6
     }
 
     .title-h2 {
@@ -153,15 +153,15 @@
     }
 
     .alert-box {
-        @apply text-xs mob_l:text-base bg-yellow-50 p-3 mob_l:p-6 rounded-md border border-yellow-300 [&>a]:text-red-2 [&>a]:underline hover:[&>a]:no-underline
+        @apply text-xs table_l:text-base bg-yellow-50 p-3 table_l:p-6 rounded-md border border-yellow-300 [&>a]:text-red-2 [&>a]:underline hover:[&>a]:no-underline
     }
 
     .alert-box-yellow {
-        @apply alert alert-warning text-xs mob_l:text-base
+        @apply alert alert-warning text-xs table_l:text-base rounded-lg table_l:rounded-md
     }    
 
     .alert-red-box-border-l {
-        @apply text-red-2 text-sm mob_l:text-lg bg-white p-3 mob_l:p-5 pl-3 mob_l:pl-5 border-l-4 border-red-1
+        @apply text-red-2 text-sm table_l:text-lg bg-white p-3 table_l:p-5 pl-3 table_l:pl-5 border-l-4 border-red-1
     }
 
     .row-prices {

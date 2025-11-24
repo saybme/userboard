@@ -1,11 +1,11 @@
 <form action="" id="formApp" data-request="onApp" class="font-semibold block w-full" data-request-validate data-request-files>
     
-    <h1 class="text-4xl font-bold mb-6">Оформить полис ОСАГО</h1>
+    <h1 class="text-2xl table_l:text-4xl font-bold mb-6">Оформить полис ОСАГО</h1>
 
     <input type="hidden" name="form" value="{{ form.id }}">
     <input type="hidden" name="page_id" value="{{ page.id }}">       
 
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid table_l:grid-cols-3 gap-3 table_l:gap-4">
         <div class="">
             {% partial 'inputs/select' input=ub0403229fc1fce2a47c2ecba88d069663 %}
         </div>   
@@ -18,7 +18,7 @@
     </div>   
 
     <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
-        <legend class="font-gilroy-medium text-lg px-3 m-0">Страхователь</legend>
+        <legend class="font-gilroy-medium text-base table_l:text-lg px-3 m-0">Страхователь</legend>
         <p>Страхователь и собственник одно лицо</p>
         <div class="">
             {% partial 'inputs/radio' row='1' input=ub9b3a04e08c68e64d0aae4fef44febb3f %}
@@ -33,7 +33,7 @@
     
 
     <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
-        <legend class="font-gilroy-medium text-lg px-3 m-0">Транспортное средство</legend>        
+        <legend class="font-gilroy-medium text-base table_l:text-lg px-3 m-0">Транспортное средство</legend>        
         
         <div class="space-y-4">
             <div class="">     
@@ -51,7 +51,7 @@
     </fieldset>
 
     <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
-        <legend class="font-gilroy-medium text-lg px-3 m-0">Указать предыдущий полис (если таков имеется) </legend>
+        <legend class="font-gilroy-medium text-base table_l:text-lg px-3 m-0">Указать предыдущий полис (если таков имеется) </legend>
         <div class="grid grid-cols-2 gap-4">
             <div class="">
                 {% partial 'inputs/text' input=ub53dce5df3da2d9ec153da1eddb65c820 %}
@@ -63,7 +63,7 @@
     </fieldset>
 
     <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
-        <legend class="font-gilroy-medium text-lg px-3 m-0">Лица, допущенные к управлению  транспортным средством </legend>
+        <legend class="font-gilroy-medium text-base table_l:text-lg px-3 m-0">Лица, допущенные к управлению  транспортным средством </legend>
         <div class="">
             {% partial 'inputs/checkbox' input=ub76fceb4f3ab0b14f70c477d4a6ab6725 %}
         </div>
@@ -73,7 +73,7 @@
     </fieldset>  
 
     <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
-        <legend class="font-gilroy-medium text-lg px-3 m-0">Контактная информация</legend>
+        <legend class="font-gilroy-medium text-base table_l:text-lg px-3 m-0">Контактная информация</legend>
 
         <div class="">
             {% partial 'inputs/text' input=ub6fee19bf0a1904283958ff99196fe930 %}

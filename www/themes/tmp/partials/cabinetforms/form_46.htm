@@ -33,7 +33,7 @@
         <div class="mt-5 space-y-2">           
             {% partial 'inputs/radio' input=ube22b8470d8fa570c75ddadf2db420f22 code='transport' ajax='calcSumForm()' %}  
         </div> 
-        <div class="mt-5 grid gap-5 mob_l:grid-cols-2">            
+        <div class="mt-5 grid gap-3 table_l:grid-cols-2 table_l:gap-5">            
             <div class="">
                 {% partial 'inputs/text' input=ub4f65166dde674809335cefb3c76d8f44 %}              
             </div>
@@ -65,7 +65,7 @@
 
     <div class="mt-5 bg-white rounded-lg p-5">
         <h3 class="form-title">4. Что нужно сделать с ПТС</h3>  
-        <div class="mt-5 underline text-xs mob_l:text-base">
+        <div class="mt-5 underline text-xs table_l:text-base">
             Получите новый ПТС, если старый утрачен, пришёл в негодность или в нём закончилось свободное место
         </div> 
         <div class="mt-5">
@@ -78,7 +78,7 @@
         <div class="mt-5 ">
             {% partial 'inputs/radio' input=ub3b806b1e1b0f94e906029280e62f6122 %}
         </div>    
-        <div class="mt-5 grid mob_l:grid-cols-3 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-3 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ubd136a446b90c5d09a66ae7c972b70170 %}
             </div>
@@ -101,7 +101,7 @@
         <div class="mt-5">
             {% partial 'inputs/text' input=ubfef2da32ae9424df5735b6f6b1dc3712 %}
         </div>
-        <div class="mt-5 grid grid-cols-2 gap-5">
+        <div class="mt-5 grid table_l:grid-cols-2 gap-3 table_l:gap-5">
             <div class="">
                 {% partial 'inputs/text' input=ub6be501e9498161ac0237de79c2e8e928 %}    
             </div>
@@ -139,8 +139,8 @@
             {% partial 'cabinetforms/prices' %} 
         </div>   
         <div class="mt-5 border-l-4 border-yellow-500 pl-5 bg-yellow-50 py-2">
-            <p class="font-bold text-lg">Госпошлина не оплачивается</p>
-            <p class="text-xs mob_l:text-sm">
+            <p class="font-bold text-base table_l:text-lg">Госпошлина не оплачивается</p>
+            <p class="text-xs table_l:text-sm">
                 в случае прекращения (снятия с учета) ТС, за исключением случая вывоза ТС за границу
                 Внимание! Оплата производиться только после того как наш оператор свяжется с Вами по телефону и подтвердит регистрацию заявки                
             </p>
@@ -149,7 +149,7 @@
             <div class="" id="resultSum">
                 {% partial 'cabinetforms/form_total' %}                
             </div>
-            <div class="font-bold text-yellow-600 mt-5 text-xs mob_l:text-base">
+            <div class="font-bold text-yellow-600 mt-5 text-xs table_l:text-base">
                 Внимание! О ходе рассмотрения заявки Вы будете, проинформированы нашим оператором путем дозвона (убедительная просьба после заполнения заявки оставаться на связи. В случае неудачной попытки связаться с Вами, мы вынуждены будем Вашу заявку отклонить)
             </div>
         </div>
