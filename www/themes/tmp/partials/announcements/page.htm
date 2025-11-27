@@ -4,18 +4,18 @@
         {% partial "breadcrumbs/items" items=breadcrumbs %}   
     </div>
     
-    <div class="flex table_l:items-start pt-2 pb-9 flex-col-reverse table_l:flex-row gap-6">
+    <div class="pt-2 pb-9">
         
-        <div class="w-full table_l:w-[320px] flex-none">
-            {% partial 'sidebars/servises' %}
-        </div>        
+        <!-- <div class="w-full table_l:w-[320px] flex-none">
+            % partial 'sidebars/servises' %
+        </div>         -->
     
-        <div class="flex-1">      
+        <div class="max-w-[700px]">      
             {% if page.type_pay == 1 %}
 
-                <h1 class="text-xl table_l:text-3xl font-bold mb-3 table_l:mb-6 text-blue-2">Продам гос.номер</h1>                
+                <h1 class="text-xl table_l:text-3xl font-bold mb-3 table_l:mb-6 text-blue-2">Продам гос.номер</h1>  
 
-                {% if page.type == 1 %}
+                {% if page.type == 1 and page.number == true %}
                     <div class="mb-6 font-bold flex">
                         <div class="flex bg-white border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope">
                             <div class="py-3 px-8 text-5xl">{{ page.series | substr(0,1) }} {{ page.number }} {{ page.series | substr(1,3) }}</div>
@@ -27,7 +27,7 @@
                     </div>
                 {% endif %}
 
-                {% if page.type == 2 %}
+                {% if page.type == 2 and page.number == true %}
                     <div class="font-bold bg-white mb-6 border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope max-w-[230px] text-5xl">
                         <div class="p-6 pb-8 text-center">{{ page.number }}</div>
                         <div class="flex text-center uppercase">
@@ -48,7 +48,7 @@
                     </div>
                 {% endif %}                  
                 
-                {% if page.type == 3 %}
+                {% if page.type == 3 and page.number == true %}
                     <div class="mb-6 font-bold flex">
                         <div class="flex bg-white border-2 border-black rounded-md bg-gradient-to-t from-[#dfdfdf] to-white font-manrope">
                             <div class="py-3 px-8 text-5xl">{{ page.series }} {{ page.number }}</div>
@@ -60,7 +60,7 @@
                     </div>
                 {% endif %}                
 
-                <div class="flex gap-10">
+                <div class="flex gap-10 flex-col">
 
                     <div class="text-base table_l:text-xl space-y-1 flex-1">
                         {% if page.urgently %}
@@ -111,7 +111,7 @@
                     </div>    
                     
                     {% if page.photo %}
-                        <div class="flex-none">
+                        <div class="flex-none flex">
                             <a href="{{ page.photo.path }}" target="_blank" class="block border border-gray-300 rounded-md overflow-hidden p-1 hover:border-red-1 bg-white" data-fancybox>
                                 <img src="{{ page.photo.thumb(250,250) }}" alt="" class="block rounded-md">  
                             </a>                  
