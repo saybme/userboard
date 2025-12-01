@@ -6,9 +6,7 @@ use RainLab\Pages\Classes\Controller;
 use RainLab\Pages\Classes\Page as StaticPage;
 use RainLab\Pages\Classes\Router;
 use Cms\Classes\Theme;
-use Cms\Classes\Snippet;
 use Cms\Classes\Controller as CmsController;
-use Cms\Classes\SnippetManager;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
@@ -116,7 +114,7 @@ class Plugin extends PluginBase
 
             // Get rendered content
             $contents = Controller::instance()->getPageContents($page);
-            if (strlen($contents)) {
+            if ($contents && strlen($contents)) {
                 return $contents;
             }
         });
@@ -129,7 +127,7 @@ class Plugin extends PluginBase
             }
 
             $contents = Controller::instance()->getPlaceholderContents($page, $blockName, $blockContents);
-            if (strlen($contents)) {
+            if ($contents && strlen($contents)) {
                 return $contents;
             }
         });
@@ -202,7 +200,7 @@ class Plugin extends PluginBase
     {
         return [
             'filters' => [
-                'staticPage' => [\RainLab\Pages\Classes\Page::class, 'url']
+                'staticPage' => [\RainLab\Pages\Classes\Page::class, 'url', false]
             ]
         ];
     }

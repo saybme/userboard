@@ -132,6 +132,55 @@ class Index extends Controller
     }
 
     /**
+     * index_onOpenMultiple
+     */
+    public function index_onOpenMultiple()
+    {
+        $result = [];
+        $openTabs = post('openTabs');
+
+        if (!is_array($openTabs)) {
+            return;
+        }
+
+        $maxTabs = Config::get('rainlab.pages::remember_tabs_max', 5);
+        if ($maxTabs === false) {
+            return;
+        }
+
+        if ($maxTabs !== 0) {
+            $openTabs = array_slice($openTabs, -($maxTabs));
+        }
+
+        foreach ($openTabs as $obj) {
+            $type = $obj['type'] ?? null;
+            $path = $obj['path'] ?? null;
+            if (!$type || !$path) {
+                continue;
+            }
+
+            $object = $this->loadObject($type, $path, true);
+            if (!$object) {
+                continue;
+            }
+
+            /*
+             * Extensibility
+             */
+            Event::fire('pages.object.load', [$this, $object, $type]);
+            $this->fireEvent('object.load', [$object, $type]);
+
+            $result[] = [
+                'type' => $type,
+                'path' => $path,
+                'theme' => $this->theme->getDirName()
+            ] + $this->pushObjectForm($type, $object, null, $path);
+        }
+
+        return ['multiObjects' => $result];
+    }
+
+    /**
      * onSave
      */
     public function onSave()
@@ -448,6 +497,9 @@ class Index extends Controller
         return $object;
     }
 
+    /**
+     * createObject
+     */
     protected function createObject($type)
     {
         $class = $this->resolveTypeClassName($type);
@@ -459,6 +511,9 @@ class Index extends Controller
         return $object;
     }
 
+    /**
+     * resolveTypeClassName
+     */
     protected function resolveTypeClassName($type)
     {
         $types = [
@@ -757,13 +812,13 @@ class Index extends Controller
     /**
      * pushObjectForm
      */
-    protected function pushObjectForm($type, $object, $alias = null)
+    protected function pushObjectForm($type, $object, $alias = null, $path = null)
     {
         $widget = $this->makeObjectFormWidget($type, $object, $alias);
 
         $this->vars['canCommit'] = $this->canCommitObject($object);
         $this->vars['canReset'] = $this->canResetObject($object);
-        $this->vars['objectPath'] = Request::input('path');
+        $this->vars['objectPath'] = Request::input('path', $path);
         $this->vars['lastModified'] = DateTime::makeCarbon($object->mtime);
 
         if ($type == 'page') {
@@ -772,11 +827,11 @@ class Index extends Controller
 
         return [
             'tabTitle' => $this->getTabTitle($type, $object),
-            'tab'      => $this->makePartial('form_page', [
-                'form'         => $widget,
-                'objectType'   => $type,
-                'objectTheme'  => $this->theme->getDirName(),
-                'objectMtime'  => $object->mtime,
+            'tab' => $this->makePartial('form_page', [
+                'form' => $widget,
+                'objectType' => $type,
+                'objectTheme' => $this->theme->getDirName(),
+                'objectMtime' => $object->mtime,
                 'objectParent' => Request::input('parentFileName')
             ])
         ];
