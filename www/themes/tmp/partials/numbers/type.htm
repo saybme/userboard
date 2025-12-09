@@ -2,12 +2,12 @@
 
 <div class="number-plate">
     <div class="number-plate-left space-x-[2px]">
-        <div class="number-plate__letter" data-gos-nums="1">{{ item.props.series.0 ?: 'X' }}</div>
-        <div class="">{{ item.props.number.0 ?: 'X' }}</div>
-        <div class="">{{ item.props.number.1 ?: 'X' }}</div>
-        <div class="">{{ item.props.number.2 ?: 'X' }}</div>
-        <div class="number-plate__letter" data-gos-nums="5">{{ item.props.series.1 ?: 'X' }}</div>
-        <div class="number-plate__letter" data-gos-nums="6">{{ item.props.series.2 ?: 'X' }}</div>
+        <div class="number-plate__letter" data-gos-nums="1">{{ item.props.series.0 == '' ? 'X' : item.props.series.0 }}</div>
+        <div class="">{{ item.props.number.0 == '' ? 'X' : item.props.number.0 }}</div>
+        <div class="">{{ item.props.number.1 == '' ? 'X' : item.props.number.1 }}</div>
+        <div class="">{{ item.props.number.2 == '' ? 'X' : item.props.number.2 }}</div>
+        <div class="number-plate__letter" data-gos-nums="5">{{ item.props.series.1 == '' ? 'X' : item.props.series.1 }}</div>
+        <div class="number-plate__letter" data-gos-nums="6">{{ item.props.series.2 == '' ? 'X' : item.props.series.2 }}</div>
     </div>
     <div class="number-plate-right">
         <div class="flex-1" data-gos-nums="7">{{ item.props.region }}</div>

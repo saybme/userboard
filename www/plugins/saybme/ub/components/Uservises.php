@@ -49,7 +49,7 @@ class Uservises extends \Cms\Classes\ComponentBase
 
     private function getContent(){
         $type = $this->property('type');       
-        //dd($type);
+        
         return $this->$type();
     }
 
@@ -86,7 +86,7 @@ class Uservises extends \Cms\Classes\ComponentBase
         $options['breadcrumbs'] = $this->getBreadcrumbs($servise);
         $options['servises'] = $this->getAllServises();
 
-        //dd($tmp);
+        
 
         return $this->renderPartial($tmp, $options);
     }

@@ -151,12 +151,11 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         if($page->tmp) $tpl = $page->tmp;     
         
-        // if($user->utype->id == 2){
-        //     $tpl = 'applications/page-manager';
-        // }
-
-       
-        //dd($tpl);
+        if($user->utype->id == 2){
+            if($page->ptype != 'app'){
+                return $this->controller->run('404');
+            }            
+        }        
        
         // Страница форма
         if($page->form){
@@ -180,7 +179,9 @@ class Cabinet extends \Cms\Classes\ComponentBase
             $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page); 
         }  
                 
-        $options['content'] = $this->renderPartial($tpl, $options); 
+        $options['content'] = $this->renderPartial($tpl, $options);  
+        
+        //var_dump($tpl);
 
         return $this->renderPartial('cabinet/wrap', $options);
     }

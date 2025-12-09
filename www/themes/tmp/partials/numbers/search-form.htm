@@ -33,9 +33,9 @@ function onStart(){
                 {% if activeType == 1 %}
                     <div class="border-2 border-black rounded-md overflow-hidden number-plate max-w-none">
                         <div class="p-2 flex items-end gap-2">
-                            <input type="text" name="series[]" value="{{ numberdata.series.0 }}" maxlength="1" tabindex="1" oninput="stepFormInput(this)" class="input input-sm input-bordered w-[60px] text-center" placeholder="*">
-                            <input type="text" name="number" value="{{ numberdata.number }}" maxlength="3" tabindex="2" oninput="stepFormInput(this)" class="input text-xl input-bordered text-center w-[150px]" placeholder="***">
-                            <input type="text" name="series[]" value="{{ numberdata.series.1 }}" maxlength="2" tabindex="3" oninput="stepFormInput(this)" class="input input-sm input-bordered w-[60px] text-center" placeholder="**">
+                            <input type="text" name="series[]" value="{{ numberdata.series.0 }}" maxlength="1" tabindex="1" oninput="stepFormInput(this); this.value = this.value.toUpperCase()" class="input input-sm input-bordered w-[60px] text-center" placeholder="*">
+                            <input type="text" name="number" value="{{ numberdata.number }}" maxlength="3" tabindex="2" oninput="stepFormInput(this); this.value = this.value.toUpperCase()" class="input text-xl input-bordered text-center w-[150px]" placeholder="***">
+                            <input type="text" name="series[]" value="{{ numberdata.series.1 }}" maxlength="2" tabindex="3" oninput=" this.value = this.value.toUpperCase(); stepFormInput(this);" class="input input-sm input-bordered w-[60px] text-center" placeholder="**">
                         </div>
                         <div class="p-2 border-l-2 border-black flex flex-col gap-1">
                             <input type="text" name="region" value="{{ numberdata.region }}" maxlength="3" tabindex="4" class="input input-sm input-bordered w-[60px] text-center" placeholder="***">

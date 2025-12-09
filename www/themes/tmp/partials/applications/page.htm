@@ -43,13 +43,16 @@
             <div class="flex-none text-nowrap text-xl mob_l:text-3xl">
                 <b class="text-red-1">{{ page.price }}</b> руб.
             </div>
-            <div class="">
-                <form action="/cabinet/oplata" method="get">
-                    <input type="hidden" name="title" value="{{ page.name }}">
-                    <input type="hidden" name="price" value="{{ page.price }}">
-                    <button class="px-4 py-2 bg-blue-2 text-white rounded-lg hover:bg-blue-3 transition">Оплатить</button>
-                </form>
-            </div>
+            {% if user.utype.id != 2 %}
+                <div class="">
+                    <form action="/cabinet/oplata" method="get">
+                        <input type="hidden" name="title" value="{{ page.name }}">
+                        <input type="hidden" name="price" value="{{ page.price }}">
+                        <button class="px-4 py-2 bg-blue-2 text-white rounded-lg hover:bg-blue-3 transition">Оплатить</button>
+                    </form>
+                </div>
+            {% endif %}
+            
         </div>
     {% endif %}
  
