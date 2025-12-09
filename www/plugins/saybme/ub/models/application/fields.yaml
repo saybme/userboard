@@ -56,3 +56,10 @@ secondaryTabs:
             label: Стоимость 
             span: full
             type: number
+        payment:
+            label: Оплата
+            span: full
+            type: relation
+            comment: 'Связь с моделью оплаты'
+            nameFrom: id
+            placeholder: 'Выберите оплату'

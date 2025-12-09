@@ -25,6 +25,12 @@ class Application extends Model
         'files' => \System\Models\File::class
     ];
     
+    public $morphOne = [
+        'payment' => [
+            \Saybme\Ub\Models\Payment::class, 
+            'name' => 'imageable'
+        ]
+    ];
 
     public function getLinkAttribute(){
 
@@ -60,6 +66,14 @@ class Application extends Model
         $options[2] = 'Заявка выполнена';
 
         return $options;
+    }
+
+    public function getAppStatusAttribute(){
+        if(!$this->status) return 'Статус не присвоен';
+
+        $payment = $this->payment;
+
+        return $payment;
     }
 
     public function getStatusNameAttribute(){

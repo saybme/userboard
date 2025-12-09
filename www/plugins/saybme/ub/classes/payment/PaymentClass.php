@@ -1,5 +1,6 @@
 <?php namespace Saybme\Ub\Classes\Payment;
 
+use Saybme\Ub\Models\Application;
 use Saybme\Ub\Models\Payment;
 use Input;
 use Log;
@@ -11,9 +12,12 @@ class PaymentClass {
 
         $pay = new Payment;
         $pay->fill($data);
-        $pay->save();
+        $pay->save();  
 
-    
+        // Привязываем к приложению
+        $app = Application::find($data['app_id']);
+        $app->payment = $pay;
+        $app->save();
 
         return $pay;
     }

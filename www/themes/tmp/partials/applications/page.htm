@@ -44,13 +44,23 @@
                 <b class="text-red-1">{{ page.price }}</b> руб.
             </div>
             {% if user.utype.id != 2 %}
+                
+                {% if page.payment.link %}
+                    <div class="">
+                        <a href="{{ page.payment.link }}" target="_blank" class="px-4 py-2 bg-blue-2 text-white rounded-lg hover:bg-blue-3 transition">Оплатить</a>
+                    </div>
+                {% else %}
                 <div class="">
-                    <form action="/cabinet/oplata" method="get">
-                        <input type="hidden" name="title" value="{{ page.name }}">
-                        <input type="hidden" name="price" value="{{ page.price }}">
-                        <button class="px-4 py-2 bg-blue-2 text-white rounded-lg hover:bg-blue-3 transition">Оплатить</button>
+                    <form data-request="onPay" data-request-validate>
+                        <input type="hidden" name="app_id" value="{{ page.id }}">
+                        <input type="hidden" name="description" value="{{ page.name }}">
+                        <input type="hidden" name="sum" value="{{ page.price }}">
+                        <input type="hidden" name="user" value="{{ user.id }}">
+                        <button class="px-4 py-2 bg-blue-2 text-white rounded-lg hover:bg-blue-3 transition" loading>Оплатить</button>
                     </form>
                 </div>
+                {% endif %}
+                
             {% endif %}
             
         </div>

@@ -12,6 +12,7 @@ use Saybme\Ub\Models\Ubform;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Prpage;
 use Saybme\Ub\Models\Document;
+use Saybme\Ub\Models\Payment;
 use Saybme\Ub\Classes\Payment\PaymentClass;
 use Request;
 use ValidationException;
@@ -188,6 +189,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
     // Оплата услуги
     public function onPay(){
+        
         $data = Input::get();
 
         $messages = [
@@ -216,7 +218,12 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $SessionId = $qpay->initPay($payment);   
         
         // Редирект по ссылке
-        $link = 'https://secure.payture.com/apim/Pay?SessionId=' . $SessionId;
+        $link = 'https://secure.payture.com/apim/Pay?SessionId=' . $SessionId;     
+
+        // Сохраняем ссылку
+        $payment->link = $link;
+        $payment->save();
+
         return redirect($link);
     }
 

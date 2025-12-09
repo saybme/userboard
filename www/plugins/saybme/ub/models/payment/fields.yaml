@@ -3,17 +3,31 @@ fields:
         label: Наименование платежа
         span: auto
         type: text
+    sum:
+        label: Сумма платежа
+        span: auto
+        type: number
     user:
         label: Пользователь 
-        span: auto
+        span: full
         type: relation
         placeholder: -- Выбрать --
         nameFrom: phone
+    status:
+        label: Статус платежа 
+        comment: Статус оплаты платежа
+        span: full
+        type: dropdown
     description:
         label: Описание платежа
         span: full
         type: textarea
         size: small
+    link:
+        label: Ссылка на оплату
+        span: full
+        type: text
+        disabled: true
 tabs:
     fields:
         uuid:

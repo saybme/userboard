@@ -5,6 +5,9 @@ columns:
         relation: user
         select: phone
         searchable: true
+    status_name:
+        label: Статус
+        type: text
     sum:
         label: Сумма
         type: number
@@ -12,3 +15,7 @@ columns:
         label: Создан
         type: datetime
         width: '200px'
+    id:
+        label: ID
+        type: number
+        width: 'auto'

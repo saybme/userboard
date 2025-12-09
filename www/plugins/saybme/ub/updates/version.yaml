@@ -348,3 +348,15 @@ v1.0.116:
 v1.0.117:
     - 'Updated table saybme_ub_applications'
     - builder_table_update_saybme_ub_applications_5.php
+v1.0.118:
+    - 'Updated table saybme_ub_payments'
+    - builder_table_update_saybme_ub_payments_2.php
+v1.0.119:
+    - 'Updated table saybme_ub_payments'
+    - builder_table_update_saybme_ub_payments_3.php
+v1.0.120:
+    - 'Updated table saybme_ub_payments'
+    - builder_table_update_saybme_ub_payments_4.php
+v1.0.121:
+    - 'Updated table saybme_ub_payments'
+    - builder_table_update_saybme_ub_payments_5.php
