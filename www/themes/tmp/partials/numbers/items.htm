@@ -1,7 +1,12 @@
 {% for item in items %}
-    <div class="bg-white px-4 py-2 rounded-md border border-gray-100 flex table_l:items-center flex-col table_l:flex-row gap-y-2">
+    <div class="px-4 py-2 rounded-md border {{ item.urgently == true ? 'bg-yellow-50 border-yellow-500' : 'border-gray-100 bg-white' }} flex table_l:items-center flex-col table_l:flex-row gap-y-2">
         <div class="flex-1 flex gap-4 table_l:items-center flex-col table_l:flex-row">
-            <div class="w-full table_l:w-1/4">
+            <div class="w-full table_l:w-1/4 relative flex items-center">
+                {% if item.urgently %}
+                    <svg xmlns="http://www.w3.org/2000/svg" title="Срочно!" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-red-1 me-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                    </svg>
+                {% endif %}
                 {% partial 'numbers/type' item=item %}
             </div>
             <div class="flex-1 flex gap-4 flex-1">
@@ -20,14 +25,14 @@
                 <div class="table_l:w-1/4">
                     <p class="text-xs leading-none">Цена</p>
                     {% if item.type_price %}
-                        <p class="font-bold text-xs table_l:text-base">{{ item.type_price }}</p>
+                        <p class="font-bold text-xs table_l:text-base leading-none">{{ item.type_price }}</p>
                         {% if item.type_price == 'Договорная' %}
                             <div class="text-xs">
                                 {{ item.fix_price }}
                             </div>
                         {% endif %}
                     {% else %}
-                        <p class="font-bold text-xs table_l:text-base ">от {{ item.sum_start }} руб.</p>
+                        <p class="font-bold text-xs table_l:text-base leading-none">от {{ item.sum_start }} руб.</p>
                     {% endif %}
                 </div>
             </div>

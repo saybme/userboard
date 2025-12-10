@@ -8,3 +8,7 @@ create:
 update:
     redirect: saybme/ub/carnumbers
     redirectClose: saybme/ub/carnumbers
+
+design:
+    displayMode: sidebar
+    sidebarSize: 450

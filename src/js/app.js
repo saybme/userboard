@@ -2,8 +2,14 @@ import { Fancybox } from "@fancyapps/ui/dist/fancybox/";
 import { Carousel } from "@fancyapps/ui/dist/carousel/";
 import { Autoplay } from "@fancyapps/ui/dist/carousel/carousel.autoplay.js";
 import { Autoscroll } from "@fancyapps/ui/dist/carousel/carousel.autoscroll.js";
+import tippy from 'tippy.js';
 
 import { Dropzone } from "dropzone";
+
+
+tippy('[title]', {
+    content: (reference) => reference.getAttribute('title'),
+});
 
 // fancybox
 Fancybox.bind("[data-fancybox]");
@@ -736,15 +742,19 @@ window.gosNumInputRegion = function(el){
 window.stepFormInput = function(input){
     let maxlength = input.getAttribute('maxlength');
 
-    if(input.value.length == maxlength){
-        const event = document.dispatchEvent(new KeyboardEvent('keydown', {
-            key: 'Tab',
-            code: 'Tab',
-        }));
-        input.dispatchEvent(event);
-    };
-
-    
+    if(input.value.length >= maxlength){
+        // Находим все input/select/textarea в форме
+        const form = input.closest('form');
+        if(!form) return;
+        
+        const focusableElements = form.querySelectorAll('input:not([disabled]), select:not([disabled]), textarea:not([disabled])');
+        const currentIndex = Array.from(focusableElements).indexOf(input);
+        
+        // Переходим к следующему элементу
+        if(currentIndex !== -1 && currentIndex < focusableElements.length - 1){
+            focusableElements[currentIndex + 1].focus();
+        }
+    }
 }
 
 // Карусель гос номеров
@@ -783,3 +793,4 @@ window.numberCarouselVertical = function(){
         Carousel(containerV, options).init();
     }    
 }
+

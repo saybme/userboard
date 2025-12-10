@@ -34,19 +34,21 @@ class ServiseClass {
     }
 
     // Гос номера
-    public function getCarnumber($typePay = 1, $mode = ''){
+    public function getCarnumber($typePay = 1, $mode = ''){       
 
         // Лента
         if($typePay == 3) {
             $items = Carnumber::active()->whereIn('type', [1,2,3])->where('type_pay', 2)->orderBy('id','desc')->where('description','!=','');  
             return $items->get();       
-        }       
-        
+        }     
 
         // Тип номера
         $type = Input::get('type') ?: 1;
 
-        $items = Carnumber::active()->where('type', $type)->where('type_pay', $typePay)->orderBy('id','desc');       
+        $items = Carnumber::active()->where('type', $type)->where('type_pay', $typePay);
+        
+        // Сортивовка по полю urgently и дате публикации
+        $items = $items->orderBy('urgently', 'desc')->orderBy('created_at', 'desc');
         
         if($mode == 'top'){
             return $items->where('number', '!=', '')->get();     

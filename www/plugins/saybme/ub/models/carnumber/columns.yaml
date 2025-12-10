@@ -5,10 +5,11 @@ columns:
     type:
         label: Тип
         type: partial
-    type_pay:
-        label: Действие
     is_active:
         label: Опубликован
+        type: switch
+    urgently:
+        label: Срочность
         type: switch
     created_at:
         label: Создан
