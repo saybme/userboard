@@ -59,5 +59,16 @@ class Ubforms extends \Cms\Classes\ComponentBase
         return $content;
     }
 
+    // Создаем модель из данных формы
+    public function onFormCreate(){
+
+        $mode = Input::get('mode');
+        if(!$mode) {
+            throw new \ApplicationException('UB: Не указан режим обработки формы');
+        }
+
+        return;
+    }
+
     public $ubforms;
 }

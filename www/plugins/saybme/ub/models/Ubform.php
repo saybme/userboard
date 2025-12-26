@@ -30,7 +30,7 @@ class Ubform extends Model
     // Перед удалением
     public function beforeDelete(){
         // Удаляем шаблон
-        $filename = dirname(dirname(__FILE__)) . '/views/ubforms/form_' . $this->id . '.htm'; 
+        $filename = base_path($this->getFormPath());
         unlink($filename);    
     }
 
@@ -38,12 +38,17 @@ class Ubform extends Model
     private function createForm(){    
 
         $text = '';  
-        $filename = dirname(dirname(__FILE__)) . '/views/ubforms/form_' . $this->id . '.htm';      
+        $filename = base_path($this->getFormPath());     
         
         $fh = fopen($filename, 'w');
         fwrite($fh, $text);
         fclose($fh);
 
+    }    
+    
+    // Путь к форме
+    public function getFormPath() {
+        return '/plugins/saybme/ub/components/ubforms/forms/form_' . $this->id . '.htm';
     }
 
     public function beforeCreate() {    
