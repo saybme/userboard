@@ -162,7 +162,8 @@ class Plugin extends PluginBase
             \Saybme\Ub\Components\Cabinet::class    => 'cabinet',
             \Saybme\Ub\Components\Support::class    => 'support',
             \Saybme\Ub\Components\Uservises::class    => 'uservises',
-            \Saybme\Ub\Components\Ubapps::class    => 'ubapps'
+            \Saybme\Ub\Components\Ubapps::class    => 'ubapps',
+            \Saybme\Ub\Components\Ubforms::class    => 'ubforms',
         ];
     }
 
