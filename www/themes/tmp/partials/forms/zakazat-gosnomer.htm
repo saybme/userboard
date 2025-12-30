@@ -132,31 +132,11 @@
                         <div data-validate-for="contacts" class="text-error"></div>
                     </div>    
                 </div>
-                <h4 class="font-gilroy-medium text-lg mt-4">Сумма, руб. *</h4>
-                <div class="mt-2">
-                    <label class="label cursor-pointer py-1">  
-                        <input type="radio" name="type_price" class="radio radio-sm" value="Договорная" data-id="1" onchange="selectTypePrice(this)" checked>
-                        <span class="label-text ml-2 flex-1">Договорная</span> 
-                    </label>
-                    <label class="label cursor-pointer py-1">  
-                        <input type="radio" name="type_price" class="radio radio-sm" data-id="2" onchange="selectTypePrice(this)" value="Фиксированная цена">
-                        <span class="label-text ml-2 flex-1">Фиксированная цена</span> 
-                    </label>
-                </div>
-                <div class="flex gap-2 mt-2">
-                    <div class="data-input-row " data-input-id="1">
-                        <span class="block w-full text-sm mb-1 pl-1">от</span>
-                        <input type="number" value="" name="sum_start" class="input input-bordered w-full max-w-[150px]" placeholder="" id="sum_start"> 
-                        <div data-validate-for="sum_start" class="text-error"></div>
-                    </div> 
-                    <div class="data-input-row " data-input-id="1">
-                        <span class="block w-full text-sm mb-1 pl-1">до</span>
-                        <input type="number" value="" name="sum_end" class="input input-bordered w-full max-w-[150px]" placeholder="" id="sum_end"> 
-                        <div data-validate-for="sum_end" class="text-error"></div>
-                    </div> 
-                    <div class="data-input-row hidden" data-input-id="2">
+                <h4 class="font-gilroy-medium text-lg mt-4">Сумма, руб. *</h4>                
+                <div class="flex gap-2 mt-2">                    
+                    <div class="data-input-row" data-input-id="2">
                         <span class="block w-full text-sm mb-1 pl-1">Укажите цену</span>
-                        <input type="number" value="" disabled name="price" class="input input-bordered w-full max-w-[200px]" placeholder="" id="price"> 
+                        <input type="number" value="" name="price" class="input input-bordered w-full max-w-[200px]" placeholder="" id="price"> 
                         <div data-validate-for="price" class="text-error"></div>
                     </div>
                 </div>                   

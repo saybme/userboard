@@ -93,3 +93,8 @@ secondaryTabs:
             comment: Фото госномерного знака
             type: fileupload
             mode: image
+        price:
+            label: Цена
+            span: full
+            comment: Цена за госномерной знак
+            type: number

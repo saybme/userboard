@@ -228,7 +228,7 @@ class AppClass {
         Request::validate($rules, Lang::get('saybme.ub::validation'));
 
         $data['user'] = $user->id;
-        $data['is_active'] = true;
+        $data['is_active'] = false;
         //$data['num'] = implode('|', $data['nums']);        
         
 
