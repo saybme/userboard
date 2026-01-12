@@ -79,11 +79,7 @@
                         </div>
                         <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
                             <div class=""><b>Сумма:</b></div>
-                            {% if page.type_price == 'Фиксированная цена' %}
-                                <div class="">Фиксированная цена {{ page.price == true ? page.price ~ ' руб.' : '' }}</div>
-                            {% elseif page.type_price == 'Договорная' %}
-                                <div class="">Договорная {{ page.sum_start == true ? 'от '~page.sum_start~' руб. ' : '' }} {{ page.sum_end == true ? 'до '~page.sum_end~' руб.' : '' }}</div>
-                            {% endif %}
+                            <div class="">{{ page.price }} руб.</div>
                         </div>
 
                         <div class="">
@@ -194,11 +190,7 @@
                     </div>
                     <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Сумма:</b></div>
-                        {% if page.type_price == 'Фиксированная цена' %}
-                            <div class="">Фиксированная цена {{ page.price == true ? page.price ~ ' руб.' : '' }}</div>
-                        {% elseif page.type_price == 'Договорная' %}
-                            <div class="">Договорная {{ page.sum_start == true ? 'от '~page.sum_start~' руб. ' : '' }} {{ page.sum_end == true ? 'до '~page.sum_end~' руб.' : '' }}</div>
-                        {% endif %}
+                        <div class="">{{ page.price }} руб.</div>
                     </div>                    
 
                 </div>                

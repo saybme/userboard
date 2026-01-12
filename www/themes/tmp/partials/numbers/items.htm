@@ -24,16 +24,7 @@
                 </div>
                 <div class="table_l:w-1/4">
                     <p class="text-xs leading-none">Цена</p>
-                    {% if item.type_price %}
-                        <p class="font-bold text-xs table_l:text-base leading-none">{{ item.type_price }}</p>
-                        {% if item.type_price == 'Договорная' %}
-                            <div class="text-xs">
-                                {{ item.fix_price }}
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <p class="font-bold text-xs table_l:text-base leading-none">от {{ item.sum_start }} руб.</p>
-                    {% endif %}
+                    <p class="font-bold text-xs table_l:text-base leading-none">{{ item.price }} руб.</p>
                 </div>
             </div>
         </div>
