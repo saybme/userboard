@@ -93,6 +93,9 @@ secondaryTabs:
             comment: Фото госномерного знака
             type: fileupload
             mode: image
+        props[phone]:
+            label: Номер телефона
+            span: full
         price:
             label: Цена
             span: full

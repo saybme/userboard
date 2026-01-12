@@ -187,17 +187,7 @@
                 </label>
             </div>
 
-            <div class="mt-2">     
-                <h4 class="font-gilroy-medium text-lg mt-4">Оформлением занимается</h4>       
-                <div class="mt-2">
-                    {% for key, item in ['Собственник номеров','Покупатель номеров','Менеджер сайта (5% от стоимости номеров)'] %}
-                        <label class="label cursor-pointer py-1">  
-                            <input type="radio" name="props[paperwork]" class="radio checked:bg-red-500" value="{{ item }}" {{ key == 0 ? 'checked' : '' }}>
-                            <span class="label-text ml-2 flex-1">{{ item }}</span> 
-                        </label>
-                    {% endfor %}
-                </div>
-            </div>
+            
             
         </fieldset>
 
