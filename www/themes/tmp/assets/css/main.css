@@ -620,7 +620,7 @@ input[type="number"]::-webkit-inner-spin-button,
   }
 }
 
-.text > p, .text > ul, .text > ul, .text > table{
+.text > p, .text > ul, .text > ul, .text > table, .text > ol{
   margin-bottom: 1rem;
   font-family: Gilroy Medium, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
@@ -631,6 +631,13 @@ input[type="number"]::-webkit-inner-spin-button,
   margin-bottom: 1rem;
   margin-left: 1.25rem;
   list-style-type: disc;
+  line-height: 1.5;
+}
+
+.text > ol{
+  margin-bottom: 1rem;
+  margin-left: 1.25rem;
+  list-style-type: decimal;
   line-height: 1.5;
 }
 
@@ -661,6 +668,16 @@ input[type="number"]::-webkit-inner-spin-button,
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 600;
+}
+
+.text .oc-red{
+  --tw-text-opacity: 1;
+  color: rgb(239 50 50 / var(--tw-text-opacity));
+}
+
+.text .oc-blue{
+  --tw-text-opacity: 1;
+  color: rgb(40 90 127 / var(--tw-text-opacity));
 }
 
 .title-h1{
