@@ -1,0 +1,32 @@
+[viewBag]
+snippetCode = "boxlink"
+snippetName = "Блок с кнопкой ссылкой"
+snippetDescription = "Укажите ссылку на ресурс"
+snippetProperties[page_link][title] = "Ссылка"
+snippetProperties[page_link][type] = "string"
+snippetProperties[page_link][default] = ""
+snippetProperties[page_link][options] = ""
+snippetProperties[page_title][title] = "Заголовок"
+snippetProperties[page_title][type] = "string"
+snippetProperties[page_title][default] = ""
+snippetProperties[page_title][options] = ""
+snippetProperties[page_type][title] = "Тип кнопки"
+snippetProperties[page_type][type] = "string"
+snippetProperties[page_type][default] = 1
+snippetProperties[page_type][options] = ""
+==
+<?php
+function onStart(){
+    
+}
+?>
+==
+
+<div class="py-4 flex justify-center border-t border-gray-300 bg-white">
+    <a href="{{ page_link ?: '#' }}" class="btn btn-red w-full max-w-[450px]">
+        <span class="">{{ page_title ?: 'Подробнее' }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+    </a>
+</div>

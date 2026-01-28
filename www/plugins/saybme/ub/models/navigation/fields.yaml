@@ -1,0 +1,57 @@
+fields:
+    is_active:
+        label: Опубликован
+        span: full
+        default: 1
+        type: switch
+        comment: Отметьте, чтобы сделать элемент видимым на сайте
+    title:
+        label: Заголовок
+        span: auto
+        type: text
+        comment: Заголовок элемента навигации
+    parent:
+        label: Родительский элемент
+        span: auto
+        type: relation
+        placeholder: Выберите родительский элемент
+        comment: Выберите родительский элемент навигации, если необходимо создать вложенный пункт
+        nameFrom: title
+    link:
+        label: Ссылка
+        span: full
+        type: pagefinder    
+        comment: Укажите URL или путь для навигационного элемента
+tabs:
+    fields:
+        image:
+            label: Изображение
+            span: full
+            type: fileupload
+            mode: image
+            tab: Основное
+            comment: Выберите изображение для элемента навигации
+        description:
+            label: Описание
+            span: full
+            type: textarea
+            size: small
+            tab: Основное
+            comment: Дополнительная информация об элементе навигации
+        created_at:
+            label: 'Дата создания'
+            mode: datetime
+            span: auto
+            disabled: 1
+            type: datepicker
+            tab: Настройки
+            comment: Дата и время создания элемента
+        updated_at:
+            label: 'Дата обновления'
+            span: auto
+            mode: datetime
+            disabled: 1
+            type: datepicker
+            tab: Настройки
+            comment: Дата и время последнего обновления элемента
+    

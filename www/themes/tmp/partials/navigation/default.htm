@@ -1,0 +1,19 @@
+<div class="grid table_l:grid-cols-3 gap-4 max-w-[320px] mx-auto table_l:max-w-none">
+    {% for item in items %}
+        <a href="{{ item.link }}" class="block rounded-lg border border-gray-500 shadow-lg overflow-hidden bg-blue-2 text-white group">
+            <div class="aspect-w-4 aspect-h-2">
+                {% if item.image %}
+                    <img src="{{ item.image.path }}" alt="{{ item.title }}" class="object-cover size-full group-hover:scale-105 transition-transform">
+                {% else %}
+                    <div class="bg-gray-300 w-full h-full flex items-center justify-center text-gray-500">
+                        <span class="text-sm">Нет изображения</span>
+                    </div>
+                {% endif %}
+            </div>
+            <h2 class=" text-base laptop:text-xl font-bold p-2 laptop:p-4 leading-none flex items-center justify-between gap-2">
+                <span class="">{{ item.title }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-4 laptop:size-6 flex-none group-hover:text-red-500 transition-colors" fill="currentColor" viewBox="0 0 256 256"><path d="M237.66,122.34l-96-96A8,8,0,0,0,128,32V72H48A16,16,0,0,0,32,88v80a16,16,0,0,0,16,16h80v40a8,8,0,0,0,13.66,5.66l96-96A8,8,0,0,0,237.66,122.34ZM144,204.69V176a8,8,0,0,0-8-8H48V88h88a8,8,0,0,0,8-8V51.31L220.69,128Z"></path></svg>
+            </h2>
+        </a>
+    {% endfor %}
+</div>

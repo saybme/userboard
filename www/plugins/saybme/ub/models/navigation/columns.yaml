@@ -1,0 +1,16 @@
+columns:
+    title:
+        label: Заголовок
+        type: text
+        searchable: true
+    link:
+        label: Ссылка
+        type: text
+    is_active:
+        label: Опубликован
+        type: switch
+    id:
+        label: ID
+        type: number
+        align: right
+        width: auto

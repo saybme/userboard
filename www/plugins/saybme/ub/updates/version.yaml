@@ -360,3 +360,12 @@ v1.0.120:
 v1.0.121:
     - 'Updated table saybme_ub_payments'
     - builder_table_update_saybme_ub_payments_5.php
+v1.0.122:
+    - 'Created table saybme_ub_navigations'
+    - builder_table_create_saybme_ub_navigations.php
+v1.0.123:
+    - 'Updated table saybme_ub_navigations'
+    - builder_table_update_saybme_ub_navigations.php
+v1.0.124:
+    - 'Updated table saybme_ub_navigations'
+    - builder_table_update_saybme_ub_navigations_2.php

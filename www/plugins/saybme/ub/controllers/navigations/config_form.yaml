@@ -1,0 +1,14 @@
+name: Navigations
+form: $/saybme/ub/models/navigation/fields.yaml
+modelClass: Saybme\Ub\Models\Navigation
+defaultRedirect: saybme/ub/navigations
+create:
+    redirect: 'saybme/ub/navigations/update/:id'
+    redirectClose: saybme/ub/navigations
+update:
+    redirect: saybme/ub/navigations
+    redirectClose: saybme/ub/navigations
+
+design:
+    displayMode: popup
+    size: large

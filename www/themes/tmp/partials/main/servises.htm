@@ -1,27 +1,6 @@
-[uservises]
-slug = "{{ :slug }}"
-servise = 8
-type = "getServiseId"
-
-[ubapps paygusnumber]
-slug = "{{ :slug }}"
-type = "payNumbersJson"
-max = 5
-
-[ubapps]
-slug = "{{ :slug }}"
-type = "getNumbers"
-max = 30
-
-[ubapps buygusnumber]
-slug = "{{ :slug }}"
-type = "buyNumbersJson"
-max = 5
-
-[ubapps buyLenta]
-slug = "{{ :slug }}"
-type = "buyNumbersLenta"
-max = 30
+[unav]
+navigation = 1
+template = "navigation/default"
 ==
 <?php
 function onStart(){
@@ -37,21 +16,11 @@ function onStart(){
 ==
 <div class="table:container pt-[2.5rem] pb-[4.125rem] px-2">
 
-    <h1 class="text-center text-txt-30 table:text-txt-40 laptop:text-h1 text-blue-2 leading-tight ubtitle" id="mainservises">
+    <h1 class="text-center text-txt-30 table:text-txt-40 laptop:text-h1 text-blue-2 leading-tight ubtitle mb-6" id="mainservises">
         Услуги сервиса {{ 'USERBOARD.RU' | ubtitle }}
     </h1> 
 
-    <div class="mt-10 grid table_l:grid-cols-3 gap-4 max-w-[320px] mx-auto table_l:max-w-none">
-        {% for item in '33,32,34' | servises %}
-            <a href="{{ item.link }}" class="block border border-gray-400 overflow-hidden rounded-md bg-blue-2 text-white">
-                <img src="{{ item.photo.thumb(340,210,{mode:'crop'}) }}" alt="{{ item.name }}" class="block w-full h-auto">
-                <div class="flex px-3 py-3 items-center">
-                    <h2 class="text-lg font-semibold leading-none flex-1 gap-2">{{ item.name }}</h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6 flex-none" fill="currentColor" viewBox="0 0 256 256"><path d="M237.66,122.34l-96-96A8,8,0,0,0,128,32V72H48A16,16,0,0,0,32,88v80a16,16,0,0,0,16,16h80v40a8,8,0,0,0,13.66,5.66l96-96A8,8,0,0,0,237.66,122.34ZM144,204.69V176a8,8,0,0,0-8-8H48V88h88a8,8,0,0,0,8-8V51.31L220.69,128Z"></path></svg>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
+    {% component 'unav' %}    
 
     <div class="py-5 table_l:py-10 flex justify-center gap-3 table_l:gap-6 flex-wrap">
         <a href="/cabinet/doverennost-na-upravlenie-avtomobilem" class="btn btn-secondary rounded-full px-8 table_l:h-[42px] max-h-0">
