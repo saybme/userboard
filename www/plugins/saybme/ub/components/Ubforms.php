@@ -33,7 +33,7 @@ class Ubforms extends \Cms\Classes\ComponentBase
     }
 
     function onRun(){
-        $this->ubforms = $this->getForm();
+        $this->ubforms = $this->getForm();        
     }
     
     public function getForm() {
@@ -53,7 +53,7 @@ class Ubforms extends \Cms\Classes\ComponentBase
         }
 
         $optins['form'] = $form;
-        $tmp = '@forms/form_' . $form->id;
+        $tmp = '@forms/form_' . $form->id;        
 
         $content = $this->renderPartial($tmp, $optins);
         return $content;

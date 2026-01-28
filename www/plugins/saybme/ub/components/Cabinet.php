@@ -165,6 +165,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
             $options['form'] = $page->form;
             $arr = CabinetClass::getFormOptions($inputs);            
             $options = array_merge($options, $arr);
+            
         }         
         
         $options['user'] = $user;
@@ -182,7 +183,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
                 
         $options['content'] = $this->renderPartial($tpl, $options);  
         
-        //var_dump($tpl);
+        
 
         return $this->renderPartial('cabinet/wrap', $options);
     }

@@ -1,0 +1,208 @@
+<div class="" id="result-form">
+
+    
+
+    <form action="" data-request="onAddApp" class="block w-full" data-request-files data-request-validate>
+
+        
+
+        {% set type = 'type' | get ?: '1' %}
+
+        <input type="hidden" name="pay" class="radio checked:bg-red-500" value="Продам">
+        <input type="hidden" name="mode" value="carnumber">
+        <input type="hidden" name="type" value="{{ type }}">       
+        <input type="hidden" name="type_pay" value="1">          
+        
+        <input type="hidden" name="redirect" value="/servises/transportnye-uslugi/kupit-gos-nomer">
+
+        <div class="gos-number-types mb-5">
+            {% set types = ['Авто','Мото','Прицеп'] %}
+            {% for key, item in types %}                
+                <a href="?type={{ key+1 }}" class="gos-number-type {{ key+1 == type ? 'active' : '' }}">{{ item }}</a> 
+           {% endfor %}
+        </div> 
+
+        <div class="flex gap-6 text-xl font-semibold mb-5 text-gray-500">
+            <span class="underline text-blue-1">Продам</span>
+            <a href="/cabinet/zakazat-gosnomer" class="hover:text-red-1">Куплю</a>
+        </div>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <legend class="form-legend">Продать</legend>                   
+            <div class="">
+                
+                <div class="">
+                    <label class="label cursor-pointer py-1">  
+                        <input type="checkbox" name="urgently" class="checkbox rounded-sm" value="1">
+                        <span class="label-text ml-2 flex-1">Срочно</span> 
+                    </label>
+                </div>
+                <p class="underline mt-2 text-xs">
+                    <i class="">
+                        Поставив отметку срочно вы, ускоряете возможность продать быстро свой номер, вами заинтересуются пользователи, которые занимаются на постоянной основе перепродажей номеров, их переоформлением, или хотят ваш номер приобрести, так как он привлек внимание!  Такие пользователи в кратчайшие сроки свяжутся с вами и предложат выкупить номер по своей цене. 
+                    </i>
+                </p>
+            </div>        
+            {% if type == '1' %}
+                <div class="mt-4 space-y-4">                
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Авто' %}                    
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="text" name="props[series][0]" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][0]" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][2]" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="photo" class="block w-full text-sm mb-1">Фото номера</label>
+                        <input type="file" value="" name="photo" class="file-input input-bordered w-full max-w-[500px]" placeholder="" id="photos">    
+                    </div>
+                </div>
+            {% endif %}
+            {% if type == '2' %}
+                <div class="mt-4 space-y-4">                
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Мото' %}                    
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="number" name="props[number][0]" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][4]" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][0]" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="photo" class="block w-full text-sm mb-1">Фото номера</label>
+                        <input type="file" value="" name="photo" class="file-input input-bordered w-full max-w-[500px]" placeholder="" id="photos">    
+                    </div>
+                </div>
+            {% endif %}
+            {% if type == '3' %}
+                <div class="mt-4 space-y-4">                
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Прицеп' %}                    
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="text" name="props[series][0]" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][0]" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][3]" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="photo" class="block w-full text-sm mb-1">Фото номера</label>
+                        <input type="file" value="" name="photo" class="file-input input-bordered w-full max-w-[500px]" placeholder="" id="photos">    
+                    </div>
+                </div>
+            {% endif %}
+        </fieldset>
+
+        <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+            <legend class="font-gilroy-medium text-xs table_l:text-lg px-3 m-0">Заполнение формы продажи номеров в галерею номеров</legend>  
+            <div class="">
+                <label for="username" class="block w-full text-sm mb-1">Как к Вам обращаться</label>
+                <input type="text" value="" name="username" class="input input-bordered w-full" placeholder="" id="username">    
+                <div data-validate-for="username" class="text-error"></div>
+            </div>
+            <div class="mt-2">
+                <div class="">
+                    <span class="block w-full text-sm mb-1 pl-1">Телефон, вацап, телеграмм, почта</span>
+                    <input type="text" value="" name="contacts" class="input input-bordered w-full" placeholder="" id="contacts"> 
+                    <div data-validate-for="contacts" class="text-error"></div>
+                </div>    
+            </div>
+            <h4 class="font-gilroy-medium text-lg mt-4">Сумма, руб. *</h4>            
+            <div class="flex gap-2 mt-2">               
+                <div class="data-input-row" data-input-id="2">
+                    <span class="block w-full text-sm mb-1 pl-1">Укажите цену</span>
+                    <input type="number" value="" name="price" class="input input-bordered w-full max-w-[200px]" placeholder="" id="price"> 
+                    <div data-validate-for="price" class="text-error"></div>
+                </div>
+            </div>  
+            <h4 class="font-gilroy-medium text-lg mt-4">Адрес собственника номера</h4>
+            <div class="mt-2">                          
+                <div class="mt-2 flex gap-x-5 flex-wrap table_sm:flex-nowrap gap-y-2">
+                    <div class="w-full table_l:min-w-[250px]">
+                        <label for="address_region" class="block w-full text-sm mb-1">Регион</label>
+                        <input type="text" value="" name="address[region]" class="input input-bordered w-full" placeholder="" id="address_region">    
+                    </div>
+                    <div class="flex-1 table_l:min-w-[250px]">
+                        <label for="address_city" class="block w-full text-sm mb-1">Населенный пункт</label>
+                        <input type="text" value="" name="address[city]" class="input input-bordered w-full" placeholder="" id="address_city">    
+                    </div>
+                </div>              
+            </div>
+
+            <div class="mt-2 grid gap-0">
+                <label class="label cursor-pointer py-1">  
+                    <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на хранении" checked>
+                    <span class="label-text ml-2 flex-1">Номер на хранении</span> 
+                </label>
+                {% if type == 2 %}
+                    <label class="label cursor-pointer py-1">  
+                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На мото">
+                        <span class="label-text ml-2 flex-1">На мото</span> 
+                    </label>
+                {% elseif type == 3 %}
+                    <label class="label cursor-pointer py-1">  
+                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На прицепе">
+                        <span class="label-text ml-2 flex-1">На прицепе</span> 
+                    </label>
+                {% else %}
+                    <label class="label cursor-pointer py-1">  
+                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На авто">
+                        <span class="label-text ml-2 flex-1">На авто</span> 
+                    </label>
+                {% endif %}
+            </div>
+
+            <div class="mt-2">     
+                <h4 class="font-gilroy-medium text-lg mt-4">Что включено</h4>       
+                <label class="label cursor-pointer py-1">  
+                    <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление включено" checked>
+                    <span class="label-text ml-2 flex-1">Оформление включено</span> 
+                </label>
+                <label class="label cursor-pointer py-1">  
+                    <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Не включено">
+                    <span class="label-text ml-2 flex-1">Не включено</span> 
+                </label>
+                <label class="label cursor-pointer py-1">  
+                    <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление 50/50">
+                    <span class="label-text ml-2 flex-1">Оформление 50/50</span> 
+                </label>
+            </div>
+
+            
+            
+        </fieldset>
+
+        <div class="mt-4">
+            <button class="btn btn-red btn-lg w-full table_l:w-auto"  data-attach-loading>Подать объявление</button>
+        </div>
+
+        {% if page.content %}
+            <div class="text mt-12 text-xs table_l:text-base">
+                {{ page.content | raw }}
+            </div>
+        {% endif %} 
+
+    </form>
+
+</div>
