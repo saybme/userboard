@@ -10,3 +10,7 @@ toolbar:
     search:
         prompt: 'backend::lang.list.search_prompt'
 recordUrl: 'saybme/ub/carnumbers/update/:id'
+
+defaultSort:
+    column: created_at
+    direction: desc
