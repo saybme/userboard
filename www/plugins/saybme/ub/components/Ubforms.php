@@ -53,7 +53,9 @@ class Ubforms extends \Cms\Classes\ComponentBase
         }
 
         $optins['form'] = $form;
-        $tmp = '@forms/form_' . $form->id;        
+        $tmp = '@forms/form_' . $form->id;       
+        
+        //var_dump($tmp);
 
         $content = $this->renderPartial($tmp, $optins);
         return $content;

@@ -156,11 +156,13 @@ class Cabinet extends \Cms\Classes\ComponentBase
             if($page->ptype != 'app'){
                 return $this->controller->run('404');
             }            
-        }        
+        }    
+        
+        //var_dump($tpl);
        
         // Страница форма
         if($page->form){
-            $tpl = 'cabinetforms/form_' . $page->form->id;       
+            $tpl = 'cabinetforms/form_' . $page->form->id;                
             $inputs = $page->form->inputs;        
             $options['form'] = $page->form;
             $arr = CabinetClass::getFormOptions($inputs);            
