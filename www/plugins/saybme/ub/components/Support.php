@@ -53,7 +53,9 @@ class Support extends \Cms\Classes\ComponentBase
         
         if(!$user) return;
 
-        $options['themes'] = Suptheme::active()->userType($user->id)->get();
+        $options['themes'] = Suptheme::active()->userType($user->id)->orderBy('id', 'desc')->get();
+
+        
 
         return $this->renderPartial($tpl, $options);
     }

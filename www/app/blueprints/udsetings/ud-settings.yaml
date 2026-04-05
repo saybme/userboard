@@ -97,6 +97,35 @@ fields:
         span: full
         tab: Общие
 
+    _networks:
+        label: Социальные сети
+        span: full
+        tab: Общие
+        type: section
+
+    networks:
+        span: full
+        tab: Общие
+        type: repeater
+        form:
+            fields:
+                title:
+                    label: Название сети
+                    span: auto
+                    tab: Текст
+                value:
+                    label: Значение
+                    span: auto
+                    type: text
+                    tab: Иконка
+                icon:
+                    label: Иконка SVG
+                    span: full
+                    type: mediafinder
+                    mode: file
+                    maxItems: 1
+                    tab: Иконка
+
     footer_info:
         label: Информация в подвале
         type: textarea

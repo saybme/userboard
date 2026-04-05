@@ -4436,6 +4436,10 @@ ul.nav-registration ul{
   width: 100%;
 }
 
+.w-1\/4{
+  width: 25%;
+}
+
 .max-w-4xl{
   max-width: 56rem;
 }
@@ -6303,6 +6307,10 @@ ul.nav-registration ul{
 
   .mob_l\:h-\[25px\]{
     height: 25px;
+  }
+
+  .mob_l\:max-w-\[500px\]{
+    max-width: 500px;
   }
 
   .mob_l\:columns-4{
