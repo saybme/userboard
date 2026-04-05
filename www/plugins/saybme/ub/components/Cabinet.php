@@ -182,6 +182,9 @@ class Cabinet extends \Cms\Classes\ComponentBase
         } else {
             $options['breadcrumbs'] = $this->cabinetBreadcrumbs($page); 
         }  
+        
+
+        //var_dump($tpl);
                 
         $options['content'] = $this->renderPartial($tpl, $options);  
         
