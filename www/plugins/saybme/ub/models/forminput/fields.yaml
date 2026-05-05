@@ -23,7 +23,7 @@ fields:
 tabs:
     fields:
         type:
-            label: Тип поля 
+            label: Тип поля
             span: auto
             type: dropdown
             tab: Связь параметров
@@ -35,8 +35,8 @@ tabs:
             nameFrom: title
             tab: Связь параметров
         is_required:
-            label: Обязательное поле 
-            span: full 
+            label: Обязательное поле
+            span: full
             type: checkbox
             tab: Дополнительно
         comment:
@@ -44,7 +44,7 @@ tabs:
             tab: Дополнительно
             type: text
         input_type:
-            label: Тип поля 
+            label: Тип поля
             span: full
             type: dropdown
             tab: Дополнительно
@@ -52,27 +52,28 @@ tabs:
                 text: Текст
                 email: E-mail
                 tel: Телефон
-                datetime-local: Дата и время
+                datetime-local: Дата и время,
+                select: Выпадающий список
         app_title:
-            label: Заголовок в заявке 
-            span: full 
-            type: text 
+            label: Заголовок в заявке
+            span: full
+            type: text
             tab: Дополнительно
         attr:
-            label: Атрибуты 
+            label: Атрибуты
             span: full
             tab: Дополнительно
-            type: text 
+            type: text
             size: small
         price_code:
-            label: Рассчет стоимости 
-            span: full 
+            label: Рассчет стоимости
+            span: full
             tab: Цены
             type: codeeditor
             size: huge
             language: php
         prices:
-            label: Цены 
+            label: Цены
             span: full
             tab: Цены
             type: datatable
