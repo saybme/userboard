@@ -62,8 +62,8 @@ class Application extends Model
     public function getStatusOptions(){
 
         $options[0] = 'Новая';
-        $options[1] = 'Принята в работу';
-        $options[2] = 'Заявка выполнена';
+        $options[1] = 'Заявка принята в работу';
+        $options[2] = 'Заявка исполнена';
 
         return $options;
     }

@@ -8,6 +8,8 @@ use Saybme\Ub\Classes\Servises\ServiseClass;
 use Saybme\Ub\Models\Formvalue;
 use System\Models\File;
 use Input;
+use Event;
+use Str;
 
 /**
  * Plugin class
@@ -114,20 +116,40 @@ class Plugin extends PluginBase
    
     public function boot() {
 
-        \Event::listen('cms.page.init', function($controller) {
+        Event::listen('media.file.upload', function ($mediaWidget, &$path, $uploadedFile) {
+            $originalName = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = strtolower($uploadedFile->getClientOriginalExtension());
+            $slug = Str::slug($originalName) ?: 'file';
+            $newName = 'img-' . Str::random(8) . '-' . $slug . ($extension ? '.' . $extension : '');
+
+            $dir = pathinfo($path, PATHINFO_DIRNAME);
+            $newPath = ($dir && $dir !== '.') ? $dir . '/' . $newName : $newName;
+
+            while (\Media\Classes\MediaLibrary::instance()->has($newPath)) {
+                $newName = 'img-' . Str::random(8) . '-' . $slug . ($extension ? '.' . $extension : '');
+                $newPath = ($dir && $dir !== '.') ? $dir . '/' . $newName : $newName;
+            }
+
+            if ($newPath !== $path) {
+                \Media\Classes\MediaLibrary::instance()->moveFile($path, $newPath, true);
+                $path = $newPath;
+            }
+        });
+
+        Event::listen('cms.page.init', function($controller) {
             $q = new AuthClass;
             $controller->vars['auth'] = $q->getAuth();
         });
 
 
-        \Event::listen('cms.pageLookup.listTypes', function() {
+        Event::listen('cms.pageLookup.listTypes', function() {
             return [              
                 'ub-page-cabinet' => 'UB страница кабинета',
                 'ub-form' => 'UB форма'
             ];
         });
 
-        \Event::listen('pages.menuitem.listTypes', function() {
+        Event::listen('pages.menuitem.listTypes', function() {
             return [              
                 'ub-page-cabinet' => 'UB страница кабинета',
                 'ub-form' => 'UB форма'
@@ -135,7 +157,7 @@ class Plugin extends PluginBase
         });
         
     
-        \Event::listen(['cms.pageLookup.getTypeInfo', 'pages.menuitem.getTypeInfo'], function($type) {
+        Event::listen(['cms.pageLookup.getTypeInfo', 'pages.menuitem.getTypeInfo'], function($type) {
             if ($type == 'ub-form') {
                 return Models\Ubform::getMenuTypeInfo($type);
             }
@@ -144,7 +166,7 @@ class Plugin extends PluginBase
             }
         });
     
-        \Event::listen(['cms.pageLookup.resolveItem', 'pages.menuitem.resolveItem'], function($type, $item, $url, $theme) {
+        Event::listen(['cms.pageLookup.resolveItem', 'pages.menuitem.resolveItem'], function($type, $item, $url, $theme) {
             if ($type == 'ub-form') {
                 return Models\Ubform::resolveMenuItem($item, $url, $theme);
             }

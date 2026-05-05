@@ -30,7 +30,21 @@ addEventListener('ajax:done', function(event) {
         alert(1);
     }
 
+    // modalSubTheme 
+    if(handler == 'modalSubTheme'){
+        modalSubTheme(event);
+    }
+
 });
+
+// Окно оставить отзыв
+window.modalSubTheme = function(data){
+    Fancybox.show([
+        {
+            html: data.modal
+        },
+    ]);
+}
 
 // dropzone
 let dropzones = document.querySelectorAll('.izones');
