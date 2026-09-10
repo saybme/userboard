@@ -1,6 +1,5 @@
 <?php namespace Saybme\Ub\Components;
 
-use Saybme\Ub\Classes\App\SmsClass;
 use Saybme\Ub\Classes\App\AppClass;
 use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Classes\Document\DocumentClass;
@@ -75,8 +74,6 @@ class Cabinet extends \Cms\Classes\ComponentBase
         $slug = $this->property('slug');
 
         //dd($slug);
-
-        $sms = new SmsClass;
 
         $options = array();
         $tpl = 'cabinet/profile';

@@ -1,6 +1,6 @@
 <?php namespace Saybme\Ub\Classes\Auth;
 
-use Saybme\Ub\Classes\App\SmsClass;
+use Saybme\Ub\Classes\Auth\SmsruClass;
 use Saybme\Ub\Classes\App\AppClass;
 use Saybme\Ub\Classes\App\AppformClass;
 use Saybme\Ub\Models\User;
@@ -96,15 +96,15 @@ class AuthClass {
         if($utype == 2) return;
 
         $q = new AppClass;
-        $qSms = new SmsClass;
+        $qSms = new SmsruClass;
         
         $code = rand(1000, 9999);
         $phone = $q->setPhone(Input::get('phone'));    
 
+        $qSms->send($phone, 'Код для входа ' . $code);
+
         Session::put('auth.phone', $phone);
-        Session::put('auth.sms', $code);     
-        
-        $qSms->sendSms($phone, $code);
+        Session::put('auth.sms', $code);
 
     }
 
