@@ -8,9 +8,12 @@ class User extends Model
     use \October\Rain\Database\Traits\Validation;
     use \October\Rain\Database\Traits\Sortable;
     use \October\Rain\Database\Traits\Purgeable;
+    use \October\Rain\Database\Traits\Hashable;
     use \Tailor\Traits\BlueprintRelationModel;
 
     protected $purgeable = ['password_confirmation'];
+
+    protected $hashable = ['password'];
 
     protected $fillable = ['login','phone','password','password_confirmation','is_active','email','profile'];
     protected $jsonable = ['profile'];

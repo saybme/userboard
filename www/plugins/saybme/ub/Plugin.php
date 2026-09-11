@@ -18,8 +18,16 @@ class Plugin extends PluginBase
 {
     
     public function register() {
+
         $this->registerValidationRule('sms', SmsRule::class); // Проверка СМС кода
         $this->registerValidationRule('phone', PhoneRule::class); // Проверка номере телефона
+
+        $autoload = __DIR__ . '/vendor/autoload.php';
+
+        if (file_exists($autoload)) {
+            require_once $autoload;
+        }   
+
     }
 
     public function registerMarkupTags() {

@@ -1,0 +1,7 @@
+{
+    "name": "saybme/ub",
+    "type": "october-plugin",
+    "require": {
+        "firebase/php-jwt": "^7.1"
+    }
+}

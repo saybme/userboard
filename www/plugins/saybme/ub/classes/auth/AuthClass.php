@@ -74,12 +74,14 @@ class AuthClass {
         // Валидация пользователя
         $rules['phone'] = 'required|min:11';
         $rules['check'] = 'accepted';
+        $rules['verify_method'] = 'required|in:telegram,sms';
         Request::validate($rules, Lang::get('saybme.ub::validation'));   
         
         Session::put('auth.utype', 1);
+        Session::put('auth.verify_method', Input::get('verify_method'));
     }  
 
-    // Шаг 3 проверка пользователя
+    // Проверка, есть ли пользователь с таким телефоном
     public function authStepTwo() {  
 
         $q = new AppClass;
@@ -89,8 +91,36 @@ class AuthClass {
         return $user;
     }
 
-    // Сохраняем смс и телефон в сессию
-    public function saveContactUser(){
+    // Создать Telegram Bot challenge и вернуть deep link
+    public function startTelegramBotVerification(): string
+    {
+        $q = new AppClass;
+        $phone = $q->setPhone(Input::get('phone'));
+
+        if (!$phone) {
+            throw new ValidationException([
+                'phone' => 'Укажите корректный номер телефона.',
+            ]);
+        }
+
+        $bot = new TelegramBot;
+        return $bot->createChallengeAndDeepLink($phone);
+    }
+
+    // Сохраняем ожидаемый номер перед Telegram OAuth (старый OIDC, оставлен)
+    public function prepareTelegramVerification()
+    {
+        $q = new AppClass;
+        $phone = $q->setPhone(Input::get('phone'));
+
+        Session::put('telegram_expected_phone', $phone);
+        Session::put('auth.phone', $phone);
+        Session::put('auth.utype', 1);
+        Session::forget('phone_verification');
+    }
+
+    // Отправка SMS-кода (регистрация или вход)
+    public function saveContactUser($isNew = false){
 
         $utype = Session::get('auth.utype');
         if($utype == 2) return;
@@ -105,24 +135,135 @@ class AuthClass {
 
         Session::put('auth.phone', $phone);
         Session::put('auth.sms', $code);
-
+        Session::put('auth.is_new', (bool) $isNew);
+        Session::put('auth.verify_method', 'sms');
     }
 
-    // Проверка смс кода и автоизация пользователя
-    public function authStepThree(){       
-        
-        // if($utype == 2){
-        //     $phone = Session::get('auth.phone');
-        //     $user = User::where('login', $phone)->first();
-        //     $this->saveUserHash($user->hash);
-        //     return;
-        // };
+    /**
+     * Получить актуальное подтверждение номера (telegram|sms).
+     * Возвращает массив, 'expired' или null.
+     */
+    public function getPhoneVerification()
+    {
+        if (!Session::has('phone_verification')) {
+            return null;
+        }
 
+        $verification = Session::get('phone_verification');
+        $provider = $verification['provider'] ?? null;
+
+        if (
+            !is_array($verification) ||
+            !in_array($provider, ['telegram', 'sms'], true) ||
+            empty($verification['phone'])
+        ) {
+            Session::forget('phone_verification');
+            return null;
+        }
+
+        if (($verification['expires_at'] ?? 0) < time()) {
+            Session::forget('phone_verification');
+            return 'expired';
+        }
+
+        return $verification;
+    }
+
+    // Проверка SMS-кода
+    public function validateSmsCode()
+    {
         $rules['sms'] = 'required|sms';
-        Request::validate($rules, Lang::get('saybme.ub::validation')); 
+        Request::validate($rules, Lang::get('saybme.ub::validation'));
+    }
 
-        $this->createUser();
-        
+    // После верного SMS для новой регистрации — сохраняем подтверждение
+    public function markPhoneVerifiedBySms()
+    {
+        $phone = Session::get('auth.phone');
+        if (!$phone) {
+            throw new ValidationException([
+                'phone' => 'Сессия подтверждения устарела. Начните сначала.',
+            ]);
+        }
+
+        Session::put('phone_verification', [
+            'provider' => 'sms',
+            'phone' => $phone,
+            'verified_at' => time(),
+            'expires_at' => time() + 900,
+        ]);
+
+        Session::forget('auth.sms');
+        Session::forget('auth.is_new');
+    }
+
+    // Регистрация после подтверждения телефона (Telegram или SMS)
+    public function registerWithVerifiedPhone()
+    {
+        $verification = $this->getPhoneVerification();
+
+        if ($verification === 'expired' || !$verification) {
+            Session::forget('phone_verification');
+            throw new ValidationException([
+                'phone' => 'Срок подтверждения номера истёк. Подтвердите номер ещё раз.',
+            ]);
+        }
+
+        $rules['password'] = 'required|min:8|confirmed';
+        $rules['password_confirmation'] = 'required';
+        Request::validate($rules, Lang::get('saybme.ub::validation'));
+
+        $phone = $verification['phone'];
+
+        if (User::where('phone', $phone)->exists()) {
+            throw new ValidationException([
+                'phone' => 'Пользователь с таким номером уже зарегистрирован. Войдите в аккаунт.',
+            ]);
+        }
+
+        $data['is_active'] = true;
+        $data['phone'] = $phone;
+        $data['password'] = Input::get('password');
+        $data['password_confirmation'] = Input::get('password_confirmation');
+
+        if (($verification['provider'] ?? null) === 'telegram') {
+            $data['profile'] = [
+                'telegram_id' => $verification['telegram_id'] ?? null,
+                'telegram_name' => $verification['name'] ?? null,
+                'telegram_username' => $verification['username'] ?? null,
+                'provider_user_id' => $verification['provider_user_id'] ?? null,
+            ];
+        }
+
+        $user = new User;
+        $user->fill($data);
+        $user->save();
+
+        Session::forget('phone_verification');
+        Session::forget('telegram_expected_phone');
+        Session::put('auth.phone', $phone);
+        Session::put('auth.utype', 1);
+
+        $this->saveUserHash($user->hash);
+
+        return $user;
+    }
+
+    // Вход существующего пользователя по подтверждённому телефону
+    public function loginByPhone($phone)
+    {
+        $user = User::where('phone', $phone)->first();
+        if (!$user) {
+            return null;
+        }
+
+        Session::forget('phone_verification');
+        Session::forget('telegram_expected_phone');
+        Session::put('auth.phone', $phone);
+        Session::put('auth.utype', 1);
+        $this->saveUserHash($user->hash);
+
+        return $user;
     }
 
     // Авторизация пользователя
@@ -139,31 +280,12 @@ class AuthClass {
         };       
        
 
-        $rules['sms'] = 'required|sms';
-        Request::validate($rules, Lang::get('saybme.ub::validation')); 
+        $this->validateSmsCode();
 
         $phone = Session::get('auth.phone');
         $user = User::where('phone', $phone)->first();
 
         $this->saveUserHash($user->hash);
-
-    }
-
-    // Создаем пользователя
-    public function createUser(){
-
-        $auth = $this->getAuthSession();    
-        
-        $password = 123456789;
-        
-        $data['is_active'] = true;
-        $data['phone'] = $auth['phone'];
-        $data['password'] = $password;
-        $data['password_confirmation'] = $password;
-
-        $user = new User;
-        $user->fill($data);
-        $user->save();
 
     }
 

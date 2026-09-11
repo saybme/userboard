@@ -6,7 +6,14 @@
 
         <form action="" data-request="onAuth" class="block w-full mt-3" data-request-success="console.log(data)" data-request-validate>  
             <div id="open-result">
-                {% partial 'modal/form-inputs' step=1 %}
+                {% partial 'modal/form-inputs'
+                    step=step|default(1)
+                    auth=auth
+                    auth_error=auth_error
+                    phone_verified=phone_verified
+                    verify_provider=verify_provider
+                    is_registration=is_registration
+                %}
             </div>    
         </form>
 

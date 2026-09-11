@@ -2,6 +2,10 @@
 
     <input type="hidden" name="step" value="2">
 
+    {% if auth_error %}
+        <div class="text-xs text-red-2 mb-3 w-full">{{ auth_error }}</div>
+    {% endif %}
+
     <div class="">
         <label for="" class="mb-1 block w-full">Номер телефона</label>
         <input type="text" name="phone" placeholder="+7 999 999-99-99" class="input input-bordered w-full" oninput="setPhone(this)">
@@ -16,8 +20,13 @@
         <div data-validate-for="check" class="text-xs text-red-2 mt-1 w-full"></div>
     </div>
 
-    <div class="mt-4">
-        <button class="btn btn-red" data-attach-loading>Отправить</button>
+    <div data-validate-for="verify_method" class="text-xs text-red-2 mt-3 w-full"></div>
+
+    <input type="hidden" name="verify_method" id="auth-verify-method" value="">
+
+    <div class="mt-4 grid gap-2">
+        <button type="submit" class="btn btn-red" data-attach-loading onclick="document.getElementById('auth-verify-method').value='telegram'">Подтвердить через Telegram</button>
+        <button type="submit" class="btn btn-outline border-blue-1 text-blue-1" data-attach-loading onclick="document.getElementById('auth-verify-method').value='sms'">Подтвердить по СМС</button>
     </div>
 
 {% endif %}
@@ -48,23 +57,33 @@
 
     {% else %}
 
+        {% if phone_verified %}
+            <div class="mt-2 font-gilroy-medium">
+                {% if verify_provider == 'sms' %}
+                    <p>Номер подтверждён по СМС</p>
+                {% else %}
+                    <p>Номер подтверждён через Telegram</p>
+                {% endif %}
+            </div>
+        {% endif %}
+
         <div class="mt-2">
-            <label for="m-sms-code" class="mb-1 block w-full">Введите код из СМС</label>
-            <input type="text" name="sms" id="m-sms-code" value="" class="input input-bordered w-full">
-            <div data-validate-for="sms" class="text-xs text-red-2 mt-1 w-full"></div>
+            <label for="m-password" class="mb-1 block w-full">Пароль</label>
+            <input type="password" name="password" id="m-password" value="" class="input input-bordered w-full" autocomplete="new-password">
+            <div data-validate-for="password" class="text-xs text-red-2 mt-1 w-full"></div>
         </div>
-        
-        <div class="mt-2 font-gilroy-medium">
-            <p>СМС с кодом для входа отправлено на Ваш номер телефона.</p>
-        </div>   
+
+        <div class="mt-2">
+            <label for="m-password-confirmation" class="mb-1 block w-full">Повторите пароль</label>
+            <input type="password" name="password_confirmation" id="m-password-confirmation" value="" class="input input-bordered w-full" autocomplete="new-password">
+            <div data-validate-for="password_confirmation" class="text-xs text-red-2 mt-1 w-full"></div>
+        </div>
 
         <div class="mt-2">
             <button class="btn btn-red" data-attach-loading>Зарегистрироваться</button>
         </div>
 
-    {% endif %}  
-
-    
+    {% endif %}
 
 {% endif %}
 
@@ -85,13 +104,17 @@
     </div>
     
     <div class="mt-2 font-gilroy-medium">
-        <p>СМС с кодом для входа отправлено на Ваш номер телефона.</p>
+        {% if is_registration %}
+            <p>СМС с кодом для регистрации отправлено на Ваш номер телефона.</p>
+        {% else %}
+            <p>СМС с кодом для входа отправлено на Ваш номер телефона.</p>
+        {% endif %}
     </div>   
 
-    
-
     <div class="mt-2">
-        <button class="btn btn-red" data-attach-loading>Войти</button>
+        <button class="btn btn-red" data-attach-loading>
+            {% if is_registration %}Продолжить{% else %}Войти{% endif %}
+        </button>
     </div>
 
 {% endif %}

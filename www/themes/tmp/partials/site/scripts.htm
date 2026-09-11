@@ -1,4 +1,15 @@
 <script src="{{ ['assets/js/app.js'] | theme }}"></script>
 
+{% if open_auth_modal %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('btn-auth-open');
+    if (btn) {
+        btn.click();
+    }
+});
+</script>
+{% endif %}
+
 {% framework extras %}
 {% scripts %}

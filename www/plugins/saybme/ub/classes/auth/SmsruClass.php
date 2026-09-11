@@ -8,8 +8,6 @@ class SmsruClass {
 
     // Отправка сообщения через сервис https://smsc.ru/
     public function send($phone, $text) {
-        // Временно меняет текст на Тестовое сообщение
-        $text = 'Тестовое сообщение';
         $payload = [
             'phones' => $phone,
             'mes' => $text,
