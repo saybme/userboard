@@ -372,3 +372,6 @@ v1.0.124:
 v1.0.125:
     - 'Created table saybme_ub_auth_challenges'
     - builder_table_create_saybme_ub_auth_challenges.php
+v1.0.126:
+    - 'Created table saybme_ub_email_login_tokens'
+    - builder_table_create_saybme_ub_email_login_tokens.php

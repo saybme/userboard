@@ -87,7 +87,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
             return $this->renderPartial($tpl, $options);
         }
 
-        if($user->utype->id == 2){
+        if(($user->utype->id ?? null) == 2){
             $options['user'] = $user;
             $options['applications'] = $q->getUserApplicationsManager($user->id);
             return $this->renderPartial('cabinet/manager', $options);
@@ -149,7 +149,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         if($page->tmp) $tpl = $page->tmp;
 
-        if($user->utype->id == 2){
+        if(($user->utype->id ?? null) == 2){
             if($page->ptype != 'app'){
                 return $this->controller->run('404');
             }

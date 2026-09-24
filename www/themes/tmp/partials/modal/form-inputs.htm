@@ -1,15 +1,44 @@
 {% if step == 1 %}
 
-    <input type="hidden" name="step" value="2">
+    <input type="hidden" name="step" id="auth-step" value="2">
+    <input type="hidden" name="auth_action" id="auth-action" value="">
+    <input type="hidden" name="verify_method" id="auth-verify-method" value="">
+    <input type="hidden" name="phone" id="auth-phone" value="">
+    <input type="hidden" name="email" id="auth-email" value="">
 
     {% if auth_error %}
         <div class="text-xs text-red-2 mb-3 w-full">{{ auth_error }}</div>
     {% endif %}
 
     <div class="">
-        <label for="" class="mb-1 block w-full">Номер телефона</label>
-        <input type="text" name="phone" placeholder="+7 999 999-99-99" class="input input-bordered w-full" oninput="setPhone(this)">
+        <label for="auth-login" id="auth-login-label" class="mb-1 block w-full">Телефон или email</label>
+        <input
+            type="text"
+            id="auth-login"
+            name="login"
+            value=""
+            placeholder="+7 999 999-99-99 или email"
+            class="input input-bordered w-full"
+            autocomplete="username"
+            oninput="authDetectMode(this)"
+        >
+        <div data-validate-for="login" class="text-xs text-red-2 mt-1 w-full"></div>
         <div data-validate-for="phone" class="text-xs text-red-2 mt-1 w-full"></div>
+        <div data-validate-for="email" class="text-xs text-red-2 mt-1 w-full"></div>
+    </div>
+
+    <div id="auth-mode-email-fields" class="mt-4" style="display:none;">
+        <div class="">
+            <label for="m-email-password" class="mb-1 block w-full">Пароль</label>
+            <input type="password" name="password" id="m-email-password" value="" class="input input-bordered w-full" autocomplete="current-password">
+            <div data-validate-for="password" class="text-xs text-red-2 mt-1 w-full"></div>
+        </div>
+
+        <div class="mt-2" id="auth-email-confirm-wrap">
+            <label for="m-email-password-confirmation" class="mb-1 block w-full">Повторите пароль <span class="text-gray-400 font-normal">(для регистрации)</span></label>
+            <input type="password" name="password_confirmation" id="m-email-password-confirmation" value="" class="input input-bordered w-full" autocomplete="new-password">
+            <div data-validate-for="password_confirmation" class="text-xs text-red-2 mt-1 w-full"></div>
+        </div>
     </div>
 
     <div class="mt-4 relative pl-6">
@@ -20,13 +49,59 @@
         <div data-validate-for="check" class="text-xs text-red-2 mt-1 w-full"></div>
     </div>
 
-    <div data-validate-for="verify_method" class="text-xs text-red-2 mt-3 w-full"></div>
+    <div id="auth-mode-phone" class="mt-4" style="display:none;">
+        <div data-validate-for="verify_method" class="text-xs text-red-2 mb-3 w-full"></div>
+        <div class="grid gap-2">
+            <button type="submit" class="btn btn-red" data-attach-loading onclick="authPreparePhone('telegram')">Подтвердить через Telegram</button>
+            <button type="submit" class="btn btn-outline border-blue-1 text-blue-1" data-attach-loading onclick="authPreparePhone('sms')">Подтвердить по СМС</button>
+        </div>
+    </div>
 
-    <input type="hidden" name="verify_method" id="auth-verify-method" value="">
+    <div id="auth-mode-email" class="mt-4" style="display:none;">
+        <div class="grid gap-2">
+            <button
+                type="submit"
+                id="auth-email-submit"
+                class="btn btn-red w-full"
+                style="display:none;"
+                data-action="email_login"
+                data-attach-loading
+                onclick="authPrepareEmail(this.getAttribute('data-action'))"
+            >Войти</button>
+            <button
+                type="submit"
+                id="auth-email-link"
+                class="btn btn-outline border-blue-1 text-blue-1 w-full"
+                style="display:none;"
+                data-action="email_link"
+                data-attach-loading
+                onclick="authPrepareEmail(this.getAttribute('data-action'))"
+            >Войти по ссылке на почту</button>
+        </div>
+    </div>
 
-    <div class="mt-4 grid gap-2">
-        <button type="submit" class="btn btn-red" data-attach-loading onclick="document.getElementById('auth-verify-method').value='telegram'">Подтвердить через Telegram</button>
-        <button type="submit" class="btn btn-outline border-blue-1 text-blue-1" data-attach-loading onclick="document.getElementById('auth-verify-method').value='sms'">Подтвердить по СМС</button>
+    <p id="auth-mode-hint" class="mt-4 text-sm text-gray-500">Введите номер телефона или email, чтобы продолжить</p>
+
+    <script>
+        (function () {
+            var input = document.getElementById('auth-login');
+            if (input && typeof authDetectMode === 'function') {
+                authDetectMode(input);
+            }
+        })();
+    </script>
+
+{% endif %}
+
+{% if step == 'email_link_sent' %}
+
+    <div class="py-2">
+        <p class="font-gilroy-medium text-blue-2">Ссылка для входа отправлена</p>
+        <p class="mt-2 text-sm text-gray-600">
+            Мы отправили письмо на <strong>{{ email_link_sent_to }}</strong>.
+            Перейдите по ссылке из письма, чтобы войти в кабинет без пароля.
+        </p>
+        <p class="mt-2 text-xs text-gray-500">Ссылка действует 15 минут и работает только один раз.</p>
     </div>
 
 {% endif %}

@@ -1,6 +1,7 @@
 <?php namespace Saybme\Ub\Components;
 
 use Saybme\Ub\Classes\Auth\AuthClass;
+use Saybme\Ub\Models\User;
 use Input;
 use Redirect;
 use Session;
@@ -40,14 +41,67 @@ class App extends \Cms\Classes\ComponentBase
         return $result;
     }
 
+    // Проверка: email уже зарегистрирован или нет
+    public function onCheckAuthEmail()
+    {
+        $email = mb_strtolower(trim((string) Input::get('email', Input::get('login', ''))));
+
+        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return [
+                'exists' => null,
+            ];
+        }
+
+        $exists = User::active()
+            ->whereRaw('LOWER(email) = ?', [$email])
+            ->exists();
+
+        return [
+            'exists' => $exists,
+            'email' => $email,
+        ];
+    }
+
     // Авторизация
     function onAuth(){
 
         $step = Input::get('step');
+        $authAction = Input::get('auth_action');
         $q = new AuthClass;
+        $q->syncAuthIdentifier();
 
         $options = array();
         $tpl = 'modal/form-inputs';
+
+        // Вход / регистрация по email
+        if ($authAction === 'email_login') {
+            $q->loginByEmail();
+            return Redirect::refresh();
+        }
+
+        if ($authAction === 'email_register') {
+            $q->registerByEmail();
+            return Redirect::to('/cabinet');
+        }
+
+        if ($authAction === 'email_link') {
+            $email = $q->sendEmailLoginLink();
+            $options['step'] = 'email_link_sent';
+            $options['email_link_sent_to'] = $email;
+            $result['#open-result'] = $this->renderPartial($tpl, $options);
+            return $result;
+        }
+
+        // Enter по email без выбора кнопки
+        if (
+            $step == 2
+            && trim((string) Input::get('email')) !== ''
+            && trim((string) Input::get('phone')) === ''
+        ) {
+            throw new ValidationException([
+                'email' => 'Нажмите «Войти» или «Зарегистрироваться».',
+            ]);
+        }
 
         // Шаг №1 → менеджер / SMS / Telegram
         if($step == 2) {
@@ -66,11 +120,17 @@ class App extends \Cms\Classes\ComponentBase
                     return Redirect::to($url);
                 }
 
-                // SMS: регистрация или вход
-                $q->saveContactUser(!$user);
-                $options['auth'] = $q->getAuthSession();
-                $options['step'] = 3;
-                $options['is_registration'] = !$user;
+                if ($method === 'sms') {
+                    // SMS: регистрация или вход
+                    $q->saveContactUser(!$user);
+                    $options['auth'] = $q->getAuthSession();
+                    $options['step'] = 3;
+                    $options['is_registration'] = !$user;
+                } else {
+                    throw new ValidationException([
+                        'verify_method' => 'Выберите способ подтверждения.',
+                    ]);
+                }
             }
         }
 

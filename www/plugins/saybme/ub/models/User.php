@@ -1,6 +1,7 @@
 <?php namespace Saybme\Ub\Models;
 
 use Saybme\Ub\Classes\App\AppClass;
+use ValidationException;
 use Model;
 
 class User extends Model
@@ -21,7 +22,8 @@ class User extends Model
     public $table = 'saybme_ub_users';
     
     public $rules = [
-        'phone' => 'required|min:11|phone|unique:saybme_ub_users',
+        'phone' => 'nullable|min:11|phone|unique:saybme_ub_users',
+        'email' => 'nullable|email|unique:saybme_ub_users',
         'password' => 'required:create|between:8,255|confirmed',
         'password_confirmation' => 'required_with:password|between:8,255',
     ];
@@ -43,9 +45,23 @@ class User extends Model
     
 
     public function beforeValidate() {
-        $q = new AppClass;
-        $phone = $q->setPhone($this->phone);
-        $this->phone = $phone;        
+        if (trim((string) $this->phone)) {
+            $q = new AppClass;
+            $this->phone = $q->setPhone($this->phone);
+        } else {
+            $this->phone = null;
+        }
+
+        if (!trim((string) $this->email)) {
+            $this->email = null;
+        }
+
+        // Нужен телефон или email
+        if (!$this->phone && !$this->email) {
+            throw new ValidationException([
+                'email' => 'Укажите email или номер телефона.',
+            ]);
+        }
     }
 
     // Событие перед созания модели

@@ -198,6 +198,12 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerMailTemplates()
+    {
+        return [
+            'saybme.ub::mail.login_link' => 'Ссылка для входа в кабинет',
+        ];
+    }
 
     /**
      * registerSettings used by the backend.

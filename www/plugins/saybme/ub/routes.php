@@ -5,6 +5,7 @@ use Saybme\Ub\Classes\Auth\FilesClass;
 use Saybme\Ub\Classes\Document\DocumentClass;
 use Saybme\Ub\Classes\Auth\TelegramAuth;
 use Saybme\Ub\Classes\Auth\TelegramBot;
+use Saybme\Ub\Models\User;
 
 Route::get('api/auth/logout', function() {
     return redirect('/')->withCookie(Cookie::forget('auth'));
@@ -53,6 +54,28 @@ Route::middleware(['web'])->group(function () {
         TelegramBot::class,
         'complete'
     ]);
+
+    // Вход по одноразовой ссылке из письма
+    Route::get('/auth/email/login', function () {
+        $token = (string) request()->query('token', '');
+        $auth = new AuthClass;
+        $result = $auth->loginByEmailToken($token);
+
+        if ($result instanceof User) {
+            return redirect('/cabinet');
+        }
+
+        $messages = [
+            'used' => 'Ссылка уже была использована. Запросите новую.',
+            'expired' => 'Срок действия ссылки истёк. Запросите новую.',
+            'invalid' => 'Ссылка для входа недействительна.',
+        ];
+
+        Session::flash('auth_error', $messages[$result] ?? $messages['invalid']);
+        Session::flash('open_auth_modal', 1);
+
+        return redirect('/');
+    });
 
 });
 

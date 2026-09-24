@@ -16,6 +16,7 @@ use Saybme\Ub\Models\Application;
 use Saybme\Ub\Models\Formrow;
 use Saybme\Ub\Models\Carnumber;
 use Saybme\Ub\Models\Forminput;
+use Saybme\Ub\Models\EmailLoginToken;
 use ValidationException;
 use Request;
 use Input;
@@ -24,6 +25,8 @@ use Lang;
 use Session;
 use Cookie;
 use Redirect;
+use Mail;
+use Carbon\Carbon;
 
 class AuthClass {
 
@@ -59,20 +62,65 @@ class AuthClass {
         return Session::get('auth');    
     }
 
+    /**
+     * Единое поле login → phone или email.
+     */
+    public function syncAuthIdentifier()
+    {
+        $login = trim((string) Input::get('login', ''));
+        $phone = trim((string) Input::get('phone', ''));
+        $email = trim((string) Input::get('email', ''));
+
+        if ($login !== '') {
+            if (str_contains($login, '@')) {
+                $email = mb_strtolower($login);
+                $phone = '';
+            } else {
+                $phone = $login;
+                $email = '';
+            }
+        }
+
+        if ($email !== '') {
+            $email = mb_strtolower($email);
+        }
+
+        Input::merge([
+            'phone' => $phone,
+            'email' => $email,
+            'login' => $login,
+        ]);
+    }
+
     // Шаг 1 проверка номере телефона и согласия на обработку данных
     public function authStepOne(){
 
+        $qPhone = new AppClass;
         $username = Input::get('phone');
-        $user = User::active()->where('login', $username)->where('utype_id', 2)->first();
+        $normalized = $qPhone->setPhone($username) ?: $username;
+
+        $user = User::active()
+            ->where(function ($query) use ($username, $normalized) {
+                $query->where('login', $username);
+                if ($normalized) {
+                    $query->orWhere('login', $normalized);
+                }
+            })
+            ->where('utype_id', 2)
+            ->first();
 
         if($user) {
             Session::put('auth.utype', 2);
-            Session::put('auth.phone', $username);
+            Session::put('auth.phone', $user->login ?: $normalized);
             return;  
         }          
 
-        // Валидация пользователя
-        $rules['phone'] = 'required|min:11';
+        // Валидация: после нормализации проверяем длину цифр
+        if ($normalized) {
+            Input::merge(['phone' => $normalized]);
+        }
+
+        $rules['phone'] = 'required|digits_between:11,15';
         $rules['check'] = 'accepted';
         $rules['verify_method'] = 'required|in:telegram,sms';
         Request::validate($rules, Lang::get('saybme.ub::validation'));   
@@ -237,6 +285,7 @@ class AuthClass {
 
         $user = new User;
         $user->fill($data);
+        $user->utype_id = 1;
         $user->save();
 
         Session::forget('phone_verification');
@@ -260,6 +309,180 @@ class AuthClass {
         Session::forget('phone_verification');
         Session::forget('telegram_expected_phone');
         Session::put('auth.phone', $phone);
+        Session::put('auth.utype', 1);
+        $this->saveUserHash($user->hash);
+
+        return $user;
+    }
+
+    // Вход по email и паролю
+    public function loginByEmail()
+    {
+        $email = mb_strtolower(trim((string) Input::get('email')));
+        Input::merge(['email' => $email]);
+
+        $rules['email'] = 'required|email';
+        $rules['password'] = 'required|min:8';
+        Request::validate($rules, Lang::get('saybme.ub::validation'));
+
+        $password = Input::get('password');
+
+        $user = User::active()
+            ->whereRaw('LOWER(email) = ?', [$email])
+            ->first();
+
+        if (!$user || !$user->password || !$user->checkHashValue('password', $password)) {
+            throw new ValidationException([
+                'email' => 'Неверный email или пароль.',
+            ]);
+        }
+
+        Session::put('auth.email', $email);
+        Session::put('auth.utype', 1);
+        $this->saveUserHash($user->hash);
+
+        return $user;
+    }
+
+    // Регистрация по email и паролю
+    public function registerByEmail()
+    {
+        $email = mb_strtolower(trim((string) Input::get('email')));
+        Input::merge(['email' => $email]);
+
+        $rules['email'] = 'required|email|unique:saybme_ub_users,email';
+        $rules['password'] = 'required|min:8|confirmed';
+        $rules['password_confirmation'] = 'required';
+        $rules['check'] = 'accepted';
+        Request::validate($rules, Lang::get('saybme.ub::validation'));
+
+        $data['is_active'] = true;
+        $data['email'] = $email;
+        $data['password'] = Input::get('password');
+        $data['password_confirmation'] = Input::get('password_confirmation');
+
+        $user = new User;
+        $user->fill($data);
+        $user->utype_id = 1;
+        $user->save();
+
+        Session::put('auth.email', $email);
+        Session::put('auth.utype', 1);
+        $this->saveUserHash($user->hash);
+
+        return $user;
+    }
+
+    /**
+     * Отправка одноразовой ссылки для входа без пароля.
+     */
+    public function sendEmailLoginLink()
+    {
+        $email = mb_strtolower(trim((string) Input::get('email', Input::get('login', ''))));
+        Input::merge(['email' => $email]);
+
+        $rules['email'] = 'required|email';
+        Request::validate($rules, Lang::get('saybme.ub::validation'));
+
+        $user = User::active()
+            ->whereRaw('LOWER(email) = ?', [$email])
+            ->first();
+
+        if (!$user) {
+            throw new ValidationException([
+                'email' => 'Пользователь с таким email не найден.',
+            ]);
+        }
+
+        $recent = EmailLoginToken::where('email', $email)
+            ->where('created_at', '>', Carbon::now()->subMinute())
+            ->exists();
+
+        if ($recent) {
+            throw new ValidationException([
+                'email' => 'Ссылка уже отправлена. Проверьте почту или подождите минуту.',
+            ]);
+        }
+
+        // Старые неиспользованные ссылки больше не действуют
+        EmailLoginToken::where('email', $email)
+            ->where('status', EmailLoginToken::STATUS_PENDING)
+            ->update(['status' => EmailLoginToken::STATUS_EXPIRED]);
+
+        $token = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
+
+        $record = new EmailLoginToken;
+        $record->user_id = $user->id;
+        $record->email = $email;
+        $record->token_hash = hash('sha256', $token);
+        $record->status = EmailLoginToken::STATUS_PENDING;
+        $record->ip_address = Request::ip();
+        $record->expires_at = Carbon::now()->addMinutes(15);
+        $record->save();
+
+        $link = url('/auth/email/login?token=' . rawurlencode($token));
+
+        try {
+            Mail::send('saybme.ub::mail.login_link', ['link' => $link], function ($message) use ($email) {
+                $message->to($email);
+            });
+        } catch (\Throwable $e) {
+            Log::error('Email login link send failed', [
+                'email' => $email,
+                'error' => $e->getMessage(),
+            ]);
+            throw new ValidationException([
+                'email' => 'Не удалось отправить письмо. Попробуйте позже или войдите с паролем.',
+            ]);
+        }
+
+        return $email;
+    }
+
+    /**
+     * Вход по одноразовой ссылке из письма.
+     */
+    public function loginByEmailToken(string $token)
+    {
+        $token = trim($token);
+        if ($token === '') {
+            return 'invalid';
+        }
+
+        $record = EmailLoginToken::where('token_hash', hash('sha256', $token))->first();
+        if (!$record) {
+            return 'invalid';
+        }
+
+        if ($record->status === EmailLoginToken::STATUS_USED) {
+            return 'used';
+        }
+
+        if ($record->status !== EmailLoginToken::STATUS_PENDING || $record->isExpired()) {
+            $record->status = EmailLoginToken::STATUS_EXPIRED;
+            $record->save();
+            return 'expired';
+        }
+
+        $user = User::active()->find($record->user_id);
+        if (!$user) {
+            $user = User::active()
+                ->whereRaw('LOWER(email) = ?', [mb_strtolower($record->email)])
+                ->first();
+        }
+
+        if (!$user) {
+            $record->status = EmailLoginToken::STATUS_EXPIRED;
+            $record->save();
+            return 'invalid';
+        }
+
+        $record->status = EmailLoginToken::STATUS_USED;
+        $record->used_at = Carbon::now();
+        $record->save();
+
+        Session::regenerate();
+        Session::put('auth.email', mb_strtolower((string) $user->email));
         Session::put('auth.utype', 1);
         $this->saveUserHash($user->hash);
 
