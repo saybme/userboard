@@ -8,11 +8,8 @@
             <div id="open-result">
                 {% partial 'modal/form-inputs'
                     step=step|default(1)
-                    auth=auth
                     auth_error=auth_error
-                    phone_verified=phone_verified
-                    verify_provider=verify_provider
-                    is_registration=is_registration
+                    email_link_sent_to=email_link_sent_to
                 %}
             </div>    
         </form>

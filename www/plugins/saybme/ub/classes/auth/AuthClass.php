@@ -68,17 +68,11 @@ class AuthClass {
     public function syncAuthIdentifier()
     {
         $login = trim((string) Input::get('login', ''));
-        $phone = trim((string) Input::get('phone', ''));
         $email = trim((string) Input::get('email', ''));
 
+        // Авторизация только по email
         if ($login !== '') {
-            if (str_contains($login, '@')) {
-                $email = mb_strtolower($login);
-                $phone = '';
-            } else {
-                $phone = $login;
-                $email = '';
-            }
+            $email = mb_strtolower($login);
         }
 
         if ($email !== '') {
@@ -86,9 +80,9 @@ class AuthClass {
         }
 
         Input::merge([
-            'phone' => $phone,
+            'phone' => '',
             'email' => $email,
-            'login' => $login,
+            'login' => $login !== '' ? $login : $email,
         ]);
     }
 

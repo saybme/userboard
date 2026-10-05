@@ -62,10 +62,9 @@ class App extends \Cms\Classes\ComponentBase
         ];
     }
 
-    // Авторизация
+    // Авторизация (только email)
     function onAuth(){
 
-        $step = Input::get('step');
         $authAction = Input::get('auth_action');
         $q = new AuthClass;
         $q->syncAuthIdentifier();
@@ -73,7 +72,6 @@ class App extends \Cms\Classes\ComponentBase
         $options = array();
         $tpl = 'modal/form-inputs';
 
-        // Вход / регистрация по email
         if ($authAction === 'email_login') {
             $q->loginByEmail();
             return Redirect::refresh();
@@ -92,124 +90,23 @@ class App extends \Cms\Classes\ComponentBase
             return $result;
         }
 
-        // Enter по email без выбора кнопки
-        if (
-            $step == 2
-            && trim((string) Input::get('email')) !== ''
-            && trim((string) Input::get('phone')) === ''
-        ) {
-            throw new ValidationException([
-                'email' => 'Нажмите «Войти» или «Зарегистрироваться».',
-            ]);
-        }
-
-        // Шаг №1 → менеджер / SMS / Telegram
-        if($step == 2) {
-            
-            $q->authStepOne();
-            
-            if (Session::get('auth.utype') == 2) {
-                $options['auth'] = $q->getAuthSession();
-                $options['step'] = 2;
-            } else {
-                $user = $q->authStepTwo();
-                $method = Input::get('verify_method');
-
-                if ($method === 'telegram') {
-                    $url = $q->startTelegramBotVerification();
-                    return Redirect::to($url);
-                }
-
-                if ($method === 'sms') {
-                    // SMS: регистрация или вход
-                    $q->saveContactUser(!$user);
-                    $options['auth'] = $q->getAuthSession();
-                    $options['step'] = 3;
-                    $options['is_registration'] = !$user;
-                } else {
-                    throw new ValidationException([
-                        'verify_method' => 'Выберите способ подтверждения.',
-                    ]);
-                }
-            }
-        }
-
-        // Регистрация после подтверждения номера (пароль)
-        if($step == 3) {
-            try {
-                $q->registerWithVerifiedPhone();
-                return Redirect::to('/cabinet');
-            } catch (ValidationException $e) {
-                $verification = $q->getPhoneVerification();
-
-                if ($verification === 'expired' || !$verification) {
-                    $options['step'] = 1;
-                    $options['auth_error'] = 'Срок подтверждения номера истёк. Подтвердите номер ещё раз.';
-                    $result['#open-result'] = $this->renderPartial($tpl, $options);
-                    return $result;
-                }
-
-                throw $e;
-            }
-        }     
-        
-        // SMS-код: вход или переход к паролю для регистрации
-        if($step == 4){
-            $q->validateSmsCode();
-
-            if (Session::get('auth.is_new')) {
-                $q->markPhoneVerifiedBySms();
-
-                $options['step'] = 2;
-                $options['auth'] = $q->getAuthSession();
-                $options['phone_verified'] = true;
-                $options['verify_provider'] = 'sms';
-
-                $result['#open-result'] = $this->renderPartial($tpl, $options);
-                return $result;
-            }
-
-            $q->authStepFour();
-            return Redirect::refresh();  
-        }
-
-        // Вход менеджера
-        if($step == 'manager'){          
-            $q->authStepFour();
-            return Redirect::refresh();     
-        }
-
-        $result['#open-result'] = $this->renderPartial($tpl, $options);
-        return $result;
+        throw new ValidationException([
+            'email' => 'Нажмите «Войти» или «Зарегистрироваться».',
+        ]);
     }
 
     private function authFormOptions()
     {
-        $q = new AuthClass;
+        // Телефон / Telegram больше не используются для входа
+        Session::forget('phone_verification');
+        Session::forget('telegram_expected_phone');
+
         $options = [
             'step' => 1,
         ];
 
         if (Session::has('auth_error')) {
             $options['auth_error'] = Session::pull('auth_error');
-        }
-
-        $verification = $q->getPhoneVerification();
-
-        if ($verification === 'expired') {
-            $options['step'] = 1;
-            $options['auth_error'] = 'Срок подтверждения номера истёк. Подтвердите номер ещё раз.';
-            return $options;
-        }
-
-        if ($verification) {
-            Session::put('auth.phone', $verification['phone']);
-            Session::put('auth.utype', 1);
-
-            $options['step'] = 2;
-            $options['auth'] = $q->getAuthSession();
-            $options['phone_verified'] = true;
-            $options['verify_provider'] = $verification['provider'] ?? 'telegram';
         }
 
         return $options;
