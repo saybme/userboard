@@ -8,15 +8,6 @@ window.authIsEmail = function (value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
 };
 
-window.authIsPhone = function (value) {
-    var text = String(value || '').trim();
-    if (!text || text.indexOf('@') !== -1) {
-        return false;
-    }
-    var digits = text.replace(/\D+/g, '');
-    return digits.length >= 10;
-};
-
 window.authSetEmailMode = function (exists) {
     var confirmWrap = document.getElementById('auth-email-confirm-wrap');
     var submitBtn = document.getElementById('auth-email-submit');
@@ -134,35 +125,13 @@ window.authDetectMode = function (input) {
 
     var value = String(input.value || '').trim();
     var isEmail = window.authIsEmail(value);
-    var isPhone = window.authIsPhone(value);
     var maybeEmail = value.indexOf('@') !== -1;
-    var phoneBlock = document.getElementById('auth-mode-phone');
-    var emailBlock = document.getElementById('auth-mode-email');
     var emailFields = document.getElementById('auth-mode-email-fields');
     var hint = document.getElementById('auth-mode-hint');
-    var label = document.getElementById('auth-login-label');
-    var phoneHidden = document.getElementById('auth-phone');
     var emailHidden = document.getElementById('auth-email');
 
-    if (phoneHidden) {
-        phoneHidden.value = isPhone ? value : '';
-    }
     if (emailHidden) {
-        emailHidden.value = (isEmail || maybeEmail) ? value : '';
-    }
-
-    if (label) {
-        if (isEmail || maybeEmail) {
-            label.textContent = 'Email';
-        } else if (isPhone) {
-            label.textContent = 'Номер телефона';
-        } else {
-            label.textContent = 'Телефон или email';
-        }
-    }
-
-    if (phoneBlock) {
-        phoneBlock.style.display = isPhone ? '' : 'none';
+        emailHidden.value = value;
     }
 
     if (emailFields) {
@@ -180,63 +149,31 @@ window.authDetectMode = function (input) {
     } else {
         clearTimeout(window.authEmailCheckTimer);
         window.authSetEmailMode(null);
-        if (emailBlock && !maybeEmail) {
-            emailBlock.style.display = 'none';
-        }
         if (hint) {
-            hint.style.display = (!isPhone && !maybeEmail) ? '' : 'none';
+            hint.style.display = maybeEmail ? 'none' : '';
         }
     }
-};
-
-window.authPreparePhone = function (method) {
-    var login = document.getElementById('auth-login');
-    var phoneHidden = document.getElementById('auth-phone');
-    var emailHidden = document.getElementById('auth-email');
-
-    if (login && phoneHidden) {
-        phoneHidden.value = String(login.value || '').trim();
-    }
-    if (emailHidden) {
-        emailHidden.value = '';
-    }
-
-    document.getElementById('auth-action').value = '';
-    document.getElementById('auth-step').value = '2';
-    document.getElementById('auth-verify-method').value = method;
 };
 
 window.authPrepareEmail = function (action) {
     var login = document.getElementById('auth-login');
-    var phoneHidden = document.getElementById('auth-phone');
     var emailHidden = document.getElementById('auth-email');
 
     if (login && emailHidden) {
         emailHidden.value = String(login.value || '').trim();
     }
-    if (phoneHidden) {
-        phoneHidden.value = '';
-    }
 
-    document.getElementById('auth-verify-method').value = '';
-    document.getElementById('auth-step').value = '';
     document.getElementById('auth-action').value = action;
 };
 
 window.authCanSubmit = function () {
     var action = document.getElementById('auth-action');
-    var method = document.getElementById('auth-verify-method');
 
-    // Шаги 2/3 без этих полей — обычная отправка
-    if (!action && !method) {
+    if (!action) {
         return true;
     }
 
-    if ((action && action.value) || (method && method.value)) {
-        return true;
-    }
-
-    return false;
+    return Boolean(action.value);
 };
 </script>
 

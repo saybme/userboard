@@ -63,30 +63,20 @@ class AuthClass {
     }
 
     /**
-     * Единое поле login → phone или email.
+     * Единое поле login → email.
      */
     public function syncAuthIdentifier()
     {
         $login = trim((string) Input::get('login', ''));
-        $phone = trim((string) Input::get('phone', ''));
         $email = trim((string) Input::get('email', ''));
 
         if ($login !== '') {
-            if (str_contains($login, '@')) {
-                $email = mb_strtolower($login);
-                $phone = '';
-            } else {
-                $phone = $login;
-                $email = '';
-            }
-        }
-
-        if ($email !== '') {
+            $email = mb_strtolower($login);
+        } elseif ($email !== '') {
             $email = mb_strtolower($email);
         }
 
         Input::merge([
-            'phone' => $phone,
             'email' => $email,
             'login' => $login,
         ]);
