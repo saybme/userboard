@@ -1,7 +1,6 @@
 <?php namespace Saybme\Ub\Components;
 
 use Saybme\Ub\Classes\Auth\AuthClass;
-use Saybme\Ub\Models\User;
 use Input;
 use Redirect;
 use Session;
@@ -41,24 +40,32 @@ class App extends \Cms\Classes\ComponentBase
         return $result;
     }
 
-    // Проверка: email уже зарегистрирован или нет
+    // Проверка: пользователь по email или менеджер по логину/email
     public function onCheckAuthEmail()
     {
-        $email = mb_strtolower(trim((string) Input::get('email', Input::get('login', ''))));
+        $identifier = trim((string) Input::get('login', Input::get('email', '')));
+        $q = new AuthClass;
+        $user = $q->findAuthAccount($identifier);
 
-        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($user) {
             return [
-                'exists' => null,
+                'exists' => true,
+                'is_manager' => (int) $user->utype_id === 2,
+                'email' => $identifier,
             ];
         }
 
-        $exists = User::active()
-            ->whereRaw('LOWER(email) = ?', [$email])
-            ->exists();
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            return [
+                'exists' => false,
+                'is_manager' => false,
+                'email' => $identifier,
+            ];
+        }
 
         return [
-            'exists' => $exists,
-            'email' => $email,
+            'exists' => null,
+            'is_manager' => false,
         ];
     }
 

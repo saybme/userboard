@@ -8,12 +8,14 @@ window.authIsEmail = function (value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
 };
 
-window.authSetEmailMode = function (exists) {
+window.authSetEmailMode = function (exists, isManager) {
     var confirmWrap = document.getElementById('auth-email-confirm-wrap');
     var submitBtn = document.getElementById('auth-email-submit');
     var linkBtn = document.getElementById('auth-email-link');
     var emailBlock = document.getElementById('auth-mode-email');
+    var emailFields = document.getElementById('auth-mode-email-fields');
     var passwordField = document.getElementById('m-email-password');
+    var hint = document.getElementById('auth-mode-hint');
 
     if (!submitBtn) {
         return;
@@ -23,12 +25,15 @@ window.authSetEmailMode = function (exists) {
         if (confirmWrap) {
             confirmWrap.style.display = 'none';
         }
+        if (emailFields) {
+            emailFields.style.display = '';
+        }
         submitBtn.style.display = '';
         submitBtn.textContent = 'Войти';
         submitBtn.setAttribute('data-action', 'email_login');
         submitBtn.className = 'btn btn-red w-full';
         if (linkBtn) {
-            linkBtn.style.display = '';
+            linkBtn.style.display = isManager ? 'none' : '';
         }
         if (passwordField) {
             passwordField.setAttribute('autocomplete', 'current-password');
@@ -36,12 +41,18 @@ window.authSetEmailMode = function (exists) {
         if (emailBlock) {
             emailBlock.style.display = '';
         }
+        if (hint) {
+            hint.style.display = 'none';
+        }
         return;
     }
 
     if (exists === false) {
         if (confirmWrap) {
             confirmWrap.style.display = '';
+        }
+        if (emailFields) {
+            emailFields.style.display = '';
         }
         submitBtn.style.display = '';
         submitBtn.textContent = 'Зарегистрироваться';
@@ -56,12 +67,17 @@ window.authSetEmailMode = function (exists) {
         if (emailBlock) {
             emailBlock.style.display = '';
         }
+        if (hint) {
+            hint.style.display = 'none';
+        }
         return;
     }
 
-    // ещё проверяем / невалидный email
     if (confirmWrap) {
         confirmWrap.style.display = 'none';
+    }
+    if (emailFields) {
+        emailFields.style.display = 'none';
     }
     submitBtn.style.display = 'none';
     if (linkBtn) {
@@ -70,12 +86,21 @@ window.authSetEmailMode = function (exists) {
     if (emailBlock) {
         emailBlock.style.display = 'none';
     }
+    if (hint) {
+        hint.style.display = '';
+    }
 };
 
-window.authCheckEmailExists = function (email) {
+window.authApplyCheckResult = function (data) {
+    var exists = data && data.exists === true ? true : (data && data.exists === false ? false : null);
+    var isManager = !!(data && data.is_manager);
+    window.authSetEmailMode(exists, isManager);
+};
+
+window.authCheckEmailExists = function (value) {
     var seq = ++window.authEmailCheckSeq;
 
-    if (!window.authIsEmail(email)) {
+    if (!value || String(value).trim().length < 2) {
         window.authSetEmailMode(null);
         return;
     }
@@ -84,12 +109,12 @@ window.authCheckEmailExists = function (email) {
     if (typeof oc !== 'undefined' && typeof oc.ajax === 'function') {
         requestFn = function () {
             oc.ajax('onCheckAuthEmail', {
-                data: { email: email },
+                data: { login: value, email: value },
                 success: function (data) {
                     if (seq !== window.authEmailCheckSeq) {
                         return;
                     }
-                    window.authSetEmailMode(data && data.exists === true ? true : (data && data.exists === false ? false : null));
+                    window.authApplyCheckResult(data);
                 },
                 error: function () {
                     if (seq !== window.authEmailCheckSeq) {
@@ -102,12 +127,12 @@ window.authCheckEmailExists = function (email) {
     } else if (window.jQuery && typeof jQuery('body').request === 'function') {
         requestFn = function () {
             jQuery('body').request('onCheckAuthEmail', {
-                data: { email: email },
+                data: { login: value, email: value },
                 success: function (data) {
                     if (seq !== window.authEmailCheckSeq) {
                         return;
                     }
-                    window.authSetEmailMode(data && data.exists === true ? true : (data && data.exists === false ? false : null));
+                    window.authApplyCheckResult(data);
                 }
             });
         };
@@ -124,35 +149,22 @@ window.authDetectMode = function (input) {
     }
 
     var value = String(input.value || '').trim();
-    var isEmail = window.authIsEmail(value);
-    var maybeEmail = value.indexOf('@') !== -1;
-    var emailFields = document.getElementById('auth-mode-email-fields');
-    var hint = document.getElementById('auth-mode-hint');
     var emailHidden = document.getElementById('auth-email');
 
     if (emailHidden) {
         emailHidden.value = value;
     }
 
-    if (emailFields) {
-        emailFields.style.display = (isEmail || maybeEmail) ? '' : 'none';
+    clearTimeout(window.authEmailCheckTimer);
+
+    if (value.length < 2) {
+        window.authSetEmailMode(null);
+        return;
     }
 
-    if (isEmail) {
-        if (hint) {
-            hint.style.display = 'none';
-        }
-        clearTimeout(window.authEmailCheckTimer);
-        window.authEmailCheckTimer = setTimeout(function () {
-            window.authCheckEmailExists(value);
-        }, 350);
-    } else {
-        clearTimeout(window.authEmailCheckTimer);
-        window.authSetEmailMode(null);
-        if (hint) {
-            hint.style.display = maybeEmail ? 'none' : '';
-        }
-    }
+    window.authEmailCheckTimer = setTimeout(function () {
+        window.authCheckEmailExists(value);
+    }, 350);
 };
 
 window.authPrepareEmail = function (action) {
