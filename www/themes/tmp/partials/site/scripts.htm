@@ -1,3 +1,4 @@
+{% framework extras %}
 <script src="{{ ['assets/js/app.js'] | theme }}"></script>
 
 <script>
@@ -91,6 +92,12 @@ window.authSetEmailMode = function (exists) {
     }
 };
 
+window.authRequestElement = function () {
+    return document.getElementById('btn-auth-open')
+        || document.querySelector('[data-request="onModalOpen"]')
+        || document.getElementById('auth-form');
+};
+
 window.authCheckEmailExists = function (email) {
     var seq = ++window.authEmailCheckSeq;
 
@@ -99,41 +106,39 @@ window.authCheckEmailExists = function (email) {
         return;
     }
 
-    var requestFn = null;
-    if (typeof oc !== 'undefined' && typeof oc.ajax === 'function') {
-        requestFn = function () {
-            oc.ajax('onCheckAuthEmail', {
-                data: { email: email },
-                success: function (data) {
-                    if (seq !== window.authEmailCheckSeq) {
-                        return;
-                    }
-                    window.authSetEmailMode(data && data.exists === true ? true : (data && data.exists === false ? false : null));
-                },
-                error: function () {
-                    if (seq !== window.authEmailCheckSeq) {
-                        return;
-                    }
-                    window.authSetEmailMode(null);
+    var trigger = window.authRequestElement();
+    var done = function (data) {
+        if (seq !== window.authEmailCheckSeq) {
+            return;
+        }
+        window.authSetEmailMode(data && data.exists === true ? true : (data && data.exists === false ? false : null));
+    };
+
+    if (typeof oc !== 'undefined' && typeof oc.request === 'function' && trigger) {
+        oc.request(trigger, 'onCheckAuthEmail', {
+            data: { email: email },
+            success: done,
+            error: function () {
+                if (seq !== window.authEmailCheckSeq) {
+                    return;
                 }
-            });
-        };
-    } else if (window.jQuery && typeof jQuery('body').request === 'function') {
-        requestFn = function () {
-            jQuery('body').request('onCheckAuthEmail', {
-                data: { email: email },
-                success: function (data) {
-                    if (seq !== window.authEmailCheckSeq) {
-                        return;
-                    }
-                    window.authSetEmailMode(data && data.exists === true ? true : (data && data.exists === false ? false : null));
-                }
-            });
-        };
+                window.authSetEmailMode(null);
+            }
+        });
+        return;
     }
 
-    if (requestFn) {
-        requestFn();
+    if (window.jQuery && trigger && typeof jQuery(trigger).request === 'function') {
+        jQuery(trigger).request('onCheckAuthEmail', {
+            data: { email: email },
+            success: done,
+            error: function () {
+                if (seq !== window.authEmailCheckSeq) {
+                    return;
+                }
+                window.authSetEmailMode(null);
+            }
+        });
     }
 };
 
@@ -164,22 +169,40 @@ window.authDetectMode = function (input) {
 window.authPrepareEmail = function (action) {
     var login = document.getElementById('auth-login');
     var emailHidden = document.getElementById('auth-email');
+    var actionInput = document.getElementById('auth-action');
 
     if (login && emailHidden) {
         emailHidden.value = String(login.value || '').trim();
     }
 
-    document.getElementById('auth-action').value = action;
+    if (actionInput) {
+        actionInput.value = action || '';
+    }
 };
 
-window.authCanSubmit = function () {
-    var action = document.getElementById('auth-action');
-
-    if (!action) {
-        return true;
+window.authSubmit = function (action) {
+    var form = document.getElementById('auth-form') || document.querySelector('#enter-form form');
+    if (!form) {
+        return;
     }
 
-    return !!action.value;
+    window.authPrepareEmail(action);
+
+    if (typeof oc !== 'undefined' && typeof oc.request === 'function') {
+        oc.request(form, 'onAuth');
+        return;
+    }
+
+    if (window.jQuery && typeof jQuery(form).request === 'function') {
+        jQuery(form).request('onAuth');
+    }
+};
+
+window.authInitForm = function () {
+    var login = document.getElementById('auth-login');
+    if (login && typeof window.authDetectMode === 'function') {
+        window.authDetectMode(login);
+    }
 };
 </script>
 

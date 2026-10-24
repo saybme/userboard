@@ -48,36 +48,27 @@
     <div id="auth-mode-email" class="mt-4" style="display:none;">
         <div class="grid gap-2">
             <button
-                type="submit"
+                type="button"
                 id="auth-email-submit"
                 class="btn btn-red w-full"
                 style="display:none;"
                 data-action="email_login"
                 data-attach-loading
-                onclick="authPrepareEmail(this.getAttribute('data-action'))"
+                onclick="authSubmit('email_login')"
             >Войти</button>
             <button
-                type="submit"
+                type="button"
                 id="auth-email-link"
                 class="btn btn-outline border-blue-1 text-blue-1 w-full"
                 style="display:none;"
                 data-action="email_link"
                 data-attach-loading
-                onclick="authPrepareEmail(this.getAttribute('data-action'))"
+                onclick="authSubmit('email_link')"
             >Войти по ссылке на почту</button>
         </div>
     </div>
 
     <p id="auth-mode-hint" class="mt-4 text-sm text-gray-500">Введите email, чтобы продолжить</p>
-
-    <script>
-        (function () {
-            var input = document.getElementById('auth-login');
-            if (input && typeof authDetectMode === 'function') {
-                authDetectMode(input);
-            }
-        })();
-    </script>
 
 {% endif %}
 

@@ -25,6 +25,14 @@ addEventListener('ajax:done', function(event) {
         modal(event.detail.data);
     }
 
+    if(handler == 'onAuth'){
+        setTimeout(function () {
+            if (typeof window.authInitForm === 'function') {
+                window.authInitForm();
+            }
+        }, 0);
+    }
+
     // onStatusApp
     if(handler == 'onStatusApp'){
         alert(1);
@@ -102,7 +110,13 @@ function modal(data){
         {
             html: data.modal
         },
-    ]);      
+    ]);
+
+    setTimeout(function () {
+        if (typeof window.authInitForm === 'function') {
+            window.authInitForm();
+        }
+    }, 0);
 }
 
 
