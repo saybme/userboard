@@ -10,9 +10,9 @@ window.authIsEmail = function (value) {
 };
 
 window.authRequestElement = function () {
-    return document.getElementById('btn-auth-open')
-        || document.querySelector('[data-request="onModalOpen"]')
-        || document.getElementById('auth-form');
+    return document.getElementById('auth-form')
+        || document.getElementById('btn-auth-open')
+        || document.querySelector('[data-request="onModalOpen"]');
 };
 
 window.authSetEmailMode = function (exists, isManager) {
@@ -98,10 +98,19 @@ window.authSetEmailMode = function (exists, isManager) {
     }
 };
 
+window.authParseExists = function (data) {
+    var value = data && data.exists;
+    if (value === true || value === 1 || value === '1' || value === 'true') {
+        return true;
+    }
+    if (value === false || value === 0 || value === '0' || value === 'false') {
+        return false;
+    }
+    return null;
+};
+
 window.authApplyCheckResult = function (data) {
-    var exists = data && data.exists === true ? true : (data && data.exists === false ? false : null);
-    var isManager = !!(data && data.is_manager);
-    window.authSetEmailMode(exists, isManager);
+    window.authSetEmailMode(window.authParseExists(data), !!(data && data.is_manager));
 };
 
 window.authCheckEmailExists = function (value) {
@@ -113,9 +122,9 @@ window.authCheckEmailExists = function (value) {
         return;
     }
 
-    // Пока сервер отвечает — уже показываем кнопку, если это похоже на email
+    // Пока сервер отвечает: неизвестный email → регистрация, не вход
     if (window.authIsEmail(email)) {
-        window.authSetEmailMode(true);
+        window.authSetEmailMode(false);
     }
 
     var trigger = window.authRequestElement();
@@ -131,7 +140,7 @@ window.authCheckEmailExists = function (value) {
             return;
         }
         if (window.authIsEmail(email)) {
-            window.authSetEmailMode(true);
+            window.authSetEmailMode(false);
         } else {
             window.authSetEmailMode(null);
         }
@@ -184,7 +193,7 @@ window.authDetectMode = function (input) {
     }
 
     if (window.authIsEmail(value)) {
-        window.authSetEmailMode(true);
+        window.authSetEmailMode(false);
     }
 
     window.authEmailCheckTimer = setTimeout(function () {

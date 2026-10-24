@@ -361,7 +361,6 @@ class AuthClass {
         if (!$user || !$user->password || !$user->checkHashValue('password', $password)) {
             throw new ValidationException([
                 'login' => 'Неверный логин или пароль.',
-                'email' => 'Неверный логин или пароль.',
             ]);
         }
 
