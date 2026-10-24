@@ -9,6 +9,12 @@ window.authIsEmail = function (value) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
 };
 
+window.authRequestElement = function () {
+    return document.getElementById('btn-auth-open')
+        || document.querySelector('[data-request="onModalOpen"]')
+        || document.getElementById('auth-form');
+};
+
 window.authSetEmailMode = function (exists, isManager) {
     var confirmWrap = document.getElementById('auth-email-confirm-wrap');
     var submitBtn = document.getElementById('auth-email-submit');
@@ -100,55 +106,60 @@ window.authApplyCheckResult = function (data) {
 
 window.authCheckEmailExists = function (value) {
     var seq = ++window.authEmailCheckSeq;
+    var email = String(value || '').trim();
 
-    if (!value || String(value).trim().length < 2) {
+    if (!email) {
         window.authSetEmailMode(null);
         return;
     }
 
-    var requestFn = null;
+    // Пока сервер отвечает — уже показываем кнопку, если это похоже на email
+    if (window.authIsEmail(email)) {
+        window.authSetEmailMode(true);
+    }
+
+    var trigger = window.authRequestElement();
+    var payload = { login: email, email: email };
+    var done = function (data) {
+        if (seq !== window.authEmailCheckSeq) {
+            return;
+        }
+        window.authApplyCheckResult(data);
+    };
+    var fail = function () {
+        if (seq !== window.authEmailCheckSeq) {
+            return;
+        }
+        if (window.authIsEmail(email)) {
+            window.authSetEmailMode(true);
+        } else {
+            window.authSetEmailMode(null);
+        }
+    };
+
+    if (typeof oc !== 'undefined' && typeof oc.request === 'function' && trigger) {
+        oc.request(trigger, 'onCheckAuthEmail', {
+            data: payload,
+            success: done,
+            error: fail
+        });
+        return;
+    }
+
     if (typeof oc !== 'undefined' && typeof oc.ajax === 'function') {
-        requestFn = function () {
-            oc.ajax('onCheckAuthEmail', {
-                data: { login: value, email: value },
-                success: function (data) {
-                    if (seq !== window.authEmailCheckSeq) {
-                        return;
-                    }
-                    window.authApplyCheckResult(data);
-                },
-                error: function () {
-                    if (seq !== window.authEmailCheckSeq) {
-                        return;
-                    }
-                    window.authSetEmailMode(null);
-                }
-            });
-        };
-    } else if (window.jQuery && typeof jQuery('body').request === 'function') {
-        requestFn = function () {
-            jQuery('body').request('onCheckAuthEmail', {
-                data: { login: value, email: value },
-                success: function (data) {
-                    if (seq !== window.authEmailCheckSeq) {
-                        return;
-                    }
-                    window.authApplyCheckResult(data);
-                }
-            });
-        };
+        oc.ajax('onCheckAuthEmail', {
+            data: payload,
+            success: done,
+            error: fail
+        });
+        return;
     }
 
     if (window.jQuery && trigger && typeof jQuery(trigger).request === 'function') {
         jQuery(trigger).request('onCheckAuthEmail', {
-            data: { email: email },
+            data: payload,
             success: done,
-            error: function () {
-                if (seq !== window.authEmailCheckSeq) {
-                    return;
-                }
-                window.authSetEmailMode(null);
-            }
+            error: fail
         });
     }
 };
@@ -167,30 +178,74 @@ window.authDetectMode = function (input) {
 
     clearTimeout(window.authEmailCheckTimer);
 
-    if (value.length < 2) {
+    if (!value) {
         window.authSetEmailMode(null);
         return;
     }
 
+    if (window.authIsEmail(value)) {
+        window.authSetEmailMode(true);
+    }
+
     window.authEmailCheckTimer = setTimeout(function () {
         window.authCheckEmailExists(value);
-    }, 350);
+    }, 250);
 };
 
 window.authPrepareEmail = function (action) {
     var login = document.getElementById('auth-login');
     var emailHidden = document.getElementById('auth-email');
     var actionInput = document.getElementById('auth-action');
+    var submitBtn = document.getElementById('auth-email-submit');
+    var resolved = action || (submitBtn && submitBtn.getAttribute('data-action')) || '';
 
     if (login && emailHidden) {
         emailHidden.value = String(login.value || '').trim();
     }
 
-    document.getElementById('auth-action').value = action;
+    if (actionInput) {
+        actionInput.value = resolved;
+    }
+};
+
+window.authSubmit = function (action) {
+    var form = document.getElementById('auth-form') || document.querySelector('#enter-form form');
+    var submitBtn = document.getElementById('auth-email-submit');
+    var resolved = action || (submitBtn && submitBtn.getAttribute('data-action')) || 'email_login';
+
+    if (!form) {
+        return;
+    }
+
+    window.authPrepareEmail(resolved);
+
+    if (typeof oc !== 'undefined' && typeof oc.request === 'function') {
+        oc.request(form, 'onAuth');
+        return;
+    }
+
+    if (window.jQuery && typeof jQuery(form).request === 'function') {
+        jQuery(form).request('onAuth');
+        return;
+    }
+
+    form.request(resolved);
+};
+
+window.authInitForm = function () {
+    var login = document.getElementById('auth-login');
+    if (login && typeof window.authDetectMode === 'function') {
+        window.authDetectMode(login);
+    }
 };
 
 window.authCanSubmit = function () {
     var action = document.getElementById('auth-action');
+    var submitBtn = document.getElementById('auth-email-submit');
+
+    if (action && !action.value && submitBtn) {
+        action.value = submitBtn.getAttribute('data-action') || 'email_login';
+    }
 
     if (!action) {
         return true;

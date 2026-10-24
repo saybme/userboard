@@ -10,7 +10,7 @@
     <div class="">
         <label for="auth-login" class="mb-1 block w-full">Email или логин</label>
         <input
-            type="email"
+            type="text"
             id="auth-login"
             name="login"
             value=""
@@ -18,6 +18,8 @@
             class="input input-bordered w-full"
             autocomplete="username"
             oninput="authDetectMode(this)"
+            onkeyup="authDetectMode(this)"
+            onchange="authDetectMode(this)"
         >
         <div data-validate-for="login" class="text-xs text-red-2 mt-1 w-full"></div>
         <div data-validate-for="email" class="text-xs text-red-2 mt-1 w-full"></div>
@@ -54,7 +56,7 @@
                 style="display:none;"
                 data-action="email_login"
                 data-attach-loading
-                onclick="authSubmit('email_login')"
+                onclick="authSubmit(this.getAttribute('data-action') || 'email_login')"
             >Войти</button>
             <button
                 type="button"
