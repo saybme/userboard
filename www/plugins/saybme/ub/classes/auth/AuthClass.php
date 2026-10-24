@@ -63,27 +63,63 @@ class AuthClass {
     }
 
     /**
-     * Единое поле login → phone или email.
+     * Единое поле login → email или логин менеджера.
      */
     public function syncAuthIdentifier()
     {
         $login = trim((string) Input::get('login', ''));
         $email = trim((string) Input::get('email', ''));
+        $identifier = $login !== '' ? $login : $email;
 
-        // Авторизация только по email
-        if ($login !== '') {
-            $email = mb_strtolower($login);
-        }
-
-        if ($email !== '') {
+        if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $email = mb_strtolower($identifier);
+        } elseif ($identifier !== '') {
+            $email = '';
+        } elseif ($email !== '') {
             $email = mb_strtolower($email);
         }
 
         Input::merge([
-            'phone' => '',
             'email' => $email,
-            'login' => $login !== '' ? $login : $email,
+            'login' => $identifier,
         ]);
+    }
+
+    /**
+     * Найти аккаунт для входа: менеджер по login/email или пользователь по email.
+     */
+    public function findAuthAccount(string $identifier): ?User
+    {
+        $identifier = trim($identifier);
+        if ($identifier === '') {
+            return null;
+        }
+
+        $normalized = mb_strtolower($identifier);
+
+        $manager = User::active()
+            ->where('utype_id', 2)
+            ->where(function ($query) use ($identifier, $normalized) {
+                $query->whereRaw('LOWER(login) = ?', [$normalized])
+                    ->orWhere('login', $identifier);
+
+                if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+                    $query->orWhereRaw('LOWER(email) = ?', [$normalized]);
+                }
+            })
+            ->first();
+
+        if ($manager) {
+            return $manager;
+        }
+
+        if (!filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            return null;
+        }
+
+        return User::active()
+            ->whereRaw('LOWER(email) = ?', [$normalized])
+            ->first();
     }
 
     // Шаг 1 проверка номере телефона и согласия на обработку данных
@@ -309,30 +345,34 @@ class AuthClass {
         return $user;
     }
 
-    // Вход по email и паролю
+    // Вход по email/логину и паролю
     public function loginByEmail()
     {
-        $email = mb_strtolower(trim((string) Input::get('email')));
-        Input::merge(['email' => $email]);
+        $identifier = trim((string) Input::get('login', Input::get('email', '')));
+        Input::merge(['login' => $identifier]);
 
-        $rules['email'] = 'required|email';
+        $rules['login'] = 'required';
         $rules['password'] = 'required|min:8';
         Request::validate($rules, Lang::get('saybme.ub::validation'));
 
         $password = Input::get('password');
-
-        $user = User::active()
-            ->whereRaw('LOWER(email) = ?', [$email])
-            ->first();
+        $user = $this->findAuthAccount($identifier);
 
         if (!$user || !$user->password || !$user->checkHashValue('password', $password)) {
             throw new ValidationException([
-                'email' => 'Неверный email или пароль.',
+                'login' => 'Неверный логин или пароль.',
+                'email' => 'Неверный логин или пароль.',
             ]);
         }
 
-        Session::put('auth.email', $email);
-        Session::put('auth.utype', 1);
+        $isManager = (int) $user->utype_id === 2;
+
+        Session::put('auth.utype', $isManager ? 2 : 1);
+        if ($isManager) {
+            Session::put('auth.phone', $user->login);
+        } else {
+            Session::put('auth.email', mb_strtolower((string) $user->email));
+        }
         $this->saveUserHash($user->hash);
 
         return $user;

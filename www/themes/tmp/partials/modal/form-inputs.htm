@@ -8,13 +8,13 @@
     {% endif %}
 
     <div class="">
-        <label for="auth-login" id="auth-login-label" class="mb-1 block w-full">Email</label>
+        <label for="auth-login" class="mb-1 block w-full">Email или логин</label>
         <input
             type="email"
             id="auth-login"
             name="login"
             value=""
-            placeholder="name@example.com"
+            placeholder="email@example.com"
             class="input input-bordered w-full"
             autocomplete="username"
             oninput="authDetectMode(this)"
@@ -68,7 +68,16 @@
         </div>
     </div>
 
-    <p id="auth-mode-hint" class="mt-4 text-sm text-gray-500">Введите email, чтобы продолжить</p>
+    <p id="auth-mode-hint" class="mt-4 text-sm text-gray-500">Введите email или логин, чтобы продолжить</p>
+
+    <script>
+        (function () {
+            var input = document.getElementById('auth-login');
+            if (input && typeof authDetectMode === 'function') {
+                authDetectMode(input);
+            }
+        })();
+    </script>
 
 {% endif %}
 
