@@ -1,44 +1,31 @@
 <div class="py-8">
 
-    <h1 class="table:text-txt-40 text-blue-2">Заявки пользователя:</h1>
-
-    <div class="mt-4 pb-6">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <h1 class="table:text-txt-40 text-blue-2">
+            {% if section == 'ads' %}Объявления{% else %}Заявки{% endif %}
+        </h1>
         <a href="/api/auth/logout" class="btn btn-sm btn-warning">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                 <path fill-rule="evenodd" d="M3 4.25A2.25 2.25 0 015.25 2h5.5A2.25 2.25 0 0113 4.25v2a.75.75 0 01-1.5 0v-2a.75.75 0 00-.75-.75h-5.5a.75.75 0 00-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 00.75-.75v-2a.75.75 0 011.5 0v2A2.25 2.25 0 0110.75 18h-5.5A2.25 2.25 0 013 15.75V4.25z" clip-rule="evenodd" />
                 <path fill-rule="evenodd" d="M19 10a.75.75 0 00-.75-.75H8.704l1.048-.943a.75.75 0 10-1.004-1.114l-2.5 2.25a.75.75 0 000 1.114l2.5 2.25a.75.75 0 101.004-1.114l-1.048-.943h9.546A.75.75 0 0019 10z" clip-rule="evenodd" />
-            </svg>          
+            </svg>
             Выход
-        </a> 
+        </a>
     </div>
 
-    <div class="mt-6 space-y-1" id="apps">
-        {% for item in applications %}
-            <a href="{{ item.link }}" class="block bg-white rounded-md border text hover:bg-black/10 app_status_{{ item.status }}">
-                <div class="flex px-5 py-3">
+    <div class="mt-6 flex flex-wrap gap-2">
+        <a href="/cabinet" class="btn btn-sm {{ section == 'applications' ? 'btn-red text-white' : 'bg-white text-blue-2 border border-blue-2 hover:bg-blue-50' }}">
+            Заявки
+        </a>
+        <a href="/cabinet/obyavleniya" class="btn btn-sm {{ section == 'ads' ? 'btn-red text-white' : 'bg-white text-blue-2 border border-blue-2 hover:bg-blue-50' }}">
+            Объявления
+        </a>
+    </div>
 
-                    <div class=" flex-1">
-                        <div class="font-bold text-blue-2 leading-tight">№{{ item.num }}</div>
-                        <div class="text-sm/none text-gray-500 mt-1">Пользователь: {{ item.user.phone }}</div>
-                    </div>
-                    <div class="flex-1 text-gray-500">
-                        <div class="text-sm/none text-gray-500">Статус:</div>
-                        <div class="status status_{{ item.status }}">
-                            <b>{{ item.status_name }}</b>
-                        </div>
-                    </div>
-                    <div class="">
-                        <div class="text-sm/none text-gray-500">Дата:</div>
-                        <div class="flex items-center text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 me-1">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                            </svg>                              
-                            <b>{{ item.created_at | date('d.m.Y') }}</b>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    </div> 
+    {% if section == 'ads' %}
+        {% partial 'cabinet/manager-ads' announcements=announcements %}
+    {% else %}
+        {% partial 'cabinet/manager-applications' applications=applications %}
+    {% endif %}
 
 </div>

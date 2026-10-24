@@ -30,6 +30,23 @@ class User extends Model
 
     public $hasMany = [
         'documents' => \Saybme\Ub\Models\Document::class,
+        'applications' => \Saybme\Ub\Models\Application::class,
+        'carnumbers' => \Saybme\Ub\Models\Carnumber::class,
+    ];
+
+    public $belongsToMany = [
+        'managed_applications' => [
+            \Saybme\Ub\Models\Application::class,
+            'table' => 'saybme_ub_application_managers',
+            'key' => 'user_id',
+            'otherKey' => 'application_id',
+        ],
+        'managed_carnumbers' => [
+            \Saybme\Ub\Models\Carnumber::class,
+            'table' => 'saybme_ub_carnumber_managers',
+            'key' => 'user_id',
+            'otherKey' => 'carnumber_id',
+        ],
     ];
 
     public $attachMany = [
@@ -77,6 +94,28 @@ class User extends Model
 
     public function scopeActive($query) {
         return $query->where('is_active', true);
+    }
+
+    public function getDisplayNameAttribute()
+    {
+        if (trim((string) $this->email)) {
+            return $this->email;
+        }
+
+        if (trim((string) $this->phone)) {
+            return $this->phone;
+        }
+
+        if (trim((string) $this->login)) {
+            return $this->login;
+        }
+
+        return 'Клиент #' . $this->id;
+    }
+
+    public function isManager(): bool
+    {
+        return (int) $this->utype_id === 2;
     }
 
 

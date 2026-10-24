@@ -87,10 +87,8 @@ class Cabinet extends \Cms\Classes\ComponentBase
             return $this->renderPartial($tpl, $options);
         }
 
-        if(($user->utype->id ?? null) == 2){
-            $options['user'] = $user;
-            $options['applications'] = $q->getUserApplicationsManager($user->id);
-            return $this->renderPartial('cabinet/manager', $options);
+        if($user->isManager()){
+            return $this->renderManagerCabinet($user, $q, 'applications');
         }
 
         $options['user'] = $user;
@@ -137,10 +135,21 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         $page = $q->getPage($slug);
 
-
         if(!$user) {
             $tpl = 'cabinet/404';
             return $this->renderPartial($tpl, $options);
+        }
+
+        if($user->isManager()){
+            $carnumberId = $this->managerCarnumberIdFromSlug($slug);
+            if ($carnumberId) {
+                return $this->renderManagerCarnumber($user, $carnumberId);
+            }
+
+            $section = $this->managerSectionFromSlug($slug);
+            if ($section) {
+                return $this->renderManagerCabinet($user, $q, $section);
+            }
         }
 
         if(!$page) return $this->controller->run('404');
@@ -149,7 +158,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         if($page->tmp) $tpl = $page->tmp;
 
-        if(($user->utype->id ?? null) == 2){
+        if($user->isManager()){
             if($page->ptype != 'app'){
                 return $this->controller->run('404');
             }
@@ -502,6 +511,89 @@ class Cabinet extends \Cms\Classes\ComponentBase
         return $data;
     }
 
+
+    private function renderManagerCabinet($user, $q, $section = 'applications')
+    {
+        if (!in_array($section, ['applications', 'ads'], true)) {
+            $section = 'applications';
+        }
+
+        $this->page->title = $section === 'ads' ? 'Объявления' : 'Заявки';
+
+        return $this->renderPartial('cabinet/manager', [
+            'user' => $user,
+            'section' => $section,
+            'applications' => $q->getUserApplicationsManager($user->id),
+            'announcements' => [
+                [
+                    'code' => 'carnumbers',
+                    'title' => 'Гос. номера',
+                    'empty' => 'Объявлений с гос. номерами пока нет',
+                    'items' => $q->getGosNumbersManager(),
+                ],
+            ],
+        ]);
+    }
+
+    private function managerSectionFromSlug($slug)
+    {
+        $value = $this->normalizeCabinetSlug($slug);
+
+        $map = [
+            'zayavki' => 'applications',
+            'obyavleniya' => 'ads',
+            'ads' => 'ads',
+        ];
+
+        return $map[$value] ?? null;
+    }
+
+    private function managerCarnumberIdFromSlug($slug)
+    {
+        $value = $this->normalizeCabinetSlug($slug);
+
+        if (preg_match('#^obyavleniya/nomer/(\d+)$#', $value, $matches)) {
+            return (int) $matches[1];
+        }
+
+        return null;
+    }
+
+    private function normalizeCabinetSlug($slug)
+    {
+        if (is_array($slug)) {
+            return trim(implode('/', $slug), '/');
+        }
+
+        return trim((string) $slug, '/');
+    }
+
+    private function renderManagerCarnumber($user, $id)
+    {
+        $page = \Saybme\Ub\Models\Carnumber::with('user')->find($id);
+        if (!$page) {
+            return $this->controller->run('404');
+        }
+
+        $title = $page->car_number ?: ($page->num ?: ('Объявление #' . $page->id));
+        $this->page->title = $title;
+
+        return $this->renderPartial('cabinet/manager-ad-carnumber', [
+            'user' => $user,
+            'page' => $page,
+            'section' => 'ads',
+            'breadcrumbs' => [
+                [
+                    'title' => 'Объявления',
+                    'url' => url('/cabinet/obyavleniya'),
+                ],
+                [
+                    'title' => $title,
+                    'isActive' => 'active',
+                ],
+            ],
+        ]);
+    }
 
     private function addScripts(){
         // $scripts[] = 'saybme/ub/assets/javascript/support.js';

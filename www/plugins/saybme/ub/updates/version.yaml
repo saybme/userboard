@@ -375,3 +375,12 @@ v1.0.125:
 v1.0.126:
     - 'Created table saybme_ub_email_login_tokens'
     - builder_table_create_saybme_ub_email_login_tokens.php
+v1.0.127:
+    - 'Index saybme_ub_applications.user_id'
+    - builder_table_update_saybme_ub_applications_6.php
+v1.0.128:
+    - 'Created table saybme_ub_application_managers'
+    - builder_table_create_saybme_ub_application_managers.php
+v1.0.129:
+    - 'Created table saybme_ub_carnumber_managers'
+    - builder_table_create_saybme_ub_carnumber_managers.php

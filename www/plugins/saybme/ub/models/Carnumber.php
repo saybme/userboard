@@ -39,12 +39,50 @@ class Carnumber extends Model
     ];
 
     public $belongsTo = [
-        'user' => \Saybme\Ub\Models\User::class
+        'user' => [
+            \Saybme\Ub\Models\User::class,
+            'key' => 'user_id',
+        ],
+    ];
+
+    public $belongsToMany = [
+        'managers' => [
+            \Saybme\Ub\Models\User::class,
+            'table' => 'saybme_ub_carnumber_managers',
+            'key' => 'carnumber_id',
+            'otherKey' => 'user_id',
+        ],
     ];
 
     public function scopeActive($query) {
         return $query->where('is_active', true);
     }  
+
+    public function getClientLabelAttribute()
+    {
+        if (!$this->user) {
+            return 'Без клиента';
+        }
+
+        return $this->user->display_name;
+    }
+
+    public function afterCreate()
+    {
+        $this->attachManagers();
+    }
+
+    public function attachManagers()
+    {
+        $managerIds = User::active()
+            ->where('utype_id', 2)
+            ->pluck('id')
+            ->all();
+
+        if ($managerIds) {
+            $this->managers()->syncWithoutDetaching($managerIds);
+        }
+    }
 
     public function beforeCreate(){
         
@@ -70,34 +108,46 @@ class Carnumber extends Model
         return url($url);
     }
 
-    public function getCarNumberAttribute(){    
+    public function getCabinetLinkAttribute()
+    {
+        return url('cabinet/obyavleniya/nomer/' . $this->id);
+    }
 
-        $series = null;
+    public function getCarNumberAttribute()
+    {
+        $props = is_array($this->props) ? $this->props : [];
+        $series = '';
 
-        if(key_exists('series', $this->props)){
-            // Серия        
-            $series = implode('', $this->props['series']);
-            $arr['series'] = substr($series, 0, 1);    
+        if (!empty($props['series'])) {
+            $series = is_array($props['series']) ? implode('', $props['series']) : (string) $props['series'];
+        } elseif ($this->series) {
+            $series = (string) $this->series;
         }
 
-        if(key_exists('number', $this->props)){
-            // Номер
-            $number = implode('', $this->props['number']);
-            $arr['number'] = $number;    
+        $number = '';
+        if (!empty($props['number'])) {
+            $number = is_array($props['number']) ? implode('', $props['number']) : (string) $props['number'];
+        } elseif ($this->number) {
+            $number = (string) $this->number;
         }
 
-          
-        
-        // Серия
-        $arr['series_2'] = substr($series, 1, 2);
-        
-
-        if(key_exists('region', $this->props)){
-            // Регион
-            $arr['region'] = $this->props['region'];   
+        $region = '';
+        if (!empty($props['region'])) {
+            $region = is_array($props['region']) ? implode('', $props['region']) : (string) $props['region'];
+        } elseif ($this->region) {
+            $region = (string) $this->region;
         }
-        
-        return implode('-', $arr);
+
+        $parts = array_filter([
+            mb_substr($series, 0, 1),
+            $number,
+            mb_substr($series, 1, 2),
+            $region,
+        ], function ($part) {
+            return trim((string) $part) !== '';
+        });
+
+        return $parts ? implode(' ', $parts) : ($this->num ?: '');
     }
 
     public $attachOne = [

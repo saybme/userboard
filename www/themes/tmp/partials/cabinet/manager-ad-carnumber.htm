@@ -1,0 +1,26 @@
+<div class="py-8">
+
+    <div class="flex flex-wrap items-center justify-between gap-4">
+        <a href="/cabinet/obyavleniya" class="btn btn-sm bg-white text-blue-2 border border-blue-2 hover:bg-blue-50">← К объявлениям</a>
+        <a href="/api/auth/logout" class="btn btn-sm btn-warning">Выход</a>
+    </div>
+
+    <div class="mt-4">
+        {% partial "breadcrumbs/items" items=breadcrumbs %}
+    </div>
+
+    <div class="mt-4 mb-6 flex flex-wrap gap-3 text-sm">
+        <div class="bg-white border rounded-md px-3 py-2">
+            Клиент: <b>{{ page.client_label }}</b>
+        </div>
+        <div class="bg-white border rounded-md px-3 py-2">
+            Статус: <b>{{ page.is_active ? 'Опубликован' : 'На модерации' }}</b>
+        </div>
+        <div class="bg-white border rounded-md px-3 py-2">
+            Дата: <b>{{ page.created_at | date('d.m.Y H:i') }}</b>
+        </div>
+    </div>
+
+    {% partial 'announcements/page' page=page breadcrumbs=[] %}
+
+</div>

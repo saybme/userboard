@@ -30,6 +30,12 @@ class AppClass {
         $q = new AuthClass;
         $user = $q->getActiveUser();
 
+        if (!$user) {
+            throw new ValidationException([
+                'check_politic' => 'Чтобы отправить заявку, войдите в аккаунт.',
+            ]);
+        }
+
         // Данные формы
         $data['data'] = Input::get();
         $data['price'] = Input::get('price');
@@ -125,7 +131,13 @@ class AppClass {
 
         // Профиль
         $q = new AuthClass;
-        $user = $q->getActiveUser(); 
+        $user = $q->getActiveUser();
+
+        if (!$user) {
+            throw new ValidationException([
+                'check_politic' => 'Чтобы отправить заявку, войдите в аккаунт.',
+            ]);
+        }
 
         // Заявка
         $app = new Application;
@@ -222,7 +234,13 @@ class AppClass {
 
         // Профиль
         $q = new AuthClass;
-        $user = $q->getActiveUser(); 
+        $user = $q->getActiveUser();
+
+        if (!$user) {
+            throw new ValidationException([
+                'username' => 'Чтобы разместить объявление, войдите в аккаунт.',
+            ]);
+        }
 
         // Валидиция
         Request::validate($rules, Lang::get('saybme.ub::validation'));

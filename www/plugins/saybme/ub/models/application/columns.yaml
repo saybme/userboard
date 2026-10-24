@@ -3,6 +3,22 @@ columns:
         label: Заявка
         type: text
         searchable: true
+    client_label:
+        label: Клиент
+        type: text
+        searchable: false
+    user_email:
+        label: Email
+        relation: user
+        select: email
+        searchable: true
+        invisible: true
+    user_phone:
+        label: Телефон
+        relation: user
+        select: phone
+        searchable: true
+        invisible: true
     status_name:
         label: Статус
         type: text

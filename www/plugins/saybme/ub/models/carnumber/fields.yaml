@@ -101,3 +101,13 @@ secondaryTabs:
             span: full
             comment: Цена за госномерной знак
             type: number
+        user:
+            label: Клиент
+            span: full
+            type: relation
+            nameFrom: display_name
+        managers:
+            label: Менеджеры
+            span: full
+            type: relation
+            nameFrom: display_name

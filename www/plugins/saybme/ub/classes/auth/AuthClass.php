@@ -580,13 +580,12 @@ class AuthClass {
     // Получаем заявки пользователя
     public function getUserApplications($id = ''){       
         if(!$id) return;
-        return Application::where('user_id', $id)->get()->sortDesc();
+        return Application::where('user_id', $id)->orderByDesc('id')->get();
     }   
 
-    // Получаем заявки менеджера
-    public function getUserApplicationsManager($id = ''){       
-        if(!$id) return;
-        return Application::get()->sortDesc();
+    // Все заявки для кабинета менеджера (заявки привязаны к клиенту, не к менеджеру)
+    public function getUserApplicationsManager($id = ''){
+        return Application::with('user')->orderByDesc('id')->get();
     }  
 
     // Странцы профиля
@@ -595,11 +594,16 @@ class AuthClass {
         return $pages;
     }
 
-    // Гос номера
+    // Гос номера клиента
     public function getGosNumbers($id = null){
         if(!$id) return;
-        $items = Carnumber::active();
-        return $items->orderBy('id', 'desc')->get();
+        return Carnumber::with('user')->where('user_id', $id)->orderByDesc('id')->get();
+    }
+
+    // Все гос номера для кабинета менеджера
+    public function getGosNumbersManager()
+    {
+        return Carnumber::with('user')->orderByDesc('id')->get();
     }
 
     // Контент страницы профиля

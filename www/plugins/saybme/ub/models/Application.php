@@ -18,7 +18,19 @@ class Application extends Model
     ];
 
     public $belongsTo = [
-        'user' => \Saybme\Ub\Models\User::class
+        'user' => [
+            \Saybme\Ub\Models\User::class,
+            'key' => 'user_id',
+        ],
+    ];
+
+    public $belongsToMany = [
+        'managers' => [
+            \Saybme\Ub\Models\User::class,
+            'table' => 'saybme_ub_application_managers',
+            'key' => 'application_id',
+            'otherKey' => 'user_id',
+        ],
     ];
 
     public $attachMany = [
@@ -45,6 +57,15 @@ class Application extends Model
     public function getNameAttribute(){
         $name = 'Заявка №:' . $this->num;
         return $name;
+    }
+
+    public function getClientLabelAttribute()
+    {
+        if (!$this->user) {
+            return 'Без клиента';
+        }
+
+        return $this->user->display_name;
     }
 
     // Список цен
@@ -129,6 +150,23 @@ class Application extends Model
         $this->num = $this->createNum();
         $this->hash = $hash;
         $this->url = 'applications/' . $hash;
+    }
+
+    public function afterCreate()
+    {
+        $this->attachManagers();
+    }
+
+    public function attachManagers()
+    {
+        $managerIds = User::active()
+            ->where('utype_id', 2)
+            ->pluck('id')
+            ->all();
+
+        if ($managerIds) {
+            $this->managers()->syncWithoutDetaching($managerIds);
+        }
     }    
 
     // Номер заявки

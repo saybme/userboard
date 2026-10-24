@@ -44,10 +44,17 @@ secondaryTabs:
             type: text
             disabled: true
         user:
-            label: Пользователь
+            label: Клиент
             span: full
             type: relation
-            nameFrom: phone
+            nameFrom: display_name
+            comment: 'Заявка привязана к клиенту'
+        managers:
+            label: Менеджеры
+            span: full
+            type: relation
+            nameFrom: display_name
+            comment: 'Заявка видна этим менеджерам'
         status:
             label: Статус заявки
             span: full

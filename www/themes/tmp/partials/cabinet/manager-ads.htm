@@ -1,0 +1,17 @@
+<div class="mt-8 space-y-10">
+    {% for group in announcements %}
+        <section id="ads-{{ group.code }}">
+            <h2 class="text-xl table:text-2xl font-bold text-blue-2">{{ group.title }}</h2>
+
+            <div class="mt-4 space-y-1">
+                {% if group.code == 'carnumbers' %}
+                    {% partial 'cabinet/manager-ads-carnumbers' items=group.items empty=group.empty %}
+                {% else %}
+                    <div class="text-gray-500">{{ group.empty ?: 'Пока нет объявлений' }}</div>
+                {% endif %}
+            </div>
+        </section>
+    {% else %}
+        <div class="text-gray-500">Объявлений пока нет</div>
+    {% endfor %}
+</div>
