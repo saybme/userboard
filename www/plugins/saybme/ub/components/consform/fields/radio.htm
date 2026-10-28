@@ -1,0 +1,13 @@
+<div class="form-label">
+    {{ field.title }} {% if field.is_required %}<b class="text-red-1">*</b>{% endif %}
+</div>
+<div class="space-y-2 mt-1">
+    {% for item in field.options %}
+        <label class="flex items-center gap-2">
+            <input type="radio" name="{{ field.code }}" value="{{ item.value ?: item.title }}" class="radio radio-sm">
+            <span>{{ item.title }}</span>
+        </label>
+    {% endfor %}
+</div>
+{% if field.comment %}<div class="text-xs text-gray-400 mt-1">{{ field.comment }}</div>{% endif %}
+<div data-validate-for="{{ field.code }}" class="text-error text-xs"></div>

@@ -1,0 +1,13 @@
+name: Заголовок
+description: Текст без поля ввода
+icon: icon-header
+fields:
+    title:
+        label: Заголовок
+        span: full
+        type: text
+    text:
+        label: Текст
+        span: full
+        type: textarea
+        size: small

@@ -1,9 +1,86 @@
 fields:
     title:
-        label: Title
-        span: auto
+        label: Название
+        comment: Укажите название формы
+        span: left
         type: text
-    description:
-        label: Description
-        span: auto
-        type: textarea
+    slug:
+        label: Код формы
+        comment: Заполняется автоматически из названия
+        span: right
+        type: text
+        preset:
+            field: title
+            type: slug
+tabs:
+    fields:
+        data:
+            label: Структура формы
+            comment: Добавляйте блоки, внутри блока — поля нужного типа
+            span: full
+            tab: Поля формы
+            type: repeater
+            prompt: Добавить блок
+            titleFrom: title
+            form:
+                fields:
+                    title:
+                        label: Название блока
+                        comment: Заголовок секции на форме
+                        span: left
+                        type: text
+                    code:
+                        label: Код блока
+                        comment: Латинский идентификатор, можно оставить пустым
+                        span: right
+                        type: text
+                    description:
+                        label: Описание блока
+                        span: left
+                        type: textarea
+                        size: small
+                    columns:
+                        label: Колонок
+                        comment: Как выстроить поля внутри блока
+                        span: right
+                        type: dropdown
+                        default: 1
+                        options:
+                            1: 1 колонка
+                            2: 2 колонки
+                            3: 3 колонки
+                    fields:
+                        label: Поля блока
+                        comment: Выберите тип поля и заполните его настройки
+                        span: full
+                        type: repeater
+                        prompt: Добавить поле
+                        titleFrom: title
+                        groups:
+                            text: $/saybme/ub/config/consform/field_text.yaml
+                            textarea: $/saybme/ub/config/consform/field_textarea.yaml
+                            number: $/saybme/ub/config/consform/field_number.yaml
+                            email: $/saybme/ub/config/consform/field_email.yaml
+                            phone: $/saybme/ub/config/consform/field_phone.yaml
+                            date: $/saybme/ub/config/consform/field_date.yaml
+                            datetime: $/saybme/ub/config/consform/field_datetime.yaml
+                            select: $/saybme/ub/config/consform/field_select.yaml
+                            radio: $/saybme/ub/config/consform/field_radio.yaml
+                            checkbox: $/saybme/ub/config/consform/field_checkbox.yaml
+                            checkboxes: $/saybme/ub/config/consform/field_checkboxes.yaml
+                            file: $/saybme/ub/config/consform/field_file.yaml
+                            files: $/saybme/ub/config/consform/field_files.yaml
+                            dropzone: $/saybme/ub/config/consform/field_dropzone.yaml
+                            address: $/saybme/ub/config/consform/field_address.yaml
+                            year: $/saybme/ub/config/consform/field_year.yaml
+                            relation: $/saybme/ub/config/consform/field_relation.yaml
+                            hidden: $/saybme/ub/config/consform/field_hidden.yaml
+                            heading: $/saybme/ub/config/consform/field_heading.yaml
+                            alert: $/saybme/ub/config/consform/field_alert.yaml
+        description:
+            label: Описание
+            comment: Служебный текст, не выводится как поле формы
+            span: full
+            tab: Описание
+            type: richeditor
+            size: large

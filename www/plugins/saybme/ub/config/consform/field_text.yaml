@@ -1,0 +1,38 @@
+name: Строка
+description: Однострочное текстовое поле
+icon: icon-font
+fields:
+    title:
+        label: Название поля
+        span: left
+        type: text
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    placeholder:
+        label: Подсказка в поле
+        span: left
+        type: text
+    comment:
+        label: Комментарий под полем
+        span: right
+        type: text
+    default:
+        label: Значение по умолчанию
+        span: left
+        type: text
+    span:
+        label: Ширина
+        span: right
+        type: dropdown
+        default: full
+        options:
+            full: На всю ширину
+            left: Левая колонка
+            right: Правая колонка
+    is_required:
+        label: Обязательное поле
+        span: full
+        type: checkbox

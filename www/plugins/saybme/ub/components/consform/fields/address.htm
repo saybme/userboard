@@ -1,0 +1,13 @@
+<div class="form-label">
+    {{ field.title }} {% if field.is_required %}<b class="text-red-1">*</b>{% endif %}
+</div>
+<div class="space-y-2">
+    <input type="text" name="{{ field.code }}[region]" class="input input-bordered w-full" placeholder="Регион">
+    <input type="text" name="{{ field.code }}[city]" class="input input-bordered w-full" placeholder="Город">
+    <div class="grid grid-cols-1 table_l:grid-cols-3 gap-2">
+        <input type="text" name="{{ field.code }}[street]" class="input input-bordered w-full table_l:col-span-2" placeholder="Улица">
+        <input type="text" name="{{ field.code }}[house]" class="input input-bordered w-full" placeholder="Дом">
+    </div>
+</div>
+{% if field.comment %}<div class="text-xs text-gray-400 mt-1">{{ field.comment }}</div>{% endif %}
+<div data-validate-for="{{ field.code }}" class="text-error text-xs"></div>

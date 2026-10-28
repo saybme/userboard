@@ -17,4 +17,9 @@ class Formvalue extends Model
         return $query->where('is_active', true)->where('nest_depth', 0);
     }
 
+    public function getValuesAttribute()
+    {
+        return $this->children;
+    }
+
 }

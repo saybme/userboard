@@ -1,0 +1,25 @@
+name: Уведомление
+description: Информационный блок
+icon: icon-info-circle
+fields:
+    title:
+        label: Заголовок
+        span: left
+        type: text
+    style:
+        label: Цвет
+        span: right
+        type: dropdown
+        default: yellow
+        options:
+            yellow: Жёлтый
+            red: Красный
+            blue: Синий
+            green: Зелёный
+    text:
+        label: Текст
+        span: full
+        type: richeditor
+        size: small
+        toolbarButtons: bold|italic
+        useLineBreaks: true

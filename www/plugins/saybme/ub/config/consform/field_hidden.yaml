@@ -1,0 +1,17 @@
+name: Скрытое поле
+description: Не показывается пользователю
+icon: icon-eye-slash
+fields:
+    title:
+        label: Служебное название
+        span: left
+        type: text
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    default:
+        label: Значение
+        span: full
+        type: text

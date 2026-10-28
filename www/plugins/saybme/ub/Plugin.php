@@ -195,6 +195,7 @@ class Plugin extends PluginBase
             \Saybme\Ub\Components\Ubapps::class    => 'ubapps',
             \Saybme\Ub\Components\Ubforms::class    => 'ubforms',
             \Saybme\Ub\Components\Unav::class       => 'unav',
+            \Saybme\Ub\Components\Consform::class   => 'consform',
         ];
     }
 

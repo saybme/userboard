@@ -1,0 +1,31 @@
+name: Адрес
+description: Набор полей адреса
+icon: icon-map-marker
+fields:
+    title:
+        label: Название блока адреса
+        span: left
+        type: text
+        default: Адрес
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    comment:
+        label: Комментарий
+        span: full
+        type: text
+    is_required:
+        label: Обязательное поле
+        span: full
+        type: checkbox
+    span:
+        label: Ширина
+        span: auto
+        type: dropdown
+        default: full
+        options:
+            full: На всю ширину
+            left: Левая колонка
+            right: Правая колонка

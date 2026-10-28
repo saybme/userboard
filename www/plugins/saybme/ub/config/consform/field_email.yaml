@@ -1,0 +1,37 @@
+name: E-mail
+description: Поле электронной почты
+icon: icon-envelope-o
+fields:
+    title:
+        label: Название поля
+        span: left
+        type: text
+        default: E-mail
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    placeholder:
+        label: Подсказка в поле
+        span: left
+        type: text
+        default: email@example.com
+    comment:
+        label: Комментарий
+        span: right
+        type: text
+    is_required:
+        label: Обязательное поле
+        span: full
+        type: checkbox
+        default: 1
+    span:
+        label: Ширина
+        span: auto
+        type: dropdown
+        default: full
+        options:
+            full: На всю ширину
+            left: Левая колонка
+            right: Правая колонка

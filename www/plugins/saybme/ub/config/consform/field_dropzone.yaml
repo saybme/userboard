@@ -1,0 +1,31 @@
+name: Фото (Dropzone)
+description: Загрузка изображений перетаскиванием
+icon: icon-file-image-o
+fields:
+    title:
+        label: Название поля
+        span: left
+        type: text
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    comment:
+        label: Комментарий / текст в зоне загрузки
+        span: full
+        type: textarea
+        size: small
+    is_required:
+        label: Обязательное поле
+        span: full
+        type: checkbox
+    span:
+        label: Ширина
+        span: auto
+        type: dropdown
+        default: full
+        options:
+            full: На всю ширину
+            left: Левая колонка
+            right: Правая колонка

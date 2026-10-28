@@ -1,0 +1,34 @@
+name: Чекбокс
+description: Одно согласие / да-нет
+icon: icon-check-square-o
+fields:
+    title:
+        label: Подпись
+        span: left
+        type: text
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    comment:
+        label: Комментарий
+        span: full
+        type: text
+    checked:
+        label: Включён по умолчанию
+        span: full
+        type: checkbox
+    is_required:
+        label: Обязательное поле
+        span: full
+        type: checkbox
+    span:
+        label: Ширина
+        span: auto
+        type: dropdown
+        default: full
+        options:
+            full: На всю ширину
+            left: Левая колонка
+            right: Правая колонка

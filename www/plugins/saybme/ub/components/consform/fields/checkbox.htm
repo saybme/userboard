@@ -1,0 +1,9 @@
+<label class="flex items-start gap-2">
+    <input type="hidden" name="{{ field.code }}" value="0">
+    <input type="checkbox" name="{{ field.code }}" value="1" class="checkbox checkbox-sm mt-1" {{ field.checked ? 'checked' : '' }}>
+    <span>
+        {{ field.title }} {% if field.is_required %}<b class="text-red-1">*</b>{% endif %}
+        {% if field.comment %}<span class="block text-xs text-gray-400 mt-1">{{ field.comment }}</span>{% endif %}
+    </span>
+</label>
+<div data-validate-for="{{ field.code }}" class="text-error text-xs"></div>

@@ -1,5 +1,13 @@
 columns:
     title:
-        label: title
+        label: Название
         type: text
         searchable: true
+    slug:
+        label: Код
+        type: text
+        searchable: true
+    updated_at:
+        label: Обновлено
+        type: datetime
+        invisible: true

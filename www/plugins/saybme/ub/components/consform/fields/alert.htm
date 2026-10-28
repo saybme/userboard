@@ -1,0 +1,4 @@
+<div class="alert {{ field.style == 'red' ? 'alert-error' : (field.style == 'blue' ? 'alert-info' : (field.style == 'green' ? 'alert-success' : 'alert-warning')) }} rounded-md">
+    {% if field.title %}<div class="font-semibold">{{ field.title }}</div>{% endif %}
+    {% if field.text %}<div>{{ field.text | raw }}</div>{% endif %}
+</div>

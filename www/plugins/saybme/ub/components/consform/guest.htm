@@ -1,0 +1,11 @@
+<div class="p-6 rounded-md bg-white shadow-md">
+    <h2 class="text-xl font-bold text-blue-2 mb-3">{{ page.title ?: 'Форма' }}</h2>
+    <p class="mb-4">Чтобы заполнить форму, войдите в аккаунт.</p>
+    <button
+        type="button"
+        id="btn-auth-open"
+        class="btn btn-red"
+        data-request="onModalOpen"
+        data-request-data="modal: 'open-form'"
+    >Войти</button>
+</div>

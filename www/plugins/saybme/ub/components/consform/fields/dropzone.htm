@@ -1,0 +1,6 @@
+<label class="form-label">
+    {{ field.title }} {% if field.is_required %}<b class="text-red-1">*</b>{% endif %}
+</label>
+<input type="file" name="{{ field.code }}[]" accept="image/*" class="file-input file-input-bordered w-full" multiple>
+{% if field.comment %}<div class="text-xs text-gray-400 mt-1">{{ field.comment }}</div>{% endif %}
+<div data-validate-for="{{ field.code }}" class="text-error text-xs"></div>

@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="p-6 rounded-md bg-white shadow-md">
+        {% if page.title %}
+            <h1 class="text-2xl table_sm:text-3xl font-bold text-blue-2 mb-4">{{ page.title }}</h1>
+        {% endif %}
+
+        {% if page.description %}
+            <div class="text mb-6">{{ page.description | raw }}</div>
+        {% endif %}
+
+        <form action="" method="post" data-request="onConsformSend" data-request-validate data-request-files class="block w-full space-y-6">
+            <input type="hidden" name="form_slug" value="{{ page.slug }}">
+
+            {% for block in page.blocks %}
+                <fieldset class="border pt-5 pb-5 px-5 rounded-lg">
+                    {% if block.title %}
+                        <legend class="font-semibold text-lg px-3 m-0">{{ block.title }}</legend>
+                    {% endif %}
+                    {% if block.description %}
+                        <div class="text-sm text-gray-500 mb-4">{{ block.description }}</div>
+                    {% endif %}
+
+                    <div class="grid grid-cols-1 {{ block.columns == 2 ? 'table_l:grid-cols-2' : (block.columns == 3 ? 'table_l:grid-cols-3' : '') }} gap-4">
+                        {% for field in block.fields %}
+                            {% set group = field._group ?: 'text' %}
+                            <div class="{{ field.span == 'left' or field.span == 'right' ? '' : 'table_l:col-span-full' }}">
+                                {% partial '@fields/' ~ group field=field %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </fieldset>
+            {% endfor %}
+
+            <div>
+                <button class="btn btn-red" data-attach-loading>Отправить</button>
+            </div>
+        </form>
+    </div>
+</div>

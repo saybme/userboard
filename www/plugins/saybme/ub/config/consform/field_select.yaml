@@ -1,0 +1,53 @@
+name: Список
+description: Выпадающий список
+icon: icon-caret-square-o-down
+fields:
+    title:
+        label: Название поля
+        span: left
+        type: text
+    code:
+        label: Код поля
+        comment: Оставьте пустым — заполнится автоматически
+        span: right
+        type: text
+    comment:
+        label: Комментарий
+        span: full
+        type: text
+    empty_option:
+        label: Пустой пункт
+        comment: 'Например: «Не выбрано»'
+        span: full
+        type: text
+        default: Не выбрано
+    options:
+        label: Варианты
+        span: full
+        type: repeater
+        prompt: Добавить вариант
+        titleFrom: title
+        form:
+            fields:
+                title:
+                    label: Подпись
+                    span: left
+                    type: text
+                value:
+                    label: Значение
+                    comment: Если пусто — берётся подпись
+                    span: right
+                    type: text
+    is_required:
+        label: Обязательное поле
+        span: full
+        type: checkbox
+    span:
+        label: Ширина
+        span: auto
+        type: dropdown
+        default: full
+        options:
+            full: На всю ширину
+            left: Левая колонка
+            right: Правая колонка

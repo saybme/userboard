@@ -1,0 +1,13 @@
+<label class="form-label" for="{{ field.code }}">
+    {{ field.title }} {% if field.is_required %}<b class="text-red-1">*</b>{% endif %}
+</label>
+<select id="{{ field.code }}" name="{{ field.code }}" class="select select-bordered w-full">
+    <option value="">Год</option>
+    {% set yearFrom = field.year_from ?: 1940 %}
+    {% set yearTo = field.year_to ?: 'now'|date('Y') %}
+    {% for year in yearTo..yearFrom %}
+        <option value="{{ year }}">{{ year }}</option>
+    {% endfor %}
+</select>
+{% if field.comment %}<div class="text-xs text-gray-400 mt-1">{{ field.comment }}</div>{% endif %}
+<div data-validate-for="{{ field.code }}" class="text-error text-xs"></div>
