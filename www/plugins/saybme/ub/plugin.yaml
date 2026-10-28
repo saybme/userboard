@@ -67,6 +67,10 @@ navigation:
                 label: 'Значения полей'
                 url: saybme/ub/formvalues
                 icon: icon-sitemap
+            side-menu-item4:
+                label: 'Конструктор форм'
+                url: saybme/ub/consforms
+                icon: icon-sliders
     main-menu-item3:
         label: 'UB Объявления'
         url: /

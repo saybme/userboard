@@ -1,0 +1,10 @@
+name: Consforms
+form: $/saybme/ub/models/consform/fields.yaml
+modelClass: Saybme\Ub\Models\Consform
+defaultRedirect: saybme/ub/consforms
+create:
+    redirect: 'saybme/ub/consforms/update/:id'
+    redirectClose: saybme/ub/consforms
+update:
+    redirect: saybme/ub/consforms
+    redirectClose: saybme/ub/consforms
