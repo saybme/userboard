@@ -132,7 +132,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
 
         $options = array();
         $tpl = 'cabinet/default-text';
-        $slug = $this->property('slug');
+        $slug = $this->normalizeCabinetSlug($this->property('slug'));
 
         $page = $q->getPage($slug);
 
@@ -490,6 +490,7 @@ class Cabinet extends \Cms\Classes\ComponentBase
     public function onApp(){
         $q = new AppClass();
         $app = $q->create();
+        Flash::success('Заявка отправлена.');
         return Redirect::to($app->link);
     }
 

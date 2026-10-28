@@ -27,9 +27,12 @@ class Forminput extends Model
     public $belongsTo = [
         'value' => [
             \Saybme\Ub\Models\Formvalue::class,
-            'scope' => 'isDepth'
+            'key' => 'value_id',
         ],
-        'form' => \Saybme\Ub\Models\Ubform::class,
+        'form' => [
+            \Saybme\Ub\Models\Ubform::class,
+            'key' => 'ubform_id',
+        ],
     ];
 
     public function getValuesAttribute(){

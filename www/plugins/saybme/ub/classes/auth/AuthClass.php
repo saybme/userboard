@@ -583,9 +583,12 @@ class AuthClass {
         return Application::where('user_id', $id)->orderByDesc('id')->get();
     }   
 
-    // Все заявки для кабинета менеджера (заявки привязаны к клиенту, не к менеджеру)
+    // Все заявки для кабинета менеджера, включая новые и без статуса
     public function getUserApplicationsManager($id = ''){
-        return Application::with('user')->orderByDesc('id')->get();
+        return Application::withoutGlobalScopes()
+            ->with('user')
+            ->orderByDesc('id')
+            ->get();
     }  
 
     // Странцы профиля
@@ -617,6 +620,16 @@ class AuthClass {
     public function getPage($slug = ''){
         if(!$slug) return;
 
+        if (is_array($slug)) {
+            $slug = trim(implode('/', $slug), '/');
+        } else {
+            $slug = trim((string) $slug, '/');
+        }
+
+        if ($slug === '') {
+            return;
+        }
+
         //Log::error($slug);
 
         $page = Prpage::active()->where('slug', $slug)->first();        
@@ -634,8 +647,20 @@ class AuthClass {
             return $page;
         } 
 
-        // Заявки
-        $page = Application::where('url', $slug)->first();
+        // Заявки — без фильтра по статусу, менеджер видит и новые
+        $hash = null;
+        if (preg_match('#(?:^|/)applications/([a-f0-9]+)$#', $slug, $matches)) {
+            $hash = $matches[1];
+        }
+
+        $page = Application::withoutGlobalScopes()
+            ->where(function ($query) use ($slug, $hash) {
+                $query->where('url', $slug);
+                if ($hash) {
+                    $query->orWhere('hash', $hash)->orWhere('url', 'applications/' . $hash);
+                }
+            })
+            ->first();
         if($page){
             $page->tmp = 'applications/page';
             $page->ptype = 'app';
@@ -668,18 +693,22 @@ class AuthClass {
         if(!$page) return;
 
         // Данын формы
-        $data = $page->data;
-        unset($data['form']);
+        $data = is_array($page->data) ? $page->data : [];
+        unset($data['form'], $data['page_id'], $data['check_politic'], $data['redirect'], $data['mode']);
 
-        $rows = array();        
+        $rows = array();
+        $labels = [
+            'country' => 'Страна вывоза',
+        ];
 
         foreach($data as $key => $item){
             $obj = Forminput::where('code', $key)->first();
-            if($obj){
+            $arr = [];
 
+            if($obj){
                 $arr['type'] = $obj->type ?: 'string';
                 $arr['title'] = $obj->app_title ?: $obj->title;                
-                $arr['group'] = $obj->group_title; 
+                $arr['group'] = $obj->group_title ?: 'Данные заявки'; 
 
                 if(gettype($item) == 'array'){
                     $arr['value'] = json_encode($item); 
@@ -695,15 +724,18 @@ class AuthClass {
                 if($obj->type == 'address'){
                     $arr['value'] = $this->getAddressTitle($item);      
                 }
+            } else {
+                if ($item === '' || $item === null) {
+                    continue;
+                }
 
-                // Тип связь
-                // if($obj->type == 'relation'){
-                //     $arr['value'] = 121;  
-                // }                
+                $arr['type'] = 'string';
+                $arr['title'] = $labels[$key] ?? $key;
+                $arr['group'] = 'Данные заявки';
+                $arr['value'] = is_array($item) ? json_encode($item, JSON_UNESCAPED_UNICODE) : $item;
+            }
 
-                $rows[$obj->group_title]['items'][] = $arr; 
-                                 
-            }            
+            $rows[$arr['group']]['items'][] = $arr;
         }  
 
         //dd($rows);

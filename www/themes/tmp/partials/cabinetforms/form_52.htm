@@ -19,7 +19,7 @@
                 <div class="">
                     {% for key, country in ['Япония', 'Китай', 'Корея'] %}
                         <div class="flex items-center">
-                            <input name="ubdb2c7ac220014a524496a275139e58d2" type="radio" name="country" value="{{ country }}" id="country_{{ key }}" class="radio radio-sm me-2 flex-none">
+                            <input type="radio" name="ubdb2c7ac220014a524496a275139e58d2" value="{{ country }}" id="country_{{ key }}" class="radio radio-sm me-2 flex-none">
                             <label for="country_{{ key }}" class="flex items-center">{{ country }}</label>
                         </div>
                     {% endfor %}
@@ -94,7 +94,7 @@
 
             <div class="mt-4">
                 <div class=" flex items-center gap-x-1">
-                    <input type="checkbox" id="check_politic" name="check_politic" class="checkbox checkbox-sm me-2 flex-none rounded-sm" checked>
+                    <input type="checkbox" id="check_politic" name="check_politic" value="1" class="checkbox checkbox-sm me-2 flex-none rounded-sm" checked>
                     <label for="check_politic" class="leading-none">Я ознакомлен с порядком и условиями подачи заявления в электронном виде, и даю свое согласие на обработку моих персональных данных</label>
                 </div>
                 <div data-validate-for="check_politic" class="error"></div>

@@ -1,4 +1,4 @@
-{% if user.utype.id == 2 %}
+{% if user.isManager %}
     <div class="py-4 px-4 rounded-lg bg-white mb-4">
         <h3 class="text-xl font-gilroy-medium">Контакты:</h3>
         <div class="">Пользователь: {{ page.user.phone }}</div>
@@ -43,7 +43,7 @@
             <div class="flex-none text-nowrap text-xl mob_l:text-3xl">
                 <b class="text-red-1">{{ page.price }}</b> руб.
             </div>
-            {% if user.utype.id != 2 %}
+            {% if not user.isManager %}
                 
                 {% if page.payment.link %}
                     <div class="">

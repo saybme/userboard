@@ -70,7 +70,10 @@ class Ubform extends Model
     ];   
 
     public $hasMany = [
-        'inputs' => \Saybme\Ub\Models\Forminput::class,
+        'inputs' => [
+            \Saybme\Ub\Models\Forminput::class,
+            'key' => 'ubform_id',
+        ],
     ];    
 
     public static function getMenuTypeInfo($type) {

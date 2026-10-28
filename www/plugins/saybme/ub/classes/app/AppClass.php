@@ -36,23 +36,20 @@ class AppClass {
             ]);
         }
 
-        // Данные формы
-        $data['data'] = Input::get();
-        $data['price'] = Input::get('price');
-        $data['user'] = $user->id;  
-
+        $payload = Input::get() ?: [];
         $fileKey = $user->id . time();
         
         // Сохраняем в форму даннеы полей файла
         if(count($_FILES)){            
             foreach($_FILES as $key => $file){
-                $data['data'][$key] = md5($fileKey . $key);
+                $payload[$key] = md5($fileKey . $key);
             }
         }   
         
-
         $obj = new Application;
-        $obj->fill($data);
+        $obj->user_id = $user->id;
+        $obj->data = $payload;
+        $obj->price = Input::get('price') ?: 0;
         $obj->save();
 
         $this->getInputFiles($obj, $fileKey);       
@@ -165,29 +162,22 @@ class AppClass {
             'check_politic' => 'accepted'
         ], $alertMessate);
 
-        // Данные с формы
-        $vars = Input::get();        
-        unset($vars['form']);           
+        $items = [];
+        $formId = (int) Input::get('form');
+        if ($formId) {
+            $inputs = Forminput::where('ubform_id', $formId)->get();
+            foreach ($inputs as $input) {
+                if ($input->is_required) {
+                    $items[$input->code] = $input->app_rules ?: 'required';
+                } elseif ($input->app_rules) {
+                    $items[$input->code] = $input->app_rules;
+                }
+            }
+        }
 
-        $items = array();
-        foreach($vars as $key => $item){
-            $input = Forminput::where('is_required', true)->where('code', $key)->first();           
-            if($input){                
-                $items[$key] = 'required';                
-            }            
-        }; 
-
-        // Дополнительная валидация
-        foreach($vars as $key => $item){
-            $input = Forminput::where('code', $key)->first();            
-            if($input){   
-                if($input->app_rules){
-                    $items[$key] = $input->app_rules; 
-                }             
-            }            
-        };
-
-        Request::validate($items, Lang::get('saybme.ub::validation'));        
+        if ($items) {
+            Request::validate($items, Lang::get('saybme.ub::validation'));
+        }        
     }
 
     // Выводим время реботы

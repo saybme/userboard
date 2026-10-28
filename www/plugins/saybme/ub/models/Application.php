@@ -8,12 +8,12 @@ class Application extends Model
 
     protected $jsonable = ['data'];
 
-    protected $fillable = ['user','data','files','price'];
+    protected $fillable = ['user','user_id','data','files','price'];
     
     public $table = 'saybme_ub_applications';
     
     public $rules = [
-        'user' => 'required',
+        'user_id' => 'required',
         'data' => 'required'
     ];
 
@@ -98,11 +98,25 @@ class Application extends Model
     }
 
     public function getStatusNameAttribute(){
-        if(!$this->status) return 'Статус не присвоен';
-
         $options = $this->getStatusOptions();
+        $status = $this->status;
 
-        return $options[$this->status];
+        if ($status === null || $status === '') {
+            return $options[0];
+        }
+
+        return $options[$status] ?? $options[0];
+    }
+
+    public function getFormTitleAttribute()
+    {
+        $formId = is_array($this->data) ? ($this->data['form'] ?? null) : null;
+        if (!$formId) {
+            return 'Заявка';
+        }
+
+        $form = Ubform::find($formId);
+        return $form ? $form->name : 'Заявка';
     }
 
     // public function getAppBodyAttribute(){
