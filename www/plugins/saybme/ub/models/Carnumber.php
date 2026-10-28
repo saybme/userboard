@@ -113,6 +113,44 @@ class Carnumber extends Model
         return url('cabinet/obyavleniya/nomer/' . $this->id);
     }
 
+    public function getSeriesPartsAttribute()
+    {
+        $parts = [];
+        for ($i = 0; $i < 3; $i++) {
+            $parts[$i] = $this->propPart('series', $i, $this->series);
+        }
+        return $parts;
+    }
+
+    public function getNumberPartsAttribute()
+    {
+        $parts = [];
+        for ($i = 0; $i < 5; $i++) {
+            $parts[$i] = $this->propPart('number', $i, $this->number);
+        }
+        return $parts;
+    }
+
+    public function getRegionValueAttribute()
+    {
+        $props = is_array($this->props) ? $this->props : [];
+        if (isset($props['region']) && $props['region'] !== '' && $props['region'] !== null) {
+            return is_array($props['region']) ? implode('', $props['region']) : (string) $props['region'];
+        }
+
+        return (string) $this->region;
+    }
+
+    private function propPart($key, $index, $fallback = '')
+    {
+        $props = is_array($this->props) ? $this->props : [];
+        if (isset($props[$key]) && is_array($props[$key]) && array_key_exists($index, $props[$key])) {
+            return (string) $props[$key][$index];
+        }
+
+        return (string) mb_substr((string) $fallback, (int) $index, 1);
+    }
+
     public function getCarNumberAttribute()
     {
         $props = is_array($this->props) ? $this->props : [];

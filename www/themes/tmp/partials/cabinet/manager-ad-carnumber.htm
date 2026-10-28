@@ -14,13 +14,191 @@
             Клиент: <b>{{ page.client_label }}</b>
         </div>
         <div class="bg-white border rounded-md px-3 py-2">
-            Статус: <b>{{ page.is_active ? 'Опубликован' : 'На модерации' }}</b>
+            Статус: <b>{{ page.is_active ? 'Опубликован' : 'Не опубликован' }}</b>
         </div>
         <div class="bg-white border rounded-md px-3 py-2">
             Дата: <b>{{ page.created_at | date('d.m.Y H:i') }}</b>
         </div>
     </div>
 
+    {% flash %}
+        <div class="alert alert-{{ type == 'error' ? 'error' : 'success' }} mb-4 rounded-md">{{ message }}</div>
+    {% endflash %}
+
+    <form
+        action=""
+        data-request="onUpdateCarnumber"
+        data-request-validate
+        data-request-files
+        data-request-flash
+        class="block w-full bg-white border rounded-md p-5 mb-8"
+    >
+        <input type="hidden" name="id" value="{{ page.id }}">
+
+        <h2 class="text-xl font-bold text-blue-2 mb-4">Редактирование гос. номера</h2>
+
+        <div class="grid table_l:grid-cols-2 gap-4">
+            <div>
+                <label class="block w-full text-sm mb-1">Тип номера</label>
+                <select name="type" class="select select-bordered w-full" onchange="managerGosType(this.value)">
+                    <option value="1" {{ page.type == 1 ? 'selected' : '' }}>Авто</option>
+                    <option value="2" {{ page.type == 2 ? 'selected' : '' }}>Мото</option>
+                    <option value="3" {{ page.type == 3 ? 'selected' : '' }}>Прицеп</option>
+                </select>
+            </div>
+            <div>
+                <label class="block w-full text-sm mb-1">Тип объявления</label>
+                <select name="type_pay" class="select select-bordered w-full" onchange="managerGosPay(this.value)">
+                    <option value="1" {{ page.type_pay == 1 ? 'selected' : '' }}>Продам</option>
+                    <option value="2" {{ page.type_pay == 2 ? 'selected' : '' }}>Куплю</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h4 class="font-gilroy-medium text-lg">Гос. номер</h4>
+
+            <div class="gos-type-fields mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2" data-type="1">
+                <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="text" name="props[series][2]" value="{{ page.series_parts[2] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+            </div>
+
+            <div class="gos-type-fields mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2" data-type="2">
+                <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][4]" value="{{ page.number_parts[4] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+            </div>
+
+            <div class="gos-type-fields mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2" data-type="3">
+                <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[number][3]" value="{{ page.number_parts[3] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+            </div>
+            <div data-validate-for="id" class="text-error"></div>
+        </div>
+
+        <div class="mt-4">
+            <label for="username" class="block w-full text-sm mb-1">Как обращаться</label>
+            <input type="text" id="username" name="username" value="{{ page.username }}" class="input input-bordered w-full">
+            <div data-validate-for="username" class="text-error"></div>
+        </div>
+
+        <div class="mt-4">
+            <label for="contacts" class="block w-full text-sm mb-1">Телефон, вацап, телеграмм, почта</label>
+            <input type="text" id="contacts" name="contacts" value="{{ page.contacts ?: page.props.phone }}" class="input input-bordered w-full">
+            <div data-validate-for="contacts" class="text-error"></div>
+        </div>
+
+        <div class="mt-4">
+            <label for="price" class="block w-full text-sm mb-1">Цена, руб.</label>
+            <input type="number" id="price" name="price" value="{{ page.price }}" class="input input-bordered w-full max-w-[200px]">
+            <div data-validate-for="price" class="text-error"></div>
+        </div>
+
+        <div class="mt-4 gos-pay-fields" data-pay="2">
+            <label for="description" class="block w-full text-sm mb-1">Лента объявлений</label>
+            <textarea id="description" name="description" class="textarea textarea-bordered w-full" rows="5">{{ page.description }}</textarea>
+        </div>
+
+        <div class="mt-4 gos-pay-fields space-y-3" data-pay="1">
+            <label class="flex items-center gap-2">
+                <input type="hidden" name="urgently" value="0">
+                <input type="checkbox" name="urgently" value="1" class="checkbox" {{ page.urgently ? 'checked' : '' }}>
+                <span>Срочно</span>
+            </label>
+            <div>
+                <label class="block w-full text-sm mb-1">Что включено</label>
+                <input type="text" name="props[is_play]" value="{{ page.props.is_play }}" class="input input-bordered w-full">
+            </div>
+            <div>
+                <label class="block w-full text-sm mb-1">Оформлением занимается</label>
+                <input type="text" name="props[paperwork]" value="{{ page.props.paperwork }}" class="input input-bordered w-full">
+            </div>
+            <div>
+                <label class="block w-full text-sm mb-1">Номер на складе</label>
+                <input type="text" name="props[num_sklad]" value="{{ page.props.num_sklad }}" class="input input-bordered w-full">
+            </div>
+            <div class="grid table_l:grid-cols-2 gap-3">
+                <div>
+                    <label class="block w-full text-sm mb-1">Город</label>
+                    <input type="text" name="address[city]" value="{{ page.address.city }}" class="input input-bordered w-full">
+                </div>
+                <div>
+                    <label class="block w-full text-sm mb-1">Регион</label>
+                    <input type="text" name="address[region]" value="{{ page.address.region }}" class="input input-bordered w-full">
+                </div>
+                <div>
+                    <label class="block w-full text-sm mb-1">Улица</label>
+                    <input type="text" name="address[street]" value="{{ page.address.street }}" class="input input-bordered w-full">
+                </div>
+                <div>
+                    <label class="block w-full text-sm mb-1">Дом</label>
+                    <input type="text" name="address[house]" value="{{ page.address.house }}" class="input input-bordered w-full">
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <label class="block w-full text-sm mb-1">Фото</label>
+            {% if page.photo %}
+                <div class="mb-2">
+                    <img src="{{ page.photo.thumb(120,120) }}" alt="" class="rounded-md border">
+                </div>
+            {% endif %}
+            <input type="file" name="photo" accept="image/*" class="file-input file-input-bordered w-full max-w-md">
+        </div>
+
+        <div class="mt-5 flex flex-wrap items-center gap-4">
+            <label class="flex items-center gap-2">
+                <input type="hidden" name="is_active" value="0">
+                <input type="checkbox" name="is_active" value="1" class="checkbox" {{ page.is_active ? 'checked' : '' }}>
+                <span>Опубликовать объявление</span>
+            </label>
+        </div>
+
+        <div class="mt-5">
+            <button class="btn btn-red btn-lg" data-attach-loading>Сохранить</button>
+        </div>
+    </form>
+
     {% partial 'announcements/page' page=page breadcrumbs=[] %}
 
 </div>
+
+<script>
+    function managerGosType(type) {
+        document.querySelectorAll('.gos-type-fields').forEach(function (el) {
+            var on = String(el.getAttribute('data-type')) === String(type);
+            el.style.display = on ? '' : 'none';
+            el.querySelectorAll('input').forEach(function (input) {
+                input.disabled = !on;
+            });
+        });
+    }
+
+    function managerGosPay(type) {
+        document.querySelectorAll('.gos-pay-fields').forEach(function (el) {
+            var on = String(el.getAttribute('data-pay')) === String(type);
+            el.style.display = on ? '' : 'none';
+            el.querySelectorAll('input, textarea, select').forEach(function (input) {
+                input.disabled = !on;
+            });
+        });
+    }
+
+    managerGosType('{{ page.type ?: 1 }}');
+    managerGosPay('{{ page.type_pay ?: 2 }}');
+</script>

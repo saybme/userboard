@@ -264,6 +264,20 @@ window.authCanSubmit = function () {
 };
 </script>
 
+<script>
+    if (typeof window.numberCarousel === 'function') {
+        window.numberCarousel();
+    }
+    if (typeof window.numberCarouselLenta === 'function') {
+        window.numberCarouselLenta();
+    }
+    if (typeof window.numberCarouselVertical === 'function') {
+        window.numberCarouselVertical();
+    }
+</script>
+
+{% scripts %}
+
 {% if open_auth_modal %}
 <script>
 document.addEventListener('DOMContentLoaded', function () {

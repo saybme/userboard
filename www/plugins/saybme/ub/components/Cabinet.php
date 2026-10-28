@@ -18,6 +18,7 @@ use ValidationException;
 use Response;
 use Input;
 use Redirect;
+use Flash;
 use System\Classes\CombineAssets;
 use Log;
 
@@ -401,6 +402,23 @@ class Cabinet extends \Cms\Classes\ComponentBase
     public function onCreateMessage(){
         $q = new AuthClass;
         return $q->addMessage();
+    }
+
+    public function onUpdateCarnumber()
+    {
+        $q = new AuthClass;
+        $user = $q->getActiveUser();
+        if (!$user || !$user->isManager()) {
+            throw new ValidationException([
+                'id' => 'Редактировать объявление может только менеджер.',
+            ]);
+        }
+
+        $app = new AppClass;
+        $item = $app->updateGosNum();
+
+        Flash::success('Объявление сохранено.');
+        return Redirect::to($item->cabinet_link);
     }
 
     // Создаем оббъявление

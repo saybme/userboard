@@ -788,15 +788,18 @@ window.stepFormInput = function(input){
 // Карусель гос номеров
 window.numberCarousel = function(){    
     const container = document.getElementById("numberCarousel");
-    if(container){
+    if(container && !container.classList.contains('is-initialized')){
         const options = {
             Autoscroll: {
                 speedOnHover: 0
             }            
         };
         Carousel(container, options, { Autoscroll }).init();
+        container.classList.add('is-initialized');
     }    
 }
+
+window.numberCarousel();
 
 // Лента гос номеров
 window.numberCarouselLenta = function(){

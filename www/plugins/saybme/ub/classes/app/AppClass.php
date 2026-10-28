@@ -261,4 +261,78 @@ class AppClass {
         return $data;
     }
 
+    public function updateGosNum()
+    {
+        $q = new AuthClass;
+        $user = $q->getActiveUser();
+
+        if (!$user || !$user->isManager()) {
+            throw new ValidationException([
+                'id' => 'Редактировать объявление может только менеджер.',
+            ]);
+        }
+
+        $item = Carnumber::find((int) Input::get('id'));
+        if (!$item) {
+            throw new ValidationException([
+                'id' => 'Объявление не найдено.',
+            ]);
+        }
+
+        Request::validate([
+            'username' => 'required',
+            'type' => 'required',
+            'type_pay' => 'required',
+        ], Lang::get('saybme.ub::validation'));
+
+        $item->username = Input::get('username');
+        $item->contacts = Input::get('contacts');
+        $item->price = Input::get('price') !== null && Input::get('price') !== '' ? Input::get('price') : null;
+        $item->type = Input::get('type');
+        $item->type_pay = Input::get('type_pay');
+        $item->is_active = (string) Input::get('is_active') === '1';
+
+        $payload = Input::all();
+        if (array_key_exists('description', $payload)) {
+            $item->description = Input::get('description');
+        }
+        if (array_key_exists('urgently', $payload)) {
+            $item->urgently = (string) Input::get('urgently') === '1';
+        }
+
+        $address = Input::get('address');
+        if (is_array($address)) {
+            $item->address = $address;
+        }
+
+        $props = is_array($item->props) ? $item->props : [];
+        $incoming = Input::get('props');
+        if (is_array($incoming)) {
+            $props = array_replace($props, $incoming);
+            if (isset($incoming['series']) && is_array($incoming['series'])) {
+                $props['series'] = $incoming['series'];
+                $item->series = implode('', $incoming['series']);
+            }
+            if (isset($incoming['number']) && is_array($incoming['number'])) {
+                $props['number'] = $incoming['number'];
+                $item->number = implode('', $incoming['number']);
+            }
+            if (array_key_exists('region', $incoming)) {
+                $item->region = $incoming['region'];
+            }
+        }
+        if ($item->contacts) {
+            $props['phone'] = $item->contacts;
+        }
+        $item->props = $props;
+        $item->save();
+
+        if (files('photo')) {
+            $item->photo = files('photo');
+            $item->save();
+        }
+
+        return $item;
+    }
+
 }

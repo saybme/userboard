@@ -80,7 +80,13 @@ class Ubapps extends \Cms\Classes\ComponentBase {
 
     public function getNumber(){
         $id = $this->property('slug');
-        $page = Carnumber::active()->find($id);    
+        $auth = new \Saybme\Ub\Classes\Auth\AuthClass;
+        $user = $auth->getActiveUser();
+
+        $page = ($user && $user->isManager())
+            ? Carnumber::find($id)
+            : Carnumber::active()->find($id);
+
         if(!$page) return $this->controller->run('404');
 
         $this->page->title = $page->name;
