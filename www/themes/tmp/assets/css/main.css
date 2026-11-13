@@ -4645,6 +4645,10 @@ ul.nav-registration ul{
   min-width: 120px;
 }
 
+.min-w-\[140px\]{
+  min-width: 140px;
+}
+
 .min-w-\[160px\]{
   min-width: 160px;
 }
@@ -6646,12 +6650,12 @@ ul.nav-registration ul{
     right: -10%;
   }
 
-  .table_l\:col-span-full{
-    grid-column: 1 / -1;
-  }
-
   .table_l\:col-span-2{
     grid-column: span 2 / span 2;
+  }
+
+  .table_l\:col-span-full{
+    grid-column: 1 / -1;
   }
 
   .table_l\:float-right{

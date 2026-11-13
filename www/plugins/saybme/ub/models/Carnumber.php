@@ -176,14 +176,26 @@ class Carnumber extends Model
             $region = (string) $this->region;
         }
 
-        $parts = array_filter([
-            mb_substr($series, 0, 1),
-            $number,
-            mb_substr($series, 1, 2),
-            $region,
-        ], function ($part) {
-            return trim((string) $part) !== '';
-        });
+        $type = (int) $this->type;
+
+        if ($type === 2) {
+            $parts = array_filter([$number, $series, $region], function ($part) {
+                return trim((string) $part) !== '';
+            });
+        } elseif ($type === 3) {
+            $parts = array_filter([$series, $number, $region], function ($part) {
+                return trim((string) $part) !== '';
+            });
+        } else {
+            $parts = array_filter([
+                mb_substr($series, 0, 1),
+                $number,
+                mb_substr($series, 1, 2),
+                $region,
+            ], function ($part) {
+                return trim((string) $part) !== '';
+            });
+        }
 
         return $parts ? implode(' ', $parts) : ($this->num ?: '');
     }

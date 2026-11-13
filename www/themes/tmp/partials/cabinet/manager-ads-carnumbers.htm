@@ -1,10 +1,15 @@
 {% for item in items %}
     <a href="{{ item.cabinet_link }}" class="block bg-white rounded-md border text hover:bg-black/10">
-        <div class="flex flex-wrap px-5 py-3 gap-4">
-            <div class="flex-1 min-w-[160px]">
-                <div class="text-sm/none text-gray-500">Гос. номер</div>
-                <div class="font-bold text-blue-2 leading-tight">{{ item.car_number ?: item.num ?: 'Без номера' }}</div>
-                <div class="text-sm/none text-gray-500 mt-1">Клиент: {{ item.client_label }}</div>
+        <div class="flex flex-wrap px-5 py-3 gap-4 items-center">
+            <div class="flex-none min-w-[160px]">
+                {% partial 'numbers/type' item=item %}
+                <div class="text-sm/none text-gray-500 mt-2">
+                    {% if item.type == 2 %}Мото{% elseif item.type == 3 %}Прицеп{% else %}Авто{% endif %}
+                </div>
+            </div>
+            <div class="flex-1 min-w-[140px]">
+                <div class="text-sm/none text-gray-500">Клиент</div>
+                <div class="font-bold leading-tight">{{ item.client_label }}</div>
             </div>
             <div class="flex-1 min-w-[120px] text-gray-500">
                 <div class="text-sm/none text-gray-500">Статус:</div>
