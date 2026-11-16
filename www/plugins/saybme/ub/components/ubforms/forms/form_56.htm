@@ -151,38 +151,41 @@
                 </div>              
             </div>
 
-            <div class="mt-2 grid gap-0">
-                <label class="label cursor-pointer py-1">  
-                    <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на хранении" checked>
-                    <span class="label-text ml-2 flex-1">Номер на хранении</span> 
-                </label>
-                {% if type == 2 %}
+            <div class="mt-2 ">
+                <h3 class="font-gilroy-medium text-lg mb-2">Номер находится</h3>
+                <div class="grid gap-0">
                     <label class="label cursor-pointer py-1">  
-                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На мото">
-                        <span class="label-text ml-2 flex-1">На мото</span> 
+                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на хранении" checked>
+                        <span class="label-text ml-2 flex-1">Номер на хранении</span> 
                     </label>
-                {% elseif type == 3 %}
-                    <label class="label cursor-pointer py-1">  
-                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На прицепе">
-                        <span class="label-text ml-2 flex-1">На прицепе</span> 
-                    </label>
-                {% else %}
-                    <label class="label cursor-pointer py-1">  
-                        <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На авто">
-                        <span class="label-text ml-2 flex-1">На авто</span> 
-                    </label>
-                {% endif %}
+                    {% if type == 2 %}
+                        <label class="label cursor-pointer py-1">  
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на мото">
+                            <span class="label-text ml-2 flex-1">Номер на мото</span> 
+                        </label>
+                    {% elseif type == 3 %}
+                        <label class="label cursor-pointer py-1">  
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На прицепе">
+                            <span class="label-text ml-2 flex-1">Номер на прицепе</span> 
+                        </label>
+                    {% else %}
+                        <label class="label cursor-pointer py-1">  
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на авто">
+                            <span class="label-text ml-2 flex-1">Номер на авто</span> 
+                        </label>
+                    {% endif %}
+                </div>
             </div>
 
             <div class="mt-2">     
-                <h4 class="font-gilroy-medium text-lg mt-4">Что включено</h4>       
+                <h4 class="font-gilroy-medium text-lg mt-4">Оформление</h4>       
                 <label class="label cursor-pointer py-1">  
                     <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление включено" checked>
                     <span class="label-text ml-2 flex-1">Оформление включено</span> 
                 </label>
                 <label class="label cursor-pointer py-1">  
-                    <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Не включено">
-                    <span class="label-text ml-2 flex-1">Не включено</span> 
+                    <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление не включено">
+                    <span class="label-text ml-2 flex-1">Оформление не включено</span> 
                 </label>
                 <label class="label cursor-pointer py-1">  
                     <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление 50/50">

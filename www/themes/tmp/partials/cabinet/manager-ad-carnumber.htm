@@ -25,6 +25,9 @@
         <div class="alert alert-{{ type == 'error' ? 'error' : 'success' }} mb-4 rounded-md">{{ message }}</div>
     {% endflash %}
 
+    {% set type = page.type ?: 1 %}
+    {% set typePay = page.type_pay ?: 2 %}
+
     <form
         action=""
         data-request="onUpdateCarnumber"
@@ -32,133 +35,272 @@
         data-request-files
         data-request-flash
         class="block w-full bg-white border rounded-md p-5 mb-8"
+        id="managerCarnumberForm"
     >
         <input type="hidden" name="id" value="{{ page.id }}">
+        <input type="hidden" name="type" id="manager_type" value="{{ type }}">
+        <input type="hidden" name="type_pay" id="manager_type_pay" value="{{ typePay }}">
 
         <h2 class="text-xl font-bold text-blue-2 mb-4">Редактирование гос. номера</h2>
 
-        <div class="grid table_l:grid-cols-2 gap-4">
-            <div>
-                <label class="block w-full text-sm mb-1">Тип номера</label>
-                <select name="type" class="select select-bordered w-full" onchange="managerGosType(this.value)">
-                    <option value="1" {{ page.type == 1 ? 'selected' : '' }}>Авто</option>
-                    <option value="2" {{ page.type == 2 ? 'selected' : '' }}>Мото</option>
-                    <option value="3" {{ page.type == 3 ? 'selected' : '' }}>Прицеп</option>
-                </select>
-            </div>
-            <div>
-                <label class="block w-full text-sm mb-1">Тип объявления</label>
-                <select name="type_pay" class="select select-bordered w-full" onchange="managerGosPay(this.value)">
-                    <option value="1" {{ page.type_pay == 1 ? 'selected' : '' }}>Продам</option>
-                    <option value="2" {{ page.type_pay == 2 ? 'selected' : '' }}>Куплю</option>
-                </select>
-            </div>
+        <div class="gos-number-types mb-5">
+            {% set types = ['Авто','Мото','Прицеп'] %}
+            {% for key, item in types %}
+                <button type="button" class="gos-number-type {{ key+1 == type ? 'active' : '' }}" data-type="{{ key+1 }}" onclick="managerSetType({{ key+1 }}, this)">{{ item }}</button>
+            {% endfor %}
         </div>
 
-        <div class="mt-5">
-            <h4 class="font-gilroy-medium text-lg">Гос. номер</h4>
-
-            <div class="gos-type-fields mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2" data-type="1">
-                <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="text" name="props[series][2]" value="{{ page.series_parts[2] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
-            </div>
-
-            <div class="gos-type-fields mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2" data-type="2">
-                <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][4]" value="{{ page.number_parts[4] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
-            </div>
-
-            <div class="gos-type-fields mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2" data-type="3">
-                <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[number][3]" value="{{ page.number_parts[3] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
-                <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
-            </div>
-            <div data-validate-for="id" class="text-error"></div>
+        <div class="flex gap-6 text-xl font-semibold mb-5 text-gray-500">
+            <button type="button" class="manager-pay-tab {{ typePay == 1 ? 'underline text-blue-1' : 'hover:text-red-1' }}" data-pay="1" onclick="managerSetPay(1, this)">Продам</button>
+            <button type="button" class="manager-pay-tab {{ typePay == 2 ? 'underline text-blue-1' : 'hover:text-red-1' }}" data-pay="2" onclick="managerSetPay(2, this)">Куплю</button>
         </div>
 
-        <div class="mt-4">
-            <label for="username" class="block w-full text-sm mb-1">Как обращаться</label>
-            <input type="text" id="username" name="username" value="{{ page.username }}" class="input input-bordered w-full">
-            <div data-validate-for="username" class="text-error"></div>
-        </div>
-
-        <div class="mt-4">
-            <label for="contacts" class="block w-full text-sm mb-1">Телефон, вацап, телеграмм, почта</label>
-            <input type="text" id="contacts" name="contacts" value="{{ page.contacts ?: page.props.phone }}" class="input input-bordered w-full">
-            <div data-validate-for="contacts" class="text-error"></div>
-        </div>
-
-        <div class="mt-4">
-            <label for="price" class="block w-full text-sm mb-1">Цена, руб.</label>
-            <input type="number" id="price" name="price" value="{{ page.price }}" class="input input-bordered w-full max-w-[200px]">
-            <div data-validate-for="price" class="text-error"></div>
-        </div>
-
-        <div class="mt-4 gos-pay-fields" data-pay="2">
-            <label for="description" class="block w-full text-sm mb-1">Лента объявлений</label>
-            <textarea id="description" name="description" class="textarea textarea-bordered w-full" rows="5">{{ page.description }}</textarea>
-        </div>
-
-        <div class="mt-4 gos-pay-fields space-y-3" data-pay="1">
-            <label class="flex items-center gap-2">
-                <input type="hidden" name="urgently" value="0">
-                <input type="checkbox" name="urgently" value="1" class="checkbox" {{ page.urgently ? 'checked' : '' }}>
-                <span>Срочно</span>
-            </label>
-            <div>
-                <label class="block w-full text-sm mb-1">Что включено</label>
-                <input type="text" name="props[is_play]" value="{{ page.props.is_play }}" class="input input-bordered w-full">
-            </div>
-            <div>
-                <label class="block w-full text-sm mb-1">Оформлением занимается</label>
-                <input type="text" name="props[paperwork]" value="{{ page.props.paperwork }}" class="input input-bordered w-full">
-            </div>
-            <div>
-                <label class="block w-full text-sm mb-1">Номер на складе</label>
-                <input type="text" name="props[num_sklad]" value="{{ page.props.num_sklad }}" class="input input-bordered w-full">
-            </div>
-            <div class="grid table_l:grid-cols-2 gap-3">
-                <div>
-                    <label class="block w-full text-sm mb-1">Город</label>
-                    <input type="text" name="address[city]" value="{{ page.address.city }}" class="input input-bordered w-full">
+        {# ===== ПРОДАМ (как form_56) ===== #}
+        <div class="gos-pay-fields" data-pay="1">
+            <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+                <legend class="form-legend">Продать</legend>
+                <div class="">
+                    <label class="label cursor-pointer py-1">
+                        <input type="hidden" name="urgently" value="0">
+                        <input type="checkbox" name="urgently" class="checkbox rounded-sm" value="1" {{ page.urgently ? 'checked' : '' }}>
+                        <span class="label-text ml-2 flex-1">Срочно</span>
+                    </label>
                 </div>
-                <div>
-                    <label class="block w-full text-sm mb-1">Регион</label>
-                    <input type="text" name="address[region]" value="{{ page.address.region }}" class="input input-bordered w-full">
+
+                <div class="gos-type-fields mt-4 space-y-4" data-type="1">
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Авто' %}
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][2]" value="{{ page.series_parts[2] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="photo_sell_1" class="block w-full text-sm mb-1">Фото номера</label>
+                        {% if page.photo %}
+                            <div class="mb-2"><img src="{{ page.photo.thumb(120,120) }}" alt="" class="rounded-md border"></div>
+                        {% endif %}
+                        <input type="file" name="photo" class="file-input input-bordered w-full max-w-[500px]" id="photo_sell_1">
+                    </div>
                 </div>
-                <div>
-                    <label class="block w-full text-sm mb-1">Улица</label>
-                    <input type="text" name="address[street]" value="{{ page.address.street }}" class="input input-bordered w-full">
+
+                <div class="gos-type-fields mt-4 space-y-4" data-type="2">
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Мото' %}
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][4]" value="{{ page.number_parts[4] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="photo_sell_2" class="block w-full text-sm mb-1">Фото номера</label>
+                        {% if page.photo %}
+                            <div class="mb-2"><img src="{{ page.photo.thumb(120,120) }}" alt="" class="rounded-md border"></div>
+                        {% endif %}
+                        <input type="file" name="photo" class="file-input input-bordered w-full max-w-[500px]" id="photo_sell_2">
+                    </div>
                 </div>
-                <div>
-                    <label class="block w-full text-sm mb-1">Дом</label>
-                    <input type="text" name="address[house]" value="{{ page.address.house }}" class="input input-bordered w-full">
+
+                <div class="gos-type-fields mt-4 space-y-4" data-type="3">
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Прицеп' %}
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][3]" value="{{ page.number_parts[3] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                    <div class="">
+                        <label for="photo_sell_3" class="block w-full text-sm mb-1">Фото номера</label>
+                        {% if page.photo %}
+                            <div class="mb-2"><img src="{{ page.photo.thumb(120,120) }}" alt="" class="rounded-md border"></div>
+                        {% endif %}
+                        <input type="file" name="photo" class="file-input input-bordered w-full max-w-[500px]" id="photo_sell_3">
+                    </div>
                 </div>
-            </div>
+            </fieldset>
+
+            <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+                <legend class="font-gilroy-medium text-xs table_l:text-lg px-3 m-0">Заполнение формы продажи номеров в галерею номеров</legend>
+                <div class="">
+                    <label for="username_sell" class="block w-full text-sm mb-1">Как к Вам обращаться</label>
+                    <input type="text" value="{{ page.username }}" name="username" class="input input-bordered w-full" id="username_sell">
+                    <div data-validate-for="username" class="text-error"></div>
+                </div>
+                <div class="mt-2">
+                    <span class="block w-full text-sm mb-1 pl-1">Телефон, вацап, телеграмм, почта</span>
+                    <input type="text" value="{{ page.contacts ?: page.props.phone }}" name="contacts" class="input input-bordered w-full" id="contacts_sell">
+                    <div data-validate-for="contacts" class="text-error"></div>
+                </div>
+                <h4 class="font-gilroy-medium text-lg mt-4">Сумма, руб. *</h4>
+                <div class="flex gap-2 mt-2">
+                    <div class="data-input-row">
+                        <span class="block w-full text-sm mb-1 pl-1">Укажите цену</span>
+                        <input type="number" value="{{ page.price }}" name="price" class="input input-bordered w-full max-w-[200px]" id="price_sell">
+                        <div data-validate-for="price" class="text-error"></div>
+                    </div>
+                </div>
+                <h4 class="font-gilroy-medium text-lg mt-4">Адрес собственника номера</h4>
+                <div class="mt-2 flex gap-x-5 flex-wrap table_sm:flex-nowrap gap-y-2">
+                    <div class="w-full table_l:min-w-[250px]">
+                        <label for="address_region" class="block w-full text-sm mb-1">Регион</label>
+                        <input type="text" value="{{ page.address.region }}" name="address[region]" class="input input-bordered w-full" id="address_region">
+                    </div>
+                    <div class="flex-1 table_l:min-w-[250px]">
+                        <label for="address_city" class="block w-full text-sm mb-1">Населенный пункт</label>
+                        <input type="text" value="{{ page.address.city }}" name="address[city]" class="input input-bordered w-full" id="address_city">
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h3 class="font-gilroy-medium text-lg mb-2">Номер находится</h3>
+                    <div class="grid gap-0">
+                        <label class="label cursor-pointer py-1">
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на хранении" {{ page.props.num_sklad == 'Номер на хранении' or not page.props.num_sklad ? 'checked' : '' }}>
+                            <span class="label-text ml-2 flex-1">Номер на хранении</span>
+                        </label>
+                        <label class="label cursor-pointer py-1 gos-sklad-option" data-type="1">
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на авто" {{ page.props.num_sklad in ['Номер на авто', 'На авто'] ? 'checked' : '' }}>
+                            <span class="label-text ml-2 flex-1">Номер на авто</span>
+                        </label>
+                        <label class="label cursor-pointer py-1 gos-sklad-option" data-type="2">
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="Номер на мото" {{ page.props.num_sklad in ['Номер на мото', 'На мото'] ? 'checked' : '' }}>
+                            <span class="label-text ml-2 flex-1">Номер на мото</span>
+                        </label>
+                        <label class="label cursor-pointer py-1 gos-sklad-option" data-type="3">
+                            <input type="radio" name="props[num_sklad]" class="radio checked:bg-red-500" value="На прицепе" {{ page.props.num_sklad == 'На прицепе' ? 'checked' : '' }}>
+                            <span class="label-text ml-2 flex-1">Номер на прицепе</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h4 class="font-gilroy-medium text-lg mt-4">Оформление</h4>
+                    <label class="label cursor-pointer py-1">
+                        <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление включено" {{ page.props.is_play == 'Оформление включено' or not page.props.is_play ? 'checked' : '' }}>
+                        <span class="label-text ml-2 flex-1">Оформление включено</span>
+                    </label>
+                    <label class="label cursor-pointer py-1">
+                        <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление не включено" {{ page.props.is_play in ['Оформление не включено', 'Не включено'] ? 'checked' : '' }}>
+                        <span class="label-text ml-2 flex-1">Оформление не включено</span>
+                    </label>
+                    <label class="label cursor-pointer py-1">
+                        <input type="radio" name="props[is_play]" class="radio checked:bg-red-500" value="Оформление 50/50" {{ page.props.is_play == 'Оформление 50/50' ? 'checked' : '' }}>
+                        <span class="label-text ml-2 flex-1">Оформление 50/50</span>
+                    </label>
+                </div>
+            </fieldset>
         </div>
 
-        <div class="mt-4">
-            <label class="block w-full text-sm mb-1">Фото</label>
-            {% if page.photo %}
-                <div class="mb-2">
-                    <img src="{{ page.photo.thumb(120,120) }}" alt="" class="rounded-md border">
+        {# ===== КУПЛЮ (как zakazat-gosnomer) ===== #}
+        <div class="gos-pay-fields" data-pay="2">
+            <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+                <legend class="form-legend">Куплю</legend>
+
+                <div class="gos-type-fields table_l:mt-4 space-y-4" data-type="1">
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Авто' %}
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][2]" value="{{ page.series_parts[2] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
                 </div>
-            {% endif %}
-            <input type="file" name="photo" accept="image/*" class="file-input file-input-bordered w-full max-w-md">
+
+                <div class="gos-type-fields mt-4 space-y-4" data-type="2">
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Мото' %}
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][4]" value="{{ page.number_parts[4] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gos-type-fields mt-4 space-y-4" data-type="3">
+                    <div class="">
+                        {% partial 'formtemplates/gos-number-type' type='Прицеп' %}
+                    </div>
+                    <div class="">
+                        <h4 class="font-gilroy-medium text-lg">Укажите номер</h4>
+                        <div class="mt-2 grid grid-cols-3 table_l:grid-cols-7 max-w-[500px] gap-2">
+                            <input type="text" name="props[series][0]" value="{{ page.series_parts[0] }}" data-num="1" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="text" name="props[series][1]" value="{{ page.series_parts[1] }}" data-num="2" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][0]" value="{{ page.number_parts[0] }}" data-num="3" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][1]" value="{{ page.number_parts[1] }}" data-num="4" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][2]" value="{{ page.number_parts[2] }}" data-num="5" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[number][3]" value="{{ page.number_parts[3] }}" data-num="6" oninput="gosNumInput(this)" class="input input-bordered" placeholder="*">
+                            <input type="number" name="props[region]" value="{{ page.region_value }}" data-num="7" oninput="gosNumInputRegion(this)" class="input input-bordered" placeholder="*">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label for="description" class="block w-full text-sm mb-1">Лента обьявлений по покупке номеров</label>
+                    <textarea id="description" name="description" class="textarea textarea-bordered w-full" rows="6">{{ page.description }}</textarea>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt-2 border pt-5 pb-5 px-5 rounded-lg">
+                <legend class="font-gilroy-medium text-lg px-3 m-0">Заполнение формы продажи номеров в галерею номеров</legend>
+                <div class="">
+                    <label for="username_buy" class="block w-full text-sm mb-1">Как к Вам обращаться</label>
+                    <input type="text" value="{{ page.username }}" name="username" class="input input-bordered w-full" id="username_buy">
+                    <div data-validate-for="username" class="text-error"></div>
+                </div>
+                <div class="mt-2">
+                    <span class="block w-full text-sm mb-1 pl-1">Телефон, вацап, телеграмм, почта</span>
+                    <input type="text" value="{{ page.contacts ?: page.props.phone }}" name="contacts" class="input input-bordered w-full" id="contacts_buy">
+                    <div data-validate-for="contacts" class="text-error"></div>
+                </div>
+                <h4 class="font-gilroy-medium text-lg mt-4">Сумма, руб. *</h4>
+                <div class="flex gap-2 mt-2">
+                    <div class="data-input-row">
+                        <span class="block w-full text-sm mb-1 pl-1">Укажите цену</span>
+                        <input type="number" value="{{ page.price }}" name="price" class="input input-bordered w-full max-w-[200px]" id="price_buy">
+                        <div data-validate-for="price" class="text-error"></div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
 
         <div class="mt-5 flex flex-wrap items-center gap-4">
@@ -174,31 +316,58 @@
         </div>
     </form>
 
-    {% partial 'announcements/page' page=page breadcrumbs=[] %}
+    
 
 </div>
 
 <script>
-    function managerGosType(type) {
-        document.querySelectorAll('.gos-type-fields').forEach(function (el) {
-            var on = String(el.getAttribute('data-type')) === String(type);
-            el.style.display = on ? '' : 'none';
-            el.querySelectorAll('input').forEach(function (input) {
-                input.disabled = !on;
-            });
+    function managerSetType(type, btn) {
+        document.getElementById('manager_type').value = type;
+        document.querySelectorAll('.gos-number-type').forEach(function (el) {
+            el.classList.toggle('active', String(el.getAttribute('data-type')) === String(type));
         });
+        managerApplyVisibility();
     }
 
-    function managerGosPay(type) {
+    function managerSetPay(pay, btn) {
+        document.getElementById('manager_type_pay').value = pay;
+        document.querySelectorAll('.manager-pay-tab').forEach(function (el) {
+            var on = String(el.getAttribute('data-pay')) === String(pay);
+            el.classList.toggle('underline', on);
+            el.classList.toggle('text-blue-1', on);
+            el.classList.toggle('hover:text-red-1', !on);
+        });
+        managerApplyVisibility();
+    }
+
+    function managerApplyVisibility() {
+        var type = document.getElementById('manager_type').value;
+        var pay = document.getElementById('manager_type_pay').value;
+
         document.querySelectorAll('.gos-pay-fields').forEach(function (el) {
-            var on = String(el.getAttribute('data-pay')) === String(type);
+            var on = String(el.getAttribute('data-pay')) === String(pay);
             el.style.display = on ? '' : 'none';
             el.querySelectorAll('input, textarea, select').forEach(function (input) {
                 input.disabled = !on;
             });
         });
+
+        document.querySelectorAll('.gos-pay-fields[data-pay="' + pay + '"] .gos-type-fields').forEach(function (el) {
+            var on = String(el.getAttribute('data-type')) === String(type);
+            el.style.display = on ? '' : 'none';
+            el.querySelectorAll('input, textarea, select').forEach(function (input) {
+                input.disabled = !on;
+            });
+        });
+
+        document.querySelectorAll('.gos-sklad-option').forEach(function (el) {
+            var on = String(el.getAttribute('data-type')) === String(type);
+            el.style.display = on ? '' : 'none';
+            el.querySelectorAll('input').forEach(function (input) {
+                input.disabled = !(pay === '1' && on);
+            });
+        });
     }
 
-    managerGosType('{{ page.type ?: 1 }}');
-    managerGosPay('{{ page.type_pay ?: 2 }}');
+    managerApplyVisibility();
 </script>
