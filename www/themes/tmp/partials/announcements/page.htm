@@ -71,40 +71,37 @@
                             </div>
                         {% endif %}
 
-                        <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
                             <div class=""><b>Имя:</b></div>
                             <div class="">{{ page.username }}</div>
                         </div>
-                        <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
                             <div class=""><b>Телефон, вацап, телеграмм, почта:</b></div>
-                            <div class="">{{ page.props.phone }}</div>
+                            <div class="">{{ page.contacts ?: page.props.phone }}</div>
                         </div>
-                        <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
+                        <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
                             <div class=""><b>Сумма:</b></div>
                             <div class="">{{ page.price }} руб.</div>
                         </div>
 
-                        <div class="">
-                            <div class="space-y-1">
-                                <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
-                                    <div class="text-pretty"><b>Адрес собственника номера:</b> <br> {{ page.fulladdress | join(', ') }}</div>
-                                </div>
-                                {% if page.props.num_sklad %}
-                                    <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
-                                        <div class=""><b>Номер:</b></div>
-                                        <div class="">{{ page.props.num_sklad }}</div>
-                                    </div>
-                                {% endif %}
-                                <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
-                                    <div class=""><b>Что включено:</b></div>
-                                    <div class="">{{ page.props.is_play }}</div>
-                                </div>
-                                <div class="flex bg-white border-b-2 border-gray-200 p-2 flex-col table_l:flex-row">
-                                    <div class=""><b>Оформлением занимается:</b></div>
-                                    <div class="">{{ page.props.paperwork }}</div>
-                                </div>
+                        {% if page.fulladdress %}
+                            <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
+                                <div class=""><b>Адрес собственника номера:</b></div>
+                                <div class="">{{ page.fulladdress | join(', ') }}</div>
                             </div>
-                        </div>
+                        {% endif %}
+                        {% if page.props.num_sklad %}
+                            <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
+                                <div class=""><b>Номер находится:</b></div>
+                                <div class="">{{ page.props.num_sklad }}</div>
+                            </div>
+                        {% endif %}
+                        {% if page.props.is_play %}
+                            <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
+                                <div class=""><b>Оформление:</b></div>
+                                <div class="">{{ page.props.is_play }}</div>
+                            </div>
+                        {% endif %}
 
                     </div>    
                     
@@ -182,15 +179,15 @@
                         </div>
                     {% endif %}
 
-                    <div class="flex bg-white border-b-2 border-gray-200 p-2 table_l:gap-4 flex-col table_l:flex-row">
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Имя:</b></div>
                         <div class="">{{ page.username }}</div>
                     </div>
-                    <div class="flex bg-white border-b-2 border-gray-200 p-2 table_l:gap-4 flex-col table_l:flex-row">
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Телефон, вацап, телеграмм, почта:</b></div>
-                        <div class="">{{ page.props.phone }}</div>
+                        <div class="">{{ page.contacts ?: page.props.phone }}</div>
                     </div>
-                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-4 flex-col table_l:flex-row">
+                    <div class="flex bg-white border-b-2 border-gray-200 p-2 gap-1 table_l:gap-4 flex-col table_l:flex-row">
                         <div class=""><b>Сумма:</b></div>
                         <div class="">{{ page.price }} руб.</div>
                     </div>                    
