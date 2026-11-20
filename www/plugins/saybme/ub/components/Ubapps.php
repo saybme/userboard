@@ -53,28 +53,28 @@ class Ubapps extends \Cms\Classes\ComponentBase {
     }
 
     private function getNumbers(){        
-        $options['items'] = Carnumber::active()->orderBy('id', 'desc')->get();
+        $options['items'] = Carnumber::active()->orderByDesc('urgently')->orderByDesc('created_at')->orderByDesc('id')->get();
         return $this->renderPartial('announcements/wrap', $options);
     }
 
     private function payNumbersJson(){     
         $max = $this->property('max') ?: 30; 
-        return Carnumber::active()->where('type_pay', 1)->where('type', 1)->orderBy('id', 'desc')->get()->take($max);
+        return Carnumber::active()->where('type_pay', 1)->where('type', 1)->orderByDesc('urgently')->orderByDesc('created_at')->orderByDesc('id')->get()->take($max);
     }
 
     private function buyNumbersJson(){     
         $max = $this->property('max') ?: 30; 
-        return Carnumber::active()->where('type_pay', 2)->orderBy('id', 'desc')->get()->take($max);
+        return Carnumber::active()->where('type_pay', 2)->orderByDesc('created_at')->orderByDesc('id')->get()->take($max);
     }
 
     private function buyNumbersLenta(){     
         $max = $this->property('max') ?: 30;         
-        return Carnumber::active()->where('type_pay', 2)->where('description', '!=', '')->orderBy('id', 'desc')->get()->take($max);
+        return Carnumber::active()->where('type_pay', 2)->where('description', '!=', '')->orderByDesc('created_at')->orderByDesc('id')->get()->take($max);
     }
 
     // Топ номеров
     private function getTopNumbers(){
-        $options['items'] = Carnumber::active()->orderBy('id', 'desc')->get();
+        $options['items'] = Carnumber::active()->orderByDesc('urgently')->orderByDesc('created_at')->orderByDesc('id')->get();
         return $this->renderPartial('announcements/wrap-top', $options);
     }
 
@@ -91,7 +91,7 @@ class Ubapps extends \Cms\Classes\ComponentBase {
 
         $this->page->title = $page->name;
 
-        $options['items'] = Carnumber::active()->orderBy('id', 'desc')->where('id', '!=', $page->id)->get();
+        $options['items'] = Carnumber::active()->where('id', '!=', $page->id)->orderByDesc('urgently')->orderByDesc('created_at')->orderByDesc('id')->get();
         $options['page'] = $page;
         $options['breadcrumbs'] = $this->breadcrumbs($page);
         return $this->renderPartial('announcements/page', $options);

@@ -56,6 +56,12 @@ class Carnumber extends Model
 
     public function scopeActive($query) {
         return $query->where('is_active', true);
+    }
+
+    /** Новые объявления сверху: срочно → дата публикации → id */
+    public function scopeLatestPublished($query)
+    {
+        return $query->orderByDesc('urgently')->orderByDesc('created_at')->orderByDesc('id');
     }  
 
     public function getClientLabelAttribute()

@@ -600,13 +600,13 @@ class AuthClass {
     // Гос номера клиента
     public function getGosNumbers($id = null){
         if(!$id) return;
-        return Carnumber::with('user')->where('user_id', $id)->orderByDesc('id')->get();
+        return Carnumber::with('user')->where('user_id', $id)->orderByDesc('created_at')->orderByDesc('id')->get();
     }
 
     // Все гос номера для кабинета менеджера
     public function getGosNumbersManager()
     {
-        return Carnumber::with('user')->orderByDesc('id')->get();
+        return Carnumber::with('user')->orderByDesc('created_at')->orderByDesc('id')->get();
     }
 
     // Контент страницы профиля

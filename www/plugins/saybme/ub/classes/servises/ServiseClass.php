@@ -38,17 +38,22 @@ class ServiseClass {
 
         // Лента
         if($typePay == 3) {
-            $items = Carnumber::active()->whereIn('type', [1,2,3])->where('type_pay', 2)->orderBy('id','desc')->where('description','!=','');  
-            return $items->get();       
-        }     
+            $items = Carnumber::active()
+                ->whereIn('type', [1, 2, 3])
+                ->where('type_pay', 2)
+                ->where('description', '!=', '')
+                ->orderByDesc('created_at')
+                ->orderByDesc('id');
+            return $items->get();
+        }
 
         // Тип номера
         $type = Input::get('type') ?: 1;
 
         $items = Carnumber::active()->where('type', $type)->where('type_pay', $typePay);
-        
-        // Сортивовка по полю urgently и дате публикации
-        $items = $items->orderBy('urgently', 'desc')->orderBy('created_at', 'desc');
+
+        // Срочно сверху, затем по дате публикации (создания)
+        $items = $items->orderByDesc('urgently')->orderByDesc('created_at')->orderByDesc('id');
         
         if($mode == 'top'){
             return $items->where('number', '!=', '')->get();     

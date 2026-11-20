@@ -7,6 +7,7 @@ use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Models\Formrow;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Carnumber;
+use Saybme\Ub\Classes\LicensePlate\PlatePhotoService;
 use System\Models\File;
 use ValidationException;
 use Lang;
@@ -244,9 +245,13 @@ class AppClass {
         $app->fill($data);
         $app->save();
 
-        // Прикрепляем фото к обэявлению
-        $app->photo = files('photo');
-        $app->save();
+        // Фото: загруженное пользователем или автогенерация номера
+        if (files('photo')) {
+            $app->photo = files('photo');
+            $app->save();
+        } else {
+            (new PlatePhotoService())->attachToCarnumber($app);
+        }
 
         return $data;
     }
@@ -320,6 +325,9 @@ class AppClass {
         if (files('photo')) {
             $item->photo = files('photo');
             $item->save();
+        } else {
+            // Без нового файла — обновить картинку номера по текущим данным
+            (new PlatePhotoService())->attachToCarnumber($item);
         }
 
         return $item;
