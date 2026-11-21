@@ -7,7 +7,6 @@ use Saybme\Ub\Classes\Auth\AuthClass;
 use Saybme\Ub\Models\Formrow;
 use Saybme\Ub\Models\Forminput;
 use Saybme\Ub\Models\Carnumber;
-use Saybme\Ub\Classes\LicensePlate\PlatePhotoService;
 use System\Models\File;
 use ValidationException;
 use Lang;
@@ -243,14 +242,17 @@ class AppClass {
 
         $app = new Carnumber;
         $app->fill($data);
-        $app->save();
+        $app->save(); // afterSave сгенерирует картинку номера
 
-        // Фото: загруженное пользователем или автогенерация номера
-        if (files('photo')) {
-            $app->photo = files('photo');
-            $app->save();
-        } else {
-            (new PlatePhotoService())->attachToCarnumber($app);
+        // Явно загруженное фото перекрывает автогенерацию
+        if (Input::hasFile('photo')) {
+            Carnumber::$skipPlatePhotoRegen = true;
+            try {
+                $app->photo = Input::file('photo');
+                $app->save();
+            } finally {
+                Carnumber::$skipPlatePhotoRegen = false;
+            }
         }
 
         return $data;
@@ -313,6 +315,7 @@ class AppClass {
                 $item->number = implode('', $incoming['number']);
             }
             if (array_key_exists('region', $incoming)) {
+                $props['region'] = $incoming['region'];
                 $item->region = $incoming['region'];
             }
         }
@@ -320,14 +323,16 @@ class AppClass {
             $props['phone'] = $item->contacts;
         }
         $item->props = $props;
-        $item->save();
+        $item->save(); // afterSave пересоздаст картинку при смене номера
 
-        if (files('photo')) {
-            $item->photo = files('photo');
-            $item->save();
-        } else {
-            // Без нового файла — обновить картинку номера по текущим данным
-            (new PlatePhotoService())->attachToCarnumber($item);
+        if (Input::hasFile('photo')) {
+            Carnumber::$skipPlatePhotoRegen = true;
+            try {
+                $item->photo = Input::file('photo');
+                $item->save();
+            } finally {
+                Carnumber::$skipPlatePhotoRegen = false;
+            }
         }
 
         return $item;

@@ -3,10 +3,17 @@
 use Model;
 use Input;
 use Log;
+use Saybme\Ub\Classes\LicensePlate\PlatePhotoService;
 
 class Carnumber extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+
+    /** Не пересоздавать фото при служебном save() после генерации */
+    public static bool $skipPlatePhotoRegen = false;
+
+    /** @var string|null */
+    protected $plateFingerprintBefore;
 
     protected $fillable = [
         'number',
@@ -90,20 +97,99 @@ class Carnumber extends Model
         }
     }
 
-    public function beforeCreate(){
-        
-        // Серия
+    public function beforeCreate()
+    {
+        // Фронтовые формы: props приходят через Input
         $series = Input::get('props.series');
-        $this->series = implode('', $series);
+        if (is_array($series)) {
+            $this->series = implode('', $series);
+        }
 
-        // Номер
         $number = Input::get('props.number');
-        $this->number = implode('', $number);
+        if (is_array($number)) {
+            $this->number = implode('', $number);
+        }
 
-        // Регион
         $region = Input::get('props.region');
-        $this->region = $region;
+        if ($region !== null && $region !== '') {
+            $this->region = $region;
+        }
+    }
 
+    public function beforeSave()
+    {
+        $this->syncPlateColumnsFromProps();
+
+        if (static::$skipPlatePhotoRegen) {
+            return;
+        }
+
+        $this->plateFingerprintBefore = $this->exists
+            ? $this->fingerprintFromStoredState()
+            : '';
+    }
+
+    public function afterSave()
+    {
+        if (static::$skipPlatePhotoRegen) {
+            return;
+        }
+
+        $service = new PlatePhotoService();
+        $after = $service->fingerprint($this);
+        $changed = $after !== '' && $after !== (string) $this->plateFingerprintBefore;
+
+        // В админке и на сайте: номер изменился или фото ещё нет
+        if ($changed || !$this->photo) {
+            static::$skipPlatePhotoRegen = true;
+            try {
+                $service->attachToCarnumber($this);
+            } finally {
+                static::$skipPlatePhotoRegen = false;
+            }
+        }
+    }
+
+    /**
+     * Синхронизация series/number/region из props (форма бэкенда).
+     */
+    public function syncPlateColumnsFromProps(): void
+    {
+        $props = is_array($this->props) ? $this->props : [];
+
+        if (isset($props['series'])) {
+            $this->series = is_array($props['series'])
+                ? implode('', $props['series'])
+                : (string) $props['series'];
+        }
+        if (isset($props['number'])) {
+            $this->number = is_array($props['number'])
+                ? implode('', $props['number'])
+                : (string) $props['number'];
+        }
+        if (array_key_exists('region', $props) && $props['region'] !== null && $props['region'] !== '') {
+            $this->region = is_array($props['region'])
+                ? implode('', $props['region'])
+                : (string) $props['region'];
+        }
+    }
+
+    private function fingerprintFromStoredState(): string
+    {
+        $snap = new self();
+        $snap->type = $this->getOriginal('type');
+        $snap->series = $this->getOriginal('series');
+        $snap->number = $this->getOriginal('number');
+        $snap->region = $this->getOriginal('region');
+        $origProps = $this->getOriginal('props');
+        if (is_string($origProps)) {
+            $decoded = json_decode($origProps, true);
+            $snap->props = is_array($decoded) ? $decoded : [];
+        } else {
+            $snap->props = is_array($origProps) ? $origProps : [];
+        }
+
+        return (new PlatePhotoService())->fingerprint($snap);
     }
 
 

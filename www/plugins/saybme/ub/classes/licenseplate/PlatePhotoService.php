@@ -5,13 +5,10 @@ use System\Models\File;
 use Log;
 
 /**
- * Генерация PNG гос. номера и прикрепление к объявлению (attachOne photo).
+ * Генерация SVG гос. номера и прикрепление к объявлению (attachOne photo).
  */
 class PlatePhotoService
 {
-    /** Ширина PNG по умолчанию для карточек сайта */
-    public const DEFAULT_WIDTH = 1040;
-
     private LicensePlateGenerator $generator;
 
     public function __construct(?LicensePlateGenerator $generator = null)
@@ -20,8 +17,6 @@ class PlatePhotoService
     }
 
     /**
-     * Собрать данные номера из модели. null — если недостаточно данных.
-     *
      * @return array{type:string,number:string,region:string}|null
      */
     public function extractFromCarnumber(Carnumber $item): ?array
@@ -34,25 +29,22 @@ class PlatePhotoService
 
         $props = is_array($item->props) ? $item->props : [];
 
-        $series = $this->joinParts($props['series'] ?? null, $item->series);
-        $digits = $this->joinParts($props['number'] ?? null, $item->number);
-        $region = $this->joinParts($props['region'] ?? null, $item->region);
+        $series = trim((string) ($item->series ?: $this->joinParts($props['series'] ?? null)));
+        $digits = trim((string) ($item->number ?: $this->joinParts($props['number'] ?? null)));
+        $region = trim((string) ($item->region ?: $this->joinParts($props['region'] ?? null)));
 
-        $region = preg_replace('/\D+/', '', (string) $region) ?? '';
+        $region = preg_replace('/\D+/', '', $region) ?? '';
         if ($region === '') {
             return null;
         }
 
         if ($typeId === 1) {
-            // А + 123 + ВС
             $letter1 = mb_substr($series, 0, 1, 'UTF-8');
             $letters2 = mb_substr($series, 1, 2, 'UTF-8');
             $number = $letter1 . $digits . $letters2;
         } elseif ($typeId === 2) {
-            // 1234 + АВ
             $number = $digits . $series;
         } else {
-            // АВ + 1234
             $number = $series . $digits;
         }
 
@@ -68,10 +60,16 @@ class PlatePhotoService
         ];
     }
 
-    /**
-     * Сгенерировать и прикрепить photo. false — пропуск (нет данных / ошибка).
-     */
-    public function attachToCarnumber(Carnumber $item, ?int $width = null): bool
+    public function fingerprint(Carnumber $item): string
+    {
+        $payload = $this->extractFromCarnumber($item);
+        if ($payload === null) {
+            return '';
+        }
+        return $payload['type'] . '|' . $payload['number'] . '|' . $payload['region'];
+    }
+
+    public function attachToCarnumber(Carnumber $item): bool
     {
         $payload = $this->extractFromCarnumber($item);
         if ($payload === null) {
@@ -79,11 +77,10 @@ class PlatePhotoService
         }
 
         try {
-            $png = $this->generator->toPng(
+            $svg = $this->generator->toSvg(
                 $payload['type'],
                 $payload['number'],
-                $payload['region'],
-                $width ?? self::DEFAULT_WIDTH
+                $payload['region']
             );
         } catch (PlateException $e) {
             Log::info('PlatePhotoService: skip generate — ' . $e->getMessage(), [
@@ -99,22 +96,30 @@ class PlatePhotoService
         }
 
         $safeName = preg_replace('/[^\p{L}\p{N}\-_]+/u', '', $payload['number'] . '-' . $payload['region']) ?: 'plate';
-        $filename = 'gosnomer-' . $item->id . '-' . $safeName . '.png';
+        $filename = 'gosnomer-' . $item->id . '-' . $safeName . '.svg';
+
+        if ($item->photo) {
+            $item->photo->delete();
+        }
 
         $file = new File;
-        $file->fromData($png, $filename);
+        $file->fromData($svg, $filename);
         $file->is_public = true;
         $file->save();
 
         $item->photo = $file;
-        $item->save();
+
+        $prev = Carnumber::$skipPlatePhotoRegen;
+        Carnumber::$skipPlatePhotoRegen = true;
+        try {
+            $item->save();
+        } finally {
+            Carnumber::$skipPlatePhotoRegen = $prev;
+        }
 
         return true;
     }
 
-    /**
-     * Тип сайта (1 авто / 2 мото / 3 прицеп) → тип генератора.
-     */
     public function mapSiteType(int $typeId): ?string
     {
         return match ($typeId) {

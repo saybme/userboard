@@ -1,159 +1,106 @@
 <?php namespace Saybme\Ub\Classes\LicensePlate;
 
-use Saybme\Ub\Classes\LicensePlate\Regions\RegionCodes;
-
 /**
- * Валидация и нормализация серии/номера и кода региона.
+ * Нормализация и проверка номера. Возвращает только безопасные символы A-Z/0-9.
  */
 class PlateValidator
 {
-    /** Допустимые кириллические буквы ГОСТ */
-    public const LETTERS = ['А', 'В', 'Е', 'К', 'М', 'Н', 'О', 'Р', 'С', 'Т', 'У', 'Х'];
-
-    /** Латиница → кириллица (визуальные аналоги) */
-    public const LATIN_MAP = [
-        'A' => 'А', 'a' => 'А',
-        'B' => 'В', 'b' => 'В',
-        'E' => 'Е', 'e' => 'Е',
-        'K' => 'К', 'k' => 'К',
-        'M' => 'М', 'm' => 'М',
-        'H' => 'Н', 'h' => 'Н',
-        'O' => 'О', 'o' => 'О',
-        'P' => 'Р', 'p' => 'Р',
-        'C' => 'С', 'c' => 'С',
-        'T' => 'Т', 't' => 'Т',
-        'Y' => 'У', 'y' => 'У',
-        'X' => 'Х', 'x' => 'Х',
+    public const CYR_TO_LATIN = [
+        'А' => 'A', 'В' => 'B', 'Е' => 'E', 'К' => 'K',
+        'М' => 'M', 'Н' => 'H', 'О' => 'O', 'Р' => 'P',
+        'С' => 'C', 'Т' => 'T', 'У' => 'Y', 'Х' => 'X',
+        'а' => 'A', 'в' => 'B', 'е' => 'E', 'к' => 'K',
+        'м' => 'M', 'н' => 'H', 'о' => 'O', 'р' => 'P',
+        'с' => 'C', 'т' => 'T', 'у' => 'Y', 'х' => 'X',
     ];
 
+    public const ALLOWED = 'ABEKMHOPCTYX';
+
     /**
-     * @return array{type: string, number: string, region: string, chars: list<string>, execution: int, flag: bool}
+     * @return array{type:string,number:string,region:string,chars:list<string>}
      */
-    public function validate(
-        string $type,
-        string $number,
-        string $region,
-        int $execution = 1,
-        bool $flag = true,
-        bool $strictRegion = false
-    ): array {
-        $type = PlateTypes::normalize($type);
-        $number = $this->normalizeNumber($number);
+    public function parse(string $type, string $number, string $region): array
+    {
+        $type = strtolower(trim($type));
+        if (!in_array($type, PlateTypes::all(), true)) {
+            throw new PlateException('Неизвестный тип: «' . $this->safe($type) . '». Допустимо: car, trailer, moto.');
+        }
+
+        $number = $this->normalizeBody($number);
         $region = $this->normalizeRegion($region);
 
-        $this->validateFormat($type, $number);
-        $this->validateRegion($region, $strictRegion);
+        $ok = match ($type) {
+            PlateTypes::CAR => (bool) preg_match('/^[A-Z]\d{3}[A-Z]{2}$/', $number),
+            PlateTypes::TRAILER => (bool) preg_match('/^[A-Z]{2}\d{4}$/', $number),
+            PlateTypes::MOTO => (bool) preg_match('/^\d{4}[A-Z]{2}$/', $number),
+            default => false,
+        };
 
-        if ($type === PlateTypes::MOTO && !in_array($execution, [1, 2], true)) {
-            throw new PlateException('Для мотоцикла execution должен быть 1 или 2.');
+        if (!$ok) {
+            $hint = match ($type) {
+                PlateTypes::CAR => 'буква + 3 цифры + 2 буквы (А123ВС)',
+                PlateTypes::TRAILER => '2 буквы + 4 цифры (АВ1234)',
+                PlateTypes::MOTO => '4 цифры + 2 буквы (1234АВ)',
+            };
+            throw new PlateException('Неверный формат номера. Ожидается: ' . $hint . '.');
         }
+
+        $chars = preg_split('//u', $number . $region, -1, PREG_SPLIT_NO_EMPTY) ?: [];
 
         return [
             'type' => $type,
             'number' => $number,
             'region' => $region,
-            'chars' => $this->splitChars($number),
-            'execution' => $execution,
-            'flag' => $flag,
+            'chars' => $chars,
         ];
     }
 
-    public function normalizeNumber(string $number): string
+    public function normalizeBody(string $raw): string
     {
-        $number = trim($number);
-        $number = preg_replace('/[\s\-_.]+/u', '', $number) ?? '';
+        $raw = preg_replace('/\s+/u', '', $raw) ?? '';
         $out = '';
-        $len = mb_strlen($number, 'UTF-8');
+        $len = mb_strlen($raw, 'UTF-8');
         for ($i = 0; $i < $len; $i++) {
-            $ch = mb_substr($number, $i, 1, 'UTF-8');
-            if (isset(self::LATIN_MAP[$ch])) {
-                $ch = self::LATIN_MAP[$ch];
+            $ch = mb_substr($raw, $i, 1, 'UTF-8');
+            if (isset(self::CYR_TO_LATIN[$ch])) {
+                $out .= self::CYR_TO_LATIN[$ch];
+                continue;
             }
-            $ch = mb_strtoupper($ch, 'UTF-8');
-            $out .= $ch;
+            if (preg_match('/^\d$/', $ch)) {
+                $out .= $ch;
+                continue;
+            }
+            if (preg_match('/^[A-Za-z]$/', $ch)) {
+                $up = strtoupper($ch);
+                if (!str_contains(self::ALLOWED, $up)) {
+                    throw new PlateException(
+                        'Недопустимый символ. Разрешены: А В Е К М Н О Р С Т У Х и цифры.'
+                    );
+                }
+                $out .= $up;
+                continue;
+            }
+            throw new PlateException(
+                'Недопустимый символ. Разрешены: А В Е К М Н О Р С Т У Х и цифры.'
+            );
         }
         return $out;
     }
 
     public function normalizeRegion(string $region): string
     {
-        $region = trim($region);
-        $region = preg_replace('/\D+/', '', $region) ?? '';
-        if (preg_match('/^\d{1}$/', $region)) {
-            $region = '0' . $region;
+        $digits = preg_replace('/\D+/', '', $region) ?? '';
+        if ($digits === '' || strlen($digits) > 3) {
+            throw new PlateException('Код региона: 2 или 3 цифры.');
         }
-        return $region;
+        if (strlen($digits) === 1) {
+            $digits = '0' . $digits;
+        }
+        return $digits;
     }
 
-    public function validateFormat(string $type, string $number): void
+    private function safe(string $s): string
     {
-        $letter = '[' . implode('', self::LETTERS) . ']';
-        $patterns = [
-            PlateTypes::CAR => '/^' . $letter . '\d{3}' . $letter . '{2}$/u',
-            PlateTypes::TRAILER => '/^' . $letter . '{2}\d{4}$/u',
-            PlateTypes::MOTO => '/^\d{4}' . $letter . '{2}$/u',
-        ];
-
-        $hints = [
-            PlateTypes::CAR => 'Формат легкового: буква + 3 цифры + 2 буквы (например А123ВС).',
-            PlateTypes::TRAILER => 'Формат прицепа: 2 буквы + 4 цифры (например АВ1234).',
-            PlateTypes::MOTO => 'Формат мотоцикла: 4 цифры + 2 буквы (например 1234АВ).',
-        ];
-
-        if (!isset($patterns[$type])) {
-            throw new PlateException('Неизвестный тип номера.');
-        }
-
-        if (!preg_match($patterns[$type], $number)) {
-            // Более детальная диагностика
-            $this->throwDetailedFormatError($type, $number, $hints[$type]);
-        }
-    }
-
-    public function validateRegion(string $region, bool $strictRegion = false): void
-    {
-        if (!preg_match('/^\d{2,3}$/', $region)) {
-            throw new PlateException(
-                'Код региона должен содержать 2 или 3 цифры (получено: «' . $region . '»).'
-            );
-        }
-
-        if ($strictRegion && !RegionCodes::isKnown($region)) {
-            throw new PlateException(
-                'Неизвестный код региона «' . $region . '». Включите strictRegion=false или укажите известный код.'
-            );
-        }
-    }
-
-    /** @return list<string> */
-    public function splitChars(string $number): array
-    {
-        $chars = [];
-        $len = mb_strlen($number, 'UTF-8');
-        for ($i = 0; $i < $len; $i++) {
-            $chars[] = mb_substr($number, $i, 1, 'UTF-8');
-        }
-        return $chars;
-    }
-
-    private function throwDetailedFormatError(string $type, string $number, string $hint): void
-    {
-        if ($number === '') {
-            throw new PlateException('Номер не указан. ' . $hint);
-        }
-
-        $allowed = array_merge(self::LETTERS, array_map('strval', range(0, 9)));
-        $len = mb_strlen($number, 'UTF-8');
-        for ($i = 0; $i < $len; $i++) {
-            $ch = mb_substr($number, $i, 1, 'UTF-8');
-            if (!in_array($ch, $allowed, true) && !preg_match('/^\d$/u', $ch)) {
-                throw new PlateException(
-                    'Недопустимый символ «' . $ch . '» в номере. Разрешены цифры и буквы: '
-                    . implode(', ', self::LETTERS) . '. ' . $hint
-                );
-            }
-        }
-
-        throw new PlateException('Неверный формат номера «' . $number . '». ' . $hint);
+        return htmlspecialchars(mb_substr($s, 0, 32, 'UTF-8'), ENT_QUOTES | ENT_XML1, 'UTF-8');
     }
 }

@@ -1,212 +1,88 @@
 <?php
-/**
- * Standalone HTML-демо генератора номеров.
- * Подключается маршрутом /dev/license-plate при app.debug=true.
- *
- * @var string|null $generateUrl URL эндпоинта генерации (если задан роутом)
- */
-$generateUrl = $generateUrl ?? 'generate';
-?><!DOCTYPE html>
+/** @var string $generateUrl */
+$generateUrl = $generateUrl ?? '/dev/license-plate/generate';
+?>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Генератор номерных знаков — демо</title>
-<style>
-  :root {
-    --bg: #1a1d23;
-    --panel: #242830;
-    --text: #e8eaed;
-    --muted: #9aa0a6;
-    --accent: #3d8bfd;
-    --border: #3c4048;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; font-family: "Segoe UI", system-ui, sans-serif;
-    background: var(--bg); color: var(--text); min-height: 100vh;
-  }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
-  h1 { font-size: 1.35rem; font-weight: 600; margin: 0 0 4px; }
-  .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
-  form {
-    display: grid; gap: 12px;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    background: var(--panel); padding: 16px; border-radius: 10px;
-    border: 1px solid var(--border);
-  }
-  label { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; color: var(--muted); }
-  input, select {
-    background: var(--bg); color: var(--text); border: 1px solid var(--border);
-    border-radius: 6px; padding: 8px 10px; font-size: 0.95rem;
-  }
-  .actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-  button {
-    background: var(--accent); color: #fff; border: 0; border-radius: 6px;
-    padding: 10px 16px; font-size: 0.9rem; cursor: pointer; font-weight: 600;
-  }
-  button.secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
-  button:disabled { opacity: 0.5; cursor: wait; }
-  .preview {
-    margin-top: 24px; background: var(--panel); border: 1px solid var(--border);
-    border-radius: 10px; padding: 20px; min-height: 140px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .preview img, .preview object { max-width: 100%; height: auto; background: transparent; }
-  .err {
-    margin-top: 12px; padding: 10px 12px; border-radius: 6px;
-    background: #3b1d1d; color: #ffb4b4; display: none;
-  }
-  .err.show { display: block; }
-  .meta { margin-top: 8px; font-size: 0.8rem; color: var(--muted); }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Генератор госномеров (SVG)</title>
+  <style>
+    :root { color-scheme: light; }
+    body { font-family: Georgia, "Times New Roman", serif; max-width: 820px; margin: 2rem auto; padding: 0 1rem; background: #f3efe6; color: #1a1a1a; }
+    h1 { font-size: 1.6rem; font-weight: 600; }
+    label { display: block; margin-top: .9rem; font-size: .95rem; }
+    input, select, button { font: inherit; font-size: 1rem; padding: .45rem .6rem; margin-top: .25rem; }
+    button { cursor: pointer; background: #1a1a1a; color: #fff; border: 0; padding: .55rem 1rem; }
+    button.secondary { background: #555; margin-left: .5rem; }
+    .preview { margin-top: 1.5rem; background: #fff; border: 1px solid #ccc; padding: 1rem; overflow-x: auto; }
+    .preview svg { max-width: 100%; height: auto; display: block; }
+    .err { color: #a40000; margin-top: 1rem; white-space: pre-wrap; }
+    .hint { color: #555; font-size: .9rem; margin-top: .4rem; }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Генератор российских номерных знаков</h1>
-  <p class="sub">SVG / PNG · типы car / trailer / moto · только для отладки (debug)</p>
-
-  <form id="form">
+  <h1>Госномера РФ — SVG (ГОСТ Р 50577-2018)</h1>
+  <p class="hint">Тип 1 — автомобиль, тип 2 — прицеп, тип 4 — мотоцикл. Только SVG, без PNG/шрифтов ОС.</p>
+  <form id="f">
     <label>Тип
-      <select name="type" id="type">
-        <option value="car">Легковой (тип 1)</option>
-        <option value="trailer">Прицеп (тип 2)</option>
-        <option value="moto">Мотоцикл (тип 4)</option>
+      <select name="type">
+        <option value="car">Тип 1 — автомобиль</option>
+        <option value="trailer">Тип 2 — прицеп</option>
+        <option value="moto">Тип 4 — мотоцикл</option>
       </select>
     </label>
     <label>Номер
-      <input name="number" id="number" value="А123ВС" autocomplete="off">
+      <input name="number" value="А888АА" required autocomplete="off">
     </label>
     <label>Регион
-      <input name="region" id="region" value="125" autocomplete="off">
+      <input name="region" value="00" required autocomplete="off">
     </label>
-    <label>Формат
-      <select name="format" id="format">
-        <option value="svg">SVG</option>
-        <option value="png">PNG</option>
-      </select>
-    </label>
-    <label>Ширина PNG (px)
-      <input name="width" id="width" type="number" value="760" min="100" max="4000">
-    </label>
-    <label>Исполнение (moto)
-      <select name="execution" id="execution">
-        <option value="1">1 — 190×145</option>
-        <option value="2">2 — 190×175</option>
-      </select>
-    </label>
-    <label>Флаг
-      <select name="flag" id="flag">
-        <option value="1">Да</option>
-        <option value="0">Нет</option>
-      </select>
-    </label>
-    <div class="actions">
-      <button type="submit" id="btn">Сгенерировать</button>
-      <button type="button" class="secondary" id="download">Скачать</button>
+    <div style="margin-top:1rem">
+      <button type="submit">Показать</button>
+      <button type="button" class="secondary" id="dl">Скачать SVG</button>
     </div>
   </form>
+  <div class="err" id="err" hidden></div>
+  <div class="preview" id="out"></div>
+  <script>
+    const url = <?= json_encode($generateUrl, JSON_UNESCAPED_SLASHES) ?>;
+    const form = document.getElementById('f');
+    const out = document.getElementById('out');
+    const err = document.getElementById('err');
+    let lastSvg = '';
 
-  <div class="err" id="err"></div>
-  <div class="preview" id="preview"><span class="meta">Нажмите «Сгенерировать»</span></div>
-  <p class="meta" id="info"></p>
-</div>
-<script>
-(function () {
-  const generateUrl = <?= json_encode($generateUrl, JSON_UNESCAPED_UNICODE) ?>;
-  const form = document.getElementById('form');
-  const preview = document.getElementById('preview');
-  const err = document.getElementById('err');
-  const info = document.getElementById('info');
-  const btn = document.getElementById('btn');
-  const typeEl = document.getElementById('type');
-  const numberEl = document.getElementById('number');
-  let lastBlob = null;
-  let lastMime = 'image/svg+xml';
-  let lastName = 'plate.svg';
-
-  const defaults = {
-    car: 'А123ВС',
-    trailer: 'АВ1234',
-    moto: '1234АВ'
-  };
-  typeEl.addEventListener('change', () => {
-    numberEl.value = defaults[typeEl.value] || numberEl.value;
-  });
-
-  function showError(msg) {
-    err.textContent = msg || 'Ошибка';
-    err.classList.add('show');
-  }
-  function clearError() {
-    err.classList.remove('show');
-    err.textContent = '';
-  }
-
-  async function generate(download) {
-    clearError();
-    btn.disabled = true;
-    const fd = new FormData(form);
-    const params = new URLSearchParams();
-    for (const [k, v] of fd.entries()) params.set(k, v);
-
-    try {
-      const res = await fetch(generateUrl + '?' + params.toString(), {
-        method: 'GET',
-        headers: { 'Accept': 'image/*, application/json' }
-      });
-      const ct = res.headers.get('content-type') || '';
+    async function generate() {
+      err.hidden = true;
+      const q = new URLSearchParams(new FormData(form));
+      q.set('format', 'svg');
+      const res = await fetch(url + '?' + q.toString(), { headers: { 'Accept': 'image/svg+xml,application/json' } });
+      const text = await res.text();
       if (!res.ok) {
-        let msg = 'HTTP ' + res.status;
-        if (ct.includes('json')) {
-          const j = await res.json();
-          msg = j.error || msg;
-        }
-        throw new Error(msg);
+        let msg = text;
+        try { msg = JSON.parse(text).error || text; } catch (e) {}
+        err.textContent = msg;
+        err.hidden = false;
+        out.innerHTML = '';
+        lastSvg = '';
+        return;
       }
-      const blob = await res.blob();
-      lastBlob = blob;
-      lastMime = blob.type || (params.get('format') === 'png' ? 'image/png' : 'image/svg+xml');
-      const ext = lastMime.includes('png') ? 'png' : 'svg';
-      lastName = (params.get('number') || 'plate') + '_' + (params.get('region') || '') + '.' + ext;
-
-      const url = URL.createObjectURL(blob);
-      preview.innerHTML = '';
-      const img = document.createElement('img');
-      img.alt = 'Номерной знак';
-      img.src = url;
-      preview.appendChild(img);
-      info.textContent = lastMime + ' · ' + blob.size + ' байт';
-
-      if (download) {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = lastName;
-        a.click();
-      }
-    } catch (e) {
-      showError(e.message || String(e));
-    } finally {
-      btn.disabled = false;
+      lastSvg = text;
+      out.innerHTML = text;
     }
-  }
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    generate(false);
-  });
-  document.getElementById('download').addEventListener('click', () => {
-    if (lastBlob) {
-      const url = URL.createObjectURL(lastBlob);
+    form.addEventListener('submit', (e) => { e.preventDefault(); generate(); });
+    document.getElementById('dl').addEventListener('click', () => {
+      if (!lastSvg) return;
+      const blob = new Blob([lastSvg], { type: 'image/svg+xml;charset=utf-8' });
       const a = document.createElement('a');
-      a.href = url;
-      a.download = lastName;
+      a.href = URL.createObjectURL(blob);
+      a.download = 'plate.svg';
       a.click();
-    } else {
-      generate(true);
-    }
-  });
-})();
-</script>
+      URL.revokeObjectURL(a.href);
+    });
+    generate();
+  </script>
 </body>
 </html>

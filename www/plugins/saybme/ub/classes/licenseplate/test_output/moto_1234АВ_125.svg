@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="190mm" height="145mm" viewBox="0 0 190 145" fill="none">
-<rect x="0" y="0" width="190" height="145" rx="7.5" ry="7.5" fill="#ffffff"/>
-<rect x="1.5" y="1.5" width="187" height="142" rx="6" ry="6" fill="none" stroke="#000000" stroke-width="3"/>
-<line x1="4" y1="88" x2="186" y2="88" stroke="#000000" stroke-width="2" stroke-linecap="square"/>
-<path fill="#000000" fill-rule="evenodd" d="M38 8 H62 V152 H38 V52 L22 64 V40 Z" transform="translate(14.25 11) scale(0.3)"/>
-<path fill="#000000" fill-rule="evenodd" d="M12 38 C12 16 32 6 50 6 C72 6 88 20 88 42 C88 64 74 76 52 94 L28 114 V126 H88 V152 H8 V116 L46 84 C62 72 64 62 64 46 C64 34 56 28 46 28 C34 28 28 36 28 46 Z" transform="translate(36.35 11) scale(0.3)"/>
-<path fill="#000000" fill-rule="evenodd" d="M16 18 C20 6 38 4 52 4 C74 4 90 18 90 40 C90 56 80 68 64 74 C82 80 94 94 94 114 C94 140 72 154 48 154 C26 154 10 142 6 124 H34 C38 134 44 138 52 138 C66 138 72 128 72 114 C72 100 62 92 46 92 H34 V68 H48 C62 68 68 58 68 46 C68 34 60 26 48 26 C38 26 32 32 30 42 Z" transform="translate(64.45 11) scale(0.3)"/>
-<path fill="#000000" fill-rule="evenodd" d="M58 8 H82 V152 H58 V108 H8 V84 L52 8 Z M32 84 H58 V48 Z" transform="translate(92.55 11) scale(0.3)"/>
-<path fill="#000000" fill-rule="evenodd" d="M8 152 L42 8 H62 L96 152 H70 L64 122 H36 L30 152 Z M42 96 H58 L50 56 Z" transform="translate(121.85 11) scale(0.3)"/>
-<path fill="#000000" fill-rule="evenodd" d="M12 8 H56 C78 8 90 22 90 42 C90 56 82 66 68 70 C86 74 98 88 98 110 C98 136 78 152 50 152 H12 Z M36 30 V66 H52 C62 66 66 58 66 48 C66 38 60 30 52 30 Z M36 90 V130 H54 C68 130 74 120 74 110 C74 98 66 90 54 90 Z" transform="translate(151.15 11) scale(0.3)"/>
-<path fill="#000000" fill-rule="evenodd" d="M38 8 H62 V152 H38 V52 L22 64 V40 Z" transform="translate(11 101) scale(0.175)"/>
-<path fill="#000000" fill-rule="evenodd" d="M12 38 C12 16 32 6 50 6 C72 6 88 20 88 42 C88 64 74 76 52 94 L28 114 V126 H88 V152 H8 V116 L46 84 C62 72 64 62 64 46 C64 34 56 28 46 28 C34 28 28 36 28 46 Z" transform="translate(23.85 101) scale(0.175)"/>
-<path fill="#000000" fill-rule="evenodd" d="M22 8 H86 V34 H46 V62 H58 C82 62 96 78 96 104 C96 134 76 154 48 154 C26 154 10 140 8 120 H36 C38 130 44 136 52 136 C66 136 72 124 72 110 C72 94 64 86 50 86 H22 Z" transform="translate(40.2 101) scale(0.175)"/>
-<g><rect x="157" y="107" width="24" height="5.3333" fill="#ffffff" stroke="#000000" stroke-width="0.3"/><rect x="157" y="112.3333" width="24" height="5.3333" fill="#0039A6"/><rect x="157" y="117.6667" width="24" height="5.3333" fill="#D52B1E"/><rect x="157" y="107" width="24" height="16" fill="none" stroke="#000000" stroke-width="0.4"/></g>
-<g><path fill="#000000" fill-rule="evenodd" d="M14 8 H56 C80 8 94 24 94 50 C94 72 80 88 60 92 L94 152 H66 L40 98 H40 V152 H14 Z M40 32 V74 H54 C66 74 68 64 68 52 C68 40 64 32 54 32 Z" transform="translate(139.3 111) scale(0.05)"/><path fill="#000000" fill-rule="evenodd" d="M12 8 H38 V100 C38 124 44 136 52 136 C60 136 66 124 66 100 V8 H92 V104 C92 140 74 154 52 154 C30 154 12 140 12 104 Z" transform="translate(142.785 111) scale(0.05)"/><path fill="#000000" fill-rule="evenodd" d="M86 36 C78 14 62 8 46 8 C22 8 8 24 8 46 C8 68 22 80 48 88 C64 92 70 98 70 108 C70 120 62 130 48 130 C36 130 28 122 26 110 H8 C12 136 28 154 50 154 C76 154 94 136 94 110 C94 86 78 74 52 66 C36 62 32 56 32 46 C32 34 40 28 50 28 C62 28 68 36 70 46 Z" transform="translate(146.44 111) scale(0.05)"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 145" width="190" height="145" fill="none">
+<rect width="190" height="145" rx="10" fill="#fff"/>
+<rect x="1.5" y="1.5" width="187" height="142" rx="8" fill="none" stroke="#000" stroke-width="3"/>
+<line x1="8" y1="70" x2="182" y2="70" stroke="#000" stroke-width="2"/>
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="42" letter-spacing="0em"><tspan x="20" y="55">1</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="42" letter-spacing="0em"><tspan x="58" y="55">2</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="42" letter-spacing="0em"><tspan x="96" y="55">3</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="42" letter-spacing="0em"><tspan x="134" y="55">4</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="36" letter-spacing="0em"><tspan x="16" y="120">A</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="36" letter-spacing="0em"><tspan x="50" y="120">B</tspan></text>
+
+<line x1="90" y1="78" x2="90" y2="142" stroke="#000" stroke-width="2.5"/>
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="28" letter-spacing="0em"><tspan x="100" y="118">1</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="28" letter-spacing="0em"><tspan x="119.6" y="118">2</tspan></text>
+
+<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="28" letter-spacing="0em"><tspan x="139.2" y="118">5</tspan></text>
+
+<text x="118" y="95" font-family="Tahoma" font-size="10" fill="#000">RUS</text>
+<rect x="150" y="82" width="22" height="14" fill="#fff" stroke="#000" stroke-width="0.5"/>
+<rect x="150" y="86.7" width="22" height="4.7" fill="#0066B3"/>
+<rect x="150" y="91.3" width="22" height="4.7" fill="#ED1C24"/>
 </svg>

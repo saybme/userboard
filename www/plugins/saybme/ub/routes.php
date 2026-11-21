@@ -127,28 +127,8 @@ if (config('app.debug')) {
             $type = (string) $req->input('type', 'car');
             $number = (string) $req->input('number', '');
             $region = (string) $req->input('region', '');
-            $format = strtolower((string) $req->input('format', 'svg'));
-            $width = $req->input('width');
-            $execution = (int) $req->input('execution', 1);
-            $flag = filter_var($req->input('flag', true), FILTER_VALIDATE_BOOLEAN);
-
             $g = new LicensePlateGenerator();
-            $data = $g->generate([
-                'type' => $type,
-                'number' => $number,
-                'region' => $region,
-                'format' => $format,
-                'width' => $width !== null && $width !== '' ? (int) $width : null,
-                'execution' => $execution,
-                'flag' => $flag,
-            ]);
-
-            if ($format === 'png') {
-                return Response::make($data, 200, [
-                    'Content-Type' => 'image/png',
-                    'Cache-Control' => 'no-store',
-                ]);
-            }
+            $data = $g->toSvg($type, $number, $region);
 
             return Response::make($data, 200, [
                 'Content-Type' => 'image/svg+xml; charset=UTF-8',
