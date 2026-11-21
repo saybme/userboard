@@ -63,8 +63,11 @@ foreach ($cases as [$type, $number, $region]) {
         if (!str_contains($svg, '<tspan ')) {
             throw new RuntimeException('no text slots');
         }
-        if (preg_match('/@font-face|imagick|gd_/i', $svg)) {
-            throw new RuntimeException('font-face/gd/imagick leak');
+        if (preg_match('/imagick|gd_/i', $svg)) {
+            throw new RuntimeException('gd/imagick leak');
+        }
+        if (!str_contains($svg, 'RoadNumbers')) {
+            throw new RuntimeException('expected RoadNumbers font');
         }
         // XSS: no raw user text nodes beyond paths
         if (str_contains($svg, '<script') || str_contains($svg, 'javascript:')) {

@@ -1,26 +1,31 @@
 <?php namespace Saybme\Ub\Classes\LicensePlate;
 
 /**
- * Генератор: рамка из SVG-шаблона, символы в <text>/<tspan>.
+ * Генератор: рамка из SVG-шаблона, символы в <text>/<tspan>, шрифт RoadNumbers.
  */
 class SvgPlateBuilder
 {
-    /** Позиции основного ряда (из шаблона). */
     private const MAIN_X = [10.0, 15.0, 20.0, 25.0, 30.0, 36.0];
     private const MAIN_Y = 10.5435;
     private const MAIN_SIZE = 9.0;
 
-    /** Регион 2 цифры. */
     private const REG2_X = [51.6, 56.5];
     private const REG2_Y = 8.2;
     private const REG2_SIZE = 6.5;
 
-    /** Регион 3 цифры. */
     private const REG3_X = [50.8, 54.2, 57.6];
     private const REG3_Y = 8.0;
     private const REG3_SIZE = 5.5;
 
+    /** Латиница (валидатор) → строчная кириллица как в шаблоне. */
+    private const TO_CYR_LOWER = [
+        'A' => 'а', 'B' => 'в', 'E' => 'е', 'K' => 'к',
+        'M' => 'м', 'H' => 'н', 'O' => 'о', 'P' => 'р',
+        'C' => 'с', 'T' => 'т', 'Y' => 'у', 'X' => 'х',
+    ];
+
     private string $template;
+    private static ?string $fontCss = null;
 
     public function __construct()
     {
@@ -73,20 +78,39 @@ class SvgPlateBuilder
             $this->template
         );
 
+        // встраиваем RoadNumbers
+        $svg = preg_replace(
+            '/<defs>/',
+            '<defs><style type="text/css"><![CDATA[' . $this->fontFaceCss() . ']]></style>',
+            $svg,
+            1
+        );
+
         return '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . $svg;
     }
 
     private function textNode(float $x, float $y, float $size, string $ch): string
     {
+        $ch = $this->displayChar($ch);
         $safe = htmlspecialchars($ch, ENT_XML1 | ENT_QUOTES, 'UTF-8');
         return sprintf(
-            '<text fill="black" style="white-space: pre" xml:space="preserve" font-family="Tahoma" font-size="%s" letter-spacing="0em">'
+            '<text fill="black" style="white-space: pre" xml:space="preserve" font-family="RoadNumbers" font-size="%s" letter-spacing="0em">'
             . '<tspan x="%s" y="%s">%s</tspan></text>' . "\n",
             $this->f($size),
             $this->f($x),
             $this->f($y),
             $safe
         );
+    }
+
+    /** Цифры как есть, буквы — строчная кириллица. */
+    private function displayChar(string $ch): string
+    {
+        $ch = strtoupper($ch);
+        if (isset(self::TO_CYR_LOWER[$ch])) {
+            return self::TO_CYR_LOWER[$ch];
+        }
+        return $ch;
     }
 
     /** @param list<string> $chars */
@@ -103,6 +127,7 @@ class SvgPlateBuilder
             $w,
             $h
         );
+        $parts[] = '<defs><style type="text/css"><![CDATA[' . $this->fontFaceCss() . ']]></style></defs>';
         $parts[] = sprintf('<rect width="%d" height="%d" rx="10" fill="#fff"/>', $w, $h);
         $parts[] = '<rect x="1.5" y="1.5" width="187" height="142" rx="8" fill="none" stroke="#000" stroke-width="3"/>';
         $parts[] = '<line x1="8" y1="70" x2="182" y2="70" stroke="#000" stroke-width="2"/>';
@@ -127,12 +152,28 @@ class SvgPlateBuilder
             $parts[] = $this->textNode($x, 118, $sz, $ch);
             $x += $sz * 0.7;
         }
-        $parts[] = '<text x="118" y="95" font-family="Tahoma" font-size="10" fill="#000">RUS</text>';
+        $parts[] = '<text x="118" y="95" font-family="RoadNumbers" font-size="10" fill="#000">rus</text>';
         $parts[] = '<rect x="150" y="82" width="22" height="14" fill="#fff" stroke="#000" stroke-width="0.5"/>';
         $parts[] = '<rect x="150" y="86.7" width="22" height="4.7" fill="#0066B3"/>';
         $parts[] = '<rect x="150" y="91.3" width="22" height="4.7" fill="#ED1C24"/>';
         $parts[] = '</svg>';
         return implode("\n", $parts);
+    }
+
+    private function fontFaceCss(): string
+    {
+        if (self::$fontCss !== null) {
+            return self::$fontCss;
+        }
+        $path = __DIR__ . '/fonts/RoadNumbers2.0.ttf';
+        if (!is_file($path)) {
+            throw new PlateException('Нет fonts/RoadNumbers2.0.ttf');
+        }
+        $b64 = base64_encode((string) file_get_contents($path));
+        self::$fontCss = "@font-face{font-family:'RoadNumbers';"
+            . "src:url('data:font/truetype;charset=utf-8;base64,{$b64}') format('truetype');"
+            . 'font-weight:normal;font-style:normal;}';
+        return self::$fontCss;
     }
 
     private function f(float $n): string
